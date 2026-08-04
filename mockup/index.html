@@ -163,7 +163,9 @@ html:not(.js) .pillar-media{max-height:190px}
 .hero .wrap{position:relative; z-index:2; width:100%}
 .hero-top{display:flex; flex-wrap:wrap; gap:var(--sp-4) var(--sp-6); align-items:baseline;
   margin-bottom:var(--sp-6)}
-.hero h1{font-size:clamp(2.15rem,6.1vw,4.65rem); font-weight:700; max-width:17ch}
+.hero h1{font-size:clamp(2.05rem,5.2vw,4.15rem); font-weight:700; max-width:19ch;
+  text-wrap:balance}
+.hero h1 .ln > span{line-height:1.02}
 .hero h1 em{font-style:italic; font-weight:600; color:var(--accent-on-dark)}
 .hero-foot{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
 .hero-lede{color:var(--text-muted-dark); font-size:1.0625rem; max-width:46ch}
@@ -503,10 +505,7 @@ html:not(.js) .pillar-media{max-height:190px}
 
       <div class="hero-stage">
         <h1 class="lp">
-          <span class="ln" style="--ln:0"><span>Marketing run by</span></span>
-          <span class="ln" style="--ln:1"><span>operators, measured in</span></span>
-          <span class="ln" style="--ln:2"><span><em class="mk" data-mk>booked jobs</em>, <em class="mk" data-mk>signed cases</em>,</span></span>
-          <span class="ln" style="--ln:3"><span>and <em class="mk" data-mk>new patients.</em></span></span>
+          <span class="ln"><span>Marketing run by operators, measured in <em class="mk" data-mk>booked jobs</em>, <em class="mk" data-mk>signed cases</em>, and <em class="mk" data-mk>new patients</em>.</span></span>
         </h1>
 
         <!-- Decorative, simulated. Never blocks pointer or focus. -->
