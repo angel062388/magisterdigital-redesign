@@ -450,8 +450,13 @@ html:not(.js) .pillar-media{max-height:190px}
   font-size:.9375rem; max-width:var(--measure)}
 
 /* ==== CTA BAND ========================================================= */
+/* Sheen gradient constrained to gold and lighter stops only. The previous
+   gradient cycled through --gold-dark (#A8842A) at parts of the animation;
+   against --on-gold-muted (#3A3007) that only reached 3.75:1 — below AA
+   4.5 for body copy. Every stop below is at or lighter than --gold, so
+   --on-gold-muted holds ≥ 5:1 across the full 16s loop. */
 .cta{position:relative; overflow:hidden; padding:var(--sp-9) 0; text-align:center;
-  background:linear-gradient(120deg,#B9932C,var(--gold) 42%,#E8CD62 68%,var(--gold-dark));
+  background:linear-gradient(120deg, var(--gold), #E8CD62 42%, var(--gold-light) 68%, var(--gold));
   background-size:260% 260%; animation:sheen 16s ease-in-out infinite alternate; color:var(--ink)}
 @keyframes sheen{to{background-position:100% 50%}}
 .cta h2{font-size:clamp(1.9rem,5vw,3.4rem); color:var(--ink); margin:0 auto var(--sp-4); max-width:17ch}

@@ -231,16 +231,30 @@
       canvas.style.transition = 'opacity .6s ease';
       requestAnimationFrame(function () { canvas.style.opacity = '1'; });
 
+      // WebGL context-loss recovery — tab backgrounding on mobile or a
+      // driver reset can drop the GL context and leave the canvas blank.
+      // Fall back to the static SVG map rather than showing an empty box.
+      canvas.addEventListener('webglcontextlost', function (e) {
+        e.preventDefault();
+        mount.classList.add('static');
+        canvas.style.opacity = '0';
+      });
+
       // Drag to rotate. Pointer capture keeps the drag if the cursor leaves.
+      // pointerMovement is reset on each pointerup/out so the decaying
+      // inertia term never leaks from one drag gesture into the next.
       canvas.addEventListener('pointerdown', function (e) {
-        pointerInteracting = phi - pointerMovement / 200;
+        pointerMovement = 0;
+        pointerInteracting = phi;
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
       });
       canvas.addEventListener('pointerup', function () {
         pointerInteracting = null;
+        pointerMovement = 0;
       });
       canvas.addEventListener('pointerout', function () {
         pointerInteracting = null;
+        pointerMovement = 0;
       });
       canvas.addEventListener('pointermove', function (e) {
         if (pointerInteracting !== null) {
@@ -277,8 +291,30 @@
     });
   }
 
+  /* ======================================================================
+     FUNCTIONAL — always run (never gated by reduced-motion)
+     The Industries panel expand/collapse is functional, not decorative:
+     without this handler, Medical and Legal panels cannot be opened by
+     keyboard or touch. Any user who has prefers-reduced-motion enabled
+     would otherwise be locked to whichever panel was open by default.
+     ====================================================================== */
+  (function panels() {
+    var els = [].slice.call(document.querySelectorAll('.panel'));
+    els.forEach(function (p) {
+      function toggle() {
+        var open = p.classList.contains('open');
+        els.forEach(function (o) { o.classList.remove('open'); o.setAttribute('aria-expanded', 'false'); });
+        if (!open) { p.classList.add('open'); p.setAttribute('aria-expanded', 'true'); }
+      }
+      p.addEventListener('click', toggle);
+      p.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  })();
+
   /* Reduced motion, or no observer support: show the finished state, stop
-     all decorative effects. Modal and globe already handled above. */
+     all decorative effects. Modal, globe, and panels already handled above. */
   if (reduced || !canObserve) {
     root.classList.add('js', reduced ? 'reduced-motion' : 'no-io');
     [].forEach.call(document.querySelectorAll('[data-reveal]'), function (el) {
@@ -525,20 +561,6 @@
     if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
   onScroll();
-
-  /* ---- Expanding vertical panels (touch + keyboard) --------------------- */
-  var panels = [].slice.call(document.querySelectorAll('.panel'));
-  panels.forEach(function (p) {
-    function toggle() {
-      var open = p.classList.contains('open');
-      panels.forEach(function (o) { o.classList.remove('open'); o.setAttribute('aria-expanded', 'false'); });
-      if (!open) { p.classList.add('open'); p.setAttribute('aria-expanded', 'true'); }
-    }
-    p.addEventListener('click', toggle);
-    p.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
-  });
 
   /* ---- FAQ disclosure height ------------------------------------------- */
   [].forEach.call(document.querySelectorAll('.faq details'), function (d) {
