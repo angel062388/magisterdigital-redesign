@@ -173,10 +173,15 @@
   // clicking is not silently dead.
   function wireMetrosStatic() {
     var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
+    metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
     metros.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        metros.forEach(function (m) { m.classList.remove('active'); });
+        metros.forEach(function (m) {
+          m.classList.remove('active');
+          m.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
       });
     });
   }
@@ -296,13 +301,18 @@
 
       // Wire the metro buttons to rotate the globe + highlight themselves.
       var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
+      metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
       metros.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var lon = parseFloat(btn.getAttribute('data-long'));
           if (isNaN(lon)) return;
           globeState.targetPhi = targetPhiFor(lon);
-          metros.forEach(function (m) { m.classList.remove('active'); });
+          metros.forEach(function (m) {
+            m.classList.remove('active');
+            m.setAttribute('aria-pressed', 'false');
+          });
           btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
         });
       });
 
@@ -435,12 +445,20 @@
       layer.classList.add('paused');
 
       var host = layer.closest('.has-ambient') || layer.parentNode;
+      var inView = false;
       new IntersectionObserver(function (es) {
-        layer.classList.toggle('paused', !es[0].isIntersecting);
+        inView = es[0].isIntersecting;
+        layer.classList.toggle('paused', !inView);
       }, { rootMargin: '120px' }).observe(host);
 
+      // Tab hide always pauses. Tab show restores from the last known
+      // intersection state — previously the paused flag stuck on visible
+      // return because the IntersectionObserver did not re-fire (element
+      // hadn't moved), leaving the CTA-band ambient motion frozen forever
+      // after a single tab-switch.
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) layer.classList.add('paused');
+        else layer.classList.toggle('paused', !inView);
       });
     });
   })();
@@ -477,19 +495,26 @@
   }, { passive: true });
   onScroll();
 
-  /* FAQ disclosure height */
+  /* FAQ disclosure height.
+     Guarded against rapid re-click: while a transition is in flight, further
+     summary clicks are ignored so the height-animation state stays coherent
+     instead of stacking two transitionend listeners on the same body. */
   [].forEach.call(document.querySelectorAll('.faq details'), function (d) {
     var body = d.querySelector('.answer-wrap');
     if (!body) return;
     if (d.open) body.style.height = 'auto';
+    var animating = false;
     d.querySelector('summary').addEventListener('click', function (e) {
       e.preventDefault();
+      if (animating) return;
+      animating = true;
       if (d.open) {
         body.style.height = body.scrollHeight + 'px';
         requestAnimationFrame(function () { body.style.height = '0px'; });
         body.addEventListener('transitionend', function done() {
           d.open = false; body.style.height = '';
           body.removeEventListener('transitionend', done);
+          animating = false;
         });
       } else {
         d.open = true;
@@ -499,6 +524,7 @@
         body.addEventListener('transitionend', function done() {
           body.style.height = 'auto';
           body.removeEventListener('transitionend', done);
+          animating = false;
         });
       }
     });

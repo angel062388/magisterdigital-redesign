@@ -309,13 +309,19 @@ html:not(.js) .pillar-media{max-height:190px}
 .panel .kicker{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em;
   text-transform:uppercase; color:var(--gold); margin-bottom:var(--sp-3)}
 .panel h3{font-size:1.4rem}
-.panel .body{max-height:0; opacity:0; overflow:hidden;
-  transition:max-height .7s cubic-bezier(.16,1,.3,1), opacity .5s ease, margin .7s}
+/* Panel body: hidden from view AND from the accessibility tree until the
+   panel is open. visibility:hidden takes it out of the AT; the max-height
+   0 kept it out of the visual box already. Removed the hover-to-open
+   rule entirely so aria-expanded and visible state can never desync
+   (Beth's Aug 5 spec: 'detail appears on CLICK'). */
+.panel .body{max-height:0; opacity:0; overflow:hidden; visibility:hidden;
+  transition:max-height .7s cubic-bezier(.16,1,.3,1), opacity .5s ease, visibility 0s linear .5s}
 .panel .body p{font-size:.875rem; color:var(--border); margin-top:var(--sp-3)}
 .panel .body ul{margin:var(--sp-4) 0 0; padding-left:1.05rem; font-size:.8125rem; color:var(--border)}
 .panel .body li{margin-bottom:6px}
-.panel:hover img,.panel.open img{filter:grayscale(0) brightness(.5) contrast(1.05); transform:scale(1)}
-.panel:hover .body,.panel.open .body{max-height:280px; opacity:1}
+.panel:hover img{filter:grayscale(0) brightness(.5) contrast(1.05); transform:scale(1)}
+.panel.open img{filter:grayscale(0) brightness(.5) contrast(1.05); transform:scale(1)}
+.panel.open .body{max-height:280px; opacity:1; visibility:visible; transition-delay:0s}
 .panel:focus-visible{outline:2px solid var(--gold); outline-offset:-4px}
 .panel .hint{position:absolute; top:14px; right:14px; z-index:3;
   font-family:var(--font-mono); font-size:.625rem; letter-spacing:.14em;
@@ -434,16 +440,20 @@ html:not(.js) .pillar-media{max-height:190px}
    headline result, industry/service tags, dashed 'Placeholder' badge.
    ========================================================================== */
 .cs-grid{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
-.cs-card{display:block; text-decoration:none; color:inherit;
-  border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden; position:relative;
-  transition:border-color .35s var(--ease), transform .5s cubic-bezier(.16,1,.3,1)}
-.cs-card:hover{border-color:var(--gold); transform:translateY(-4px)}
-.cs-card:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.cs-card{display:block; color:inherit;
+  border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden; position:relative}
+.cs-cta{display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-4);
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); text-decoration:underline; text-underline-offset:4px;
+  text-decoration-color:rgba(212,175,55,.55);
+  transition:color .28s var(--ease), text-decoration-color .28s var(--ease), gap .28s var(--ease)}
+.cs-cta:hover{color:var(--gold-light); text-decoration-color:var(--gold-light); gap:10px}
+.cs-cta:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
 .cs-thumb{position:relative; aspect-ratio:5/3; overflow:hidden}
 .cs-thumb img{width:100%; height:100%; object-fit:cover;
   filter:grayscale(1) brightness(.5) contrast(1.15); transform:scale(1.05);
   transition:filter .6s var(--ease), transform 1.2s cubic-bezier(.16,1,.3,1)}
-.cs-card:hover .cs-thumb img{filter:grayscale(.1) brightness(.65); transform:scale(1)}
+.cs-card:has(.cs-cta:hover) .cs-thumb img{filter:grayscale(.1) brightness(.65); transform:scale(1)}
 .cs-thumb::after{content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, transparent 45%, rgba(15,17,21,.85) 100%)}
 .cs-flag{position:absolute; top:12px; left:12px; z-index:2;
@@ -468,16 +478,21 @@ html:not(.js) .pillar-media{max-height:190px}
    dashed 'Placeholder' flag.
    ========================================================================== */
 .vid-grid{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
-.vid-card{display:block; text-decoration:none; color:inherit; position:relative;
-  border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden;
-  transition:border-color .35s var(--ease), transform .5s cubic-bezier(.16,1,.3,1)}
-.vid-card:hover{border-color:var(--gold); transform:translateY(-4px)}
-.vid-card:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.vid-card{display:block; color:inherit; position:relative;
+  border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden}
+.vid-cta{display:inline-flex; align-items:center; gap:6px; margin-top:12px;
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); text-decoration:underline; text-underline-offset:4px;
+  text-decoration-color:rgba(212,175,55,.55);
+  transition:color .28s var(--ease), text-decoration-color .28s var(--ease), gap .28s var(--ease)}
+.vid-cta:hover{color:var(--gold-light); text-decoration-color:var(--gold-light); gap:10px}
+.vid-cta:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
 .vid-thumb{position:relative; aspect-ratio:16/9; overflow:hidden}
 .vid-thumb img{width:100%; height:100%; object-fit:cover;
   filter:grayscale(1) brightness(.45) contrast(1.15); transform:scale(1.04);
   transition:filter .6s var(--ease), transform 1.2s cubic-bezier(.16,1,.3,1)}
-.vid-card:hover .vid-thumb img{filter:grayscale(.1) brightness(.6); transform:scale(1)}
+.vid-card:has(.vid-cta:hover) .vid-thumb img{filter:grayscale(.1) brightness(.6); transform:scale(1)}
+.vid-card:has(.vid-cta:hover) .vid-play{transform:translate(-50%,-50%) scale(1.08); background:var(--gold-light)}
 .vid-thumb::after{content:""; position:absolute; inset:0;
   background:linear-gradient(180deg, transparent 50%, rgba(15,17,21,.8) 100%)}
 .vid-play{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
@@ -486,7 +501,7 @@ html:not(.js) .pillar-media{max-height:190px}
   font-size:1.4rem; line-height:1; padding-left:5px;
   box-shadow:0 8px 22px rgba(0,0,0,.4);
   transition:transform .4s cubic-bezier(.16,1,.3,1), background .3s var(--ease)}
-.vid-card:hover .vid-play{transform:translate(-50%,-50%) scale(1.08); background:var(--gold-light)}
+/* vid-play scale-on-hover handled by .vid-card:has(.vid-cta:hover) rule above */
 .vid-flag{position:absolute; top:12px; left:12px; z-index:2;
   font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.22em; text-transform:uppercase;
   padding:3px 8px; color:var(--gold-dark); background:rgba(15,17,21,.75);
@@ -547,7 +562,12 @@ html:not(.js) .pillar-media{max-height:190px}
 .faq summary:hover{color:var(--accent-on-light)}
 .faq summary:focus-visible{outline:2px solid var(--gold-deep); outline-offset:2px}
 .answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
-.reduced-motion .answer-wrap,html:not(.js) .answer-wrap{height:auto}
+/* When motion.js runs but the environment lacks IntersectionObserver, the
+   script tags <html> with .no-io and returns early — the FAQ custom
+   height animation never wires. In that case, and for reduced-motion,
+   fall back to native <details> toggle by removing the height clamp. */
+.reduced-motion .answer-wrap,html.no-io .answer-wrap,html:not(.js) .answer-wrap{height:auto}
+html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .faq .answer{padding:0 var(--sp-7) var(--sp-5) 0; color:var(--text-muted-light);
   font-size:.9375rem; max-width:var(--measure)}
 
@@ -676,9 +696,13 @@ html:not(.js) .pillar-media{max-height:190px}
   .wrap{padding:0 var(--sp-7)}
   .hero-foot{grid-template-columns:1.1fr .9fr; align-items:end}
   .fit{grid-template-columns:1fr 1fr; gap:var(--sp-9)}
-  .panels{grid-auto-flow:column; grid-auto-columns:1fr; min-height:440px}
-  .panel{min-height:440px} .panel .pin{min-height:440px}
-  .panels:hover .panel{flex:0} .panel:hover,.panel.open{flex:1.9}
+  /* Container must be flex, not grid, for the flex-grow animation below
+     to have any effect on the child panels. Previous grid + flex on
+     children was a no-op: all panels stayed equal-width. */
+  .panels{display:flex; flex-direction:row; min-height:440px}
+  .panel{flex:1; min-height:440px; min-width:0} .panel .pin{min-height:440px}
+  .panels:hover .panel{flex:.35}
+  .panel:hover,.panel.open{flex:2.4}
   .call{grid-template-columns:.85fr 1.15fr; gap:var(--sp-8); align-items:start}
   .call-media{position:sticky; top:110px; min-height:520px}
   .call-media img{min-height:520px}
@@ -1162,10 +1186,10 @@ html:not(.js) .pillar-media{max-height:190px}
       </div>
 
       <div class="cs-grid">
-        <a class="cs-card" href="#call" data-stagger>
+        <article class="cs-card" data-stagger>
           <div class="cs-thumb">
             <span class="cs-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder case study thumbnail, home services" loading="lazy">
+            <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
           </div>
           <div class="cs-body">
             <span class="cs-kicker">Home services</span>
@@ -1175,12 +1199,13 @@ html:not(.js) .pillar-media{max-height:190px}
               <span class="cs-tag">Google Ads</span>
               <span class="cs-tag">Call tracking</span>
             </div>
+            <a class="cs-cta" href="#call">Ask us about this work <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
-        <a class="cs-card" href="#call" data-stagger>
+        </article>
+        <article class="cs-card" data-stagger>
           <div class="cs-thumb">
             <span class="cs-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/7578803/pexels-photo-7578803.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder case study thumbnail, medical practice" loading="lazy">
+            <img src="https://images.pexels.com/photos/7578803/pexels-photo-7578803.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
           </div>
           <div class="cs-body">
             <span class="cs-kicker">Medical &amp; dental</span>
@@ -1190,12 +1215,13 @@ html:not(.js) .pillar-media{max-height:190px}
               <span class="cs-tag">CRM</span>
               <span class="cs-tag">HIPAA-aware tracking</span>
             </div>
+            <a class="cs-cta" href="#call">Ask us about this work <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
-        <a class="cs-card" href="#call" data-stagger>
+        </article>
+        <article class="cs-card" data-stagger>
           <div class="cs-thumb">
             <span class="cs-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder case study thumbnail, legal firm" loading="lazy">
+            <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
           </div>
           <div class="cs-body">
             <span class="cs-kicker">Legal</span>
@@ -1205,8 +1231,9 @@ html:not(.js) .pillar-media{max-height:190px}
               <span class="cs-tag">AI intake scoring</span>
               <span class="cs-tag">Attribution</span>
             </div>
+            <a class="cs-cta" href="#call">Ask us about this work <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
+        </article>
       </div>
     </div>
   </section>
@@ -1221,50 +1248,54 @@ html:not(.js) .pillar-media{max-height:190px}
       </div>
 
       <div class="vid-grid">
-        <a class="vid-card" href="#call" data-stagger>
+        <article class="vid-card" data-stagger>
           <div class="vid-thumb">
             <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder video thumbnail" loading="lazy">
+            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
             <span class="vid-play" aria-hidden="true">&#9654;</span>
           </div>
           <div class="vid-body">
             <span class="vid-cat">Account structure</span>
             <div class="vid-title">How we lay out Google Ads for a service-area business</div>
+            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
-        <a class="vid-card" href="#call" data-stagger>
+        </article>
+        <article class="vid-card" data-stagger>
           <div class="vid-thumb">
             <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder video thumbnail" loading="lazy">
+            <img src="https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
             <span class="vid-play" aria-hidden="true">&#9654;</span>
           </div>
           <div class="vid-body">
             <span class="vid-cat">Intake</span>
             <div class="vid-title">What a booked-work-first funnel actually measures</div>
+            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
-        <a class="vid-card" href="#call" data-stagger>
+        </article>
+        <article class="vid-card" data-stagger>
           <div class="vid-thumb">
             <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder video thumbnail" loading="lazy">
+            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
             <span class="vid-play" aria-hidden="true">&#9654;</span>
           </div>
           <div class="vid-body">
             <span class="vid-cat">Pricing</span>
             <div class="vid-title">Why we price work on close rate, not on cost per lead</div>
+            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
-        <a class="vid-card" href="#call" data-stagger>
+        </article>
+        <article class="vid-card" data-stagger>
           <div class="vid-thumb">
             <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Placeholder video thumbnail" loading="lazy">
+            <img src="https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
             <span class="vid-play" aria-hidden="true">&#9654;</span>
           </div>
           <div class="vid-body">
             <span class="vid-cat">Compliance</span>
             <div class="vid-title">HIPAA-aware and ABA-safe: what changes in the account</div>
+            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
           </div>
-        </a>
+        </article>
       </div>
     </div>
   </section>
