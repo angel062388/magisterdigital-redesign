@@ -438,6 +438,17 @@ html:not(.js) .pillar-media{max-height:190px}
   .pillar{grid-template-columns:120px 1fr; gap:var(--sp-6)}
 }
 @media (min-width:900px){
+  /* Section heads use the full measure: heading left, lede right, rule
+     spanning both. Previously the heading sat alone in a narrow left
+     column and the right half of every section was dead space. */
+  .sec-head{grid-template-columns:1.12fr .88fr; gap:var(--sp-5) var(--sp-8); align-items:end}
+  .sec-head .meta{grid-column:1/-1}
+  .sec-head h2{grid-column:1; grid-row:2; max-width:none;
+    font-size:clamp(2.2rem,4.9vw,3.7rem)}
+  .sec-head .rule{grid-column:1/-1; grid-row:3}
+  .sec-head .sec-lede{grid-column:2; grid-row:2; max-width:42ch; padding-bottom:.5em}
+  /* Sections with no lede let the heading run the full width instead */
+  .sec-head:not(:has(.sec-lede)) h2{grid-column:1/-1; max-width:24ch}
   .site-nav{display:flex; gap:var(--sp-5); margin-right:var(--sp-6)}
   .header-phone{display:inline-block; margin-right:var(--sp-5)}
   .gutter{display:flex}
