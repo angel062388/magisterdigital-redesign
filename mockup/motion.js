@@ -1,18 +1,16 @@
 /* ==========================================================================
-   MAGISTER DIGITAL — MOTION
-   Signature effects: rule-draw + letterpress line reveal + split-flap mono.
-   Ambient background motion + simulated collaborative presence in the hero.
-   New 2026-08-05: founder modal + cobe dotted globe (lazy-loaded).
-
-   Contract:
-   - Nothing here is required for the page to be readable. The stylesheet
-     carries an html:not(.js) failsafe and reveals fire on a 4s safety net.
-   - prefers-reduced-motion disables every decorative effect but KEEPS the
-     modal working (functional, not decoration).
-   - Decorative layers are aria-hidden and pointer-events:none.
-   - Presence cursors sit at z-index:1 — below the wrap (z-10) and CTA
-     (z-20) — so they can never intercept clicks visually or by hit test.
-   - Only transform and opacity are animated. Offscreen work is paused.
+   MAGISTER DIGITAL, MOTION
+   Revision 2026-08-05 (round 2):
+   - Presence cursors + collaborative simulation REMOVED per Beth's Aug 5
+     second-round spec. Hero now carries itself with rule-draw + letterpress
+     reveal + ambient motion + hero-glow-follows-pointer.
+   - Founder modal now populates a Pexels headshot instead of initials.
+   - Cobe globe uses lower dark shading + higher map brightness so the full
+     sphere renders visibly rather than a lit hemisphere.
+   - Metros in Locations are clickable buttons. Click sets a targetPhi and
+     onRender lerps toward it. Active metro gets a .active highlight class.
+   - Industries panels all default closed. Panel click handler runs above
+     the reduced-motion guard so it works for reduced-motion users too.
    ========================================================================== */
 (function () {
   'use strict';
@@ -22,10 +20,9 @@
   var canObserve = 'IntersectionObserver' in window;
 
   /* ======================================================================
-     FOUNDER MODAL — always available, works in reduced-motion.
-     Data map lives here; markup is a single #founder-modal element in
-     the HTML. Placeholder-flagged; no invented credentials.
-     Full profile links go to /brian-hong/, /michael-merlino/, /dimitry-morgan/.
+     FOUNDER MODAL (always available, works in reduced-motion)
+     Data map lives here; markup is a single #founder-modal element.
+     Placeholder-flagged photos + bios; no invented credentials.
      ====================================================================== */
   (function modal() {
     var modal = document.getElementById('founder-modal');
@@ -33,7 +30,7 @@
 
     var titleEl  = modal.querySelector('[data-modal-title]');
     var roleEl   = modal.querySelector('[data-modal-role]');
-    var avatarEl = modal.querySelector('[data-modal-avatar]');
+    var photoEl  = modal.querySelector('[data-modal-photo]');
     var bioEl    = modal.querySelector('[data-modal-bio]');
     var linkEl   = modal.querySelector('[data-modal-link]');
 
@@ -41,35 +38,31 @@
       brian: {
         name: 'Brian Hong',
         role: 'Co-founder & CEO',
-        avatar: 'BH',
-        bio: 'Bio pending sign-off. Full background, operator history and stake in the businesses Magister runs land on the /brian-hong/ profile page. No invented credentials appear here.',
+        photo: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        alt: 'Placeholder headshot for Brian Hong',
+        bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
         link: '/brian-hong/'
       },
       michael: {
         name: 'Michael Merlino',
-        role: 'Co-founder · Strategy & AI systems',
-        avatar: 'MM',
+        role: 'Co-founder, Strategy & AI systems',
+        photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        alt: 'Placeholder headshot for Michael Merlino',
         bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
         link: '/michael-merlino/'
       },
       dimitry: {
         name: 'Dimitry Morgan',
-        role: 'Co-founder · Head of paid media',
-        avatar: 'DM',
-        bio: 'Bio pending sign-off. Paid-media leadership scope and the media accounts he directly runs land on the /dimitry-morgan/ profile page.',
+        role: 'Co-founder, Head of paid media',
+        photo: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        alt: 'Placeholder headshot for Dimitry Morgan',
+        bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
         link: '/dimitry-morgan/'
       }
     };
 
     var trigger = null;
 
-    function focusables() {
-      return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    }
-
-    // Siblings we mark inert while the modal is open. Prevents screen-reader
-    // and programmatic focus from escaping the dialog when aria-modal alone
-    // isn't enforced by the browser/AT combination.
     function siblings() {
       return [
         document.querySelector('header.site-header'),
@@ -79,20 +72,24 @@
       ].filter(Boolean);
     }
 
+    function focusables() {
+      return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    }
+
     function open(key, from) {
       var data = FOUNDERS[key];
       if (!data) return;
       trigger = from;
       titleEl.textContent = data.name;
       roleEl.textContent = data.role;
-      avatarEl.textContent = data.avatar;
+      photoEl.setAttribute('src', data.photo);
+      photoEl.setAttribute('alt', data.alt);
       bioEl.textContent = data.bio;
       linkEl.setAttribute('href', data.link);
       modal.hidden = false;
       document.body.classList.add('modal-open');
       siblings().forEach(function (el) { el.setAttribute('inert', ''); });
       document.addEventListener('keydown', onKey);
-      // Focus the close button first so the trap has an anchor.
       var closeBtn = modal.querySelector('.modal-close');
       if (closeBtn) closeBtn.focus();
     }
@@ -126,30 +123,36 @@
   })();
 
   /* ======================================================================
-     COBE DOTTED GLOBE — lazy-loaded, gold on near-black.
+     COBE DOTTED GLOBE
      Loaded via dynamic ESM import from esm.sh only when the locations
      section enters the viewport. prefers-reduced-motion + low-power +
-     WebGL failure all fall back to the static SVG map via .static class.
+     WebGL failure all fall back to the static SVG map.
+
+     Metros are click-targets: clicking a button sets a target phi that
+     onRender lerps toward. When reached, auto-rotation resumes and the
+     clicked metro carries a .active highlight class.
      ====================================================================== */
+  var globeState = { targetPhi: null, currentPhi: null };
+
   (function globeBoot() {
     var mount = document.querySelector('[data-globe-mount]');
     var canvas = mount && mount.querySelector('[data-globe]');
     if (!mount || !canvas) return;
 
-    // Reduced motion or no IntersectionObserver: show the SVG fallback.
+    // Reduced motion or no IntersectionObserver: show the SVG fallback,
+    // but still wire the metro buttons so clicking one visually confirms
+    // the interaction (highlight only; no globe rotation).
     if (reduced || !canObserve) {
       mount.classList.add('static');
+      wireMetrosStatic();
       return;
     }
 
-    // Low-power capability check — honours the sec-lede promise that
-    // low-power devices get the static map. If hardwareConcurrency reports
-    // 2 or fewer cores, or the device explicitly reports Save-Data, skip
-    // the WebGL globe entirely and serve the SVG fallback.
     var lowPower = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 2)
                  || (navigator.connection && navigator.connection.saveData === true);
     if (lowPower) {
       mount.classList.add('static');
+      wireMetrosStatic();
       return;
     }
 
@@ -165,27 +168,52 @@
     io.observe(mount);
   })();
 
+  // Highlight-only handler used when the globe won't run (reduced motion,
+  // low power, WebGL failure). Metro buttons still get visual feedback so
+  // clicking is not silently dead.
+  function wireMetrosStatic() {
+    var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
+    metros.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        metros.forEach(function (m) { m.classList.remove('active'); });
+        btn.classList.add('active');
+      });
+    });
+  }
+
   function loadGlobe(canvas, mount) {
     import('https://esm.sh/cobe@0.6.3').then(function (mod) {
       var createGlobe = mod.default || mod;
-      var phi = 4.9;                    // start rotated so US faces the viewer
+
+      // SD-centred start phi. Calibrated empirically: at this phi the US
+      // faces the viewer with San Diego near the front-left quarter.
+      var BASE_LON = -117.1611;      // San Diego
+      var BASE_PHI = 4.9;
+      // Given cobe's phi = 4.9 shows US, delta per degree ≈ π/180.
+      // Rotation direction: moving target_lon EAST (less negative)
+      // requires DECREASING phi. So targetPhi = BASE_PHI + (BASE_LON - target_lon) * π/180.
+      function targetPhiFor(lon) {
+        return BASE_PHI + (BASE_LON - lon) * (Math.PI / 180);
+      }
+
+      var phi = BASE_PHI;
+      globeState.currentPhi = phi;
       var pointerInteracting = null;
       var pointerMovement = 0;
       var size = mount.clientWidth || 520;
-      var paused = false;              // set true when locations section leaves the viewport
+      var paused = false;
 
-      // Ten US metros served, plus San Diego HQ (larger pin).
       var markers = [
-        { location: [32.7157, -117.1611], size: 0.14 }, // San Diego HQ
-        { location: [34.0522, -118.2437], size: 0.06 }, // Los Angeles
-        { location: [37.3382, -121.8863], size: 0.06 }, // San Jose
-        { location: [33.4484, -112.0740], size: 0.06 }, // Phoenix
-        { location: [32.7767,  -96.7970], size: 0.06 }, // Dallas
-        { location: [29.4241,  -98.4936], size: 0.06 }, // San Antonio
-        { location: [29.7604,  -95.3698], size: 0.06 }, // Houston
-        { location: [41.8781,  -87.6298], size: 0.06 }, // Chicago
-        { location: [39.9526,  -75.1652], size: 0.06 }, // Philadelphia
-        { location: [40.7128,  -74.0060], size: 0.06 }  // New York
+        { location: [32.7157, -117.1611], size: 0.14 },
+        { location: [34.0522, -118.2437], size: 0.06 },
+        { location: [37.3382, -121.8863], size: 0.06 },
+        { location: [33.4484, -112.0740], size: 0.06 },
+        { location: [32.7767,  -96.7970], size: 0.06 },
+        { location: [29.4241,  -98.4936], size: 0.06 },
+        { location: [29.7604,  -95.3698], size: 0.06 },
+        { location: [41.8781,  -87.6298], size: 0.06 },
+        { location: [39.9526,  -75.1652], size: 0.06 },
+        { location: [40.7128,  -74.0060], size: 0.06 }
       ];
 
       var globe;
@@ -195,27 +223,39 @@
           width: size * 2,
           height: size * 2,
           phi: 0,
-          theta: 0.32,
-          dark: 1,
-          diffuse: 1.15,
-          mapSamples: 12000,
-          mapBrightness: 5.5,
-          baseColor:   [0.11, 0.115, 0.13],   // land dots
-          markerColor: [0.831, 0.686, 0.216], // #D4AF37 gold
-          glowColor:   [0.20, 0.16, 0.06],    // deep gold glow
+          theta: 0.28,
+          // Dark shading reduced from 1 to 0.3 so the full sphere is
+          // visible instead of only the lit hemisphere. Map brightness
+          // raised so land dots read clearly on a near-black background.
+          dark: 0.3,
+          diffuse: 0.9,
+          mapSamples: 14000,
+          mapBrightness: 6.5,
+          baseColor:   [0.13, 0.135, 0.15],
+          markerColor: [0.831, 0.686, 0.216],
+          glowColor:   [0.20, 0.16, 0.06],
           markers: markers,
           onRender: function (state) {
-            // When the section is offscreen or the tab is hidden, skip the
-            // phi delta so cobe paints the same frame — the browser can
-            // then optimise away most of the render cost, avoiding a
-            // permanent GPU/CPU load once the user scrolls past.
             if (!paused) {
               if (pointerInteracting !== null) {
                 phi = pointerInteracting + pointerMovement / 200;
+                globeState.targetPhi = null;
+              } else if (globeState.targetPhi !== null) {
+                var delta = globeState.targetPhi - phi;
+                // Take the shortest way around the sphere
+                if (delta > Math.PI)  delta -= 2 * Math.PI;
+                if (delta < -Math.PI) delta += 2 * Math.PI;
+                if (Math.abs(delta) < 0.006) {
+                  phi = globeState.targetPhi;
+                  globeState.targetPhi = null;
+                } else {
+                  phi += delta * 0.07;
+                }
               } else {
-                phi += 0.003; // slow auto-rotation
+                phi += 0.003;
               }
             }
+            globeState.currentPhi = phi;
             state.phi = phi;
             state.width  = size * 2;
             state.height = size * 2;
@@ -223,38 +263,30 @@
         });
       } catch (err) {
         mount.classList.add('static');
+        wireMetrosStatic();
         return;
       }
 
-      // Fade the canvas in so there is no flash from black
       canvas.style.opacity = '0';
       canvas.style.transition = 'opacity .6s ease';
       requestAnimationFrame(function () { canvas.style.opacity = '1'; });
 
-      // WebGL context-loss recovery — tab backgrounding on mobile or a
-      // driver reset can drop the GL context and leave the canvas blank.
-      // Fall back to the static SVG map rather than showing an empty box.
       canvas.addEventListener('webglcontextlost', function (e) {
         e.preventDefault();
         mount.classList.add('static');
         canvas.style.opacity = '0';
       });
 
-      // Drag to rotate. Pointer capture keeps the drag if the cursor leaves.
-      // pointerMovement is reset on each pointerup/out so the decaying
-      // inertia term never leaks from one drag gesture into the next.
       canvas.addEventListener('pointerdown', function (e) {
         pointerMovement = 0;
         pointerInteracting = phi;
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
       });
       canvas.addEventListener('pointerup', function () {
-        pointerInteracting = null;
-        pointerMovement = 0;
+        pointerInteracting = null; pointerMovement = 0;
       });
       canvas.addEventListener('pointerout', function () {
-        pointerInteracting = null;
-        pointerMovement = 0;
+        pointerInteracting = null; pointerMovement = 0;
       });
       canvas.addEventListener('pointermove', function (e) {
         if (pointerInteracting !== null) {
@@ -262,19 +294,24 @@
         }
       });
 
-      // Resize: rebuild size on window resize so the globe stays crisp.
+      // Wire the metro buttons to rotate the globe + highlight themselves.
+      var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
+      metros.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lon = parseFloat(btn.getAttribute('data-long'));
+          if (isNaN(lon)) return;
+          globeState.targetPhi = targetPhiFor(lon);
+          metros.forEach(function (m) { m.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+
       var rt;
       window.addEventListener('resize', function () {
         clearTimeout(rt);
-        rt = setTimeout(function () {
-          size = mount.clientWidth || size;
-        }, 180);
+        rt = setTimeout(function () { size = mount.clientWidth || size; }, 180);
       }, { passive: true });
 
-      // Pause auto-rotation when the section leaves the viewport, and pause
-      // on tab hide. Cobe has no external pause API, so we gate the phi
-      // delta in onRender above — the same frame is painted while paused,
-      // which the browser can optimise heavily.
       new IntersectionObserver(function (es) {
         paused = !es[0].isIntersecting;
       }, { rootMargin: '50px' }).observe(mount);
@@ -288,15 +325,15 @@
       });
     }).catch(function () {
       mount.classList.add('static');
+      wireMetrosStatic();
     });
   }
 
   /* ======================================================================
-     FUNCTIONAL — always run (never gated by reduced-motion)
-     The Industries panel expand/collapse is functional, not decorative:
-     without this handler, Medical and Legal panels cannot be opened by
-     keyboard or touch. Any user who has prefers-reduced-motion enabled
-     would otherwise be locked to whichever panel was open by default.
+     FUNCTIONAL: always run (never gated by reduced-motion)
+     Industries panel expand/collapse. Without this, Medical and Legal
+     cannot be opened by keyboard or touch when prefers-reduced-motion
+     is enabled.
      ====================================================================== */
   (function panels() {
     var els = [].slice.call(document.querySelectorAll('.panel'));
@@ -323,8 +360,6 @@
     [].forEach.call(document.querySelectorAll('[data-flap]'), function (el) {
       el.textContent = el.getAttribute('data-flap');
     });
-    var pres = document.querySelector('.presence');
-    if (pres) pres.style.display = 'none';
     [].forEach.call(document.querySelectorAll('[data-ambient]'), function (a) {
       a.classList.add('paused');
     });
@@ -344,7 +379,7 @@
     [].forEach.call(document.querySelectorAll(sel), function (el) { io.observe(el); });
   }
 
-  /* ---- Reveals ---------------------------------------------------------- */
+  /* Reveals */
   observe('[data-reveal]', function (el) {
     [].forEach.call(el.querySelectorAll('[data-stagger]'), function (kid, i) {
       kid.style.setProperty('--i', i);
@@ -360,8 +395,8 @@
     });
   }, 4000);
 
-  /* ---- Split-flap mono metadata ---------------------------------------- */
-  var FLAP = '0123456789/—·ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  /* Split-flap mono metadata */
+  var FLAP = '0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   observe('[data-flap]', function (el) {
     var final = el.getAttribute('data-flap') || el.textContent;
     var chars = final.split(''), frame = 0;
@@ -378,127 +413,7 @@
     })();
   }, { threshold: 0.6 });
 
-  /* ======================================================================
-     A. SIMULATED COLLABORATIVE PRESENCE
-     Three labelled cursors drift over the headline on eased, non-repeating
-     paths and periodically mark one of the outcome words.
-     ====================================================================== */
-  (function presence() {
-    var layer = document.querySelector('.presence');
-    var stage = document.querySelector('.hero-stage');
-    if (!layer || !stage) return;
-
-    var cursors = [].slice.call(layer.querySelectorAll('.cur'));
-    var words = [].slice.call(document.querySelectorAll('[data-mk]'));
-    if (!cursors.length) return;
-
-    var box = { w: 0, h: 0 };
-    function measure() {
-      var r = layer.getBoundingClientRect();
-      box.w = r.width; box.h = r.height;
-      words.forEach(function (w) {
-        var wr = w.getBoundingClientRect();
-        w._pt = { x: wr.left - r.left + wr.width * 0.5, y: wr.top - r.top + wr.height * 0.5 };
-      });
-    }
-
-    var agents = cursors.map(function (el, i) {
-      return {
-        el: el,
-        x: Math.random() * 300, y: Math.random() * 160,
-        fx: 0, fy: 0, t: 1, dur: 1, hold: 0,
-        word: null, phase: i * 0.9
-      };
-    });
-
-    function easeInOutCubic(t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-    }
-
-    function retarget(a) {
-      var goWord = words.length && Math.random() < 0.45;
-      if (goWord) {
-        var w = words[(Math.random() * words.length) | 0];
-        if (w._pt) {
-          a.word = w;
-          a.fx = w._pt.x + (Math.random() * 40 - 20);
-          a.fy = w._pt.y + (Math.random() * 18 - 9);
-        }
-      } else {
-        a.word = null;
-        a.fx = box.w * (0.06 + Math.random() * 0.82);
-        a.fy = box.h * (0.10 + Math.random() * 0.76);
-      }
-      a.sx = a.x; a.sy = a.y;
-      a.dur = 1500 + Math.random() * 2200;
-      a.t = 0;
-    }
-
-    var running = false, last = 0, raf = 0;
-
-    function frame(now) {
-      if (!running) return;
-      var dt = last ? now - last : 16; last = now;
-
-      for (var i = 0; i < agents.length; i++) {
-        var a = agents[i];
-        if (a.hold > 0) { a.hold -= dt; }
-        else if (a.t >= 1) {
-          if (a.word) {
-            a.word.classList.add('marked');
-            var mw = a.word;
-            setTimeout(function () { mw.classList.remove('marked'); }, 1500);
-            a.hold = 900 + Math.random() * 900;
-          } else {
-            a.hold = 200 + Math.random() * 700;
-          }
-          retarget(a);
-        } else {
-          a.t = Math.min(1, a.t + dt / a.dur);
-          var e = easeInOutCubic(a.t);
-          a.x = a.sx + (a.fx - a.sx) * e;
-          a.y = a.sy + (a.fy - a.sy) * e;
-          a.phase += dt * 0.0011;
-          a.el.style.transform = 'translate3d(' +
-            (a.x + Math.sin(a.phase) * 7).toFixed(1) + 'px,' +
-            (a.y + Math.cos(a.phase * 0.8) * 5).toFixed(1) + 'px,0)';
-        }
-      }
-      raf = requestAnimationFrame(frame);
-    }
-
-    function start() {
-      if (running) return;
-      measure(); agents.forEach(retarget);
-      running = true; last = 0; layer.classList.add('live');
-      raf = requestAnimationFrame(frame);
-    }
-    function stop() {
-      running = false; cancelAnimationFrame(raf);
-      layer.classList.remove('live');
-      words.forEach(function (w) { w.classList.remove('marked'); });
-    }
-
-    new IntersectionObserver(function (es) {
-      es[0].isIntersecting ? start() : stop();
-    }, { threshold: 0.12 }).observe(stage);
-
-    document.addEventListener('visibilitychange', function () {
-      document.hidden ? stop() : (stage.getBoundingClientRect().bottom > 0 && start());
-    });
-
-    var rt;
-    window.addEventListener('resize', function () {
-      clearTimeout(rt); rt = setTimeout(measure, 180);
-    }, { passive: true });
-  })();
-
-  /* ======================================================================
-     B. AMBIENT BACKGROUND MOTION
-     Gradient meshes are CSS-animated; particles are generated here so the
-     markup stays clean. Everything pauses via animation-play-state when the
-     section leaves the viewport.
-     ====================================================================== */
+  /* AMBIENT BACKGROUND MOTION */
   (function ambient() {
     [].forEach.call(document.querySelectorAll('[data-ambient]'), function (layer) {
       var COUNT = window.innerWidth < 700 ? 16 : 30;
@@ -530,7 +445,7 @@
     });
   })();
 
-  /* ---- Header state, scroll progress, gutter chapter -------------------- */
+  /* Header state, scroll progress, gutter chapter */
   var header = document.querySelector('.site-header');
   var bar = document.querySelector('.progress span');
   var marks = [].slice.call(document.querySelectorAll('[data-mark]'));
@@ -562,7 +477,7 @@
   }, { passive: true });
   onScroll();
 
-  /* ---- FAQ disclosure height ------------------------------------------- */
+  /* FAQ disclosure height */
   [].forEach.call(document.querySelectorAll('.faq details'), function (d) {
     var body = d.querySelector('.answer-wrap');
     if (!body) return;
@@ -589,7 +504,7 @@
     });
   });
 
-  /* ---- Hero glow tracks the pointer ------------------------------------ */
+  /* Hero glow tracks the pointer */
   var hero = document.querySelector('.hero');
   if (hero && window.matchMedia('(pointer:fine)').matches) {
     hero.addEventListener('pointermove', function (e) {
