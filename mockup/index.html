@@ -9,241 +9,461 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2316171A%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-family=%27Georgia,serif%27 font-size=%2720%27 font-weight=%27700%27 fill=%27%23D4AF37%27 text-anchor=%27middle%27%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="tokens.css">
 <style>
-/* ===== Base — mobile first ============================================ */
+/* ==========================================================================
+   EDITORIAL BROADSHEET — layout, atmosphere, motion
+   Motion language: rule-draw · letterpress line reveal · split-flap mono.
+   No fade-up-on-scroll anywhere.
+   ========================================================================== */
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + var(--sp-4))}
-body{margin:0; background:var(--bg); color:var(--text-on-dark);
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:96px}
+body{margin:0; background:var(--ink); color:var(--text-on-dark);
   font-family:var(--font-body); font-size:var(--fs-base); line-height:var(--lh-base);
-  -webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; line-height:var(--lh-tight);
-  letter-spacing:var(--tracking-tight); margin:0}
-p{margin:0}
-a{color:inherit}
-img{max-width:100%; display:block}
-.wrap{max-width:var(--container); margin:0 auto; padding:0 var(--sp-5)}
-.eyebrow{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:var(--tracking-wide);
-  text-transform:uppercase; color:var(--accent-on-dark); margin:0 0 var(--sp-4)}
-.eyebrow.on-light{color:var(--accent-on-light)}
-.lede{color:var(--text-muted-dark); max-width:var(--measure); font-size:var(--fs-md)}
-.lede.on-light{color:var(--text-muted-light)}
+  -webkit-font-smoothing:antialiased; overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; line-height:.98;
+  letter-spacing:-.028em; margin:0}
+p{margin:0} a{color:inherit} img{display:block; max-width:100%}
+.wrap{max-width:1180px; margin:0 auto; padding:0 var(--sp-5)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* ===== Buttons ======================================================== */
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
-  font-family:var(--font-body); font-size:var(--fs-sm); font-weight:600; text-decoration:none;
-  padding:var(--sp-3) var(--sp-5); border-radius:var(--r-md); border:1px solid transparent;
-  cursor:pointer; white-space:nowrap;
-  transition:background var(--dur) var(--ease), color var(--dur) var(--ease),
-             border-color var(--dur) var(--ease), transform var(--dur) var(--ease)}
-.btn-primary{background:var(--gold); color:var(--ink)}
-.btn-primary:hover{background:var(--gold-light); transform:translateY(-1px)}
-.btn-primary:active{background:var(--gold-dark); color:var(--paper); transform:none}
-.btn-outline{background:transparent; color:var(--gold); border-color:var(--gold)}
-.btn-outline:hover{background:rgba(212,175,55,.12)}
-.btn-lg{font-size:var(--fs-base); padding:var(--sp-4) var(--sp-6)}
-.btn:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px}
-/* On light surfaces the primary gold fails contrast — drop to the deep gold */
-.on-light .btn-primary,.band-light .btn-primary{background:var(--gold-deep); color:var(--paper)}
-.on-light .btn-primary:hover,.band-light .btn-primary:hover{background:var(--ink)}
+/* ---- Paper grain over the whole page --------------------------------- */
+body::after{content:""; position:fixed; inset:0; z-index:9; pointer-events:none; opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E")}
 
-/* ===== Header ========================================================= */
-.site-header{position:sticky; top:0; z-index:50; background:rgba(15,17,21,.92);
-  backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid var(--rule)}
-.site-header .wrap{display:flex; align-items:center; gap:var(--sp-4); min-height:var(--header-h)}
-.brand{display:flex; align-items:baseline; gap:.4ch; text-decoration:none; margin-right:auto}
-.brand b{font-family:var(--font-display); font-size:var(--fs-md); font-weight:700; color:var(--paper); letter-spacing:var(--tracking-tight)}
-.brand span{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:var(--tracking-wide);
+/* ---- Scroll progress hairline ---------------------------------------- */
+.progress{position:fixed; top:0; left:0; right:0; height:2px; z-index:70; background:transparent}
+.progress span{display:block; height:100%; background:var(--gold); transform:scaleX(0);
+  transform-origin:left; will-change:transform}
+
+/* ---- Mono metadata --------------------------------------------------- */
+.meta{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent-on-dark)}
+.meta.dim{color:var(--muted-on-dark)}
+.meta.on-light{color:var(--accent-on-light)}
+.flapping{color:var(--gold-light)}
+
+/* ==== SIGNATURE MOVE 1 — RULE-DRAW ===================================== */
+.rule{height:1px; background:var(--rule); transform:scaleX(0); transform-origin:left;
+  transition:transform 1s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0)*70ms)}
+.rule.gold{background:linear-gradient(90deg,var(--gold),transparent)}
+.rule.light{background:var(--rule-light)}
+.in .rule,.rule.in{transform:scaleX(1)}
+
+/* ==== SIGNATURE MOVE 2 — LETTERPRESS LINE REVEAL ======================= */
+.lp .ln{display:block; overflow:hidden; position:relative}
+.lp .ln > span{display:block; clip-path:inset(0 100% 0 0);
+  transition:clip-path 1.05s cubic-bezier(.16,1,.3,1);
+  transition-delay:calc(var(--ln,0)*130ms)}
+.lp .ln::after{content:""; position:absolute; inset:0 100% 0 0; background:var(--gold);
+  opacity:0; transition:inset 1.05s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+  transition-delay:calc(var(--ln,0)*130ms)}
+.in.lp .ln > span,.lp.in .ln > span{clip-path:inset(0 0 0 0)}
+.in.lp .ln::after,.lp.in .ln::after{inset:0 0 0 100%; opacity:.85}
+.reduced-motion .lp .ln > span{clip-path:none}
+.reduced-motion .lp .ln::after{display:none}
+
+/* ==== Generic staged children (slide from the gutter, not a fade-up) ==== */
+[data-stagger]{opacity:0; transform:translate3d(-14px,0,0);
+  transition:opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1);
+  transition-delay:calc(var(--i,0)*90ms)}
+.in [data-stagger]{opacity:1; transform:none}
+.reduced-motion [data-stagger]{opacity:1; transform:none}
+
+/* ==== FAILSAFE — content must never depend on JS to be visible =========
+   motion.js sets .js on <html>. If it never runs (blocked, errored, slow),
+   or if the observer never fires, everything below renders fully. Without
+   this, a JS failure leaves buttons and headlines at opacity:0 forever. */
+html:not(.js) [data-stagger]{opacity:1; transform:none}
+html:not(.js) .lp .ln > span{clip-path:none}
+html:not(.js) .lp .ln::after{display:none}
+html:not(.js) .rule{transform:scaleX(1)}
+html:not(.js) .answer-wrap{height:auto}
+html:not(.js) .presence{display:none}
+html:not(.js) .pillar-media{max-height:190px}
+
+/* ---- Sticky gutter chapter number ------------------------------------ */
+.gutter{position:fixed; left:18px; top:50%; transform:translateY(-50%); z-index:40;
+  display:none; align-items:center; gap:10px; writing-mode:vertical-rl}
+.gutter .gutter-num{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.3em;
+  color:var(--muted-on-dark)}
+.gutter .gutter-num.bump{animation:bump .5s cubic-bezier(.16,1,.3,1)}
+@keyframes bump{0%{opacity:0; transform:translateY(8px)}100%{opacity:1; transform:none}}
+.gutter i{display:block; width:1px; height:58px; background:var(--rule)}
+
+/* ---- Header ----------------------------------------------------------- */
+.site-header{position:sticky; top:0; z-index:60; transition:background .4s var(--ease), border-color .4s var(--ease);
+  border-bottom:1px solid transparent}
+.site-header.is-stuck{background:rgba(15,17,21,.86); backdrop-filter:saturate(150%) blur(12px);
+  border-bottom-color:var(--rule)}
+.site-header .wrap{display:flex; align-items:center; gap:var(--sp-4); min-height:76px;
+  transition:min-height .4s var(--ease)}
+.site-header.is-stuck .wrap{min-height:62px}
+.brand{display:flex; align-items:baseline; gap:.45ch; text-decoration:none; margin-right:auto}
+.brand b{font-family:var(--font-display); font-size:1.32rem; font-weight:800; color:var(--paper);
+  letter-spacing:-.02em}
+.brand span{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.24em;
   text-transform:uppercase; color:var(--accent-on-dark)}
 .site-nav{display:none}
-.site-nav a{font-size:var(--fs-sm); font-weight:500; color:var(--text-muted-dark); text-decoration:none;
-  padding:var(--sp-2) 0; position:relative; transition:color var(--dur) var(--ease)}
-.site-nav a:hover{color:var(--paper)}
+.site-nav a{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-muted-dark); text-decoration:none; padding:6px 0; position:relative}
 .site-nav a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
-  background:var(--gold); transition:right var(--dur) var(--ease)}
-.site-nav a:hover::after{right:0}
-.site-nav a:focus-visible{outline:2px solid var(--gold-light); outline-offset:4px; border-radius:var(--r-sm)}
-.header-phone{display:none; font-family:var(--font-mono); font-size:var(--fs-sm); color:var(--paper);
-  text-decoration:none; white-space:nowrap}
+  background:var(--gold); transition:right .45s cubic-bezier(.16,1,.3,1)}
+.site-nav a:hover{color:var(--paper)} .site-nav a:hover::after{right:0}
+.site-nav a:focus-visible{outline:2px solid var(--gold-light); outline-offset:5px}
+.header-phone{display:none; font-family:var(--font-mono); font-size:.8125rem; color:var(--paper); text-decoration:none}
 .header-phone:hover{color:var(--gold)}
-.header-cta{font-size:var(--fs-xs); padding:var(--sp-2) var(--sp-4)}
 
-/* ===== Hero =========================================================== */
-.hero{position:relative; background:var(--ink); padding:var(--sp-9) 0 var(--sp-8); overflow:hidden}
-.hero::before{content:""; position:absolute; inset:-30% 40% auto -20%; height:520px;
-  background:radial-gradient(ellipse at center, rgba(212,175,55,.13), transparent 65%); pointer-events:none}
-.hero .wrap{position:relative}
-.hero h1{font-size:var(--fs-2xl); max-width:16ch}
-.hero h1 em{font-style:normal; color:var(--accent-on-dark)}
-.hero .lede{margin:var(--sp-5) 0 var(--sp-7)}
-.hero-actions{display:flex; flex-direction:column; gap:var(--sp-3); align-items:stretch}
-.hero-phone{display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
-  font-family:var(--font-mono); font-size:var(--fs-sm); color:var(--text-muted-dark); text-decoration:none;
-  padding:var(--sp-3)}
-.hero-phone:hover{color:var(--gold)}
-.hero-phone b{color:var(--paper); font-weight:600}
+/* ---- Buttons ---------------------------------------------------------- */
+.btn{position:relative; display:inline-flex; align-items:center; gap:.7ch; overflow:hidden;
+  font-family:var(--font-mono); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+  font-weight:500; text-decoration:none; padding:14px 26px; border:1px solid var(--gold);
+  color:var(--ink); background:var(--gold); cursor:pointer; border-radius:0}
+.btn .t{position:relative; z-index:2; transition:color .45s var(--ease)}
+.btn .ar{position:relative; z-index:2; transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.btn::before{content:""; position:absolute; inset:0; background:var(--ink);
+  transform:translate3d(0,101%,0); transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn:hover::before{transform:none}
+.btn:hover .t{color:var(--gold)} .btn:hover .ar{transform:translateX(5px)}
+.btn:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.btn-ghost{background:transparent; color:var(--gold)}
+.btn-ghost::before{background:var(--gold)}
+.btn-ghost:hover .t{color:var(--ink)}
+.btn-sm{padding:10px 18px; font-size:.6875rem}
+/* On light surfaces the primary gold fails contrast — use the deep gold */
+.band-light .btn{background:var(--gold-deep); border-color:var(--gold-deep); color:var(--paper)}
+.band-light .btn::before{background:var(--ink)}
+.band-light .btn:hover .t{color:var(--paper)}
+.band-light .btn-ghost{background:transparent; color:var(--gold-deep)}
+.band-light .btn-ghost::before{background:var(--gold-deep)}
+.band-light .btn-ghost:hover .t{color:var(--paper)}
 
-.statrow{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-5);
-  margin-top:var(--sp-8); padding-top:var(--sp-6); border-top:1px solid var(--rule)}
-.stat .v{font-family:var(--font-mono); font-size:var(--fs-xl); font-weight:600;
-  color:var(--muted-on-dark); letter-spacing:var(--tracking-tight); line-height:1}
-.stat .k{font-size:var(--fs-xs); color:var(--muted-on-dark); margin-top:var(--sp-2); line-height:1.35}
+/* ==== 00 — HERO ======================================================== */
+.hero{position:relative; min-height:92vh; display:flex; align-items:flex-end;
+  padding:calc(76px + var(--sp-8)) 0 var(--sp-8); overflow:hidden; --px:0px; --py:0px}
+.hero-img{position:absolute; inset:0; z-index:0}
+.hero-img img{width:100%; height:100%; object-fit:cover; filter:grayscale(1) contrast(1.15) brightness(.34);
+  transform:scale(1.08) translate3d(var(--px),var(--py),0); transition:transform 1.4s cubic-bezier(.16,1,.3,1);
+  animation:heroIn 2.4s cubic-bezier(.16,1,.3,1) both}
+@keyframes heroIn{from{transform:scale(1.22) translate3d(0,0,0); filter:grayscale(1) brightness(.1)}}
+.hero-img::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(22,23,26,.72) 42%, var(--ink) 100%)}
+.hero-glow{position:absolute; z-index:1; width:56vw; height:56vw; max-width:760px; max-height:760px;
+  border-radius:50%; pointer-events:none; filter:blur(10px);
+  background:radial-gradient(circle, rgba(212,175,55,.20), transparent 62%);
+  transform:translate3d(var(--px),var(--py),0)}
+.hero-glow.a{top:-14%; left:-12%; animation:drift 22s ease-in-out infinite alternate}
+.hero-glow.b{bottom:-24%; right:-16%; opacity:.55; animation:drift 28s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate3d(calc(var(--px) + 46px), calc(var(--py) - 34px),0) scale(1.12)}}
+.hero .wrap{position:relative; z-index:2; width:100%}
+.hero-top{display:flex; flex-wrap:wrap; gap:var(--sp-4) var(--sp-6); align-items:baseline;
+  margin-bottom:var(--sp-6)}
+.hero h1{font-size:clamp(2.6rem,9vw,6.4rem); font-weight:700; max-width:15ch}
+.hero h1 em{font-style:italic; font-weight:600; color:var(--accent-on-dark)}
+.hero-foot{display:grid; gap:var(--sp-6); margin-top:var(--sp-7)}
+.hero-lede{color:var(--text-muted-dark); font-size:1.0625rem; max-width:46ch}
+.hero-cta{display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-5)}
+.hero-tel{font-family:var(--font-mono); font-size:.8125rem; color:var(--text-muted-dark); text-decoration:none}
+.hero-tel b{color:var(--paper)} .hero-tel:hover{color:var(--gold)}
 
-/* ===== Section shells ================================================= */
-.band{padding:var(--sp-8) 0; border-top:1px solid var(--rule)}
+/* Ledger stat strip */
+.ledger{display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--rule);
+  margin-top:var(--sp-8)}
+.ledger div{padding:var(--sp-5) var(--sp-4) var(--sp-4) 0; border-bottom:1px solid var(--rule)}
+.ledger .v{font-family:var(--font-mono); font-size:1.6rem; font-weight:500; color:var(--muted-on-dark); line-height:1}
+.ledger .k{font-size:.6875rem; color:var(--muted-on-dark); margin-top:10px; line-height:1.4;
+  letter-spacing:.04em}
+
+/* ---- Ticker ----------------------------------------------------------- */
+.ticker{border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  overflow:hidden; background:var(--ink-deep); padding:14px 0}
+.ticker-track{display:flex; gap:var(--sp-7); width:max-content; animation:slide 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ticker span{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--muted-on-dark); white-space:nowrap}
+.ticker span b{color:var(--gold); font-weight:500}
+
+/* ---- Section shell ---------------------------------------------------- */
+.sec{padding:var(--sp-9) 0; position:relative}
+.sec-head{display:grid; gap:var(--sp-4); margin-bottom:var(--sp-8)}
+.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.3rem); max-width:19ch}
+.sec-head h2 em{font-style:italic; color:var(--accent-on-dark)}
+.band-light .sec-head h2 em{color:var(--accent-on-light)}
+.sec-lede{color:var(--text-muted-dark); max-width:52ch; font-size:1.0625rem}
+.band-light{background:var(--paper); color:var(--text-on-light)}
+.band-light .sec-lede{color:var(--text-muted-light)}
 .band-deep{background:var(--ink-deep)}
-.band-light{background:var(--surface-light); color:var(--text-on-light); border-top:0}
-.band-light h2,.band-light h3{color:var(--text-on-light)}
-.band h2{font-size:var(--fs-xl); max-width:20ch}
-.band > .wrap > .lede{margin-top:var(--sp-4)}
-.section-head{margin-bottom:var(--sp-7)}
 
-/* ===== Self-select ==================================================== */
-.fitgrid{display:grid; gap:var(--sp-5)}
-.fitcard{background:var(--bg-raised); border:1px solid var(--rule); border-radius:var(--r-lg); padding:var(--sp-6)}
-.fitcard.no{background:transparent}
-.fitcard h3{font-size:var(--fs-md); margin-bottom:var(--sp-5)}
-.fitcard.yes h3{color:var(--accent-on-dark)}
-.fitcard.no h3{color:var(--muted-on-dark)}
-.fitlist{list-style:none; margin:0; padding:0; display:grid; gap:var(--sp-4)}
-.fitlist li{display:grid; grid-template-columns:22px 1fr; gap:var(--sp-3);
-  font-size:var(--fs-sm); color:var(--text-muted-dark); line-height:1.55}
-.fitlist .mark{font-family:var(--font-mono); font-weight:600; line-height:1.5}
-.fitcard.yes .mark{color:var(--gold)}
-.fitcard.no .mark{color:var(--muted-on-dark)}
+/* ==== 01 — SELF-SELECT: two ledgers, hairline rows, no boxes =========== */
+.fit{display:grid; gap:var(--sp-8)}
+.fitcol h3{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.18em;
+  text-transform:uppercase; margin-bottom:var(--sp-5)}
+.fitcol.yes h3{color:var(--accent-on-dark)}
+.fitcol.no h3{color:var(--muted-on-dark)}
+.fitcol ul{list-style:none; margin:0; padding:0}
+.fitcol li{display:grid; grid-template-columns:34px 1fr; gap:var(--sp-3);
+  padding:var(--sp-4) 0; border-bottom:1px solid var(--rule); font-size:.9375rem;
+  color:var(--text-muted-dark); line-height:1.55}
+.fitcol li .n{font-family:var(--font-mono); font-size:.6875rem; padding-top:4px}
+.fitcol.yes .n{color:var(--gold)} .fitcol.no .n{color:var(--muted-on-dark)}
+.fitcol.no li{opacity:.72}
 
-/* ===== Cards ========================================================== */
-.cardgrid{display:grid; gap:var(--sp-5)}
-.card{background:var(--bg-raised); border:1px solid var(--rule); border-radius:var(--r-lg);
-  padding:var(--sp-6); transition:border-color var(--dur) var(--ease), transform var(--dur) var(--ease)}
-.card:hover{border-color:rgba(212,175,55,.5); transform:translateY(-2px)}
-.card .num{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--accent-on-dark);
-  letter-spacing:var(--tracking-wide)}
-.card h3{font-size:var(--fs-md); margin:var(--sp-3) 0 var(--sp-3)}
-.card p{font-size:var(--fs-sm); color:var(--text-muted-dark)}
+/* ==== 02 — PILLARS: offset editorial rows, giant outline numerals ====== */
+.pillar{display:grid; gap:var(--sp-4); padding:var(--sp-7) 0; border-bottom:1px solid var(--rule);
+  position:relative}
+.pillar:last-child{border-bottom:0}
+.pillar .idx{font-family:var(--font-display); font-size:clamp(3.4rem,11vw,7rem); line-height:.8;
+  font-weight:700; color:transparent; -webkit-text-stroke:1px rgba(212,175,55,.42);
+  letter-spacing:-.04em}
+.pillar h3{font-size:clamp(1.35rem,3.2vw,2rem); max-width:16ch}
+.pillar p{color:var(--text-muted-dark); max-width:56ch; font-size:.9375rem; margin-top:var(--sp-3)}
+.pillar .tag{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted-on-dark); margin-top:var(--sp-4)}
 
-.card-light{background:var(--paper-2); border:1px solid var(--rule-light); border-radius:var(--r-lg);
-  padding:var(--sp-6); transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease)}
-.card-light:hover{border-color:var(--gold-deep); box-shadow:var(--shadow-sm)}
-.card-light .num{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--accent-on-light);
-  letter-spacing:var(--tracking-wide)}
-.card-light h3{font-size:var(--fs-md); margin:var(--sp-3) 0 var(--sp-3); color:var(--text-on-light)}
-.card-light p{font-size:var(--fs-sm); color:var(--text-muted-light)}
-.card-light ul{margin:var(--sp-4) 0 0; padding-left:1.1rem; font-size:var(--fs-sm); color:var(--text-muted-light)}
-.card-light li{margin-bottom:var(--sp-2)}
-.card-light a.more{display:inline-block; margin-top:var(--sp-5); font-size:var(--fs-sm); font-weight:600;
-  color:var(--accent-on-light); text-decoration:underline; text-underline-offset:3px}
+/* ==== 03 — VERTICALS: expanding image panels ========================== */
+.panels{display:grid; gap:2px; margin-top:var(--sp-7)}
+.panel{position:relative; overflow:hidden; min-height:250px; cursor:pointer; border:0; padding:0;
+  text-align:left; background:var(--ink); color:var(--paper); display:block; width:100%;
+  transition:flex-grow .7s cubic-bezier(.16,1,.3,1)}
+.panel img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  filter:grayscale(1) brightness(.42) contrast(1.1);
+  transition:filter .8s var(--ease), transform 1.2s cubic-bezier(.16,1,.3,1); transform:scale(1.04)}
+.panel::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(15,17,21,.28),rgba(15,17,21,.9))}
+.panel .pin{position:relative; z-index:2; padding:var(--sp-6); display:flex; flex-direction:column;
+  justify-content:flex-end; min-height:250px}
+.panel .kicker{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:var(--sp-3)}
+.panel h3{font-size:1.4rem}
+.panel .body{max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .7s cubic-bezier(.16,1,.3,1), opacity .5s ease, margin .7s}
+.panel .body p{font-size:.875rem; color:var(--border); margin-top:var(--sp-3)}
+.panel .body ul{margin:var(--sp-4) 0 0; padding-left:1.05rem; font-size:.8125rem; color:var(--border)}
+.panel .body li{margin-bottom:6px}
+.panel:hover img,.panel.open img{filter:grayscale(0) brightness(.5) contrast(1.05); transform:scale(1)}
+.panel:hover .body,.panel.open .body{max-height:280px; opacity:1}
+.panel:focus-visible{outline:2px solid var(--gold); outline-offset:-4px}
 
-/* ===== Founders ======================================================= */
-.founders{display:grid; gap:var(--sp-5)}
-.founder{text-align:center; background:var(--bg-raised); border:1px solid var(--rule);
-  border-radius:var(--r-lg); padding:var(--sp-6)}
-.avatar{width:96px; height:96px; margin:0 auto var(--sp-4); border-radius:var(--r-full);
-  background:linear-gradient(150deg,var(--avatar-top),#16171A); border:1px solid rgba(212,175,55,.45);
-  display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-display); font-size:var(--fs-lg); font-weight:700; color:var(--gold)}
-.founder h3{font-size:var(--fs-md)}
-.founder .role{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-on-dark);
-  letter-spacing:var(--tracking-wide); text-transform:uppercase; margin-top:var(--sp-2)}
+/* ==== 04 — FOUNDERS: staggered offsets ================================= */
+.founders{display:grid; gap:var(--sp-6); margin-top:var(--sp-7)}
+.founder{border-top:1px solid var(--rule); padding-top:var(--sp-5)}
+.mono-avatar{width:78px; height:78px; display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(212,175,55,.4); background:linear-gradient(150deg,var(--avatar-top),var(--ink));
+  font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--gold);
+  margin-bottom:var(--sp-4); transition:border-color .5s var(--ease), transform .6s cubic-bezier(.16,1,.3,1)}
+.founder:hover .mono-avatar{border-color:var(--gold); transform:translateY(-4px)}
+.founder h3{font-size:1.3rem}
+.founder .role{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted-on-dark); margin-top:10px}
 
-/* ===== What lands on the call ========================================= */
-.deliverables{list-style:none; margin:0; padding:0; display:grid; gap:var(--sp-5); counter-reset:d}
-.deliverables li{counter-increment:d; display:grid; grid-template-columns:auto 1fr; gap:var(--sp-4);
-  padding-bottom:var(--sp-5); border-bottom:1px solid var(--rule)}
-.deliverables li:last-child{border-bottom:0; padding-bottom:0}
-.deliverables li::before{content:counter(d,decimal-leading-zero); font-family:var(--font-mono);
-  font-size:var(--fs-sm); font-weight:600; color:var(--accent-on-dark); padding-top:2px}
-.deliverables h3{font-size:var(--fs-base); font-family:var(--font-body); font-weight:700}
-.deliverables p{font-size:var(--fs-sm); color:var(--text-muted-dark); margin-top:var(--sp-2)}
+/* ==== 05 — THE CALL: sticky image + ledger rows ======================== */
+.call{display:grid; gap:var(--sp-7)}
+.call-media{position:relative; overflow:hidden; min-height:280px}
+.call-media img{width:100%; height:100%; min-height:280px; object-fit:cover;
+  filter:grayscale(1) brightness(.46) contrast(1.12)}
+.call-media::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(200deg,rgba(212,175,55,.14),transparent 60%)}
+.call-list{list-style:none; margin:0; padding:0; counter-reset:c}
+.call-list li{counter-increment:c; display:grid; grid-template-columns:44px 1fr; gap:var(--sp-4);
+  padding:var(--sp-5) 0; border-bottom:1px solid var(--rule)}
+.call-list li::before{content:counter(c,decimal-leading-zero); font-family:var(--font-mono);
+  font-size:.6875rem; color:var(--accent-on-dark); padding-top:5px}
+.call-list h3{font-family:var(--font-body); font-size:1rem; font-weight:700}
+.call-list p{color:var(--text-muted-dark); font-size:.9375rem; margin-top:8px; max-width:52ch}
 
-/* ===== Case studies empty state ======================================= */
-.empty{border:1px dashed rgba(212,175,55,.45); border-radius:var(--r-lg);
-  padding:var(--sp-8) var(--sp-5); text-align:center; background:rgba(212,175,55,.04)}
-.empty .tag{display:inline-block; font-family:var(--font-mono); font-size:var(--fs-xs);
-  letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--accent-on-dark);
-  border:1px solid rgba(212,175,55,.45); border-radius:var(--r-full);
-  padding:var(--sp-1) var(--sp-4); margin-bottom:var(--sp-5)}
-.empty h3{font-size:var(--fs-lg); margin-bottom:var(--sp-3)}
-.empty p{color:var(--text-muted-dark); max-width:56ch; margin:0 auto var(--sp-6); font-size:var(--fs-sm)}
-.ghostcards{display:grid; gap:var(--sp-4); margin-top:var(--sp-7)}
-.ghost{height:112px; border-radius:var(--r-md); border:1px solid var(--rule);
-  background:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 10px,transparent 10px 20px)}
+/* ==== CASE STUDIES — empty state with shimmer ========================== */
+.empty{border:1px solid var(--rule); padding:var(--sp-8) var(--sp-5); text-align:center; position:relative;
+  overflow:hidden; background:linear-gradient(180deg,rgba(212,175,55,.035),transparent)}
+.empty .meta{margin-bottom:var(--sp-4); display:inline-block}
+.empty h3{font-size:clamp(1.5rem,3.4vw,2.1rem); margin-bottom:var(--sp-4)}
+.empty p{color:var(--text-muted-dark); max-width:56ch; margin:0 auto var(--sp-6); font-size:.9375rem}
+.ghosts{display:grid; gap:2px; margin-top:var(--sp-7)}
+.ghost{height:104px; position:relative; overflow:hidden; background:var(--bg-raised)}
+.ghost::after{content:""; position:absolute; inset:0; transform:translateX(-100%);
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.1),transparent);
+  animation:shimmer 3.2s ease-in-out infinite; animation-delay:calc(var(--g,0)*.45s)}
+@keyframes shimmer{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
 
-/* ===== FAQ ============================================================ */
-.faq{border-top:1px solid var(--rule-light)}
+/* ==== 06 — FAQ ========================================================= */
+.faq{border-top:1px solid var(--rule-light); margin-top:var(--sp-7)}
 .faq details{border-bottom:1px solid var(--rule-light)}
-.faq summary{cursor:pointer; list-style:none; padding:var(--sp-5) var(--sp-6) var(--sp-5) 0; position:relative;
-  font-family:var(--font-display); font-size:var(--fs-md); font-weight:600; color:var(--text-on-light)}
+.faq summary{cursor:pointer; list-style:none; padding:var(--sp-5) var(--sp-7) var(--sp-5) 0;
+  position:relative; font-family:var(--font-display); font-size:clamp(1.05rem,2.4vw,1.4rem);
+  font-weight:600; color:var(--text-on-light); transition:color .3s var(--ease)}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+"; position:absolute; right:0; top:50%; transform:translateY(-50%);
-  font-family:var(--font-mono); font-size:var(--fs-lg); color:var(--accent-on-light); line-height:1}
-.faq details[open] summary::after{content:"−"}
+.faq summary::after,.faq summary::before{content:""; position:absolute; right:6px; top:50%;
+  background:var(--gold-deep); transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.faq summary::after{width:15px; height:1px; transform:translateY(-50%)}
+.faq summary::before{width:1px; height:15px; right:13px; transform:translateY(-50%)}
+.faq details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
 .faq summary:hover{color:var(--accent-on-light)}
-.faq summary:focus-visible{outline:2px solid var(--gold-deep); outline-offset:2px; border-radius:var(--r-sm)}
-.faq .answer{padding:0 var(--sp-6) var(--sp-5) 0; color:var(--text-muted-light);
-  font-size:var(--fs-sm); max-width:var(--measure)}
+.faq summary:focus-visible{outline:2px solid var(--gold-deep); outline-offset:2px}
+.answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
+.reduced-motion .answer-wrap,html:not(.js) .answer-wrap{height:auto}
+.faq .answer{padding:0 var(--sp-7) var(--sp-5) 0; color:var(--text-muted-light);
+  font-size:.9375rem; max-width:var(--measure)}
 
-/* ===== Final CTA band ================================================= */
-.cta-band{background:var(--gold); color:var(--ink); padding:var(--sp-8) 0; text-align:center}
-.cta-band h2{font-size:var(--fs-xl); color:var(--ink); margin:0 auto; max-width:18ch}
-.cta-band p{color:var(--on-gold-muted); margin:var(--sp-4) auto var(--sp-6); max-width:52ch; font-size:var(--fs-base)}
-.cta-band .btn-dark{background:var(--ink); color:var(--gold); font-size:var(--fs-base);
-  padding:var(--sp-4) var(--sp-6)}
-.cta-band .btn-dark:hover{background:var(--ink-deep)}
-.cta-band .phone{display:block; margin-top:var(--sp-5); font-family:var(--font-mono);
-  font-size:var(--fs-sm); color:var(--on-gold-muted); text-decoration:none}
-.cta-band .phone b{color:var(--ink)}
+/* ==== CTA BAND ========================================================= */
+.cta{position:relative; overflow:hidden; padding:var(--sp-9) 0; text-align:center;
+  background:linear-gradient(120deg,#B9932C,var(--gold) 42%,#E8CD62 68%,var(--gold-dark));
+  background-size:260% 260%; animation:sheen 16s ease-in-out infinite alternate; color:var(--ink)}
+@keyframes sheen{to{background-position:100% 50%}}
+.cta h2{font-size:clamp(1.9rem,5vw,3.4rem); color:var(--ink); margin:0 auto var(--sp-4); max-width:17ch}
+.cta p{color:var(--on-gold-muted); max-width:50ch; margin:0 auto var(--sp-7); font-size:1.0625rem}
+.cta .btn{background:var(--ink); border-color:var(--ink); color:var(--gold)}
+.cta .btn::before{background:var(--paper)}
+.cta .btn:hover .t{color:var(--ink)}
+.cta .tel{display:block; margin-top:var(--sp-5); font-family:var(--font-mono); font-size:.8125rem;
+  color:var(--on-gold-muted); text-decoration:none}
+.cta .tel b{color:var(--ink)}
 
-/* ===== Footer ========================================================= */
+/* ==== FOOTER =========================================================== */
 .site-footer{background:var(--ink-deep); padding:var(--sp-8) 0 var(--sp-6)}
 .footgrid{display:grid; gap:var(--sp-7)}
-.footcol h4{font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:600;
-  letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--accent-on-dark);
-  margin-bottom:var(--sp-4)}
-.footcol ul{list-style:none; margin:0; padding:0; display:grid; gap:var(--sp-3)}
-.footcol a{font-size:var(--fs-sm); color:var(--text-muted-dark); text-decoration:none}
+.footcol h4{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--accent-on-dark); margin-bottom:var(--sp-4)}
+.footcol ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.footcol a{font-size:.875rem; color:var(--text-muted-dark); text-decoration:none; position:relative}
 .footcol a:hover{color:var(--paper)}
-.footcol a:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px; border-radius:var(--r-sm)}
-.footcol address{font-style:normal; font-size:var(--fs-sm); color:var(--text-muted-dark); line-height:1.7}
-.footcol address a{display:inline-block}
+.footcol a:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.footcol address{font-style:normal; font-size:.875rem; color:var(--text-muted-dark); line-height:1.8}
 .footcol .mono{font-family:var(--font-mono)}
 .footbar{margin-top:var(--sp-8); padding-top:var(--sp-5); border-top:1px solid var(--rule);
-  display:grid; gap:var(--sp-4); font-size:var(--fs-xs); color:var(--muted-on-dark)}
+  display:grid; gap:var(--sp-4); font-size:.6875rem; color:var(--muted-on-dark);
+  font-family:var(--font-mono); letter-spacing:.06em}
 .footbar nav{display:flex; flex-wrap:wrap; gap:var(--sp-5)}
 .footbar a{color:var(--muted-on-dark); text-decoration:none}
 .footbar a:hover{color:var(--border)}
 
-/* ===== Responsive ===================================================== */
-@media (min-width:600px){
-  .hero-actions{flex-direction:row; align-items:center; gap:var(--sp-5)}
-  .statrow{grid-template-columns:repeat(4,1fr)}
-  .cardgrid{grid-template-columns:repeat(2,1fr)}
+/* ==== SIMULATED COLLABORATIVE PRESENCE (hero) ==========================
+   Decorative only. The layer is aria-hidden and pointer-events:none, so it
+   can never intercept a click or a focus ring. */
+.hero-stage{position:relative}
+.presence{position:absolute; inset:-8% -4%; z-index:6; pointer-events:none; contain:layout paint}
+.cur{position:absolute; top:0; left:0; display:flex; align-items:flex-start; gap:5px;
+  transform:translate3d(-100px,-100px,0); will-change:transform; opacity:0;
+  transition:opacity .6s ease}
+.presence.live .cur{opacity:1}
+.cur svg{flex:none; filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+.cur .lbl{font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.1em;
+  text-transform:uppercase; padding:3px 7px; white-space:nowrap; color:var(--ink);
+  border-radius:2px; transform:translateY(9px)}
+.cur:nth-child(1) svg{fill:var(--gold)}        .cur:nth-child(1) .lbl{background:var(--gold)}
+.cur:nth-child(2) svg{fill:var(--gold-light)}  .cur:nth-child(2) .lbl{background:var(--gold-light)}
+.cur:nth-child(3) svg{fill:#C9A227}            .cur:nth-child(3) .lbl{background:#C9A227}
+
+/* The outcome words the cursors mark up */
+.mk{font-style:italic; font-weight:600; color:var(--accent-on-dark); position:relative;
+  transition:color .4s var(--ease)}
+.mk::before{content:""; position:absolute; left:-.14em; right:-.14em; top:.04em; bottom:.06em;
+  background:rgba(212,175,55,.18); border:1px solid rgba(212,175,55,.5);
+  transform:scaleX(0); transform-origin:left; opacity:0;
+  transition:transform .5s cubic-bezier(.16,1,.3,1), opacity .3s ease; z-index:-1}
+.mk.marked::before{transform:scaleX(1); opacity:1}
+.mk.marked{color:var(--gold-light)}
+
+.presence-chip{display:inline-flex; align-items:center; gap:10px; margin-top:var(--sp-6);
+  padding:7px 13px 7px 8px; border:1px solid var(--rule); background:rgba(15,17,21,.6);
+  backdrop-filter:blur(6px)}
+.presence-chip .stack{display:flex}
+.presence-chip .stack i{width:21px; height:21px; margin-right:-7px; border-radius:50%;
+  border:1px solid var(--ink-deep); background:linear-gradient(150deg,var(--avatar-top),var(--ink));
+  font-family:var(--font-mono); font-size:.5rem; font-style:normal; color:var(--gold);
+  display:flex; align-items:center; justify-content:center}
+.presence-chip .pc-text{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-muted-dark); margin-left:5px}
+.presence-chip .pc-note{font-family:var(--font-mono); font-size:.5rem; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted-on-dark); padding-left:9px;
+  border-left:1px solid var(--rule)}
+
+/* ==== AMBIENT BACKGROUND MOTION ========================================
+   Layered blurred gradient meshes plus drifting particles. Composited
+   transform/opacity only; paused entirely when the section is offscreen. */
+.ambient{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;
+  contain:strict}
+.ambient .mesh{position:absolute; border-radius:50%; filter:blur(46px); will-change:transform;
+  animation-timing-function:cubic-bezier(.45,.05,.55,.95); animation-iteration-count:infinite;
+  animation-direction:alternate}
+.ambient .m1{width:60vw; height:60vw; max-width:780px; max-height:780px; top:-22%; left:-14%;
+  background:radial-gradient(circle,rgba(212,175,55,.16),transparent 66%); animation-name:mesh1; animation-duration:26s}
+.ambient .m2{width:52vw; height:52vw; max-width:660px; max-height:660px; bottom:-26%; right:-12%;
+  background:radial-gradient(circle,rgba(227,194,78,.11),transparent 64%); animation-name:mesh2; animation-duration:34s}
+.ambient .m3{width:44vw; height:44vw; max-width:540px; max-height:540px; top:30%; left:44%;
+  background:radial-gradient(circle,rgba(168,132,42,.13),transparent 62%); animation-name:mesh3; animation-duration:42s}
+@keyframes mesh1{to{transform:translate3d(9vw,7vh,0) scale(1.22)}}
+@keyframes mesh2{to{transform:translate3d(-8vw,-6vh,0) scale(1.16)}}
+@keyframes mesh3{to{transform:translate3d(-6vw,9vh,0) scale(.86)}}
+
+.ambient .p{position:absolute; width:3px; height:3px; border-radius:50%; background:var(--gold);
+  opacity:0; will-change:transform,opacity;
+  animation:rise linear infinite; animation-delay:calc(var(--d)*1s); animation-duration:calc(var(--s)*1s)}
+@keyframes rise{
+  0%{transform:translate3d(0,0,0) scale(.6); opacity:0}
+  12%{opacity:var(--o)}
+  80%{opacity:var(--o)}
+  100%{transform:translate3d(var(--dx),-118%,0) scale(1.15); opacity:0}
+}
+/* Truly paused offscreen — no compositor work at all */
+.ambient.paused .mesh,.ambient.paused .p{animation-play-state:paused}
+.has-ambient{position:relative; isolation:isolate}
+.has-ambient > .wrap{position:relative; z-index:1}
+
+/* ---- Pillar thumbnails ------------------------------------------------ */
+.pillar-media{overflow:hidden; margin-top:var(--sp-4); max-height:0;
+  transition:max-height .9s cubic-bezier(.16,1,.3,1)}
+.in .pillar-media{max-height:190px}
+.pillar-media img{width:100%; height:170px; object-fit:cover;
+  filter:grayscale(1) brightness(.5) contrast(1.14);
+  transition:filter .7s var(--ease), transform 1.1s cubic-bezier(.16,1,.3,1); transform:scale(1.05)}
+.pillar:hover .pillar-media img{filter:grayscale(.25) brightness(.62); transform:scale(1)}
+
+/* ---- Ghost cards now carry obscured imagery --------------------------- */
+.ghost img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  filter:grayscale(1) brightness(.26) contrast(1.2) blur(1.5px)}
+
+/* ==== RESPONSIVE ======================================================= */
+@media (min-width:640px){
+  .ledger{grid-template-columns:repeat(4,1fr)}
+  .ledger div{padding-right:var(--sp-5)}
   .founders{grid-template-columns:repeat(3,1fr)}
-  .ghostcards{grid-template-columns:repeat(3,1fr)}
-  .fitgrid{grid-template-columns:repeat(2,1fr)}
-  .footgrid{grid-template-columns:repeat(2,1fr)}
-  .footbar{grid-template-columns:1fr auto; align-items:center}
+  .ghosts{grid-template-columns:repeat(3,1fr)}
+  .pillar{grid-template-columns:120px 1fr; gap:var(--sp-6)}
 }
 @media (min-width:900px){
   .site-nav{display:flex; gap:var(--sp-5); margin-right:var(--sp-6)}
-  .header-phone{display:inline-block}
-  .hero{padding:var(--sp-10) 0 var(--sp-9)}
-  .hero h1{font-size:var(--fs-4xl)}
-  .band{padding:var(--sp-9) 0}
-  .band h2{font-size:var(--fs-2xl)}
-  .cardgrid{grid-template-columns:repeat(3,1fr)}
-  .footgrid{grid-template-columns:2fr 1fr 1fr 1.4fr}
-  .deliverables{grid-template-columns:repeat(2,1fr); gap:var(--sp-6) var(--sp-8)}
-  .deliverables li:nth-last-child(2){border-bottom:0; padding-bottom:0}
+  .header-phone{display:inline-block; margin-right:var(--sp-5)}
+  .gutter{display:flex}
+  .wrap{padding:0 var(--sp-7)}
+  .hero-foot{grid-template-columns:1.1fr .9fr; align-items:end}
+  .fit{grid-template-columns:1fr 1fr; gap:var(--sp-9)}
+  .panels{grid-auto-flow:column; grid-auto-columns:1fr; min-height:440px}
+  .panel{min-height:440px} .panel .pin{min-height:440px}
+  .panels:hover .panel{flex:0} .panel:hover,.panel.open{flex:1.9}
+  .call{grid-template-columns:.85fr 1.15fr; gap:var(--sp-8); align-items:start}
+  .call-media{position:sticky; top:110px; min-height:520px}
+  .call-media img{min-height:520px}
+  .founder:nth-child(2){margin-top:var(--sp-6)}
+  .founder:nth-child(3){margin-top:var(--sp-8)}
+  .footgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}
+  .footbar{grid-template-columns:1fr auto; align-items:center}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important; scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:none!important; scroll-behavior:auto}
+  .hero-img img{transform:none}
+}
 </style>
 </head>
 <body>
 
+<div class="progress"><span></span></div>
 <a class="sr-only" href="#main">Skip to content</a>
+
+<aside class="gutter" aria-hidden="true">
+  <span class="gutter-num">00</span><i></i>
+</aside>
 
 <header class="site-header">
   <div class="wrap">
@@ -257,253 +477,325 @@ img{max-width:100%; display:block}
       <a href="#locations">Locations</a>
     </nav>
     <a class="header-phone" href="tel:+16193300953">(619) 330-0953</a>
-    <a class="btn btn-primary header-cta" href="#book">Book a strategy call</a>
+    <a class="btn btn-sm" href="#call"><span class="t">Book a call</span><span class="ar">→</span></a>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
+  <!-- ============ 00 — HERO ============ -->
+  <section class="hero" data-reveal data-mark="00">
+    <div class="hero-img">
+      <img src="https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg?auto=compress&cs=tinysrgb&w=1920"
+           alt="" aria-hidden="true" fetchpriority="high">
+    </div>
+    <div class="hero-glow a"></div>
+    <div class="hero-glow b"></div>
+
     <div class="wrap">
-      <p class="eyebrow">B2B marketing for operators</p>
-      <h1>Marketing run by operators, measured in <em>booked jobs, signed cases, and new patients.</em></h1>
-      <p class="lede">We are not a reporting agency. We run the same channels inside businesses we have an operating stake in, and we answer to the only number that pays a payroll: revenue that actually arrived.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary btn-lg" href="#book">Book a strategy call</a>
-        <a class="hero-phone" href="tel:+16193300953">or call <b>(619) 330-0953</b></a>
+      <div class="hero-top">
+        <span class="meta" data-flap="00 / OPERATORS">00 / OPERATORS</span>
+        <span class="meta dim">Home services &middot; Medical &middot; Legal</span>
       </div>
 
-      <div class="statrow">
-        <div class="stat"><div class="v">——</div><div class="k">Managed media under our accounts</div></div>
-        <div class="stat"><div class="v">——</div><div class="k">Years combined across the three founders</div></div>
-        <div class="stat"><div class="v">——</div><div class="k">Operators served since founding</div></div>
-        <div class="stat"><div class="v">——</div><div class="k">Average months to first attributed lift</div></div>
+      <div class="hero-stage">
+        <h1 class="lp">
+          <span class="ln" style="--ln:0"><span>Marketing run by</span></span>
+          <span class="ln" style="--ln:1"><span>operators, measured in</span></span>
+          <span class="ln" style="--ln:2"><span><em class="mk" data-mk>booked jobs</em>, <em class="mk" data-mk>signed cases</em>,</span></span>
+          <span class="ln" style="--ln:3"><span>and <em class="mk" data-mk>new patients.</em></span></span>
+        </h1>
+
+        <!-- Decorative, simulated. Never blocks pointer or focus. -->
+        <div class="presence" aria-hidden="true">
+          <div class="cur" data-name="Brian"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M1 1l5.2 13.2 2.1-5.4 5.4-2.1z"/></svg><span class="lbl">Brian</span></div>
+          <div class="cur" data-name="Michael"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M1 1l5.2 13.2 2.1-5.4 5.4-2.1z"/></svg><span class="lbl">Michael</span></div>
+          <div class="cur" data-name="Dimitry"><svg viewBox="0 0 16 16" width="16" height="16"><path d="M1 1l5.2 13.2 2.1-5.4 5.4-2.1z"/></svg><span class="lbl">Dimitry</span></div>
+        </div>
+      </div>
+
+      <div class="presence-chip">
+        <span class="stack" aria-hidden="true"><i>BH</i><i>MM</i><i>DM</i></span>
+        <span class="pc-text">Three operators, one account</span>
+        <span class="pc-note">illustrative</span>
+      </div>
+
+      <div class="hero-foot">
+        <p class="hero-lede">We are not a reporting agency. We run these channels inside businesses we hold a stake in, and we answer to the only number that makes payroll: revenue that actually arrived.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">→</span></a>
+          <a class="hero-tel" href="tel:+16193300953">or call <b>(619) 330-0953</b></a>
+        </div>
+      </div>
+
+      <div class="ledger">
+        <div><div class="v" data-flap="——">——</div><div class="k">Managed media under our accounts</div></div>
+        <div><div class="v" data-flap="——">——</div><div class="k">Years combined across three founders</div></div>
+        <div><div class="v" data-flap="——">——</div><div class="k">Operators served since founding</div></div>
+        <div><div class="v" data-flap="——">——</div><div class="k">Months to first attributed lift</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SELF-SELECT ============ -->
-  <section class="band" id="fit">
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span><b>SEO</b> — Local Service Ads — <b>Google Ads</b> — Meta Ads — <b>AI Automation</b> — CRM Development — <b>Web Design</b> — Call Tracking — <b>Attribution</b> — Intake Scoring —&nbsp;</span>
+      <span><b>SEO</b> — Local Service Ads — <b>Google Ads</b> — Meta Ads — <b>AI Automation</b> — CRM Development — <b>Web Design</b> — Call Tracking — <b>Attribution</b> — Intake Scoring —&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ============ 01 — SELF-SELECT ============ -->
+  <section class="sec" id="fit" data-reveal data-mark="01">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Before you book</p>
-        <h2>We would rather you self-select than sit through a pitch</h2>
-        <p class="lede">Most agencies will take any account that clears the invoice. We would rather tell you now if this is not going to work, so read both columns honestly.</p>
+      <div class="sec-head">
+        <span class="meta" data-flap="01 / FIT">01 / FIT</span>
+        <h2>We would rather you <em>self-select</em> than sit through a pitch</h2>
+        <div class="rule"></div>
+        <p class="sec-lede">Most agencies take any account that clears the invoice. We would rather tell you now if this will not work, so read both columns honestly.</p>
       </div>
 
-      <div class="fitgrid">
-        <div class="fitcard yes">
+      <div class="fit">
+        <div class="fitcol yes">
           <h3>This works if you</h3>
-          <ul class="fitlist">
-            <li><span class="mark">→</span><span>Run a home services, medical or dental, or legal business doing real volume already.</span></li>
-            <li><span class="mark">→</span><span>Can answer the phone. Demand generation is wasted on a business that cannot pick up.</span></li>
-            <li><span class="mark">→</span><span>Will let us instrument the whole funnel, including calls and the CRM, not just the ad platform.</span></li>
-            <li><span class="mark">→</span><span>Are willing to be measured on booked work rather than on rankings and impressions.</span></li>
-            <li><span class="mark">→</span><span>Want one team on search, paid, automation and the website, not four vendors blaming each other.</span></li>
+          <ul>
+            <li data-stagger><span class="n">01</span><span>Run a home services, medical or legal business already doing real volume.</span></li>
+            <li data-stagger><span class="n">02</span><span>Can answer the phone. Demand generation is wasted on a business that cannot pick up.</span></li>
+            <li data-stagger><span class="n">03</span><span>Will let us instrument the whole funnel, including calls and the CRM, not just the ad platform.</span></li>
+            <li data-stagger><span class="n">04</span><span>Accept being measured on booked work rather than rankings and impressions.</span></li>
+            <li data-stagger><span class="n">05</span><span>Want one team across search, paid, automation and the site, not four vendors blaming each other.</span></li>
           </ul>
         </div>
-        <div class="fitcard no">
+        <div class="fitcol no">
           <h3>This does not work if you</h3>
-          <ul class="fitlist">
-            <li><span class="mark">×</span><span>Need leads this week. Nothing honest moves that fast.</span></li>
-            <li><span class="mark">×</span><span>Want a guaranteed cost per lead before anyone has seen your close rate.</span></li>
-            <li><span class="mark">×</span><span>Are looking for the cheapest quote. We are not the cheapest and we will not pretend otherwise.</span></li>
-            <li><span class="mark">×</span><span>Want to keep attribution vague so the numbers stay flattering.</span></li>
-            <li><span class="mark">×</span><span>Are a startup or side project still testing whether the offer sells at all.</span></li>
+          <ul>
+            <li data-stagger><span class="n">×</span><span>Need leads this week. Nothing honest moves that fast.</span></li>
+            <li data-stagger><span class="n">×</span><span>Want a guaranteed cost per lead before anyone has seen your close rate.</span></li>
+            <li data-stagger><span class="n">×</span><span>Are shopping on price. We are not the cheapest and will not pretend otherwise.</span></li>
+            <li data-stagger><span class="n">×</span><span>Would rather attribution stayed vague so the numbers keep looking good.</span></li>
+            <li data-stagger><span class="n">×</span><span>Are still testing whether the offer sells at all.</span></li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PILLARS ============ -->
-  <section class="band band-deep" id="pillars">
+  <!-- ============ 02 — PILLARS ============ -->
+  <section class="sec band-deep" id="pillars" data-reveal data-mark="02">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Why this is different</p>
-        <h2>Three things that change what you get</h2>
+      <div class="sec-head">
+        <span class="meta" data-flap="02 / METHOD">02 / METHOD</span>
+        <h2>Three things that change <em>what you get</em></h2>
+        <div class="rule gold"></div>
       </div>
-      <div class="cardgrid">
-        <article class="card">
-          <div class="num">01</div>
+
+      <div class="pillar" data-stagger>
+        <div class="idx">01</div>
+        <div>
           <h3>Operator experience</h3>
-          <p>Every one of us has carried the risk on a business, not just the reporting for one. That changes which levers get pulled first, and it is why we will tell you to fix intake before we will sell you more traffic.</p>
-        </article>
-        <article class="card">
-          <div class="num">02</div>
+          <p>Every one of us has carried the risk on a business, not just the reporting for one. It changes which levers get pulled first, and it is why we will tell you to fix intake before we sell you more traffic.</p>
+          <div class="tag">Skin in the game</div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Two workers in hard hats reviewing plans on site" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="pillar" data-stagger>
+        <div class="idx">02</div>
+        <div>
           <h3>One integrated team</h3>
-          <p>Search, paid media, automation, CRM and the website sit with the same team. No handoffs between three vendors, no gap where the lead gets lost and everyone points at someone else's dashboard.</p>
-        </article>
-        <article class="card">
-          <div class="num">03</div>
-          <h3>Revenue metrics, not proxy metrics</h3>
+          <p>Search, paid media, automation, CRM and the website sit with the same people. No handoffs between three vendors, and no gap where the lead goes missing while everyone points at a different dashboard.</p>
+          <div class="tag">No handoffs</div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A team working together over a desk" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="pillar" data-stagger>
+        <div class="idx">03</div>
+        <div>
+          <h3>Revenue metrics, not proxies</h3>
           <p>Rankings and impressions are inputs. We instrument calls, forms and the CRM so the reporting line ends at booked work, and so a channel that looks good but never converts gets cut.</p>
-        </article>
+          <div class="tag">Booked work only</div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=900" alt="A person reviewing figures at a desk" loading="lazy"></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ VERTICALS (light) ============ -->
-  <section class="band band-light on-light" id="verticals">
+  <!-- ============ 03 — VERTICALS ============ -->
+  <section class="sec band-light" id="verticals" data-reveal data-mark="03">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow on-light">Industries</p>
-        <h2>Three verticals, because the compliance and the buying cycle are not interchangeable</h2>
-        <p class="lede on-light">We work in three. Outside them we will refer you on rather than learn your industry at your expense.</p>
+      <div class="sec-head">
+        <span class="meta on-light" data-flap="03 / INDUSTRIES">03 / INDUSTRIES</span>
+        <h2>Three verticals, because the compliance and the buying cycle are <em>not interchangeable</em></h2>
+        <div class="rule light"></div>
+        <p class="sec-lede">Outside these three we refer you on rather than learn your industry at your expense.</p>
       </div>
-      <div class="cardgrid">
-        <article class="card-light">
-          <div class="num">Home services</div>
-          <h3>HVAC, plumbing, roofing, restoration</h3>
-          <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone gets answered.</p>
-          <ul>
-            <li>Local Service Ads and map pack</li>
-            <li>Storm and seasonal surge planning</li>
-            <li>Call tracking wired to the CRM</li>
-          </ul>
-          <a class="more" href="#book">Talk about home services →</a>
-        </article>
-        <article class="card-light">
-          <div class="num">Medical &amp; dental</div>
-          <h3>Practices and multi-location groups</h3>
-          <p>Patient acquisition without touching protected health information in a pixel payload.</p>
-          <ul>
-            <li>HIPAA-aware tracking, BAA in place</li>
-            <li>Server-side conversion measurement</li>
-            <li>Reported as ranges, never single-patient guarantees</li>
-          </ul>
-          <a class="more" href="#book">Talk about practices →</a>
-        </article>
-        <article class="card-light">
-          <div class="num">Legal</div>
-          <h3>Plaintiff and consumer-facing firms</h3>
-          <p>Long cycles, expensive clicks, and advertising rules that a generalist agency will get you in trouble with.</p>
-          <ul>
-            <li>ABA Rule 7.1 compliant messaging</li>
-            <li>Signed-case attribution, not form fills</li>
-            <li>Intake quality scoring</li>
-          </ul>
-          <a class="more" href="#book">Talk about your firm →</a>
-        </article>
+    </div>
+
+    <div class="wrap">
+      <div class="panels">
+        <div class="panel open" tabindex="0" role="button" aria-expanded="true">
+          <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A detached suburban home with a driveway" loading="lazy">
+          <div class="pin">
+            <div class="kicker">Home services</div>
+            <h3>HVAC, plumbing, roofing, restoration</h3>
+            <div class="body">
+              <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone is answered.</p>
+              <ul><li>Local Service Ads and the map pack</li><li>Storm and seasonal surge planning</li><li>Call tracking wired into the CRM</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel" tabindex="0" role="button" aria-expanded="false">
+          <img src="https://images.pexels.com/photos/7578803/pexels-photo-7578803.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A clinician consulting with a patient at a desk" loading="lazy">
+          <div class="pin">
+            <div class="kicker">Medical &amp; dental</div>
+            <h3>Practices and multi-location groups</h3>
+            <div class="body">
+              <p>Patient acquisition without putting protected health information into a pixel payload.</p>
+              <ul><li>HIPAA-aware tracking, BAA in place</li><li>Server-side conversion measurement</li><li>Reported as ranges, never single-patient guarantees</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="panel" tabindex="0" role="button" aria-expanded="false">
+          <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Two people reviewing a document across a desk" loading="lazy">
+          <div class="pin">
+            <div class="kicker">Legal</div>
+            <h3>Plaintiff and consumer-facing firms</h3>
+            <div class="body">
+              <p>Long cycles, expensive clicks, and advertising rules a generalist agency will get you in trouble with.</p>
+              <ul><li>ABA Rule 7.1 compliant messaging</li><li>Signed-case attribution, not form fills</li><li>Intake quality scoring</li></ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ FOUNDERS ============ -->
-  <section class="band" id="founders">
+  <!-- ============ 04 — FOUNDERS ============ -->
+  <section class="sec" id="founders" data-reveal data-mark="04">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Who you actually work with</p>
-        <h2>Three founders. You will speak to one of them.</h2>
-        <p class="lede">There is no account manager layer between you and the people making the decisions.</p>
+      <div class="sec-head">
+        <span class="meta" data-flap="04 / PEOPLE">04 / PEOPLE</span>
+        <h2>Three founders. You will speak to <em>one of them.</em></h2>
+        <div class="rule"></div>
+        <p class="sec-lede">There is no account manager layer between you and the people making decisions.</p>
       </div>
       <div class="founders">
-        <article class="founder">
-          <div class="avatar" aria-hidden="true">BH</div>
+        <div class="founder" data-stagger>
+          <div class="mono-avatar" aria-hidden="true">BH</div>
           <h3>Brian Hong</h3>
-          <p class="role">Co-founder &amp; CEO</p>
-        </article>
-        <article class="founder">
-          <div class="avatar" aria-hidden="true">MM</div>
+          <div class="role">Co-founder &amp; CEO</div>
+        </div>
+        <div class="founder" data-stagger>
+          <div class="mono-avatar" aria-hidden="true">MM</div>
           <h3>Michael Merlino</h3>
-          <p class="role">Co-founder · Strategy &amp; AI systems</p>
-        </article>
-        <article class="founder">
-          <div class="avatar" aria-hidden="true">DM</div>
+          <div class="role">Co-founder · Strategy &amp; AI systems</div>
+        </div>
+        <div class="founder" data-stagger>
+          <div class="mono-avatar" aria-hidden="true">DM</div>
           <h3>Dimitry Morgan</h3>
-          <p class="role">Co-founder · Head of paid media</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WHAT LANDS ON THE CALL ============ -->
-  <section class="band band-deep" id="book">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">The strategy call</p>
-        <h2>What lands on the call, whether or not you hire us</h2>
-        <p class="lede">Forty-five minutes. No deck. You leave with the findings either way.</p>
-      </div>
-      <ol class="deliverables">
-        <li><div><h3>Where your current spend leaks</h3><p>A read on the accounts you are already running, and the specific line items that are buying volume rather than work.</p></div></li>
-        <li><div><h3>Your real cost per booked job</h3><p>Not cost per lead. We work back from close rate and average ticket, using your numbers, so the figure survives contact with your P&amp;L.</p></div></li>
-        <li><div><h3>The intake gap</h3><p>Where enquiries are being lost between the click and the calendar. This is usually the cheapest fix on the list.</p></div></li>
-        <li><div><h3>What we would do in the first ninety days</h3><p>Sequenced, with the reasoning attached, so you can hand it to another agency if you would rather.</p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ============ CASE STUDIES — EMPTY STATE ============ -->
-  <section class="band" id="case-studies">
-    <div class="wrap">
-      <div class="empty">
-        <span class="tag">Coming soon</span>
-        <h3>Case studies are being written up now</h3>
-        <p>We would rather publish nothing than publish a result we cannot evidence. Named accounts, verified numbers and the disclaimers each vertical requires are in preparation, and this section fills as they clear review.</p>
-        <a class="btn btn-outline" href="#book">Ask for the numbers on your call</a>
-        <div class="ghostcards" aria-hidden="true">
-          <div class="ghost"></div><div class="ghost"></div><div class="ghost"></div>
+          <div class="role">Co-founder · Head of paid media</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ VIDEOS — EMPTY STATE ============ -->
-  <section class="band band-deep" id="videos">
+  <!-- ============ 05 — THE CALL ============ -->
+  <section class="sec band-deep has-ambient" id="call" data-reveal data-mark="05">
+    <div class="ambient" aria-hidden="true" data-ambient>
+      <div class="mesh m1"></div><div class="mesh m2"></div><div class="mesh m3"></div>
+    </div>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="meta" data-flap="05 / THE CALL">05 / THE CALL</span>
+        <h2>What lands on the call, <em>whether or not you hire us</em></h2>
+        <div class="rule gold"></div>
+        <p class="sec-lede">Forty-five minutes. No deck. You keep the findings either way.</p>
+      </div>
+
+      <div class="call">
+        <div class="call-media">
+          <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Two people reviewing performance charts on a desk" loading="lazy">
+        </div>
+        <ol class="call-list">
+          <li data-stagger><div><h3>Where your current spend leaks</h3><p>A read on the accounts you already run, and the line items buying volume rather than work.</p></div></li>
+          <li data-stagger><div><h3>Your real cost per booked job</h3><p>Not cost per lead. Worked back from close rate and average ticket, using your numbers, so it survives contact with your P&amp;L.</p></div></li>
+          <li data-stagger><div><h3>The intake gap</h3><p>Where enquiries are lost between the click and the calendar. Usually the cheapest fix on the list.</p></div></li>
+          <li data-stagger><div><h3>What we would do in ninety days</h3><p>Sequenced, with the reasoning attached, so you can hand it to another agency if you would rather.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CASE STUDIES ============ -->
+  <section class="sec" id="case-studies" data-reveal>
     <div class="wrap">
       <div class="empty">
-        <span class="tag">Coming soon</span>
+        <span class="meta">Coming soon</span>
+        <h3>Case studies are being written up now</h3>
+        <p>We would rather publish nothing than publish a result we cannot evidence. Named accounts, verified numbers and the disclaimers each vertical requires are in preparation.</p>
+        <a class="btn btn-ghost" href="#call"><span class="t">Ask for the numbers on your call</span><span class="ar">→</span></a>
+        <div class="ghosts" aria-hidden="true">
+          <div class="ghost" style="--g:0"><img src="https://images.pexels.com/photos/2760241/pexels-photo-2760241.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy"></div><div class="ghost" style="--g:1"><img src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy"></div><div class="ghost" style="--g:2"><img src="https://images.pexels.com/photos/8867482/pexels-photo-8867482.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VIDEOS ============ -->
+  <section class="sec band-deep" id="videos" data-reveal>
+    <div class="wrap">
+      <div class="empty">
+        <span class="meta">Coming soon</span>
         <h3>Videos</h3>
         <p>Short breakdowns of how we structure accounts, measure intake and price work. Filming in progress.</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="band band-light on-light" id="faq">
+  <!-- ============ 06 — FAQ ============ -->
+  <section class="sec band-light" id="faq" data-reveal data-mark="06">
     <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow on-light">Questions</p>
-        <h2>The things people ask before booking</h2>
+      <div class="sec-head">
+        <span class="meta on-light" data-flap="06 / QUESTIONS">06 / QUESTIONS</span>
+        <h2>The things people ask <em>before booking</em></h2>
+        <div class="rule light"></div>
       </div>
+
       <div class="faq">
         <details open>
           <summary>What does this cost?</summary>
-          <div class="answer">Engagements are scoped on the call, against your close rate and average ticket rather than a rate card. If the numbers do not support the spend we will say so on that call rather than three months in.</div>
+          <div class="answer-wrap"><div class="answer">Engagements are scoped on the call against your close rate and average ticket, rather than from a rate card. If the numbers do not support the spend we will say so on that call rather than three months in.</div></div>
         </details>
         <details>
           <summary>Do you guarantee a cost per lead?</summary>
-          <div class="answer">No, and be careful with anyone who does before they have seen your intake. A guaranteed cost per lead is easy to hit by buying cheaper, lower-intent volume, which is exactly the outcome you are trying to avoid.</div>
+          <div class="answer-wrap"><div class="answer">No, and be careful with anyone who does before seeing your intake. A guaranteed cost per lead is easy to hit by buying cheaper, lower-intent volume, which is exactly the outcome you are trying to avoid.</div></div>
         </details>
         <details>
           <summary>How long before anything moves?</summary>
-          <div class="answer">Paid channels can move inside the first month. Organic and local visibility are slower and depend on where you are starting. We set the expectation on the call using your baseline, not an industry average.</div>
+          <div class="answer-wrap"><div class="answer">Paid channels can move inside the first month. Organic and local visibility are slower and depend on where you start. We set that expectation on the call from your baseline, not an industry average.</div></div>
         </details>
         <details>
           <summary>Do we have to switch our CRM or website?</summary>
-          <div class="answer">Usually not. We instrument what you have first. If something genuinely blocks measurement we will show you what it is costing before recommending a change.</div>
+          <div class="answer-wrap"><div class="answer">Usually not. We instrument what you have first. If something genuinely blocks measurement we will show you what it is costing before recommending a change.</div></div>
         </details>
         <details>
           <summary>Who actually does the work?</summary>
-          <div class="answer">The founders and the in-house team. Strategy is not handed to a junior after the sale, and there is no account manager layer relaying messages.</div>
+          <div class="answer-wrap"><div class="answer">The founders and the in-house team. Strategy is not handed to a junior after the sale, and there is no account manager relaying messages.</div></div>
         </details>
         <details>
           <summary>What if we are outside your three verticals?</summary>
-          <div class="answer">We will refer you to someone who works in your category. Learning an unfamiliar industry on a client's budget is how both sides waste a year.</div>
+          <div class="answer-wrap"><div class="answer">We refer you to someone who works in your category. Learning an unfamiliar industry on a client's budget wastes a year for both sides.</div></div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- ============ FINAL CTA ============ -->
-  <section class="cta-band">
+  <!-- ============ CTA ============ -->
+  <section class="cta">
     <div class="wrap">
       <h2>Bring your numbers. We will tell you what they say.</h2>
       <p>Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
-      <a class="btn btn-dark" href="#book">Book a strategy call</a>
-      <a class="phone" href="tel:+16193300953">or call <b>(619) 330-0953</b></a>
+      <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">→</span></a>
+      <a class="tel" href="tel:+16193300953">or call <b>(619) 330-0953</b></a>
     </div>
   </section>
 
@@ -514,35 +806,26 @@ img{max-width:100%; display:block}
     <div class="footgrid">
       <div class="footcol">
         <a class="brand" href="#main" style="margin-bottom:var(--sp-4)"><b>MAGISTER</b><span>Digital</span></a>
-        <p style="font-size:var(--fs-sm); color:var(--text-muted-dark); max-width:34ch">
+        <p style="font-size:.875rem; color:var(--text-muted-dark); max-width:32ch">
           Marketing run by operators for home services, medical and legal businesses across the United States.
         </p>
       </div>
-
       <div class="footcol">
         <h4>Services</h4>
         <ul>
-          <li><a href="#pillars">SEO</a></li>
-          <li><a href="#pillars">Google Ads</a></li>
-          <li><a href="#pillars">Meta Ads</a></li>
-          <li><a href="#pillars">AI automation</a></li>
-          <li><a href="#pillars">CRM development</a></li>
-          <li><a href="#pillars">Web design</a></li>
+          <li><a href="#pillars">SEO</a></li><li><a href="#pillars">Google Ads</a></li>
+          <li><a href="#pillars">Meta Ads</a></li><li><a href="#pillars">AI automation</a></li>
+          <li><a href="#pillars">CRM development</a></li><li><a href="#pillars">Web design</a></li>
         </ul>
       </div>
-
       <div class="footcol">
         <h4>Company</h4>
         <ul>
-          <li><a href="#verticals">Industries</a></li>
-          <li><a href="#case-studies">Case studies</a></li>
-          <li><a href="#videos">Videos</a></li>
-          <li><a href="#founders">About</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#book">Contact</a></li>
+          <li><a href="#verticals">Industries</a></li><li><a href="#case-studies">Case studies</a></li>
+          <li><a href="#videos">Videos</a></li><li><a href="#founders">About</a></li>
+          <li><a href="#faq">FAQ</a></li><li><a href="#call">Contact</a></li>
         </ul>
       </div>
-
       <div class="footcol">
         <h4>San Diego</h4>
         <address>
@@ -553,17 +836,15 @@ img{max-width:100%; display:block}
         </address>
       </div>
     </div>
-
     <div class="footbar">
-      <p>&copy; 2026 Magister Digital. All rights reserved.</p>
+      <p>&copy; 2026 Magister Digital</p>
       <nav aria-label="Legal">
-        <a href="#faq">Privacy</a>
-        <a href="#faq">Terms</a>
-        <a href="#faq">Accessibility</a>
+        <a href="#faq">Privacy</a><a href="#faq">Terms</a><a href="#faq">Accessibility</a>
       </nav>
     </div>
   </div>
 </footer>
 
+<script src="motion.js" defer></script>
 </body>
 </html>
