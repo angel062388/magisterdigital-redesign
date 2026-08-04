@@ -1,18 +1,17 @@
 /* ==========================================================================
    MAGISTER DIGITAL — MOTION
-
-   Two headline effects:
-     A. Simulated collaborative presence over the hero headline
-     B. Ambient background motion behind "what lands on the call"
-
-   Plus supporting reveals, header state, panels and the FAQ disclosure.
+   Signature effects: rule-draw + letterpress line reveal + split-flap mono.
+   Ambient background motion + simulated collaborative presence in the hero.
+   New 2026-08-05: founder modal + cobe dotted globe (lazy-loaded).
 
    Contract:
    - Nothing here is required for the page to be readable. The stylesheet
-     carries an html:not(.js) failsafe, and any throw below still leaves the
-     page complete because .js is only added after a successful start.
-   - prefers-reduced-motion disables every effect to a clean static state.
+     carries an html:not(.js) failsafe and reveals fire on a 4s safety net.
+   - prefers-reduced-motion disables every decorative effect but KEEPS the
+     modal working (functional, not decoration).
    - Decorative layers are aria-hidden and pointer-events:none.
+   - Presence cursors sit at z-index:1 — below the wrap (z-10) and CTA
+     (z-20) — so they can never intercept clicks visually or by hit test.
    - Only transform and opacity are animated. Offscreen work is paused.
    ========================================================================== */
 (function () {
@@ -22,7 +21,216 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var canObserve = 'IntersectionObserver' in window;
 
-  /* Reduced motion, or no observer support: show the finished state, stop. */
+  /* ======================================================================
+     FOUNDER MODAL — always available, works in reduced-motion.
+     Data map lives here; markup is a single #founder-modal element in
+     the HTML. Placeholder-flagged; no invented credentials.
+     Full profile links go to /brian-hong/, /michael-merlino/, /dimitry-morgan/.
+     ====================================================================== */
+  (function modal() {
+    var modal = document.getElementById('founder-modal');
+    if (!modal) return;
+
+    var titleEl  = modal.querySelector('[data-modal-title]');
+    var roleEl   = modal.querySelector('[data-modal-role]');
+    var avatarEl = modal.querySelector('[data-modal-avatar]');
+    var bioEl    = modal.querySelector('[data-modal-bio]');
+    var linkEl   = modal.querySelector('[data-modal-link]');
+
+    var FOUNDERS = {
+      brian: {
+        name: 'Brian Hong',
+        role: 'Co-founder & CEO',
+        avatar: 'BH',
+        bio: 'Bio pending sign-off. Full background, operator history and stake in the businesses Magister runs land on the /brian-hong/ profile page. No invented credentials appear here.',
+        link: '/brian-hong/'
+      },
+      michael: {
+        name: 'Michael Merlino',
+        role: 'Co-founder · Strategy & AI systems',
+        avatar: 'MM',
+        bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
+        link: '/michael-merlino/'
+      },
+      dimitry: {
+        name: 'Dimitry Morgan',
+        role: 'Co-founder · Head of paid media',
+        avatar: 'DM',
+        bio: 'Bio pending sign-off. Paid-media leadership scope and the media accounts he directly runs land on the /dimitry-morgan/ profile page.',
+        link: '/dimitry-morgan/'
+      }
+    };
+
+    var trigger = null;
+
+    function focusables() {
+      return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    }
+
+    function open(key, from) {
+      var data = FOUNDERS[key];
+      if (!data) return;
+      trigger = from;
+      titleEl.textContent = data.name;
+      roleEl.textContent = data.role;
+      avatarEl.textContent = data.avatar;
+      bioEl.textContent = data.bio;
+      linkEl.setAttribute('href', data.link);
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      document.addEventListener('keydown', onKey);
+      // Focus the close button first so the trap has an anchor.
+      var closeBtn = modal.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function close() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove('modal-open');
+      document.removeEventListener('keydown', onKey);
+      if (trigger && trigger.focus) trigger.focus();
+      trigger = null;
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key !== 'Tab') return;
+      var els = focusables();
+      if (!els.length) return;
+      var first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    [].forEach.call(document.querySelectorAll('[data-modal]'), function (btn) {
+      btn.addEventListener('click', function () { open(btn.getAttribute('data-modal'), btn); });
+    });
+    [].forEach.call(modal.querySelectorAll('[data-modal-close]'), function (el) {
+      el.addEventListener('click', close);
+    });
+  })();
+
+  /* ======================================================================
+     COBE DOTTED GLOBE — lazy-loaded, gold on near-black.
+     Loaded via dynamic ESM import from esm.sh only when the locations
+     section enters the viewport. prefers-reduced-motion + low-power +
+     WebGL failure all fall back to the static SVG map via .static class.
+     ====================================================================== */
+  (function globeBoot() {
+    var mount = document.querySelector('[data-globe-mount]');
+    var canvas = mount && mount.querySelector('[data-globe]');
+    if (!mount || !canvas) return;
+
+    // Reduced motion or no IntersectionObserver: show the SVG fallback.
+    if (reduced || !canObserve) {
+      mount.classList.add('static');
+      return;
+    }
+
+    var loaded = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || loaded) return;
+        loaded = true;
+        io.disconnect();
+        loadGlobe(canvas, mount);
+      });
+    }, { rootMargin: '250px' });
+    io.observe(mount);
+  })();
+
+  function loadGlobe(canvas, mount) {
+    import('https://esm.sh/cobe@0.6.3').then(function (mod) {
+      var createGlobe = mod.default || mod;
+      var phi = 4.9;                    // start rotated so US faces the viewer
+      var pointerInteracting = null;
+      var pointerMovement = 0;
+      var size = mount.clientWidth || 520;
+
+      // Ten US metros served, plus San Diego HQ (larger pin).
+      var markers = [
+        { location: [32.7157, -117.1611], size: 0.14 }, // San Diego HQ
+        { location: [34.0522, -118.2437], size: 0.06 }, // Los Angeles
+        { location: [37.3382, -121.8863], size: 0.06 }, // San Jose
+        { location: [33.4484, -112.0740], size: 0.06 }, // Phoenix
+        { location: [32.7767,  -96.7970], size: 0.06 }, // Dallas
+        { location: [29.4241,  -98.4936], size: 0.06 }, // San Antonio
+        { location: [29.7604,  -95.3698], size: 0.06 }, // Houston
+        { location: [41.8781,  -87.6298], size: 0.06 }, // Chicago
+        { location: [39.9526,  -75.1652], size: 0.06 }, // Philadelphia
+        { location: [40.7128,  -74.0060], size: 0.06 }  // New York
+      ];
+
+      var globe;
+      try {
+        globe = createGlobe(canvas, {
+          devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+          width: size * 2,
+          height: size * 2,
+          phi: 0,
+          theta: 0.32,
+          dark: 1,
+          diffuse: 1.15,
+          mapSamples: 12000,
+          mapBrightness: 5.5,
+          baseColor:   [0.11, 0.115, 0.13],   // land dots
+          markerColor: [0.831, 0.686, 0.216], // #D4AF37 gold
+          glowColor:   [0.20, 0.16, 0.06],    // deep gold glow
+          markers: markers,
+          onRender: function (state) {
+            if (pointerInteracting !== null) {
+              phi = pointerInteracting + pointerMovement / 200;
+            } else {
+              phi += 0.003; // slow auto-rotation
+            }
+            state.phi = phi;
+            state.width  = size * 2;
+            state.height = size * 2;
+          }
+        });
+      } catch (err) {
+        mount.classList.add('static');
+        return;
+      }
+
+      // Fade the canvas in so there is no flash from black
+      canvas.style.opacity = '0';
+      canvas.style.transition = 'opacity .6s ease';
+      requestAnimationFrame(function () { canvas.style.opacity = '1'; });
+
+      // Drag to rotate. Pointer capture keeps the drag if the cursor leaves.
+      canvas.addEventListener('pointerdown', function (e) {
+        pointerInteracting = phi - pointerMovement / 200;
+        try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      canvas.addEventListener('pointerup', function () {
+        pointerInteracting = null;
+      });
+      canvas.addEventListener('pointerout', function () {
+        pointerInteracting = null;
+      });
+      canvas.addEventListener('pointermove', function (e) {
+        if (pointerInteracting !== null) {
+          pointerMovement = e.movementX * 2 + pointerMovement * 0.8;
+        }
+      });
+
+      // Resize: rebuild size on window resize so the globe stays crisp.
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () {
+          size = mount.clientWidth || size;
+        }, 180);
+      }, { passive: true });
+    }).catch(function () {
+      mount.classList.add('static');
+    });
+  }
+
+  /* Reduced motion, or no observer support: show the finished state, stop
+     all decorative effects. Modal and globe already handled above. */
   if (reduced || !canObserve) {
     root.classList.add('js', reduced ? 'reduced-motion' : 'no-io');
     [].forEach.call(document.querySelectorAll('[data-reveal]'), function (el) {
@@ -32,9 +240,9 @@
       el.textContent = el.getAttribute('data-flap');
     });
     var pres = document.querySelector('.presence');
-    if (pres) pres.style.display = 'none';           // frozen == hidden here
+    if (pres) pres.style.display = 'none';
     [].forEach.call(document.querySelectorAll('[data-ambient]'), function (a) {
-      a.classList.add('paused');                     // static gradient, no drift
+      a.classList.add('paused');
     });
     return;
   }
@@ -90,9 +298,6 @@
      A. SIMULATED COLLABORATIVE PRESENCE
      Three labelled cursors drift over the headline on eased, non-repeating
      paths and periodically mark one of the outcome words.
-
-     Explicitly simulated. No real users are represented, no counts are
-     claimed, and the chip in the markup is labelled "illustrative".
      ====================================================================== */
   (function presence() {
     var layer = document.querySelector('.presence');
@@ -107,7 +312,6 @@
     function measure() {
       var r = layer.getBoundingClientRect();
       box.w = r.width; box.h = r.height;
-      // Word rects, relative to the presence layer
       words.forEach(function (w) {
         var wr = w.getBoundingClientRect();
         w._pt = { x: wr.left - r.left + wr.width * 0.5, y: wr.top - r.top + wr.height * 0.5 };
@@ -128,7 +332,6 @@
     }
 
     function retarget(a) {
-      // Roughly 45% of hops land on an outcome word and mark it up.
       var goWord = words.length && Math.random() < 0.45;
       if (goWord) {
         var w = words[(Math.random() * words.length) | 0];
@@ -143,7 +346,7 @@
         a.fy = box.h * (0.10 + Math.random() * 0.76);
       }
       a.sx = a.x; a.sy = a.y;
-      a.dur = 1500 + Math.random() * 2200;   // never a fixed cadence
+      a.dur = 1500 + Math.random() * 2200;
       a.t = 0;
     }
 
@@ -171,7 +374,6 @@
           var e = easeInOutCubic(a.t);
           a.x = a.sx + (a.fx - a.sx) * e;
           a.y = a.sy + (a.fy - a.sy) * e;
-          // A little organic wander so paths are never straight lines
           a.phase += dt * 0.0011;
           a.el.style.transform = 'translate3d(' +
             (a.x + Math.sin(a.phase) * 7).toFixed(1) + 'px,' +
@@ -193,7 +395,6 @@
       words.forEach(function (w) { w.classList.remove('marked'); });
     }
 
-    // Only run while the hero is actually on screen.
     new IntersectionObserver(function (es) {
       es[0].isIntersecting ? start() : stop();
     }, { threshold: 0.12 }).observe(stage);
@@ -212,7 +413,7 @@
      B. AMBIENT BACKGROUND MOTION
      Gradient meshes are CSS-animated; particles are generated here so the
      markup stays clean. Everything pauses via animation-play-state when the
-     section leaves the viewport, so there is zero compositor work offscreen.
+     section leaves the viewport.
      ====================================================================== */
   (function ambient() {
     [].forEach.call(document.querySelectorAll('[data-ambient]'), function (layer) {
