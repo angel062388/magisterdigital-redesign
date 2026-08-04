@@ -9,105 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
 <style>
-/* ==========================================================================
-   MAGISTER DIGITAL — DESIGN TOKENS
-   Every value below is a variable. Nothing in this file hardcodes a colour,
-   size, radius or shadow outside this block.
-   ========================================================================== */
-:root{
-  /* ---- Gold ramp ---------------------------------------------------- */
-  --gold:            #D4AF37;   /* primary  — DARK BACKGROUNDS ONLY (see a11y) */
-  --gold-dark:       #A8842A;   /* hover / active */
-  --gold-light:      #E3C24E;   /* highlight — dark backgrounds only */
-  --gold-deep:       #6E561A;   /* the ONLY gold safe for body text on light */
-
-  /* ---- Dark neutrals ------------------------------------------------ */
-  --ink:             #16171A;   /* primary dark surface + body text on light */
-  --ink-deep:        #0F1115;   /* deepest surface */
-
-  /* ---- Muted / border ----------------------------------------------- */
-  --muted:           #45474C;
-  --muted-2:         #5E6066;
-  --border:          #C0C3C7;
-
-  /* ---- Light neutrals ----------------------------------------------- */
-  --paper:           #F7F7F5;
-  --paper-2:         #F1F1EE;
-  --paper-3:         #EEEEEB;
-
-  /* ---- Semantic aliases — use THESE in components ------------------- */
-  --bg:              var(--ink);
-  --bg-raised:       #1C1D21;
-  --surface-light:   var(--paper);
-  --text-on-dark:    var(--paper);
-  --text-on-light:   var(--ink);
-  --text-muted-dark: var(--border);
-  --text-muted-light:var(--muted);
-  --accent-on-dark:  var(--gold);
-  --accent-on-light: var(--gold-deep);
-  --rule:            #2A2C31;
-
-  /* ---- Type families ------------------------------------------------ */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body:    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-
-  /* ---- Type scale — 1.25 major third, 16px base --------------------- */
-  --fs-xs:   0.75rem;   /* 12 */
-  --fs-sm:   0.875rem;  /* 14 */
-  --fs-base: 1rem;      /* 16 */
-  --fs-md:   1.25rem;   /* 20 */
-  --fs-lg:   1.5625rem; /* 25 */
-  --fs-xl:   1.953rem;  /* 31 */
-  --fs-2xl:  2.441rem;  /* 39 */
-  --fs-3xl:  3.052rem;  /* 49 */
-  --fs-4xl:  3.815rem;  /* 61 */
-
-  --lh-tight: 1.1;
-  --lh-snug:  1.25;
-  --lh-base:  1.6;
-  --lh-loose: 1.75;
-
-  --tracking-tight: -0.02em;
-  --tracking-normal: 0;
-  --tracking-wide:  0.08em;
-
-  /* ---- Spacing scale — 4px base ------------------------------------- */
-  --sp-1:  0.25rem;  /*  4 */
-  --sp-2:  0.5rem;   /*  8 */
-  --sp-3:  0.75rem;  /* 12 */
-  --sp-4:  1rem;     /* 16 */
-  --sp-5:  1.5rem;   /* 24 */
-  --sp-6:  2rem;     /* 32 */
-  --sp-7:  3rem;     /* 48 */
-  --sp-8:  4rem;     /* 64 */
-  --sp-9:  6rem;     /* 96 */
-  --sp-10: 8rem;     /* 128 */
-
-  /* ---- Radius scale ------------------------------------------------- */
-  --r-none: 0;
-  --r-sm:   2px;
-  --r-md:   4px;
-  --r-lg:   8px;
-  --r-xl:   16px;
-  --r-full: 999px;
-
-  /* ---- Shadow scale — tuned for dark surfaces ----------------------- */
-  --shadow-none: none;
-  --shadow-sm:   0 1px 2px rgba(0,0,0,.35);
-  --shadow-md:   0 4px 12px rgba(0,0,0,.40);
-  --shadow-lg:   0 12px 32px rgba(0,0,0,.48);
-  --shadow-gold: 0 0 0 1px rgba(212,175,55,.35), 0 8px 24px rgba(212,175,55,.12);
-
-  /* ---- Motion ------------------------------------------------------- */
-  --ease: cubic-bezier(.4,0,.2,1);
-  --dur:  160ms;
-
-  /* ---- Layout ------------------------------------------------------- */
-  --measure: 68ch;
-  --container: 1120px;
-}
+/* Design tokens live in tokens.css — shared with index.html and nav.html. */
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -127,7 +31,7 @@ code,.mono,td.num{font-family:var(--font-mono); font-variant-numeric:tabular-num
   text-transform:uppercase; color:var(--accent-on-dark); margin:0 0 var(--sp-3)}
 .masthead h1{font-size:var(--fs-3xl)}
 .masthead p{color:var(--text-muted-dark); max-width:var(--measure); margin:var(--sp-4) 0 0}
-.stamp{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2); margin-top:var(--sp-5)}
+.stamp{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-on-dark); margin-top:var(--sp-5)}
 
 /* ---- Sections ------------------------------------------------------- */
 section{padding:var(--sp-8) 0; border-bottom:1px solid var(--rule)}
@@ -145,7 +49,7 @@ h3.sub{font-size:var(--fs-md); font-family:var(--font-body); font-weight:600;
 .sw .meta{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
 .sw .name{font-weight:600; font-size:var(--fs-sm)}
 .sw .hex{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-muted-dark); margin-top:2px}
-.sw .role{font-size:var(--fs-xs); color:var(--muted-2); margin-top:var(--sp-2); line-height:1.45}
+.sw .role{font-size:var(--fs-xs); color:var(--muted-on-dark); margin-top:var(--sp-2); line-height:1.45}
 .sw .var{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--accent-on-dark); margin-top:var(--sp-2)}
 
 /* ---- Callouts ------------------------------------------------------- */
@@ -176,7 +80,7 @@ td.num{text-align:right; white-space:nowrap}
 /* ---- Type specimens -------------------------------------------------- */
 .spec{display:grid; grid-template-columns:130px 1fr; gap:var(--sp-4); align-items:baseline;
   padding:var(--sp-3) 0; border-bottom:1px solid var(--rule)}
-.spec dt{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2)}
+.spec dt{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-on-dark)}
 .spec dd{margin:0; overflow:hidden; text-overflow:ellipsis}
 
 /* ---- Scale bars ------------------------------------------------------ */
@@ -215,7 +119,7 @@ td.num{text-align:right; white-space:nowrap}
 
 .states{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:var(--sp-5); margin-top:var(--sp-4)}
 .states .cell{text-align:center}
-.states .cell p{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2); margin:var(--sp-3) 0 0}
+.states .cell p{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-on-dark); margin:var(--sp-3) 0 0}
 .forced-hover{background:var(--gold-dark)!important; color:var(--paper)!important}
 .forced-active{background:var(--gold-deep)!important; color:var(--paper)!important}
 .forced-focus{outline:2px solid var(--gold-light); outline-offset:2px}
@@ -224,7 +128,7 @@ td.num{text-align:right; white-space:nowrap}
 .field label{display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:var(--sp-2)}
 .field input{width:100%; font-family:var(--font-body); font-size:var(--fs-base); color:var(--paper);
   background:var(--ink-deep); border:1px solid var(--muted); border-radius:var(--r-md); padding:var(--sp-3)}
-.field input::placeholder{color:var(--muted-2)}
+.field input::placeholder{color:var(--muted-on-dark)}
 .field input:focus{outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold)}
 
 a.inline{color:var(--gold); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px}
@@ -241,7 +145,7 @@ a.inline:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px; 
 .on-light a.inline{color:var(--gold-deep)}
 .bad-demo{color:var(--gold); font-weight:600}
 
-footer{padding:var(--sp-7) 0 var(--sp-9); color:var(--muted-2); font-size:var(--fs-sm)}
+footer{padding:var(--sp-7) 0 var(--sp-9); color:var(--muted-on-dark); font-size:var(--fs-sm)}
 footer code{color:var(--text-muted-dark)}
 
 @media (max-width:640px){
@@ -462,7 +366,7 @@ footer code{color:var(--text-muted-dark)}
     <div class="field">
       <label for="demo-email">Work email</label>
       <input id="demo-email" type="email" placeholder="you@company.com">
-      <p style="font-size:var(--fs-xs);color:var(--muted-2);margin-top:var(--sp-2)">Focus ring uses <code>--gold</code> at 8.52:1 against <code>--ink-deep</code>.</p>
+      <p style="font-size:var(--fs-xs);color:var(--muted-on-dark);margin-top:var(--sp-2)">Focus ring uses <code>--gold</code> at 8.52:1 against <code>--ink-deep</code>.</p>
     </div>
 
     <h3 class="sub">Inline link</h3>

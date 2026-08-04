@@ -1,0 +1,115 @@
+/* ==========================================================================
+   MAGISTER DIGITAL — DESIGN TOKENS
+   Single source of truth. Linked by index.html, styleguide.html, nav.html.
+   Nothing outside this file should declare a raw colour, size, radius or shadow.
+
+   ACCESSIBILITY RULE, ENFORCED BY THE ALIASES BELOW:
+   --gold (#D4AF37) scores 1.96:1 on #F7F7F5 and FAILS WCAG AA at every text
+   size, and fails the 3:1 floor for UI components. It passes at 8.52:1 on
+   #16171A. Never reference --gold directly in a component. Use
+   --accent-on-dark or --accent-on-light. On light surfaces the accessible
+   gold is --gold-deep (#6E561A) at 6.51:1.
+   ========================================================================== */
+:root{
+  /* ---- Gold ramp ---------------------------------------------------- */
+  --gold:            #D4AF37;   /* primary — DARK BACKGROUNDS ONLY */
+  --gold-dark:       #A8842A;   /* hover / active */
+  --gold-light:      #E3C24E;   /* highlight, focus ring — dark only */
+  --gold-deep:       #6E561A;   /* the ONLY gold safe for text on light */
+
+  /* ---- Dark neutrals ------------------------------------------------ */
+  --ink:             #16171A;
+  --ink-deep:        #0F1115;
+
+  /* ---- Muted / border ----------------------------------------------- */
+  /* --muted and --muted-2 are LIGHT-SURFACE text tokens. On #F7F7F5 they
+     score 8.67:1 and 5.86:1. On a dark surface they FAIL — #5E6066 on
+     #16171A is only 2.85:1 — so never use them for text on dark.
+     Use --muted-on-dark instead: 5.17:1 on ink, 4.85:1 on bg-raised,
+     5.45:1 on ink-deep. */
+  --muted:           #45474C;
+  --muted-2:         #5E6066;
+  --muted-on-dark:   #868A90;
+  --border:          #C0C3C7;
+
+  /* ---- Light neutrals ----------------------------------------------- */
+  --paper:           #F7F7F5;
+  --paper-2:         #F1F1EE;
+  --paper-3:         #EEEEEB;
+
+  /* ---- Semantic aliases — use THESE in components ------------------- */
+  --bg:              var(--ink);
+  --bg-raised:       #1C1D21;
+  --surface-light:   var(--paper);
+  --text-on-dark:    var(--paper);
+  --text-on-light:   var(--ink);
+  --text-muted-dark: var(--border);
+  --text-muted-light:var(--muted);
+  --accent-on-dark:  var(--gold);
+  --accent-on-light: var(--gold-deep);
+  --rule:            #2A2C31;
+  --rule-light:      #DFDFDA;
+  --avatar-top:      #24262B;   /* founder avatar gradient stop */
+  --on-gold-muted:   #3A3007;   /* secondary text on the gold CTA band, 6.22:1 */
+
+  /* ---- Type families ------------------------------------------------ */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- Type scale — 1.25 major third, 16px base --------------------- */
+  --fs-xs:   0.75rem;
+  --fs-sm:   0.875rem;
+  --fs-base: 1rem;
+  --fs-md:   1.25rem;
+  --fs-lg:   1.5625rem;
+  --fs-xl:   1.953rem;
+  --fs-2xl:  2.441rem;
+  --fs-3xl:  3.052rem;
+  --fs-4xl:  3.815rem;
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.25;
+  --lh-base:  1.6;
+  --lh-loose: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:  0.08em;
+
+  /* ---- Spacing scale — 4px base ------------------------------------- */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.5rem;
+  --sp-6:  2rem;
+  --sp-7:  3rem;
+  --sp-8:  4rem;
+  --sp-9:  6rem;
+  --sp-10: 8rem;
+
+  /* ---- Radius scale ------------------------------------------------- */
+  --r-none: 0;
+  --r-sm:   2px;
+  --r-md:   4px;
+  --r-lg:   8px;
+  --r-xl:   16px;
+  --r-full: 999px;
+
+  /* ---- Shadow scale ------------------------------------------------- */
+  --shadow-none: none;
+  --shadow-sm:   0 1px 2px rgba(0,0,0,.35);
+  --shadow-md:   0 4px 12px rgba(0,0,0,.40);
+  --shadow-lg:   0 12px 32px rgba(0,0,0,.48);
+  --shadow-gold: 0 0 0 1px rgba(212,175,55,.35), 0 8px 24px rgba(212,175,55,.12);
+
+  /* ---- Motion ------------------------------------------------------- */
+  --ease: cubic-bezier(.4,0,.2,1);
+  --dur:  160ms;
+
+  /* ---- Layout ------------------------------------------------------- */
+  --measure:   68ch;
+  --container: 1120px;
+  --header-h:  72px;
+}

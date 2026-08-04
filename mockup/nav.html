@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Magister Digital — Project Index</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2316171A%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-family=%27Georgia,serif%27 font-size=%2720%27 font-weight=%27700%27 fill=%27%23D4AF37%27 text-anchor=%27middle%27%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--text-on-dark);
+  font-family:var(--font-body); line-height:var(--lh-base); -webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:var(--lh-tight);
+  letter-spacing:var(--tracking-tight); margin:0}
+.wrap{max-width:820px; margin:0 auto; padding:0 var(--sp-5)}
+header{background:var(--ink-deep); border-bottom:1px solid var(--rule); padding:var(--sp-8) 0 var(--sp-7)}
+.eyebrow{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase; color:var(--accent-on-dark); margin:0 0 var(--sp-3)}
+header h1{font-size:var(--fs-2xl)}
+header p{color:var(--text-muted-dark); margin:var(--sp-4) 0 0; max-width:var(--measure)}
+main{padding:var(--sp-8) 0 var(--sp-9)}
+h2{font-size:var(--fs-lg); margin:0 0 var(--sp-5)}
+h2 + h2{margin-top:var(--sp-8)}
+.cards{display:grid; gap:var(--sp-4); margin-bottom:var(--sp-8)}
+.card{display:block; background:var(--bg-raised); border:1px solid var(--rule);
+  border-radius:var(--r-lg); padding:var(--sp-5); text-decoration:none; color:inherit;
+  transition:border-color var(--dur) var(--ease), transform var(--dur) var(--ease)}
+.card:hover{border-color:var(--gold); transform:translateY(-2px)}
+.card:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px}
+.card h3{font-size:var(--fs-md); color:var(--accent-on-dark); margin-bottom:var(--sp-2)}
+.card p{margin:0; color:var(--text-muted-dark); font-size:var(--fs-sm)}
+.card .tag{display:inline-block; font-family:var(--font-mono); font-size:var(--fs-xs);
+  color:var(--muted-on-dark); margin-top:var(--sp-3)}
+.phases{list-style:none; margin:0; padding:0; counter-reset:p; display:grid; gap:var(--sp-3)}
+.phases li{display:grid; grid-template-columns:88px 1fr; gap:var(--sp-4); align-items:baseline;
+  font-size:var(--fs-sm); color:var(--text-muted-dark); padding-bottom:var(--sp-3);
+  border-bottom:1px solid var(--rule)}
+.phases .ph{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-on-dark);
+  letter-spacing:var(--tracking-wide); text-transform:uppercase}
+.phases .now{font-family:var(--font-mono); font-size:var(--fs-xs); font-style:normal;
+  color:var(--accent-on-dark); white-space:nowrap}
+.phases strong{color:var(--paper); font-weight:600}
+footer{border-top:1px solid var(--rule); padding:var(--sp-6) 0 var(--sp-8);
+  color:var(--muted-on-dark); font-size:var(--fs-sm)}
+code{font-family:var(--font-mono); font-size:.875em; color:var(--gold-light)}
+@media (min-width:600px){ .cards{grid-template-columns:repeat(2,1fr)} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Magister Digital — Website Rebuild</p>
+    <h1>Project index</h1>
+    <p>Internal navigation for the rebuild. Not part of the site design.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h2>Pages</h2>
+    <div class="cards">
+      <a class="card" href="index.html">
+        <h3>Homepage →</h3>
+        <p>The finished homepage design. Hero, self-select, pillars, verticals, founders, call deliverables, FAQ and footer.</p>
+        <span class="tag">index.html</span>
+      </a>
+      <a class="card" href="styleguide.html">
+        <h3>Design system →</h3>
+        <p>Colour tokens, type scale, spacing, radius, elevation, interactive states, and the full WCAG contrast verification.</p>
+        <span class="tag">styleguide.html</span>
+      </a>
+    </div>
+
+    <h2>Where this sits in the process</h2>
+    <ol class="phases">
+      <li><span class="ph">Phase 0</span><span>Discovery and setup — audit, CMS decision, repo, <strong>design tokens</strong>, component primitives <em class="now">← we are here</em></span></li>
+      <li><span class="ph">Phase 1</span><span>Global shell — layout, header and navigation, footer, SEO framework, analytics and consent</span></li>
+      <li><span class="ph">Phase 2</span><span>Content model — CMS schemas, seed data</span></li>
+      <li><span class="ph">Phase 3</span><span>Templates and pages — the full set of page designs</span></li>
+      <li><span class="ph">Phase 4</span><span>Content remediation — classify and correct copy, wire CTAs, forms and booking</span></li>
+      <li><span class="ph">Phase 5</span><span>Quality and launch — responsive, accessibility, performance, SEO, redirects, staging, launch</span></li>
+    </ol>
+
+    <h2 style="margin-top:var(--sp-8)">How this is built</h2>
+    <ol class="phases">
+      <li><span class="ph">Stack</span><span>Plain HTML and CSS. No WordPress, no build step, no dependencies.</span></li>
+      <li><span class="ph">Tokens</span><span>Every colour, size, radius and shadow is a CSS custom property in <code>tokens.css</code>, shared by every page.</span></li>
+      <li><span class="ph">Type</span><span>Playfair Display, Inter and JetBrains Mono — the three already in use on the live site.</span></li>
+      <li><span class="ph">Hosting</span><span>GitHub Pages, served from <code>main</code>. Push and the link updates.</span></li>
+      <li><span class="ph">Crawling</span><span>Every page carries <code>noindex, nofollow</code> while in review.</span></li>
+    </ol>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Magister Digital rebuild · internal index · <code>mockup/nav.html</code></p>
+  </div>
+</footer>
+
+</body>
+</html>
