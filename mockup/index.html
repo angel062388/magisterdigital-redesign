@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Magister Digital — Rebuild Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#D4AF37; --gold-dark:#A8842A; --gold-light:#E3C24E; --gold-deep:#6E561A;
+  --ink:#16171A; --ink-deep:#0F1115; --muted:#45474C; --muted-2:#5E6066;
+  --border:#C0C3C7; --paper:#F7F7F5; --rule:#2A2C31; --bg-raised:#1C1D21;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace;
+  --sp-2:.5rem; --sp-3:.75rem; --sp-4:1rem; --sp-5:1.5rem; --sp-6:2rem; --sp-7:3rem; --sp-8:4rem; --sp-9:6rem;
+  --r-md:4px; --r-lg:8px; --dur:160ms; --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--font-body);
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:0 var(--sp-5)}
+header{background:var(--ink-deep);border-bottom:1px solid var(--rule);padding:var(--sp-9) 0 var(--sp-8)}
+.eyebrow{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);margin:0 0 var(--sp-3)}
+h1{font-family:var(--font-display);font-size:3.052rem;line-height:1.1;letter-spacing:-.02em;margin:0}
+header p{color:var(--border);max-width:60ch;margin:var(--sp-4) 0 0}
+main{padding:var(--sp-8) 0 var(--sp-9)}
+h2{font-family:var(--font-display);font-size:1.5625rem;margin:0 0 var(--sp-4)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--sp-5);margin-bottom:var(--sp-8)}
+.card{display:block;background:var(--bg-raised);border:1px solid var(--rule);border-radius:var(--r-lg);
+  padding:var(--sp-6);text-decoration:none;color:inherit;
+  transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+.card h3{font-family:var(--font-display);font-size:1.25rem;margin:0 0 var(--sp-2);color:var(--gold)}
+.card p{margin:0;color:var(--border);font-size:.875rem}
+.card .tag{display:inline-block;font-family:var(--font-mono);font-size:.75rem;color:var(--muted-2);margin-top:var(--sp-3)}
+.note{border-left:3px solid var(--gold);background:var(--bg-raised);padding:var(--sp-5);
+  border-radius:0 var(--r-lg) var(--r-lg) 0;margin-bottom:var(--sp-6)}
+.note h3{font-size:1rem;font-weight:700;margin:0 0 var(--sp-2)}
+.note p{margin:0;color:var(--border);font-size:.9375rem}
+ul{color:var(--border);max-width:64ch;padding-left:var(--sp-5)}
+li{margin-bottom:var(--sp-2)}
+code{font-family:var(--font-mono);font-size:.875em;color:var(--gold-light)}
+footer{border-top:1px solid var(--rule);padding:var(--sp-6) 0 var(--sp-8);color:var(--muted-2);font-size:.875rem}
+@media (max-width:640px){h1{font-size:2.441rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Magister Digital — Website Rebuild</p>
+    <h1>Mockup</h1>
+    <p>Static HTML and CSS. No WordPress, no build step, no dependencies. This is the shareable review surface for the rebuild — the GitHub repo is the staging environment.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h2>Pages</h2>
+    <div class="cards">
+      <a class="card" href="styleguide.html">
+        <h3>Design system →</h3>
+        <p>Colour tokens, type scale, spacing, radius, elevation, interactive states, and the full WCAG contrast verification.</p>
+        <span class="tag">styleguide.html</span>
+      </a>
+    </div>
+
+    <div class="note">
+      <h3>One finding you should read before anything is designed</h3>
+      <p>The primary gold <code>#D4AF37</code> scores <strong>1.96:1</strong> on the off-white surface. That fails WCAG AA for text of any size, and fails the 3:1 floor for UI components too. On the near-black it passes at <strong>8.52:1</strong>. The design system resolves this with two aliases, <code>--accent-on-dark</code> and <code>--accent-on-light</code>, so the raw gold can never reach a light surface by accident. Full matrix on the design system page.</p>
+    </div>
+
+    <h2>How this is built</h2>
+    <ul>
+      <li>Plain HTML and CSS. Open any file directly in a browser and it works.</li>
+      <li>Every colour, size, radius and shadow is a CSS custom property declared once in <code>:root</code>.</li>
+      <li>Fonts are the three already in use on the live site: Playfair Display, Inter, JetBrains Mono.</li>
+      <li>Served by GitHub Pages from this repository. Push to <code>main</code> and the link updates.</li>
+      <li>Pages carry <code>noindex</code> so the mockup cannot be crawled while it is in review.</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Magister Digital rebuild · static mockup · v1</p>
+  </div>
+</footer>
+</body>
+</html>

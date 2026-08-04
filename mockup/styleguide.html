@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Magister Digital — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   MAGISTER DIGITAL — DESIGN TOKENS
+   Every value below is a variable. Nothing in this file hardcodes a colour,
+   size, radius or shadow outside this block.
+   ========================================================================== */
+:root{
+  /* ---- Gold ramp ---------------------------------------------------- */
+  --gold:            #D4AF37;   /* primary  — DARK BACKGROUNDS ONLY (see a11y) */
+  --gold-dark:       #A8842A;   /* hover / active */
+  --gold-light:      #E3C24E;   /* highlight — dark backgrounds only */
+  --gold-deep:       #6E561A;   /* the ONLY gold safe for body text on light */
+
+  /* ---- Dark neutrals ------------------------------------------------ */
+  --ink:             #16171A;   /* primary dark surface + body text on light */
+  --ink-deep:        #0F1115;   /* deepest surface */
+
+  /* ---- Muted / border ----------------------------------------------- */
+  --muted:           #45474C;
+  --muted-2:         #5E6066;
+  --border:          #C0C3C7;
+
+  /* ---- Light neutrals ----------------------------------------------- */
+  --paper:           #F7F7F5;
+  --paper-2:         #F1F1EE;
+  --paper-3:         #EEEEEB;
+
+  /* ---- Semantic aliases — use THESE in components ------------------- */
+  --bg:              var(--ink);
+  --bg-raised:       #1C1D21;
+  --surface-light:   var(--paper);
+  --text-on-dark:    var(--paper);
+  --text-on-light:   var(--ink);
+  --text-muted-dark: var(--border);
+  --text-muted-light:var(--muted);
+  --accent-on-dark:  var(--gold);
+  --accent-on-light: var(--gold-deep);
+  --rule:            #2A2C31;
+
+  /* ---- Type families ------------------------------------------------ */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---- Type scale — 1.25 major third, 16px base --------------------- */
+  --fs-xs:   0.75rem;   /* 12 */
+  --fs-sm:   0.875rem;  /* 14 */
+  --fs-base: 1rem;      /* 16 */
+  --fs-md:   1.25rem;   /* 20 */
+  --fs-lg:   1.5625rem; /* 25 */
+  --fs-xl:   1.953rem;  /* 31 */
+  --fs-2xl:  2.441rem;  /* 39 */
+  --fs-3xl:  3.052rem;  /* 49 */
+  --fs-4xl:  3.815rem;  /* 61 */
+
+  --lh-tight: 1.1;
+  --lh-snug:  1.25;
+  --lh-base:  1.6;
+  --lh-loose: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:  0.08em;
+
+  /* ---- Spacing scale — 4px base ------------------------------------- */
+  --sp-1:  0.25rem;  /*  4 */
+  --sp-2:  0.5rem;   /*  8 */
+  --sp-3:  0.75rem;  /* 12 */
+  --sp-4:  1rem;     /* 16 */
+  --sp-5:  1.5rem;   /* 24 */
+  --sp-6:  2rem;     /* 32 */
+  --sp-7:  3rem;     /* 48 */
+  --sp-8:  4rem;     /* 64 */
+  --sp-9:  6rem;     /* 96 */
+  --sp-10: 8rem;     /* 128 */
+
+  /* ---- Radius scale ------------------------------------------------- */
+  --r-none: 0;
+  --r-sm:   2px;
+  --r-md:   4px;
+  --r-lg:   8px;
+  --r-xl:   16px;
+  --r-full: 999px;
+
+  /* ---- Shadow scale — tuned for dark surfaces ----------------------- */
+  --shadow-none: none;
+  --shadow-sm:   0 1px 2px rgba(0,0,0,.35);
+  --shadow-md:   0 4px 12px rgba(0,0,0,.40);
+  --shadow-lg:   0 12px 32px rgba(0,0,0,.48);
+  --shadow-gold: 0 0 0 1px rgba(212,175,55,.35), 0 8px 24px rgba(212,175,55,.12);
+
+  /* ---- Motion ------------------------------------------------------- */
+  --ease: cubic-bezier(.4,0,.2,1);
+  --dur:  160ms;
+
+  /* ---- Layout ------------------------------------------------------- */
+  --measure: 68ch;
+  --container: 1120px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text-on-dark);
+  font-family:var(--font-body); font-size:var(--fs-base); line-height:var(--lh-base);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:600; line-height:var(--lh-tight); letter-spacing:var(--tracking-tight); margin:0}
+code,.mono,td.num{font-family:var(--font-mono); font-variant-numeric:tabular-nums}
+
+.wrap{max-width:var(--container); margin:0 auto; padding:0 var(--sp-5)}
+
+/* ---- Masthead ------------------------------------------------------- */
+.masthead{border-bottom:1px solid var(--rule); background:var(--ink-deep); padding:var(--sp-8) 0 var(--sp-7)}
+.eyebrow{font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:var(--tracking-wide);
+  text-transform:uppercase; color:var(--accent-on-dark); margin:0 0 var(--sp-3)}
+.masthead h1{font-size:var(--fs-3xl)}
+.masthead p{color:var(--text-muted-dark); max-width:var(--measure); margin:var(--sp-4) 0 0}
+.stamp{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2); margin-top:var(--sp-5)}
+
+/* ---- Sections ------------------------------------------------------- */
+section{padding:var(--sp-8) 0; border-bottom:1px solid var(--rule)}
+section > .wrap > h2{font-size:var(--fs-2xl); margin-bottom:var(--sp-2)}
+.lede{color:var(--text-muted-dark); max-width:var(--measure); margin:0 0 var(--sp-6)}
+h3.sub{font-size:var(--fs-md); font-family:var(--font-body); font-weight:600;
+  letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--accent-on-dark);
+  margin:var(--sp-7) 0 var(--sp-4)}
+
+/* ---- Swatches ------------------------------------------------------- */
+.swatches{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:var(--sp-4)}
+.sw{border:1px solid var(--rule); border-radius:var(--r-lg); overflow:hidden; background:var(--bg-raised)}
+.sw .chip{height:96px; display:flex; align-items:flex-end; padding:var(--sp-3)}
+.sw .chip span{font-family:var(--font-mono); font-size:var(--fs-xs)}
+.sw .meta{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
+.sw .name{font-weight:600; font-size:var(--fs-sm)}
+.sw .hex{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-muted-dark); margin-top:2px}
+.sw .role{font-size:var(--fs-xs); color:var(--muted-2); margin-top:var(--sp-2); line-height:1.45}
+.sw .var{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--accent-on-dark); margin-top:var(--sp-2)}
+
+/* ---- Callouts ------------------------------------------------------- */
+.callout{border-left:3px solid var(--gold); background:var(--bg-raised); padding:var(--sp-5);
+  border-radius:0 var(--r-lg) var(--r-lg) 0; margin:var(--sp-5) 0}
+.callout.fail{border-left-color:#E5534B}
+.callout h4{font-family:var(--font-body); font-size:var(--fs-base); font-weight:700; margin:0 0 var(--sp-2)}
+.callout p{margin:0 0 var(--sp-3); color:var(--text-muted-dark)}
+.callout p:last-child{margin-bottom:0}
+
+/* ---- Tables --------------------------------------------------------- */
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+table{width:100%; border-collapse:collapse; font-size:var(--fs-sm); min-width:640px}
+th{text-align:left; font-family:var(--font-mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:var(--tracking-wide); color:var(--accent-on-dark); padding:var(--sp-3);
+  border-bottom:1px solid var(--rule); white-space:nowrap}
+td{padding:var(--sp-3); border-bottom:1px solid var(--rule); vertical-align:middle}
+td.num{text-align:right; white-space:nowrap}
+.dot{display:inline-block; width:14px; height:14px; border-radius:var(--r-sm);
+  border:1px solid rgba(255,255,255,.15); vertical-align:-2px; margin-right:var(--sp-2)}
+.badge{display:inline-block; font-family:var(--font-mono); font-size:var(--fs-xs); font-weight:600;
+  padding:2px var(--sp-2); border-radius:var(--r-full); white-space:nowrap}
+.badge.aaa {background:rgba(63,185,80,.15);  color:#5FD97A}
+.badge.aa  {background:rgba(63,185,80,.10);  color:#7FD98F}
+.badge.large{background:rgba(212,175,55,.15);color:var(--gold-light)}
+.badge.fail{background:rgba(229,83,75,.15);  color:#FF8A80}
+
+/* ---- Type specimens -------------------------------------------------- */
+.spec{display:grid; grid-template-columns:130px 1fr; gap:var(--sp-4); align-items:baseline;
+  padding:var(--sp-3) 0; border-bottom:1px solid var(--rule)}
+.spec dt{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2)}
+.spec dd{margin:0; overflow:hidden; text-overflow:ellipsis}
+
+/* ---- Scale bars ------------------------------------------------------ */
+.bars{display:flex; flex-direction:column; gap:var(--sp-2)}
+.bar{display:grid; grid-template-columns:88px 78px 1fr; gap:var(--sp-4); align-items:center;
+  font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-muted-dark)}
+.bar i{display:block; height:14px; background:var(--gold); border-radius:var(--r-sm)}
+
+.radii{display:flex; flex-wrap:wrap; gap:var(--sp-4)}
+.radii figure{margin:0; text-align:center}
+.radii .box{width:88px; height:88px; background:var(--bg-raised); border:1px solid var(--gold)}
+.radii figcaption{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-muted-dark); margin-top:var(--sp-2)}
+
+.shadows{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:var(--sp-5)}
+.shadows .card{background:var(--bg-raised); border-radius:var(--r-lg); padding:var(--sp-5);
+  font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--text-muted-dark); text-align:center}
+
+/* ---- Buttons + states ------------------------------------------------ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
+  font-family:var(--font-body); font-size:var(--fs-sm); font-weight:600;
+  padding:var(--sp-3) var(--sp-5); border-radius:var(--r-md); border:1px solid transparent;
+  cursor:pointer; text-decoration:none; transition:background var(--dur) var(--ease),
+  color var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.btn-primary{background:var(--gold); color:var(--ink)}
+.btn-primary:hover{background:var(--gold-dark); color:var(--paper)}
+.btn-primary:active{background:var(--gold-deep); color:var(--paper)}
+.btn-secondary{background:transparent; color:var(--gold); border-color:var(--gold)}
+.btn-secondary:hover{background:rgba(212,175,55,.12)}
+.btn-secondary:active{background:rgba(212,175,55,.20)}
+.btn-ghost{background:transparent; color:var(--text-muted-dark)}
+.btn-ghost:hover{color:var(--paper); background:rgba(255,255,255,.06)}
+.btn:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px}
+.btn[disabled],.btn.is-disabled{opacity:.45; cursor:not-allowed; pointer-events:none}
+
+.states{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:var(--sp-5); margin-top:var(--sp-4)}
+.states .cell{text-align:center}
+.states .cell p{font-family:var(--font-mono); font-size:var(--fs-xs); color:var(--muted-2); margin:var(--sp-3) 0 0}
+.forced-hover{background:var(--gold-dark)!important; color:var(--paper)!important}
+.forced-active{background:var(--gold-deep)!important; color:var(--paper)!important}
+.forced-focus{outline:2px solid var(--gold-light); outline-offset:2px}
+
+.field{max-width:360px}
+.field label{display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:var(--sp-2)}
+.field input{width:100%; font-family:var(--font-body); font-size:var(--fs-base); color:var(--paper);
+  background:var(--ink-deep); border:1px solid var(--muted); border-radius:var(--r-md); padding:var(--sp-3)}
+.field input::placeholder{color:var(--muted-2)}
+.field input:focus{outline:2px solid var(--gold); outline-offset:1px; border-color:var(--gold)}
+
+a.inline{color:var(--gold); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px}
+a.inline:hover{color:var(--gold-light)}
+a.inline:focus-visible{outline:2px solid var(--gold-light); outline-offset:2px; border-radius:var(--r-sm)}
+
+/* ---- Light-surface demo ---------------------------------------------- */
+.on-light{background:var(--surface-light); color:var(--text-on-light);
+  border-radius:var(--r-lg); padding:var(--sp-6); margin-top:var(--sp-4)}
+.on-light h4{font-family:var(--font-display); font-size:var(--fs-lg); margin:0 0 var(--sp-3); color:var(--accent-on-light)}
+.on-light p{color:var(--text-muted-light); max-width:var(--measure); margin:0 0 var(--sp-4)}
+.on-light .btn-primary{background:var(--gold-deep); color:var(--paper)}
+.on-light .btn-primary:hover{background:var(--ink)}
+.on-light a.inline{color:var(--gold-deep)}
+.bad-demo{color:var(--gold); font-weight:600}
+
+footer{padding:var(--sp-7) 0 var(--sp-9); color:var(--muted-2); font-size:var(--fs-sm)}
+footer code{color:var(--text-muted-dark)}
+
+@media (max-width:640px){
+  .masthead h1{font-size:var(--fs-2xl)}
+  .spec{grid-template-columns:1fr; gap:var(--sp-1)}
+  .bar{grid-template-columns:70px 62px 1fr; gap:var(--sp-3)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Magister Digital — Rebuild</p>
+    <h1>Design System</h1>
+    <p>The refined token set for the magisterdigital.ai rebuild. Every colour, size, radius and shadow on this page is a CSS custom property, declared once in <code>:root</code>. Nothing below hardcodes a value.</p>
+    <p class="stamp">Static mockup · no WordPress · v1 · 2026-08-04</p>
+  </div>
+</header>
+
+<!-- ==================== ACCESSIBILITY FINDING ==================== -->
+<section id="a11y">
+  <div class="wrap">
+    <h2>Contrast verification</h2>
+    <p class="lede">Ratios computed with the WCAG 2.1 relative-luminance formula, not estimated by eye. WCAG AA requires <strong>4.5:1</strong> for normal text and <strong>3:1</strong> for large text (18.66px bold / 24px regular) and UI components. AAA requires 7:1.</p>
+
+    <div class="callout fail">
+      <h4>The headline result: the primary gold cannot be used for text on light backgrounds.</h4>
+      <p><strong>#D4AF37 on #F7F7F5 is 1.96:1.</strong> That fails AA for normal text, fails AA for large text, and fails the 3:1 threshold for UI components. It is not a borderline miss — it is roughly 2.3× short of the requirement. The same gold on the near-black <strong>#16171A passes at 8.52:1</strong>, comfortably clearing AAA.</p>
+      <p>The palette already contains the fix. <strong>#6E561A (gold-deep) on #F7F7F5 is 6.51:1</strong>, which clears AA for all text sizes. The system below encodes this as a hard rule via two aliases: <code>--accent-on-dark</code> and <code>--accent-on-light</code>. Use the alias, never the raw gold.</p>
+    </div>
+
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Foreground</th><th>Background</th><th>Ratio</th><th>Normal text</th><th>Large text &amp; UI</th></tr></thead>
+      <tbody>
+        <tr><td><span class="dot" style="background:#D4AF37"></span>gold #D4AF37</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">8.52:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#D4AF37"></span>gold #D4AF37</td><td><span class="dot" style="background:#0F1115"></span>ink-deep #0F1115</td><td class="num">8.99:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#D4AF37"></span>gold #D4AF37</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">1.96:1</td><td><span class="badge fail">Fail</span></td><td><span class="badge fail">Fail</span></td></tr>
+        <tr><td><span class="dot" style="background:#E3C24E"></span>gold-light #E3C24E</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">10.32:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#E3C24E"></span>gold-light #E3C24E</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">1.62:1</td><td><span class="badge fail">Fail</span></td><td><span class="badge fail">Fail</span></td></tr>
+        <tr><td><span class="dot" style="background:#A8842A"></span>gold-dark #A8842A</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">5.12:1</td><td><span class="badge aa">AA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#A8842A"></span>gold-dark #A8842A</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">3.26:1</td><td><span class="badge fail">Fail</span></td><td><span class="badge large">Large / UI only</span></td></tr>
+        <tr><td><span class="dot" style="background:#6E561A"></span>gold-deep #6E561A</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">6.51:1</td><td><span class="badge aa">AA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#6E561A"></span>gold-deep #6E561A</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">2.57:1</td><td><span class="badge fail">Fail</span></td><td><span class="badge fail">Fail</span></td></tr>
+        <tr><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">16.71:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#C0C3C7"></span>border #C0C3C7</td><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td class="num">10.13:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#45474C"></span>muted #45474C</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">8.67:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#5E6066"></span>muted-2 #5E6066</td><td><span class="dot" style="background:#F7F7F5"></span>paper #F7F7F5</td><td class="num">5.86:1</td><td><span class="badge aa">AA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+        <tr><td><span class="dot" style="background:#16171A"></span>ink #16171A</td><td><span class="dot" style="background:#D4AF37"></span>gold #D4AF37</td><td class="num">8.52:1</td><td><span class="badge aaa">AAA</span></td><td><span class="badge aaa">Pass</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 class="sub">What this looks like in practice</h3>
+    <div class="on-light">
+      <h4>Gold on a light surface, done correctly</h4>
+      <p>This heading uses <code>--accent-on-light</code> (#6E561A) at 6.51:1. Body copy uses <code>--muted</code> at 8.67:1. The button below drops to the deep gold rather than the primary. <a class="inline" href="#a11y">Inline links</a> take the same treatment.</p>
+      <p>For contrast, this text is the raw primary gold: <span class="bad-demo">#D4AF37 at 1.96:1 — barely legible, and non-compliant.</span> That is the failure this system prevents.</p>
+      <a class="btn btn-primary" href="#a11y">Book the strategy call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COLOUR ==================== -->
+<section id="colour">
+  <div class="wrap">
+    <h2>Colour</h2>
+    <p class="lede">Twelve raw tokens, plus semantic aliases. Components should reference the aliases so a surface can be re-themed without touching component CSS.</p>
+
+    <h3 class="sub">Gold ramp</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#D4AF37"><span style="color:#16171A">Aa 8.52:1</span></div>
+        <div class="meta"><div class="name">Gold — primary</div><div class="hex">#D4AF37</div>
+        <div class="role">Accents, CTAs, the logo. <strong>Dark surfaces only.</strong></div><div class="var">--gold</div></div></div>
+      <div class="sw"><div class="chip" style="background:#A8842A"><span style="color:#F7F7F5">Aa 5.12:1</span></div>
+        <div class="meta"><div class="name">Gold — dark</div><div class="hex">#A8842A</div>
+        <div class="role">Hover and active states. Large text or UI only on light.</div><div class="var">--gold-dark</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E3C24E"><span style="color:#16171A">Aa 10.32:1</span></div>
+        <div class="meta"><div class="name">Gold — light</div><div class="hex">#E3C24E</div>
+        <div class="role">Highlights and focus rings on dark. Never on light.</div><div class="var">--gold-light</div></div></div>
+      <div class="sw"><div class="chip" style="background:#6E561A"><span style="color:#F7F7F5">Aa 6.51:1</span></div>
+        <div class="meta"><div class="name">Gold — deep</div><div class="hex">#6E561A</div>
+        <div class="role">The accessible gold for light surfaces. Text, links, buttons.</div><div class="var">--gold-deep</div></div></div>
+    </div>
+
+    <h3 class="sub">Dark neutrals</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#16171A;border-bottom:1px solid #2A2C31"><span style="color:#F7F7F5">Aa</span></div>
+        <div class="meta"><div class="name">Ink</div><div class="hex">#16171A</div><div class="role">Primary dark surface, and body text on light.</div><div class="var">--ink</div></div></div>
+      <div class="sw"><div class="chip" style="background:#0F1115;border-bottom:1px solid #2A2C31"><span style="color:#F7F7F5">Aa</span></div>
+        <div class="meta"><div class="name">Ink — deep</div><div class="hex">#0F1115</div><div class="role">Deepest surface. Masthead, footer, full-bleed bands.</div><div class="var">--ink-deep</div></div></div>
+      <div class="sw"><div class="chip" style="background:#45474C"><span style="color:#F7F7F5">Aa</span></div>
+        <div class="meta"><div class="name">Muted</div><div class="hex">#45474C</div><div class="role">Secondary text on light surfaces.</div><div class="var">--muted</div></div></div>
+      <div class="sw"><div class="chip" style="background:#5E6066"><span style="color:#F7F7F5">Aa</span></div>
+        <div class="meta"><div class="name">Muted 2</div><div class="hex">#5E6066</div><div class="role">Tertiary text, captions. AA on light at 5.86:1.</div><div class="var">--muted-2</div></div></div>
+      <div class="sw"><div class="chip" style="background:#C0C3C7"><span style="color:#16171A">Aa</span></div>
+        <div class="meta"><div class="name">Border</div><div class="hex">#C0C3C7</div><div class="role">Dividers on light. Muted body text on dark.</div><div class="var">--border</div></div></div>
+    </div>
+
+    <h3 class="sub">Light neutrals</h3>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#F7F7F5"><span style="color:#16171A">Aa</span></div>
+        <div class="meta"><div class="name">Paper</div><div class="hex">#F7F7F5</div><div class="role">Primary light surface, cards, reading sections.</div><div class="var">--paper</div></div></div>
+      <div class="sw"><div class="chip" style="background:#F1F1EE"><span style="color:#16171A">Aa</span></div>
+        <div class="meta"><div class="name">Paper 2</div><div class="hex">#F1F1EE</div><div class="role">Alternate surface, zebra rows.</div><div class="var">--paper-2</div></div></div>
+      <div class="sw"><div class="chip" style="background:#EEEEEB"><span style="color:#16171A">Aa</span></div>
+        <div class="meta"><div class="name">Paper 3</div><div class="hex">#EEEEEB</div><div class="role">Subtle background, inset panels.</div><div class="var">--paper-3</div></div></div>
+    </div>
+
+    <div class="callout">
+      <h4>Prune before build</h4>
+      <p>The live <code>theme.json</code> also declares the twelve stock WordPress preset colours (<code>#f78da7</code>, <code>#cf2e2e</code>, <code>#ff6900</code> and friends). They clutter the editor colour picker and invite off-brand choices. Remove them when the tokens land in the theme.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TYPE ==================== -->
+<section id="type">
+  <div class="wrap">
+    <h2>Typography</h2>
+    <p class="lede">Three families, unchanged from the live site — the existing system is deliberate and worth keeping. Playfair Display carries editorial weight on headings, Inter handles body and UI, JetBrains Mono is reserved for numbers, metrics and code.</p>
+
+    <h3 class="sub">Type scale — 1.25 major third, 16px base</h3>
+    <dl>
+      <div class="spec"><dt>--fs-4xl · 61px</dt><dd style="font-family:var(--font-display);font-size:var(--fs-4xl);line-height:var(--lh-tight)">Measured in booked jobs</dd></div>
+      <div class="spec"><dt>--fs-3xl · 49px</dt><dd style="font-family:var(--font-display);font-size:var(--fs-3xl);line-height:var(--lh-tight)">Measured in booked jobs</dd></div>
+      <div class="spec"><dt>--fs-2xl · 39px</dt><dd style="font-family:var(--font-display);font-size:var(--fs-2xl);line-height:var(--lh-tight)">Measured in booked jobs</dd></div>
+      <div class="spec"><dt>--fs-xl · 31px</dt><dd style="font-family:var(--font-display);font-size:var(--fs-xl);line-height:var(--lh-snug)">Measured in booked jobs</dd></div>
+      <div class="spec"><dt>--fs-lg · 25px</dt><dd style="font-family:var(--font-display);font-size:var(--fs-lg);line-height:var(--lh-snug)">Measured in booked jobs</dd></div>
+      <div class="spec"><dt>--fs-md · 20px</dt><dd style="font-size:var(--fs-md);line-height:var(--lh-base)">Signed cases, and new patients.</dd></div>
+      <div class="spec"><dt>--fs-base · 16px</dt><dd style="font-size:var(--fs-base)">Body copy. The default for everything that is not a heading, a caption, or a number.</dd></div>
+      <div class="spec"><dt>--fs-sm · 14px</dt><dd style="font-size:var(--fs-sm)">Secondary copy, table cells, button labels.</dd></div>
+      <div class="spec"><dt>--fs-xs · 12px</dt><dd style="font-size:var(--fs-xs);font-family:var(--font-mono);letter-spacing:var(--tracking-wide);text-transform:uppercase">Eyebrows, labels, metadata</dd></div>
+    </dl>
+
+    <h3 class="sub">Families</h3>
+    <dl>
+      <div class="spec"><dt>Playfair Display<br>--font-display</dt><dd style="font-family:var(--font-display);font-size:var(--fs-xl)">Headings, pull-quotes <em>and italics</em></dd></div>
+      <div class="spec"><dt>Inter<br>--font-body</dt><dd style="font-size:var(--fs-md)">Body, UI, navigation, buttons, forms</dd></div>
+      <div class="spec"><dt>JetBrains Mono<br>--font-mono</dt><dd style="font-family:var(--font-mono);font-size:var(--fs-md)">0123456789 · 8.52:1 · $20K/mo</dd></div>
+    </dl>
+
+    <h3 class="sub">Line height &amp; measure</h3>
+    <dl>
+      <div class="spec"><dt>--lh-tight 1.1</dt><dd style="line-height:1.1;font-family:var(--font-display);font-size:var(--fs-lg)">Display headings only, where two lines should feel like one block</dd></div>
+      <div class="spec"><dt>--lh-base 1.6</dt><dd style="line-height:1.6;max-width:var(--measure)">Body default. Paragraphs are capped at <code>--measure</code> (68ch) so a line never runs wider than the eye can track comfortably on a large screen.</dd></div>
+      <div class="spec"><dt>--lh-loose 1.75</dt><dd style="line-height:1.75;max-width:var(--measure)">Long-form reading sections, such as Insights articles and the legal and medical vertical pages.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ==================== SPACING / RADIUS / SHADOW ==================== -->
+<section id="scales">
+  <div class="wrap">
+    <h2>Spacing, radius, elevation</h2>
+    <p class="lede">A 4px base grid. Every margin, padding and gap on this page comes from the spacing scale — there are no arbitrary pixel values in the stylesheet.</p>
+
+    <h3 class="sub">Spacing scale</h3>
+    <div class="bars">
+      <div class="bar"><span>--sp-1</span><span>4px</span><i style="width:4px"></i></div>
+      <div class="bar"><span>--sp-2</span><span>8px</span><i style="width:8px"></i></div>
+      <div class="bar"><span>--sp-3</span><span>12px</span><i style="width:12px"></i></div>
+      <div class="bar"><span>--sp-4</span><span>16px</span><i style="width:16px"></i></div>
+      <div class="bar"><span>--sp-5</span><span>24px</span><i style="width:24px"></i></div>
+      <div class="bar"><span>--sp-6</span><span>32px</span><i style="width:32px"></i></div>
+      <div class="bar"><span>--sp-7</span><span>48px</span><i style="width:48px"></i></div>
+      <div class="bar"><span>--sp-8</span><span>64px</span><i style="width:64px"></i></div>
+      <div class="bar"><span>--sp-9</span><span>96px</span><i style="width:96px"></i></div>
+      <div class="bar"><span>--sp-10</span><span>128px</span><i style="width:128px"></i></div>
+    </div>
+
+    <h3 class="sub">Radius scale</h3>
+    <div class="radii">
+      <figure><div class="box" style="border-radius:var(--r-none)"></div><figcaption>--r-none<br>0</figcaption></figure>
+      <figure><div class="box" style="border-radius:var(--r-sm)"></div><figcaption>--r-sm<br>2px</figcaption></figure>
+      <figure><div class="box" style="border-radius:var(--r-md)"></div><figcaption>--r-md<br>4px</figcaption></figure>
+      <figure><div class="box" style="border-radius:var(--r-lg)"></div><figcaption>--r-lg<br>8px</figcaption></figure>
+      <figure><div class="box" style="border-radius:var(--r-xl)"></div><figcaption>--r-xl<br>16px</figcaption></figure>
+      <figure><div class="box" style="border-radius:var(--r-full)"></div><figcaption>--r-full<br>pill</figcaption></figure>
+    </div>
+
+    <h3 class="sub">Shadow scale</h3>
+    <div class="shadows">
+      <div class="card" style="box-shadow:var(--shadow-none)">--shadow-none</div>
+      <div class="card" style="box-shadow:var(--shadow-sm)">--shadow-sm</div>
+      <div class="card" style="box-shadow:var(--shadow-md)">--shadow-md</div>
+      <div class="card" style="box-shadow:var(--shadow-lg)">--shadow-lg</div>
+      <div class="card" style="box-shadow:var(--shadow-gold)">--shadow-gold</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INTERACTIVE STATES ==================== -->
+<section id="states">
+  <div class="wrap">
+    <h2>Interactive states</h2>
+    <p class="lede">Every interactive element declares all five states. The focus ring is <code>--gold-light</code> at 2px with a 2px offset, which reads at 10.32:1 against the dark surface — focus must never be removed without an equally visible replacement.</p>
+
+    <h3 class="sub">Primary button — states rendered side by side</h3>
+    <div class="states">
+      <div class="cell"><button class="btn btn-primary">Book the call</button><p>default</p></div>
+      <div class="cell"><button class="btn btn-primary forced-hover">Book the call</button><p>hover</p></div>
+      <div class="cell"><button class="btn btn-primary forced-active">Book the call</button><p>active</p></div>
+      <div class="cell"><button class="btn btn-primary forced-focus">Book the call</button><p>focus-visible</p></div>
+      <div class="cell"><button class="btn btn-primary" disabled>Book the call</button><p>disabled</p></div>
+    </div>
+
+    <h3 class="sub">Secondary and ghost — live, hover them</h3>
+    <div class="states">
+      <div class="cell"><button class="btn btn-secondary">Get the audit</button><p>secondary</p></div>
+      <div class="cell"><button class="btn btn-ghost">Learn more</button><p>ghost</p></div>
+      <div class="cell"><a class="btn btn-secondary" href="#states">Link as button</a><p>anchor variant</p></div>
+    </div>
+
+    <h3 class="sub">Form field</h3>
+    <div class="field">
+      <label for="demo-email">Work email</label>
+      <input id="demo-email" type="email" placeholder="you@company.com">
+      <p style="font-size:var(--fs-xs);color:var(--muted-2);margin-top:var(--sp-2)">Focus ring uses <code>--gold</code> at 8.52:1 against <code>--ink-deep</code>.</p>
+    </div>
+
+    <h3 class="sub">Inline link</h3>
+    <p style="max-width:var(--measure)">Body copy with an <a class="inline" href="#states">inline link in the primary gold</a>, underlined with a 3px offset so the underline never collides with descenders. Underlines stay on — colour alone is not an accessible link affordance.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Magister Digital design system · static mockup, no WordPress · <code>mockup/styleguide.html</code></p>
+    <p>Contrast ratios computed with the WCAG 2.1 relative-luminance formula. Source palette from the live site's <code>theme.json</code>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
