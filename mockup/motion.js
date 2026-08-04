@@ -67,6 +67,18 @@
       return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     }
 
+    // Siblings we mark inert while the modal is open. Prevents screen-reader
+    // and programmatic focus from escaping the dialog when aria-modal alone
+    // isn't enforced by the browser/AT combination.
+    function siblings() {
+      return [
+        document.querySelector('header.site-header'),
+        document.getElementById('main'),
+        document.querySelector('footer.site-footer'),
+        document.querySelector('.ticker')
+      ].filter(Boolean);
+    }
+
     function open(key, from) {
       var data = FOUNDERS[key];
       if (!data) return;
@@ -78,6 +90,7 @@
       linkEl.setAttribute('href', data.link);
       modal.hidden = false;
       document.body.classList.add('modal-open');
+      siblings().forEach(function (el) { el.setAttribute('inert', ''); });
       document.addEventListener('keydown', onKey);
       // Focus the close button first so the trap has an anchor.
       var closeBtn = modal.querySelector('.modal-close');
@@ -88,6 +101,7 @@
       if (modal.hidden) return;
       modal.hidden = true;
       document.body.classList.remove('modal-open');
+      siblings().forEach(function (el) { el.removeAttribute('inert'); });
       document.removeEventListener('keydown', onKey);
       if (trigger && trigger.focus) trigger.focus();
       trigger = null;
@@ -128,6 +142,17 @@
       return;
     }
 
+    // Low-power capability check — honours the sec-lede promise that
+    // low-power devices get the static map. If hardwareConcurrency reports
+    // 2 or fewer cores, or the device explicitly reports Save-Data, skip
+    // the WebGL globe entirely and serve the SVG fallback.
+    var lowPower = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 2)
+                 || (navigator.connection && navigator.connection.saveData === true);
+    if (lowPower) {
+      mount.classList.add('static');
+      return;
+    }
+
     var loaded = false;
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -147,6 +172,7 @@
       var pointerInteracting = null;
       var pointerMovement = 0;
       var size = mount.clientWidth || 520;
+      var paused = false;              // set true when locations section leaves the viewport
 
       // Ten US metros served, plus San Diego HQ (larger pin).
       var markers = [
@@ -179,10 +205,16 @@
           glowColor:   [0.20, 0.16, 0.06],    // deep gold glow
           markers: markers,
           onRender: function (state) {
-            if (pointerInteracting !== null) {
-              phi = pointerInteracting + pointerMovement / 200;
-            } else {
-              phi += 0.003; // slow auto-rotation
+            // When the section is offscreen or the tab is hidden, skip the
+            // phi delta so cobe paints the same frame — the browser can
+            // then optimise away most of the render cost, avoiding a
+            // permanent GPU/CPU load once the user scrolls past.
+            if (!paused) {
+              if (pointerInteracting !== null) {
+                phi = pointerInteracting + pointerMovement / 200;
+              } else {
+                phi += 0.003; // slow auto-rotation
+              }
             }
             state.phi = phi;
             state.width  = size * 2;
@@ -224,6 +256,22 @@
           size = mount.clientWidth || size;
         }, 180);
       }, { passive: true });
+
+      // Pause auto-rotation when the section leaves the viewport, and pause
+      // on tab hide. Cobe has no external pause API, so we gate the phi
+      // delta in onRender above — the same frame is painted while paused,
+      // which the browser can optimise heavily.
+      new IntersectionObserver(function (es) {
+        paused = !es[0].isIntersecting;
+      }, { rootMargin: '50px' }).observe(mount);
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) paused = true;
+        else {
+          var r = mount.getBoundingClientRect();
+          paused = r.bottom < 0 || r.top > window.innerHeight;
+        }
+      });
     }).catch(function () {
       mount.classList.add('static');
     });
