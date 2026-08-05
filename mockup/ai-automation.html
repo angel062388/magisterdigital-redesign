@@ -226,6 +226,27 @@
   .aa-faq details[open] summary::after{content:"\2212"; transform:none} /* minus sign */
   .aa-faq .answer{padding:0 4px 24px; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
     font-size:.95rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:70ch}
+
+  /* CTA BAND */
+  .aa-cta-band{padding:96px 32px; text-align:center; border-top:1px solid var(--border,#2A2C31);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(212,175,55,.10), transparent 55%),
+      var(--ink,#0F1115)}
+  .aa-cta-band .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:16px}
+  .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.8rem, 3.4vw, 2.8rem); line-height:1.1; margin:0 auto 32px;
+    max-width:22ch; color:var(--paper,#F7F7F5); text-wrap:balance}
+  .aa-cta-band .tel{display:inline-flex; align-items:center; gap:14px;
+    padding:18px 28px; background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-weight:600;
+    font-size:.9rem; letter-spacing:.14em; text-transform:uppercase;
+    border-radius:6px; border:1px solid var(--gold-dark,#A8842A);
+    box-shadow:0 2px 0 rgba(0,0,0,.12); text-decoration:none}
+  .aa-cta-band .tel .num{font-size:1rem}
+  .aa-cta-band .note{margin-top:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90)}
 </style>
 </head>
 <body>
@@ -474,6 +495,16 @@
       <div class="answer">Single-channel starts at $20,000 per month. Full-stack, multi-workflow deployments start at $60,000 per month. The written spec that comes out of the audit call produces your exact number, not a range.</div>
     </details>
   </div>
+</section>
+
+<section class="aa-cta-band" data-mark="08" id="call">
+  <div class="eyebrow">08 &middot; Book the audit</div>
+  <h2>The person who reads your spec is the person who builds the system.</h2>
+  <a class="tel" href="tel:+16193300953">
+    <span>Call</span>
+    <span class="num">(619) 330-0953</span>
+  </a>
+  <p class="note">45 minutes. No deck. If the numbers do not support the spend we will say so on the call.</p>
 </section>
 
 </main>
