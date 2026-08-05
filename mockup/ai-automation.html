@@ -52,6 +52,21 @@
     display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
   .aa-footer .r{text-align:right}
   .aa-footer b{color:var(--paper,#F7F7F5); font-weight:600}
+
+  /* HERO */
+  .aa-hero{padding:56px 32px 40px; max-width:1400px; margin:0 auto}
+  .aa-hero .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:16px; display:flex; gap:10px; align-items:center}
+  .aa-hero .eyebrow .num{color:var(--muted-2,#5E6066)}
+  .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(2rem, 4vw, 3.4rem); line-height:1.05; letter-spacing:-.015em;
+    margin:0 0 22px; max-width:22ch; text-wrap:balance}
+  .aa-hero h1 em{font-style:italic; color:var(--gold,#D4AF37)}
+  .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.85rem; color:var(--muted-on-dark,#868A90); max-width:56ch; line-height:1.6}
+  .aa-hero .lede code{background:var(--ink-3,#1C1E23); border:1px solid var(--border,#2A2C31);
+    padding:2px 8px; border-radius:3px; color:var(--paper,#F7F7F5)}
 </style>
 </head>
 <body>
@@ -76,7 +91,16 @@
 </header>
 
 <main>
-  <!-- sections populated by later tasks -->
+
+<section class="aa-hero" data-mark="01">
+  <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
+  <h1>The lead at 11pm answers itself before <em>11:01.</em></h1>
+  <p class="lede">
+    Live workflow, live log. Watch a real inbound qualify, book itself, and write to an audit row.
+    Run against your own inbox during the audit call. Ships inside <code>your CRM</code>, not ours.
+  </p>
+</section>
+
 </main>
 
 <footer class="aa-footer">
