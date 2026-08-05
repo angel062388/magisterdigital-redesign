@@ -143,6 +143,19 @@
     [].forEach.call(modal.querySelectorAll('[data-modal-close]'), function (el) {
       el.addEventListener('click', close);
     });
+
+    // Card-level click delegate: clicking anywhere on the founder card
+    // (not just the small Read-profile button) triggers the modal open,
+    // matching Beth's 'clickable card' spec. Skipped when the click
+    // target is already the inner button so we don't fire twice, and
+    // when the target is a link/input the user meant to reach directly.
+    [].forEach.call(document.querySelectorAll('[data-card-modal]'), function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('button, a, input, textarea, select, label')) return;
+        var inner = card.querySelector('[data-modal]');
+        if (inner) inner.click();
+      });
+    });
   })();
 
   /* ======================================================================
@@ -151,7 +164,10 @@
      responsive. If the globe loads later, its rotation function is
      assigned to globeState.rotateTo — subsequent clicks then rotate.
      ====================================================================== */
-  var globeState = { targetPhi: null, currentPhi: null, rotateTo: null };
+  // pendingLon remembers the last metro clicked before the globe finished
+  // loading; when loadGlobe assigns globeState.rotateTo, it replays the
+  // pending selection so an early click still ends up rotating the globe.
+  var globeState = { targetPhi: null, currentPhi: null, rotateTo: null, pendingLon: null };
 
   (function wireMetros() {
     var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
@@ -165,10 +181,10 @@
         });
         btn.classList.add('active');
         btn.setAttribute('aria-pressed', 'true');
-        if (typeof globeState.rotateTo === 'function') {
-          var lon = parseFloat(btn.getAttribute('data-long'));
-          if (!isNaN(lon)) globeState.rotateTo(lon);
-        }
+        var lon = parseFloat(btn.getAttribute('data-long'));
+        if (isNaN(lon)) return;
+        globeState.pendingLon = lon;
+        if (typeof globeState.rotateTo === 'function') globeState.rotateTo(lon);
       });
     });
   })();
@@ -282,10 +298,14 @@
       }
 
       // Register rotate function so any prior/future metro click routes
-      // rotation through the running globe.
+      // rotation through the running globe. If a click landed before the
+      // globe finished loading, replay that selection now.
       globeState.rotateTo = function (lon) {
         globeState.targetPhi = targetPhiFor(lon);
       };
+      if (globeState.pendingLon !== null) {
+        globeState.rotateTo(globeState.pendingLon);
+      }
 
       canvas.style.opacity = '0';
       canvas.style.transition = 'opacity .6s ease';
@@ -298,6 +318,10 @@
       });
 
       canvas.addEventListener('pointerdown', function (e) {
+        // A drag interrupts any in-flight metro-click rotation, so control
+        // hands over cleanly and the globe never snaps to a stale phi
+        // when the target-seek lerp finishes mid-drag.
+        globeState.targetPhi = null;
         pointerMovement = 0;
         pointerInteracting = phi;
         try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
@@ -481,7 +505,9 @@
     function tick() {
       var scrolled = window.scrollY || window.pageYOffset;
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      var p = max > 0 ? Math.min(scrolled / max, 1) : 0;
+      // On a non-scrollable page (max <= 0) treat progress as fully drawn,
+      // so the line renders complete instead of staying invisible.
+      var p = max > 0 ? Math.min(scrolled / max, 1) : 1;
       line.style.strokeDashoffset = (1 - p).toFixed(4);
       nodes.forEach(function (n) {
         var at = parseFloat(n.getAttribute('data-node')) || 0;

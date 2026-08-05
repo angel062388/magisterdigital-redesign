@@ -353,7 +353,11 @@ html:not(.js) .pillar-media{max-height:190px}
   font-family:var(--font-mono); font-size:1.35rem; color:var(--muted-on-dark);
   transition:color .28s var(--ease), transform .35s cubic-bezier(.16,1,.3,1)}
 .svc-link:hover .svc-arrow,.svc-link:focus-visible .svc-arrow{color:var(--gold); transform:translateX(6px)}
-.svc-link:focus-visible{outline:none; box-shadow:inset 3px 0 0 var(--gold-light)}
+/* Focus indicator matches every other interactive on the page: full
+   2px outline visible on both sides + top + bottom. Previously used a
+   3-pixel left-edge sliver that was invisible on even (image-right)
+   rows and much fainter than every other focus ring on the site. */
+.svc-link:focus-visible{outline:2px solid var(--gold-light); outline-offset:-4px}
 @media (min-width:900px){
   .svc-link{grid-template-columns:.9fr 1.1fr 44px; gap:var(--sp-7); padding:var(--sp-5) 0 var(--sp-5) var(--sp-4)}
   .svc:nth-child(even) .svc-visual{order:2}
@@ -461,11 +465,14 @@ html:not(.js) .pillar-media{max-height:190px}
    ========================================================================== */
 .founders{display:grid; gap:var(--sp-6); margin-top:var(--sp-7)}
 .founder{border-top:1px solid var(--rule); padding-top:var(--sp-5)}
-.founder-card{display:block; width:100%; text-align:left; background:none; border:0; padding:0;
-  color:inherit; cursor:pointer; font:inherit; position:relative;
+/* Card is a plain div now (was <button>), so the h3 inside stays a real
+   heading in the AT tree and screen readers can jump to it via H-key
+   nav. Card-level click is handled by JS delegate on data-card-modal;
+   the semantic interactive element is the inner .founder-more button. */
+.founder-card{display:block; position:relative; cursor:pointer;
   transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .founder-card:hover{transform:translateY(-3px)}
-.founder-card:focus-visible{outline:2px solid var(--gold-light); outline-offset:6px}
+.founder-card:focus-within{outline:2px solid var(--gold-light); outline-offset:6px}
 .founder-img{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;
   border:1px solid var(--rule); margin-bottom:var(--sp-4); background:var(--bg-raised)}
 .founder-img img{width:100%; height:100%; object-fit:cover; object-position:center 20%;
@@ -479,10 +486,17 @@ html:not(.js) .pillar-media{max-height:190px}
 .founder-card h3{font-size:1.35rem}
 .founder-card .role{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.16em;
   text-transform:uppercase; color:var(--muted-on-dark); margin-top:10px}
+/* Real semantic button now. Reset native button styles + inherit the
+   card's typographic system. Focus ring is on the .founder-card wrapper
+   via :focus-within so keyboard users still see a clear indicator. */
 .founder-more{display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-4);
+  background:none; border:0; padding:0; cursor:pointer; text-align:left;
   font-family:var(--font-mono); font-size:.625rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--gold); opacity:.85; transition:opacity .28s var(--ease), gap .28s var(--ease)}
+  color:var(--gold); opacity:.85;
+  transition:opacity .28s var(--ease), gap .28s var(--ease), color .28s var(--ease)}
 .founder-card:hover .founder-more{opacity:1; gap:10px}
+.founder-more:hover{color:var(--gold-light); opacity:1; gap:12px}
+.founder-more:focus-visible{outline:2px solid var(--gold-light); outline-offset:4px}
 
 /* 07 THE CALL */
 .call{display:grid; gap:var(--sp-7)}
@@ -1093,7 +1107,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 
     <div class="wrap">
       <div class="panels">
-        <div class="panel" tabindex="0" role="button" aria-expanded="false">
+        <div class="panel" tabindex="0" aria-expanded="false">
           <img src="https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy">
           <div class="pin">
             <div class="kicker">Home services</div>
@@ -1104,7 +1118,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </div>
           </div>
         </div>
-        <div class="panel" tabindex="0" role="button" aria-expanded="false">
+        <div class="panel" tabindex="0" aria-expanded="false">
           <img src="https://images.pexels.com/photos/7578803/pexels-photo-7578803.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy">
           <div class="pin">
             <div class="kicker">Medical &amp; dental</div>
@@ -1115,7 +1129,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </div>
           </div>
         </div>
-        <div class="panel" tabindex="0" role="button" aria-expanded="false">
+        <div class="panel" tabindex="0" aria-expanded="false">
           <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy">
           <div class="pin">
             <div class="kicker">Legal</div>
@@ -1203,34 +1217,34 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </header>
       <div class="founders">
         <div class="founder" data-stagger>
-          <button class="founder-card" type="button" data-modal="brian" aria-haspopup="dialog" aria-controls="founder-modal">
+          <div class="founder-card" data-card-modal="brian">
             <div class="founder-img">
               <img src="img/brian-hong.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
             </div>
             <h3>Brian Hong</h3>
             <div class="role">Co-founder &amp; CEO</div>
-            <span class="founder-more">Read profile <span aria-hidden="true">&rarr;</span></span>
-          </button>
+            <button class="founder-more" type="button" data-modal="brian" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+          </div>
         </div>
         <div class="founder" data-stagger>
-          <button class="founder-card" type="button" data-modal="michael" aria-haspopup="dialog" aria-controls="founder-modal">
+          <div class="founder-card" data-card-modal="michael">
             <div class="founder-img">
               <img src="img/michael-merlino.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
             </div>
             <h3>Michael Merlino</h3>
             <div class="role">Co-founder, Strategy &amp; AI systems</div>
-            <span class="founder-more">Read profile <span aria-hidden="true">&rarr;</span></span>
-          </button>
+            <button class="founder-more" type="button" data-modal="michael" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+          </div>
         </div>
         <div class="founder" data-stagger>
-          <button class="founder-card" type="button" data-modal="dimitry" aria-haspopup="dialog" aria-controls="founder-modal">
+          <div class="founder-card" data-card-modal="dimitry">
             <div class="founder-img">
               <img src="img/dimitry-morgan.png" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
             </div>
             <h3>Dimitry Morgan</h3>
             <div class="role">Co-founder, Head of paid media</div>
-            <span class="founder-more">Read profile <span aria-hidden="true">&rarr;</span></span>
-          </button>
+            <button class="founder-more" type="button" data-modal="dimitry" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+          </div>
         </div>
       </div>
     </div>
