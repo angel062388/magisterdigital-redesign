@@ -197,6 +197,20 @@
   .aa-price .note{margin-top:auto; padding-top:16px; border-top:1px solid var(--border,#2A2C31);
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.7rem; color:var(--muted-2,#5E6066)}
+
+  /* WHY-STACK */
+  .aa-stack{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:start}
+  @media (max-width:900px){ .aa-stack{grid-template-columns:1fr} }
+  .aa-stack p{font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5); margin:0 0 18px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-stack p.small{color:var(--muted-on-dark,#868A90); font-size:.88rem}
+  .aa-stack .quote{padding:22px; border-left:2px solid var(--gold,#D4AF37);
+    background:var(--ink-2,#16171A); border-radius:0 4px 4px 0;
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic; font-weight:500;
+    font-size:1.05rem; color:var(--paper,#F7F7F5); line-height:1.45}
+  .aa-stack .quote cite{display:block; margin-top:14px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-style:normal; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--muted-2,#5E6066)}
 </style>
 </head>
 <body>
@@ -396,6 +410,22 @@
         <li>Engineer on call for edge-case tuning</li>
       </ul>
       <div class="note">Fits multi-location groups and firms with 8+ inbound channels.</div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="06">
+  <div class="eyebrow">06 &middot; Why we work with your stack</div>
+  <h2>A system, not a platform. Built on the tools you already pay for.</h2>
+  <div class="aa-stack">
+    <div>
+      <p>We do not sell you a login. We build workflows that sit inside your CRM, your calendar, your phone system, and your on-call Slack, using accounts your team already has.</p>
+      <p>If your stack is Go High Level, HubSpot, ServiceTitan, or a bespoke build, the automation lives there. The agents, workflows, training data, and log structure belong to your business. You do not lose access to anything when we stop working together.</p>
+      <p class="small">Ownership matters because vendors churn, contracts end, and the automation that qualified last month's leads needs to keep qualifying next month's, regardless of who built it.</p>
+    </div>
+    <div class="quote">
+      Rankings and impressions are inputs. We instrument calls, forms, and the CRM so the reporting line ends at booked work, not clicks.
+      <cite>&mdash; from the audit brief</cite>
     </div>
   </div>
 </section>
