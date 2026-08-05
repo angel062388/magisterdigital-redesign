@@ -122,6 +122,25 @@
   @keyframes aaSlideIn{from{opacity:0; transform:translateY(4px)} to{opacity:1}}
   .aa-log::after{content:""; position:absolute; left:0; right:0; bottom:0; height:60px;
     background:linear-gradient(to bottom, transparent, var(--ink,#0F1115)); pointer-events:none}
+
+  /* KPI STRIP */
+  .aa-kpi-wrap{max-width:1400px; margin:0 auto}
+  .aa-kpi-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border:1px solid var(--border,#2A2C31); border-top:none;
+    border-radius:0 0 6px 6px; overflow:hidden}
+  @media (max-width:820px){ .aa-kpi-strip{grid-template-columns:repeat(2,1fr)} }
+  .aa-kpi{padding:22px 24px; border-right:1px solid var(--border,#2A2C31); background:var(--ink-2,#16171A)}
+  .aa-kpi:nth-child(4n){border-right:none}
+  @media (max-width:820px){ .aa-kpi:nth-child(2n){border-right:none} }
+  .aa-kpi .l{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:8px}
+  .aa-kpi .v{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.5rem; color:var(--paper,#F7F7F5); font-weight:600; letter-spacing:.06em}
+  .aa-kpi .d{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; color:var(--muted-2,#5E6066); margin-top:6px}
+  .aa-kpi-foot{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; color:var(--muted-2,#5E6066); padding:14px 4px 0; text-align:left}
 </style>
 </head>
 <body>
@@ -229,6 +248,16 @@
   </div>
 
 </section>
+
+<div class="aa-kpi-wrap">
+  <div class="aa-kpi-strip">
+    <div class="aa-kpi"><div class="l">tasks / hr</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">avg time &middot; trigger to book</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">escalation rate</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">cost / decision</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
+  </div>
+  <p class="aa-kpi-foot">Verified numbers land after your audit call, sourced from your CRM. This page ships without invented figures.</p>
+</div>
 
 </main>
 
