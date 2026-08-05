@@ -237,5 +237,105 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
+<script data-v="17">
+(function(){
+  const templates = [
+    ['TRIGGER',  '<span class="good">webhook.hvac_inquiry</span> queued'],
+    ['QUALIFY',  'window: 24hr, zip: 92109 &rarr; <span class="good">qualified</span>'],
+    ['DECIDE',   'match: emergency_replace &rarr; <span class="good">book</span>'],
+    ['ACTION',   'calendly.event_created &rarr; Aug 07 14:30'],
+    ['LOG',      'row_written.audit_005421']
+  ];
+  const templatesHandoff = [
+    ['TRIGGER',  '<span class="good">webhook.legal_inquiry</span> queued'],
+    ['QUALIFY',  'window: 7d, matter: consult &rarr; <span class="warn">edge case</span>'],
+    ['DECIDE',   'confidence 0.71 &rarr; <span class="warn">handoff</span>'],
+    ['ACTION',   'slack.oncall_paged &rarr; @dimitry'],
+    ['LOG',      'row_written.audit_005422']
+  ];
+
+  let step = 0, cycle = 0;
+  const nodes = () => document.querySelectorAll('[data-node]');
+  const edges = () => document.querySelectorAll('[data-edge]');
+  const logStream = document.getElementById('aaLogStream');
+  const stepEl = document.querySelector('[data-step-idx]');
+  const cycleEl = document.querySelector('[data-cycle]');
+
+  function reset(){
+    nodes().forEach(n => n.classList.remove('active','done'));
+    edges().forEach(e => {
+      e.classList.remove('hot');
+      if (e.hasAttribute('marker-end')) e.setAttribute('marker-end','url(#aaArr)');
+    });
+  }
+
+  function highlight(nodeKey, edgeKey){
+    document.querySelectorAll('[data-node="'+nodeKey+'"]').forEach(n => n.classList.add('active'));
+    if (edgeKey){
+      document.querySelectorAll('[data-edge="'+edgeKey+'"]').forEach(e => {
+        e.classList.add('hot');
+        if (e.hasAttribute('marker-end')) e.setAttribute('marker-end','url(#aaArrHot)');
+      });
+    }
+  }
+
+  function markDone(nodeKey){
+    document.querySelectorAll('[data-node="'+nodeKey+'"]').forEach(n => {
+      n.classList.remove('active');
+      n.classList.add('done');
+    });
+  }
+
+  function appendLog(row){
+    if (!logStream) return;
+    const secs = String(Math.floor((cycle*11 + step*2) % 60)).padStart(2,'0');
+    const line = document.createElement('div');
+    line.className = 'aa-log-row';
+    line.innerHTML =
+      '<span class="t">00:00:'+secs+'</span>' +
+      '<span class="k">'+row[0]+'</span>' +
+      '<span class="m">'+row[1]+'</span>';
+    logStream.prepend(line);
+    while (logStream.children.length > 8) logStream.removeChild(logStream.lastChild);
+  }
+
+  function tick(){
+    const branchHandoff = cycle % 2 === 1;
+    const seq = branchHandoff ? templatesHandoff : templates;
+
+    switch(step){
+      case 0: reset(); highlight('trigger'); break;
+      case 1: markDone('trigger'); highlight('qualify','trigger'); break;
+      case 2: markDone('qualify'); highlight('decide','qualify'); break;
+      case 3:
+        markDone('decide');
+        if (branchHandoff) highlight('handoff','decide-hand');
+        else highlight('route','decide-book');
+        break;
+      case 4:
+        markDone(branchHandoff ? 'handoff' : 'route');
+        highlight('log', branchHandoff ? 'log-in-b' : 'log-in-a');
+        break;
+    }
+
+    if (seq[step]) appendLog(seq[step]);
+
+    step++;
+    if (step > 4){ step = 0; cycle++; }
+    if (stepEl) stepEl.textContent = step + 1;
+    if (cycleEl) cycleEl.textContent = String(cycle+1).padStart(3,'0');
+  }
+
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!rm){
+    tick();
+    setInterval(tick, 1800);
+  } else {
+    ['trigger','qualify','decide','route','log'].forEach(k => markDone(k));
+    appendLog(['LOG','automation paused, respecting your motion preferences']);
+  }
+})();
+</script>
+
 </body>
 </html>
