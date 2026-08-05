@@ -180,6 +180,102 @@
                      covered: false };
 
   /* ======================================================================
+     HERO LOGO, REAL TIME RENDER
+     Instead of replaying a fixed keyframe, this writes the logo's tilt,
+     lift and specular highlight every frame from live pointer position.
+     The gold reads as metal catching light: move the cursor and the
+     highlight sweeps to follow it, and the plate tilts away from it.
+
+     Values are eased toward their targets each frame rather than snapped,
+     so the motion keeps weight. When the pointer is idle or absent, a slow
+     time-based drift takes over so the mark is never completely static.
+
+     Skipped entirely under prefers-reduced-motion, where the CSS keyframe
+     fallback is also disabled and the logo simply sits still.
+     ====================================================================== */
+  (function liveLogo() {
+    if (reduced) return;
+    var stage = document.querySelector('[data-logo-stage]');
+    var hero = stage && stage.closest('.hero');
+    if (!stage || !hero) return;
+
+    var sheen = stage.querySelector('.hero-logo-sheen');
+    document.documentElement.classList.add('logo-live');
+
+    // cur = what is on screen, tgt = where it wants to be.
+    var cur = { rx: 0, ry: 0, fy: 0, sx: -80, lift: 0 };
+    var tgt = { rx: 0, ry: 0, fy: 0, sx: -80, lift: 0 };
+    var pointerActive = false, lastMove = 0, running = false, t0 = null;
+
+    hero.addEventListener('pointermove', function (e) {
+      var r = hero.getBoundingClientRect();
+      // -1 to 1 across the hero, so the logo reacts to the whole area
+      var nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      var ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      nx = Math.max(-1, Math.min(1, nx));
+      ny = Math.max(-1, Math.min(1, ny));
+      tgt.ry = nx * 13;          // yaw follows the cursor horizontally
+      tgt.rx = -ny * 9;          // pitch is inverted so it leans toward you
+      tgt.fy = ny * -6;
+      tgt.sx = -60 + ((nx + 1) / 2) * 200;  // highlight tracks across the mark
+      tgt.lift = 1 - Math.min(1, Math.abs(nx) * 0.6 + Math.abs(ny) * 0.4);
+      pointerActive = true;
+      lastMove = performance.now();
+    }, { passive: true });
+
+    hero.addEventListener('pointerleave', function () { pointerActive = false; });
+
+    function frame(now) {
+      if (t0 === null) t0 = now;
+      var t = (now - t0) / 1000;
+
+      // Idle behaviour: slow figure-of-eight drift plus a highlight that
+      // crosses the mark every few seconds, so it still looks alive with
+      // no pointer on the page at all.
+      if (!pointerActive || now - lastMove > 2200) {
+        tgt.ry = Math.sin(t * 0.45) * 7;
+        tgt.rx = Math.sin(t * 0.32) * 4.5;
+        tgt.fy = Math.sin(t * 0.5) * 7;
+        tgt.lift = 0.5 + Math.sin(t * 0.5) * 0.5;
+        var cycle = (t * 0.16) % 1;
+        tgt.sx = cycle < 0.42 ? -80 + (cycle / 0.42) * 260 : 180;
+      }
+
+      var k = 0.075;
+      cur.rx += (tgt.rx - cur.rx) * k;
+      cur.ry += (tgt.ry - cur.ry) * k;
+      cur.fy += (tgt.fy - cur.fy) * k;
+      cur.lift += (tgt.lift - cur.lift) * k;
+      cur.sx += (tgt.sx - cur.sx) * (pointerActive ? 0.12 : 0.06);
+
+      stage.style.setProperty('--rx', cur.rx.toFixed(2) + 'deg');
+      stage.style.setProperty('--ry', cur.ry.toFixed(2) + 'deg');
+      stage.style.setProperty('--fy', cur.fy.toFixed(2) + 'px');
+      stage.style.setProperty('--lift', cur.lift.toFixed(3));
+      if (sheen) sheen.style.backgroundPosition = cur.sx.toFixed(1) + '% 0';
+
+      if (running) requestAnimationFrame(frame);
+    }
+
+    // Only render while the hero is actually on screen, and never while the
+    // tab is hidden. A per frame loop left running off screen is waste.
+    function start() { if (!running) { running = true; t0 = null; requestAnimationFrame(frame); } }
+    function stop()  { running = false; }
+
+    var visible = false;
+    if (canObserve) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting;
+        if (visible && !document.hidden) start(); else stop();
+      }, { rootMargin: '80px' }).observe(hero);
+    } else { visible = true; start(); }
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else if (visible) start();
+    });
+  })();
+
+  /* ======================================================================
      METRO MAP: clicking a metro replaces the globe with a Google Maps
      embed of that city. The iframe is built on first use, so a visitor
      who never clicks a metro never loads anything from Google.
@@ -313,6 +409,11 @@
       var pointerInteracting = null;
       var pointerMovement = 0;
       var size = mount.clientWidth || 520;
+      // Buffer must be sized in DEVICE pixels. This was hardcoded to size*2,
+      // which is only correct on a 2x display: on an ordinary 1x monitor it
+      // built a buffer twice the CSS box, so the sphere drew at double scale
+      // and only a corner of it was ever visible.
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
       var paused = false;
 
       var markers = [
@@ -331,9 +432,9 @@
       var globe;
       try {
         globe = createGlobe(canvas, {
-          devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
-          width: size * 2,
-          height: size * 2,
+          devicePixelRatio: dpr,
+          width: size * dpr,
+          height: size * dpr,
           phi: 0,
           theta: 0.28,
           // MUCH brighter: dark shading almost off, map dots turned up
@@ -372,8 +473,8 @@
             }
             globeState.currentPhi = phi;
             state.phi = phi;
-            state.width  = size * 2;
-            state.height = size * 2;
+            state.width  = size * dpr;
+            state.height = size * dpr;
           }
         });
       } catch (err) {

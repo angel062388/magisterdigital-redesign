@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="preconnect" href="https://esm.sh" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="tokens.css?v=5">
 <style>
 /* ==========================================================================
    MAGISTER DIGITAL, HOMEPAGE
@@ -223,11 +223,25 @@ html:not(.js) .pillar-media{max-height:190px}
      .hero-logo-sheen a gold highlight that sweeps across then rests
    The sheen is masked with the logo PNG itself, so it lights only the
    wordmark and shield rather than sweeping a rectangle over the hero. */
+.hero-visual{perspective:1000px}
 .hero-logo-wrap{position:relative; width:100%; max-width:520px;
   animation:heroLogoIn 1.4s cubic-bezier(.16,1,.3,1) both}
+/* REAL TIME STAGE. motion.js drives --rx, --ry and --fy every frame from
+   live pointer position, so the tilt and the specular highlight are
+   rendered per frame rather than replayed from a fixed keyframe. The CSS
+   keyframes below stay as the no-JS and reduced-motion fallback. */
+.hero-logo-stage{position:relative; transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translate3d(0,var(--fy,0px),0);
+  will-change:transform}
 .hero-logo{width:100%; height:auto; display:block; opacity:1;
   filter:drop-shadow(0 24px 60px rgba(212,175,55,.32));
   animation:heroLogoFloat 7s ease-in-out 1.4s infinite alternate}
+/* Once JS takes over, the canned float and sweep are switched off and the
+   same properties are written per frame instead. */
+.logo-live .hero-logo{animation:none;
+  filter:drop-shadow(0 calc(18px + var(--lift,0)*14px) calc(44px + var(--lift,0)*30px)
+                     rgba(212,175,55,calc(.22 + var(--lift,0)*.24)))}
+.logo-live .hero-logo-sheen{animation:none}
 .hero-logo-sheen{position:absolute; inset:0; pointer-events:none;
   -webkit-mask-image:url(img/magister-logo.png); mask-image:url(img/magister-logo.png);
   -webkit-mask-size:100% 100%; mask-size:100% 100%;
@@ -285,7 +299,7 @@ html:not(.js) .pillar-media{max-height:190px}
 /* HERO TEL: ghost button, matches .btn-ghost shape and hover.
    Transparent background, gold border+text, radius, shadow, lift on hover,
    fills gold on hover. Cursor pointer. Focus ring visible. */
-.hero-tel{position:relative; display:inline-flex; align-items:center; gap:.7ch;
+.hero-tel,.cta .cta-tel{position:relative; display:inline-flex; align-items:center; gap:.7ch;
   font-family:var(--font-mono); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
   font-weight:600; text-decoration:none; padding:16px 26px; white-space:nowrap;
   background:transparent; color:var(--gold);
@@ -294,16 +308,16 @@ html:not(.js) .pillar-media{max-height:190px}
   cursor:pointer;
   transition:background .25s var(--ease), color .25s var(--ease),
              transform .18s var(--ease), box-shadow .3s var(--ease), border-color .25s var(--ease)}
-.hero-tel .tag{color:var(--muted-on-dark); font-weight:500;
+.hero-tel .tag,.cta .cta-tel .tag{color:var(--muted-on-dark); font-weight:500;
   transition:color .25s var(--ease)}
-.hero-tel b{color:var(--gold-light); font-weight:600;
+.hero-tel b,.cta .cta-tel b{color:var(--gold-light); font-weight:600;
   transition:color .25s var(--ease)}
-.hero-tel:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);
+.hero-tel:hover,.cta .cta-tel:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);
   transform:translateY(-2px);
   box-shadow:0 12px 28px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
-.hero-tel:hover .tag,.hero-tel:hover b{color:var(--ink)}
-.hero-tel:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
-.hero-tel:active{transform:translateY(0);
+.hero-tel:hover .tag,.hero-tel:hover b,.cta .cta-tel:hover .tag,.cta .cta-tel:hover b{color:var(--ink)}
+.hero-tel:focus-visible,.cta .cta-tel:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.hero-tel:active,.cta .cta-tel:active{transform:translateY(0);
   box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
 
 /* LEDGER */
@@ -366,13 +380,25 @@ html:not(.js) .pillar-media{max-height:190px}
 @media (max-width:899.98px){.sec[data-mark]::before{display:none}}
 .sec > .wrap{position:relative; z-index:1}
 
+/* Full column width. The 920px cap that used to live here was the real
+   constraint on the headings: the h2 rule below sizes itself from 100% of
+   THIS element, so the cap silently shrank every heading's available width
+   by 164px and forced short ones onto two lines. */
 .sec-head{display:flex; flex-direction:column; align-items:flex-start;
-  gap:var(--sp-4); margin-bottom:var(--sp-8); max-width:920px}
+  gap:var(--sp-4); margin-bottom:var(--sp-8); max-width:100%}
 /* text-wrap:balance evens the lines so a single short word ("nationwide"
    on LOCATIONS) can never be left stranded on its own line. */
-.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.3rem); max-width:22ch; line-height:1.02;
-  text-wrap:balance}
+/* max-width reserves 210px on the right so a heading can never run under the
+   chapter numeral, but is otherwise as wide as the column allows. That lets
+   a short heading finish on one line instead of wrapping early and leaving
+   a hole beside it, which is what the fixed 22ch was doing. */
+.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.3rem); line-height:1.02;
+  max-width:min(46ch, calc(100% - 170px)); text-wrap:balance}
+@media (max-width:900px){.sec-head h2{max-width:100%}}
 .sec-head h2 em{font-style:italic; color:var(--accent-on-dark)}
+/* Keeps a hyphenated compound from splitting across lines. "self-select"
+   was breaking after the hyphen, leaving "self-" stranded at the line end. */
+.nb{white-space:nowrap}
 .band-light .sec-head h2 em{color:var(--accent-on-light)}
 .sec-head .rule{width:100%; align-self:stretch}
 .sec-lede{color:var(--text-muted-dark); max-width:64ch; font-size:1.0625rem; margin-top:var(--sp-2)}
@@ -430,10 +456,14 @@ html:not(.js) .pillar-media{max-height:190px}
    Bright vs muted, oversized Playfair word-marks, strikethrough on the NO
    side. Sharp visual contrast, not a plain two-column list.
    ========================================================================== */
-.fit-split{display:grid; gap:2px; margin-top:var(--sp-5)}
-.fit-panel{padding:var(--sp-7) var(--sp-6); position:relative; overflow:hidden}
-.fit-yes{background:var(--bg-raised); border-top:2px solid var(--gold)}
-.fit-no{background:var(--ink-deep); border-top:2px solid var(--muted)}
+/* Two genuine boxes, not two tinted halves of one slab: full border, radius,
+   and a real gap between them so they read as separate cards. The accent
+   sits on the left edge of each box. */
+.fit-split{display:grid; gap:var(--sp-5); margin-top:var(--sp-5)}
+.fit-panel{padding:var(--sp-7) var(--sp-6); position:relative; overflow:hidden;
+  border:1px solid var(--rule); border-radius:12px}
+.fit-yes{background:var(--bg-raised); border-left:3px solid var(--gold)}
+.fit-no{background:var(--ink-deep); border-left:3px solid var(--muted)}
 .fit-mark{display:flex; align-items:baseline; gap:var(--sp-5); margin-bottom:var(--sp-6);
   padding-bottom:var(--sp-4); border-bottom:1px solid var(--rule)}
 .fit-word{font-family:var(--font-display); font-weight:700; font-style:italic;
@@ -452,11 +482,12 @@ html:not(.js) .pillar-media{max-height:190px}
 /* --text-on-dark, not --paper: this has to flip with the surface, and
    --paper is deliberately left un-remapped on light bands. */
 .fit-yes .fit-items li{color:var(--text-on-dark)}
+/* The animated rule that used to run across each NO item is removed. It was
+   pinned at top:50% of the item, so on a one line item it read as a
+   strikethrough and on a two line item it sat between the lines as a stray
+   rule. Two different wrong results from the same rule, which is why the
+   column looked inconsistent. The X marker carries the negation on its own. */
 .fit-no .fit-items li{color:var(--muted-on-dark); position:relative}
-.fit-no .fit-items li::after{content:""; position:absolute; left:32px; right:0; top:50%;
-  height:1px; background:rgba(93,96,102,.35); transform:scaleX(0); transform-origin:left;
-  transition:transform .9s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0)*100ms + .3s)}
-.in .fit-no .fit-items li::after{transform:scaleX(1)}
 .fit-check{font-family:var(--font-mono); font-size:.9375rem; padding-top:2px; align-self:start}
 .fit-yes .fit-check{color:var(--gold)}
 .fit-no .fit-check{color:var(--muted-on-dark)}
@@ -623,6 +654,10 @@ html:not(.js) .pillar-media{max-height:190px}
   box-shadow:0 3px 9px rgba(0,0,0,.4), inset 0 -1px 0 rgba(0,0,0,.2)}
 .loc-list{display:grid; gap:var(--sp-6); align-content:start}
 .loc-hq{border-top:2px solid var(--gold); padding-top:var(--sp-5)}
+/* Address and call button share the row on wide screens. */
+.loc-hq-row{display:flex; flex-wrap:wrap; align-items:center;
+  justify-content:space-between; gap:var(--sp-5)}
+.loc-hq-tel{flex:0 0 auto}
 .loc-hq .meta{margin-bottom:var(--sp-3); display:inline-block}
 .loc-addr{font-style:normal; font-size:.9375rem; color:var(--text-muted-dark); line-height:1.75}
 .loc-addr b{display:block; font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--paper);
@@ -855,11 +890,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .cta h2 em{color:var(--gold); font-style:italic}
 .cta p{color:var(--border); max-width:52ch; margin:0 auto var(--sp-7); font-size:1.0625rem}
 .cta-actions{display:flex; align-items:center; justify-content:center; gap:var(--sp-5); flex-wrap:wrap}
-.cta .cta-tel{font-family:var(--font-mono); font-size:.9375rem;
-  color:var(--gold); text-decoration:underline; text-underline-offset:5px;
-  text-decoration-color:rgba(212,175,55,.6)}
-.cta .cta-tel b{color:var(--gold-light)}
-.cta .cta-tel:hover{color:var(--gold-light); text-decoration-color:var(--gold-light)}
+/* The phone in the closing band is a real ghost button now, same treatment
+   as the hero one. Styling comes from the shared .hero-tel rule block; only
+   the higher-specificity resets it needs live here. */
+.cta .cta-tel{text-decoration:none}
 
 /* FOOTER */
 .site-footer{background:var(--ink-deep); padding:var(--sp-8) 0 var(--sp-6)}
@@ -1149,8 +1183,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-logo-wrap">
-            <img src="img/magister-logo.png" alt="" class="hero-logo" width="745" height="147">
-            <span class="hero-logo-sheen"></span>
+            <div class="hero-logo-stage" data-logo-stage>
+              <img src="img/magister-logo.png" alt="" class="hero-logo" width="745" height="147">
+              <span class="hero-logo-sheen"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -1170,7 +1206,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="01 / FIT">01 / FIT</span>
-        <h2>We would rather you <em>self-select</em> than sit through a pitch</h2>
+        <h2>We would rather you <em class="nb">self-select</em> than sit through a pitch</h2>
         <div class="rule"></div>
       </header>
 
@@ -1448,12 +1484,16 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
         <div class="loc-list">
           <div class="loc-hq">
             <span class="meta">Headquarters</span>
-            <address class="loc-addr">
-              <b>San Diego</b>
-              1135 Garnet Ave #13<br>
-              San Diego, CA 92109<br>
-              <a class="mono" href="tel:+16193300953">(619) 330-0953</a>
-            </address>
+            <!-- Address left, phone button right, so the short address block
+                 no longer leaves a void across the rest of the column. -->
+            <div class="loc-hq-row">
+              <address class="loc-addr">
+                <b>San Diego</b>
+                1135 Garnet Ave #13<br>
+                San Diego, CA 92109
+              </address>
+              <a class="hero-tel loc-hq-tel" href="tel:+16193300953"><span class="tag">Call</span> <b>(619) 330-0953</b></a>
+            </div>
           </div>
           <div>
             <span class="meta dim" style="display:block; margin-bottom:var(--sp-3)">Metros served</span>
@@ -1547,10 +1587,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- CASE STUDIES -->
-  <section class="sec band-light" id="case-studies" data-reveal>
+  <section class="sec band-light" id="case-studies" data-reveal data-mark="08">
     <div class="wrap">
       <header class="sec-head">
-        <span class="meta">Case studies</span>
+        <span class="meta" data-flap="08 / CASE STUDIES">08 / CASE STUDIES</span>
         <h2>Named accounts, <em>verified numbers, real disclaimers</em></h2>
         <div class="rule gold"></div>
       </header>
@@ -1609,10 +1649,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- VIDEOS -->
-  <section class="sec band-deep" id="videos" data-reveal>
+  <section class="sec band-deep" id="videos" data-reveal data-mark="09">
     <div class="wrap">
       <header class="sec-head">
-        <span class="meta" data-flap="VIDEOS">VIDEOS</span>
+        <span class="meta" data-flap="09 / VIDEOS">09 / VIDEOS</span>
         <h2>Short breakdowns from the <em>operators actually running it</em></h2>
         <div class="rule gold"></div>
       </header>
@@ -1671,10 +1711,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 08 REVIEWS -->
-  <section class="sec band-light" id="reviews" data-reveal data-mark="08">
+  <section class="sec band-light" id="reviews" data-reveal data-mark="10">
     <div class="wrap">
       <header class="sec-head">
-        <span class="meta" data-flap="08 / TRUST">08 / TRUST</span>
+        <span class="meta" data-flap="10 / TRUST">10 / TRUST</span>
         <h2>What clients are <em>saying</em></h2>
         <div class="rule gold"></div>
       </header>
@@ -1741,10 +1781,10 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 09 FAQ -->
-  <section class="sec band-light" id="faq" data-reveal data-mark="09">
+  <section class="sec band-light" id="faq" data-reveal data-mark="11">
     <div class="wrap">
       <header class="sec-head">
-        <span class="meta on-light" data-flap="09 / QUESTIONS">09 / QUESTIONS</span>
+        <span class="meta on-light" data-flap="11 / QUESTIONS">11 / QUESTIONS</span>
         <h2>The things people ask <em>before booking</em></h2>
         <div class="rule light"></div>
       </header>
@@ -1786,7 +1826,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       <p>Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
       <div class="cta-actions">
         <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-        <a class="cta-tel" href="tel:+16193300953">or call <b>(619) 330-0953</b></a>
+        <a class="cta-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
       </div>
     </div>
   </section>
@@ -1859,6 +1899,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 </div>
 
-<script src="motion.js" defer></script>
+<script src="motion.js?v=5" defer></script>
 </body>
 </html>
