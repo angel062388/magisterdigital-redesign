@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="preconnect" href="https://esm.sh" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css?v=6">
+<link rel="stylesheet" href="tokens.css?v=7">
 <style>
 /* ==========================================================================
    MAGISTER DIGITAL, HOMEPAGE
@@ -81,7 +81,7 @@ body::after{content:""; position:fixed; inset:0; z-index:9; pointer-events:none;
 html:not(.js) [data-stagger]{opacity:1; transform:none}
 html:not(.js) .rule{transform:scaleX(1)}
 html:not(.js) .answer-wrap{height:auto}
-html:not(.js) .pillar-media{max-height:190px}
+html:not(.js) .pillar-media{max-height:380px}
 
 .gutter{position:fixed; left:18px; top:50%; transform:translateY(-50%); z-index:40;
   display:none; align-items:center; gap:10px; writing-mode:vertical-rl}
@@ -110,6 +110,45 @@ html:not(.js) .pillar-media{max-height:190px}
   text-transform:uppercase; opacity:0; transition:opacity .5s var(--ease)}
 .attr-label.lit{opacity:.85}
 .reduced-motion .attribution{display:none}
+
+/* ==========================================================================
+   INTRO SPLASH
+   Mark first, then the headline. The panel fills the screen in the brand
+   ink, the logo resolves out of a blur, a gold rule draws under it, then the
+   whole panel lifts away and the hero content rises in behind it.
+
+   The dismissal is a CSS animation with fill:both and a delay, not a JS
+   timeout. If motion.js never loads, the panel still clears on its own.
+   Reduced motion removes the panel entirely and the hero shows immediately.
+   ========================================================================== */
+.intro{position:fixed; inset:0; z-index:9999; background:var(--ink);
+  display:grid; place-items:center; align-content:center; gap:var(--sp-5);
+  overflow:hidden; will-change:transform,opacity;
+  animation:introOut .9s cubic-bezier(.7,0,.3,1) 1.65s both}
+.intro-logo{width:min(52vw,430px); height:auto;
+  animation:introLogo 1.15s cubic-bezier(.16,1,.3,1) .12s both}
+.intro-rule{display:block; width:min(52vw,430px); height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transform:scaleX(0); transform-origin:center;
+  animation:introRule .9s cubic-bezier(.16,1,.3,1) .75s both}
+@keyframes introLogo{
+  from{opacity:0; transform:translateY(16px) scale(.94); filter:blur(8px)}
+  to  {opacity:1; transform:none; filter:blur(0)}}
+@keyframes introRule{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+@keyframes introOut{to{opacity:0; visibility:hidden; transform:translateY(-3%)}}
+
+/* Hero content rises in as the panel clears, so the headline reads as the
+   second beat of one sequence rather than something that was already there. */
+.hero-content > *{animation:heroRise .85s cubic-bezier(.16,1,.3,1) both;
+  animation-delay:calc(2.25s + var(--hd,0)*.11s)}
+.hero-content > *:nth-child(1){--hd:0} .hero-content > *:nth-child(2){--hd:1}
+.hero-content > *:nth-child(3){--hd:2} .hero-content > *:nth-child(4){--hd:3}
+@keyframes heroRise{from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:none}}
+.hero-logo-wrap{animation-delay:2.5s}
+@media (prefers-reduced-motion:reduce){
+  .intro{display:none}
+  .hero-content > *{animation:none}
+}
 
 /* HEADER */
 .site-header{position:sticky; top:0; z-index:60; transition:background .4s var(--ease), border-color .4s var(--ease);
@@ -935,8 +974,8 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 /* Pillar thumbnails */
 .pillar-media{overflow:hidden; margin-top:var(--sp-4); max-height:0;
   transition:max-height .9s cubic-bezier(.16,1,.3,1)}
-.in .pillar-media{max-height:190px}
-.pillar-media img{width:100%; height:170px; object-fit:cover;
+.in .pillar-media{max-height:380px}
+.pillar-media img{width:100%; height:340px; object-fit:cover;
   filter:grayscale(1) brightness(.5) contrast(1.14);
   transition:filter .7s var(--ease), transform 1.1s cubic-bezier(.16,1,.3,1); transform:scale(1.05)}
 .pillar:hover .pillar-media img{filter:grayscale(.25) brightness(.62); transform:scale(1)}
@@ -1064,6 +1103,16 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 </style>
 </head>
 <body>
+
+<!-- INTRO SPLASH. Brand panel with the mark centred, held, then it lifts to
+     reveal the headline. Decorative, so it is hidden from assistive tech and
+     contains nothing focusable. It dismisses itself with a pure CSS
+     animation, deliberately NOT with JS, so it can never strand a visitor
+     behind a full screen panel if the script fails to load. -->
+<div class="intro" aria-hidden="true">
+  <img src="img/magister-logo.png" alt="" class="intro-logo" width="745" height="147">
+  <span class="intro-rule"></span>
+</div>
 
 <div class="progress"><span></span></div>
 <a class="sr-only" href="#main">Skip to content</a>
@@ -1342,7 +1391,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           <h3>Operator experience</h3>
           <p>Every one of us has carried the risk on a business, not just the reporting for one. It changes which levers get pulled first, and it is why we will tell you to fix intake before we sell you more traffic.</p>
           <div class="tag">Skin in the game</div>
-          <div class="pillar-media"><img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg?auto=compress&cs=tinysrgb&w=1400&h=490&fit=crop" alt="" loading="lazy"></div>
         </div>
       </div>
       <div class="pillar" data-stagger>
@@ -1351,7 +1400,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           <h3>One integrated team</h3>
           <p>Search, paid media, automation, CRM and the website sit with the same people. No handoffs between three vendors, and no gap where the lead goes missing while everyone points at a different dashboard.</p>
           <div class="tag">No handoffs</div>
-          <div class="pillar-media"><img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/3182755/pexels-photo-3182755.jpeg?auto=compress&cs=tinysrgb&w=1400&h=490&fit=crop" alt="" loading="lazy"></div>
         </div>
       </div>
       <div class="pillar" data-stagger>
@@ -1360,7 +1409,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           <h3>Revenue metrics, not proxies</h3>
           <p>Rankings and impressions are inputs. We instrument calls, forms and the CRM so the reporting line ends at booked work, and so a channel that looks good but never converts gets cut.</p>
           <div class="tag">Booked work only</div>
-          <div class="pillar-media"><img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy"></div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/187041/pexels-photo-187041.jpeg?auto=compress&cs=tinysrgb&w=1400&h=490&fit=crop" alt="" loading="lazy"></div>
         </div>
       </div>
     </div>
@@ -1879,6 +1928,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 </div>
 
-<script src="motion.js?v=6" defer></script>
+<script src="motion.js?v=7" defer></script>
 </body>
 </html>
