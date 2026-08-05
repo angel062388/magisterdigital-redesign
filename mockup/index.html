@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="preconnect" href="https://esm.sh" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css?v=13">
+<link rel="stylesheet" href="tokens.css?v=14">
 <style>
 /* ==========================================================================
    MAGISTER DIGITAL, HOMEPAGE
@@ -243,11 +243,28 @@ html:not(.js) .pillar-media{max-height:380px}
   box-shadow:0 6px 18px rgba(212,175,55,.26), inset 0 -2px 0 rgba(0,0,0,.16)}
 .btn-sm:hover{box-shadow:0 11px 26px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.2)}
 .btn-sm:active{box-shadow:0 3px 9px rgba(212,175,55,.24), inset 0 -1px 0 rgba(0,0,0,.18)}
-.band-light .btn{background:var(--gold-deep); border-color:var(--gold-deep); color:var(--paper);
-  box-shadow:0 6px 18px rgba(110,86,26,.28), inset 0 -2px 0 rgba(0,0,0,.15)}
-.band-light .btn:hover{background:#5A4514; border-color:#5A4514; color:var(--paper)}
-.band-light .btn-ghost{background:transparent; color:var(--gold-deep); border-color:var(--gold-deep)}
-.band-light .btn-ghost:hover{background:var(--gold-deep); color:var(--paper)}
+/* BUTTONS KEEP THE SAME GOLD ON EVERY SURFACE (Beth, 2026-08-05).
+   Literal values, because inside .band-light the gold tokens are remapped to
+   the deep gold for TEXT safety, and a button must not inherit that.
+
+   A filled gold button is fine on paper: what has to pass is its own dark
+   text on the gold, 8.52:1, not the gold against the page. The darker border
+   is what carries the 3:1 boundary that #D4AF37 on #F7F7F5 (1.96:1) cannot.
+
+   The outlined button is the one case that CANNOT match exactly: bright gold
+   TEXT on paper is 1.96:1 and unreadable. It keeps the bright gold border and
+   takes dark ink text, so it still reads as the same gold button. */
+.band-light .btn{background:#D4AF37; border-color:#A8842A; color:#16171A;
+  box-shadow:0 6px 18px rgba(212,175,55,.30), inset 0 -2px 0 rgba(0,0,0,.16)}
+.band-light .btn:hover{background:#E3C24E; border-color:#A8842A; color:#16171A;
+  box-shadow:0 12px 28px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.18)}
+.band-light .btn-ghost{background:transparent; color:#16171A; border-color:#D4AF37}
+.band-light .btn-ghost:hover{background:#D4AF37; color:#16171A; border-color:#A8842A}
+/* Same treatment for the phone button, which shares the .hero-tel rules. */
+.band-light .hero-tel{color:#16171A; border-color:#D4AF37}
+.band-light .hero-tel b{color:var(--gold-deep)}
+.band-light .hero-tel:hover{background:#D4AF37; color:#16171A; border-color:#A8842A}
+.band-light .hero-tel:hover b,.band-light .hero-tel:hover .tag{color:#16171A}
 
 /* HERO */
 .hero{position:relative; min-height:100svh; display:flex; align-items:center;
@@ -1985,6 +2002,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 </div>
 
-<script src="motion.js?v=13" defer></script>
+<script src="motion.js?v=14" defer></script>
 </body>
 </html>
