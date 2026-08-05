@@ -205,7 +205,11 @@
     // cur = what is on screen, tgt = where it wants to be.
     var cur = { rx: 0, ry: 0, fy: 0, sx: -80, lift: 0 };
     var tgt = { rx: 0, ry: 0, fy: 0, sx: -80, lift: 0 };
-    var pointerActive = false, lastMove = 0, running = false, t0 = null;
+    // Pointer contribution, held separately so it can be ADDED to the
+    // automatic motion rather than replacing it, and decayed back to zero
+    // when the pointer leaves.
+    var p = { ry: 0, rx: 0, fy: 0, sx: 0, active: 0 };
+    var pointerActive = false, running = false, t0 = null;
 
     hero.addEventListener('pointermove', function (e) {
       var r = hero.getBoundingClientRect();
@@ -214,13 +218,11 @@
       var ny = ((e.clientY - r.top) / r.height) * 2 - 1;
       nx = Math.max(-1, Math.min(1, nx));
       ny = Math.max(-1, Math.min(1, ny));
-      tgt.ry = nx * 13;          // yaw follows the cursor horizontally
-      tgt.rx = -ny * 9;          // pitch is inverted so it leans toward you
-      tgt.fy = ny * -6;
-      tgt.sx = -60 + ((nx + 1) / 2) * 200;  // highlight tracks across the mark
-      tgt.lift = 1 - Math.min(1, Math.abs(nx) * 0.6 + Math.abs(ny) * 0.4);
+      p.ry = nx * 11;          // yaw follows the cursor horizontally
+      p.rx = -ny * 8;          // pitch is inverted so it leans toward you
+      p.fy = ny * -5;
+      p.sx = nx * 90;          // nudges the highlight toward the cursor
       pointerActive = true;
-      lastMove = performance.now();
     }, { passive: true });
 
     hero.addEventListener('pointerleave', function () { pointerActive = false; });
@@ -229,17 +231,25 @@
       if (t0 === null) t0 = now;
       var t = (now - t0) / 1000;
 
-      // Idle behaviour: slow figure-of-eight drift plus a highlight that
-      // crosses the mark every few seconds, so it still looks alive with
-      // no pointer on the page at all.
-      if (!pointerActive || now - lastMove > 2200) {
-        tgt.ry = Math.sin(t * 0.45) * 7;
-        tgt.rx = Math.sin(t * 0.32) * 4.5;
-        tgt.fy = Math.sin(t * 0.5) * 7;
-        tgt.lift = 0.5 + Math.sin(t * 0.5) * 0.5;
-        var cycle = (t * 0.16) % 1;
-        tgt.sx = cycle < 0.42 ? -80 + (cycle / 0.42) * 260 : 180;
-      }
+      // AUTOMATIC MOTION. This always runs, on every frame, whether or not
+      // a pointer is anywhere near the page: a slow figure-of-eight tilt,
+      // a rise and fall, and a highlight that sweeps the mark roughly every
+      // six seconds. The logo animates on its own with no input at all.
+      var autoRy = Math.sin(t * 0.42) * 9;
+      var autoRx = Math.sin(t * 0.31) * 5.5;
+      var autoFy = Math.sin(t * 0.5) * 9;
+      var cycle  = (t * 0.17) % 1;
+      var autoSx = cycle < 0.4 ? -80 + (cycle / 0.4) * 265 : 185;
+
+      // Pointer influence decays to zero after it leaves, so the automatic
+      // motion is never left frozen at wherever the cursor happened to be.
+      p.active += ((pointerActive ? 1 : 0) - p.active) * 0.05;
+
+      tgt.ry = autoRy + p.ry * p.active;
+      tgt.rx = autoRx + p.rx * p.active;
+      tgt.fy = autoFy + p.fy * p.active;
+      tgt.sx = autoSx + p.sx * p.active;
+      tgt.lift = 0.5 + Math.sin(t * 0.5) * 0.5;
 
       var k = 0.075;
       cur.rx += (tgt.rx - cur.rx) * k;
