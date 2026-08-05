@@ -1,16 +1,24 @@
 /* ==========================================================================
    MAGISTER DIGITAL, MOTION
-   Revision 2026-08-05 (round 2):
-   - Presence cursors + collaborative simulation REMOVED per Beth's Aug 5
-     second-round spec. Hero now carries itself with rule-draw + letterpress
-     reveal + ambient motion + hero-glow-follows-pointer.
-   - Founder modal now populates a Pexels headshot instead of initials.
-   - Cobe globe uses lower dark shading + higher map brightness so the full
-     sphere renders visibly rather than a lit hemisphere.
-   - Metros in Locations are clickable buttons. Click sets a targetPhi and
-     onRender lerps toward it. Active metro gets a .active highlight class.
-   - Industries panels all default closed. Panel click handler runs above
-     the reduced-motion guard so it works for reduced-motion users too.
+   Revision 3 (2026-08-05):
+   - Attribution line: fixed left-gutter SVG stroke that draws itself as the
+     visitor scrolls (stroke-dashoffset from 1 to 0 tied to scroll progress).
+     Four milestone nodes + mono labels light up as they're passed.
+   - Metro click handlers wired IMMEDIATELY (not inside the cobe .then()), so
+     clicking a metro always highlights + always feels responsive; globe
+     rotation kicks in the moment cobe loads.
+   - Globe re-tuned much brighter: dark 0.05, mapBrightness 9.5, diffuse 0.65,
+     brighter base + brighter markers. Full sphere reads clearly, land dots
+     visible against near-black background, gold pins pop.
+   - onRender gives targetPhi priority over pointerInteracting, so a metro
+     click can never be beaten by a stale pointer state.
+   - Hero safety timeout tightened to 300ms so the letterpress reveal fires
+     visibly on load even if the IntersectionObserver misses.
+   - Panels: click still toggles (touch fallback + non-hover devices), and
+     mouseenter/mouseleave now sync aria-expanded on hover-capable devices
+     so screen-reader state stays truthful.
+   - Modal: photo-rise animation is driven by CSS keyframes; JS just resets
+     the animation on each open so it fires again for subsequent founders.
    ========================================================================== */
 (function () {
   'use strict';
@@ -20,9 +28,8 @@
   var canObserve = 'IntersectionObserver' in window;
 
   /* ======================================================================
-     FOUNDER MODAL (always available, works in reduced-motion)
-     Data map lives here; markup is a single #founder-modal element.
-     Placeholder-flagged photos + bios; no invented credentials.
+     FOUNDER MODAL: real Pexels-swap-for-real-photos, plus a repeating
+     photo-rise entrance animation. always available, works in reduced-motion.
      ====================================================================== */
   (function modal() {
     var modal = document.getElementById('founder-modal');
@@ -33,29 +40,31 @@
     var photoEl  = modal.querySelector('[data-modal-photo]');
     var bioEl    = modal.querySelector('[data-modal-bio]');
     var linkEl   = modal.querySelector('[data-modal-link]');
+    var heroEl   = modal.querySelector('.modal-hero');
+    var panelEl  = modal.querySelector('.modal-panel');
 
     var FOUNDERS = {
       brian: {
         name: 'Brian Hong',
         role: 'Co-founder & CEO',
-        photo: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200',
-        alt: 'Placeholder headshot for Brian Hong',
+        photo: 'img/brian-hong.jpg',
+        alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
         bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
         link: '/brian-hong/'
       },
       michael: {
         name: 'Michael Merlino',
         role: 'Co-founder, Strategy & AI systems',
-        photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200',
-        alt: 'Placeholder headshot for Michael Merlino',
+        photo: 'img/michael-merlino.jpg',
+        alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
         bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
         link: '/michael-merlino/'
       },
       dimitry: {
         name: 'Dimitry Morgan',
         role: 'Co-founder, Head of paid media',
-        photo: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=1200',
-        alt: 'Placeholder headshot for Dimitry Morgan',
+        photo: 'img/dimitry-morgan.png',
+        alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
         bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
         link: '/dimitry-morgan/'
       }
@@ -68,12 +77,22 @@
         document.querySelector('header.site-header'),
         document.getElementById('main'),
         document.querySelector('footer.site-footer'),
-        document.querySelector('.ticker')
+        document.querySelector('.ticker'),
+        document.querySelector('.attribution')
       ].filter(Boolean);
     }
 
     function focusables() {
       return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    }
+
+    function restartAnimation(el) {
+      if (!el) return;
+      var a = el.style.animation;
+      el.style.animation = 'none';
+      // Force reflow so removing + re-adding registers as a fresh animation
+      void el.offsetWidth;
+      el.style.animation = '';
     }
 
     function open(key, from) {
@@ -89,6 +108,10 @@
       modal.hidden = false;
       document.body.classList.add('modal-open');
       siblings().forEach(function (el) { el.setAttribute('inert', ''); });
+      // Restart the CSS entrance animations so the photo-rise + panel-fade
+      // fire on every open, not only the first.
+      restartAnimation(heroEl);
+      restartAnimation(panelEl);
       document.addEventListener('keydown', onKey);
       var closeBtn = modal.querySelector('.modal-close');
       if (closeBtn) closeBtn.focus();
@@ -123,38 +146,46 @@
   })();
 
   /* ======================================================================
-     COBE DOTTED GLOBE
-     Loaded via dynamic ESM import from esm.sh only when the locations
-     section enters the viewport. prefers-reduced-motion + low-power +
-     WebGL failure all fall back to the static SVG map.
-
-     Metros are click-targets: clicking a button sets a target phi that
-     onRender lerps toward. When reached, auto-rotation resumes and the
-     clicked metro carries a .active highlight class.
+     METRO BUTTONS: click handlers wired IMMEDIATELY (not inside the cobe
+     .then), so clicking a metro always highlights + always feels
+     responsive. If the globe loads later, its rotation function is
+     assigned to globeState.rotateTo — subsequent clicks then rotate.
      ====================================================================== */
-  var globeState = { targetPhi: null, currentPhi: null };
+  var globeState = { targetPhi: null, currentPhi: null, rotateTo: null };
 
+  (function wireMetros() {
+    var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
+    if (!metros.length) return;
+    metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
+    metros.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        metros.forEach(function (m) {
+          m.classList.remove('active');
+          m.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        if (typeof globeState.rotateTo === 'function') {
+          var lon = parseFloat(btn.getAttribute('data-long'));
+          if (!isNaN(lon)) globeState.rotateTo(lon);
+        }
+      });
+    });
+  })();
+
+  /* ======================================================================
+     COBE GLOBE, brighter tuning + always-live click-rotate.
+     ====================================================================== */
   (function globeBoot() {
     var mount = document.querySelector('[data-globe-mount]');
     var canvas = mount && mount.querySelector('[data-globe]');
     if (!mount || !canvas) return;
 
-    // Reduced motion or no IntersectionObserver: show the SVG fallback,
-    // but still wire the metro buttons so clicking one visually confirms
-    // the interaction (highlight only; no globe rotation).
-    if (reduced || !canObserve) {
-      mount.classList.add('static');
-      wireMetrosStatic();
-      return;
-    }
+    if (reduced || !canObserve) { mount.classList.add('static'); return; }
 
     var lowPower = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 2)
                  || (navigator.connection && navigator.connection.saveData === true);
-    if (lowPower) {
-      mount.classList.add('static');
-      wireMetrosStatic();
-      return;
-    }
+    if (lowPower) { mount.classList.add('static'); return; }
 
     var loaded = false;
     var io = new IntersectionObserver(function (entries) {
@@ -168,35 +199,16 @@
     io.observe(mount);
   })();
 
-  // Highlight-only handler used when the globe won't run (reduced motion,
-  // low power, WebGL failure). Metro buttons still get visual feedback so
-  // clicking is not silently dead.
-  function wireMetrosStatic() {
-    var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
-    metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
-    metros.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        metros.forEach(function (m) {
-          m.classList.remove('active');
-          m.setAttribute('aria-pressed', 'false');
-        });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
-      });
-    });
-  }
-
   function loadGlobe(canvas, mount) {
     import('https://esm.sh/cobe@0.6.3').then(function (mod) {
       var createGlobe = mod.default || mod;
 
-      // SD-centred start phi. Calibrated empirically: at this phi the US
-      // faces the viewer with San Diego near the front-left quarter.
-      var BASE_LON = -117.1611;      // San Diego
-      var BASE_PHI = 4.9;
-      // Given cobe's phi = 4.9 shows US, delta per degree ≈ π/180.
-      // Rotation direction: moving target_lon EAST (less negative)
-      // requires DECREASING phi. So targetPhi = BASE_PHI + (BASE_LON - target_lon) * π/180.
+      // Calibration: BASE_PHI + (BASE_LON - target_lon) * (π/180).
+      // Sign convention: increasing phi rotates the sphere so a westward
+      // longitude comes to the front. For a US-centred base, moving east
+      // (less-negative longitude) subtracts phi, moving west adds phi.
+      var BASE_LON = -100;     // rough US centre; SD click stays close to home
+      var BASE_PHI = 4.6;
       function targetPhiFor(lon) {
         return BASE_PHI + (BASE_LON - lon) * (Math.PI / 180);
       }
@@ -229,36 +241,34 @@
           height: size * 2,
           phi: 0,
           theta: 0.28,
-          // Dark shading reduced from 1 to 0.3 so the full sphere is
-          // visible instead of only the lit hemisphere. Map brightness
-          // raised so land dots read clearly on a near-black background.
-          dark: 0.3,
-          diffuse: 0.9,
-          mapSamples: 14000,
-          mapBrightness: 6.5,
-          baseColor:   [0.13, 0.135, 0.15],
-          markerColor: [0.831, 0.686, 0.216],
-          glowColor:   [0.20, 0.16, 0.06],
+          // MUCH brighter: dark shading almost off, map dots turned up
+          // hard so the full sphere reads clearly against near-black.
+          dark: 0.05,
+          diffuse: 0.65,
+          mapSamples: 16000,
+          mapBrightness: 9.5,
+          baseColor:   [0.22, 0.23, 0.26],
+          markerColor: [1.0,  0.85, 0.28],
+          glowColor:   [0.42, 0.32, 0.09],
           markers: markers,
           onRender: function (state) {
-            if (!paused) {
-              if (pointerInteracting !== null) {
-                phi = pointerInteracting + pointerMovement / 200;
+            if (paused) { state.phi = phi; return; }
+            // targetPhi wins over pointer + auto-rotation: a metro click
+            // can never be silently beaten by a stale drag state.
+            if (globeState.targetPhi !== null) {
+              var delta = globeState.targetPhi - phi;
+              if (delta > Math.PI)  delta -= 2 * Math.PI;
+              if (delta < -Math.PI) delta += 2 * Math.PI;
+              if (Math.abs(delta) < 0.006) {
+                phi = globeState.targetPhi;
                 globeState.targetPhi = null;
-              } else if (globeState.targetPhi !== null) {
-                var delta = globeState.targetPhi - phi;
-                // Take the shortest way around the sphere
-                if (delta > Math.PI)  delta -= 2 * Math.PI;
-                if (delta < -Math.PI) delta += 2 * Math.PI;
-                if (Math.abs(delta) < 0.006) {
-                  phi = globeState.targetPhi;
-                  globeState.targetPhi = null;
-                } else {
-                  phi += delta * 0.07;
-                }
               } else {
-                phi += 0.003;
+                phi += delta * 0.09;
               }
+            } else if (pointerInteracting !== null) {
+              phi = pointerInteracting + pointerMovement / 200;
+            } else {
+              phi += 0.003;
             }
             globeState.currentPhi = phi;
             state.phi = phi;
@@ -268,9 +278,14 @@
         });
       } catch (err) {
         mount.classList.add('static');
-        wireMetrosStatic();
         return;
       }
+
+      // Register rotate function so any prior/future metro click routes
+      // rotation through the running globe.
+      globeState.rotateTo = function (lon) {
+        globeState.targetPhi = targetPhiFor(lon);
+      };
 
       canvas.style.opacity = '0';
       canvas.style.transition = 'opacity .6s ease';
@@ -299,23 +314,6 @@
         }
       });
 
-      // Wire the metro buttons to rotate the globe + highlight themselves.
-      var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
-      metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
-      metros.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var lon = parseFloat(btn.getAttribute('data-long'));
-          if (isNaN(lon)) return;
-          globeState.targetPhi = targetPhiFor(lon);
-          metros.forEach(function (m) {
-            m.classList.remove('active');
-            m.setAttribute('aria-pressed', 'false');
-          });
-          btn.classList.add('active');
-          btn.setAttribute('aria-pressed', 'true');
-        });
-      });
-
       var rt;
       window.addEventListener('resize', function () {
         clearTimeout(rt);
@@ -335,17 +333,17 @@
       });
     }).catch(function () {
       mount.classList.add('static');
-      wireMetrosStatic();
     });
   }
 
   /* ======================================================================
-     FUNCTIONAL: always run (never gated by reduced-motion)
-     Industries panel expand/collapse. Without this, Medical and Legal
-     cannot be opened by keyboard or touch when prefers-reduced-motion
-     is enabled.
+     INDUSTRIES PANELS
+     Touch/click toggle (fallback path). CSS handles hover-open + focus-open
+     on hover-capable devices. JS mouseenter/leave also sync aria-expanded
+     on those devices so SR state stays truthful.
      ====================================================================== */
   (function panels() {
+    var hasHover = window.matchMedia('(hover: hover)').matches;
     var els = [].slice.call(document.querySelectorAll('.panel'));
     els.forEach(function (p) {
       function toggle() {
@@ -357,11 +355,21 @@
       p.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
       });
+      if (hasHover) {
+        p.addEventListener('mouseenter', function () { p.setAttribute('aria-expanded', 'true'); });
+        p.addEventListener('mouseleave', function () {
+          if (!p.classList.contains('open')) p.setAttribute('aria-expanded', 'false');
+        });
+        p.addEventListener('focus', function () { p.setAttribute('aria-expanded', 'true'); });
+        p.addEventListener('blur', function () {
+          if (!p.classList.contains('open')) p.setAttribute('aria-expanded', 'false');
+        });
+      }
     });
   })();
 
-  /* Reduced motion, or no observer support: show the finished state, stop
-     all decorative effects. Modal, globe, and panels already handled above. */
+  /* Reduced motion, or no observer support: show finished state, stop
+     decorative effects. Modal, globe boot, panels already handled above. */
   if (reduced || !canObserve) {
     root.classList.add('js', reduced ? 'reduced-motion' : 'no-io');
     [].forEach.call(document.querySelectorAll('[data-reveal]'), function (el) {
@@ -389,21 +397,22 @@
     [].forEach.call(document.querySelectorAll(sel), function (el) { io.observe(el); });
   }
 
-  /* Reveals */
+  /* Reveals: fire on IO, plus a 300ms safety timeout that force-reveals
+     any [data-reveal] currently in the viewport. That guarantees the hero
+     letterpress + rule-draw animations always fire on load, even if the
+     IntersectionObserver missed because the section was already in view. */
   observe('[data-reveal]', function (el) {
     [].forEach.call(el.querySelectorAll('[data-stagger]'), function (kid, i) {
       kid.style.setProperty('--i', i);
     });
     el.classList.add('in');
   });
-
-  /* Safety net: if anything is still unrevealed after 4s, reveal it. */
   setTimeout(function () {
     [].forEach.call(document.querySelectorAll('[data-reveal]:not(.in)'), function (el) {
       var r = el.getBoundingClientRect();
       if (r.top < window.innerHeight) el.classList.add('in');
     });
-  }, 4000);
+  }, 300);
 
   /* Split-flap mono metadata */
   var FLAP = '0123456789/ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -451,16 +460,41 @@
         layer.classList.toggle('paused', !inView);
       }, { rootMargin: '120px' }).observe(host);
 
-      // Tab hide always pauses. Tab show restores from the last known
-      // intersection state — previously the paused flag stuck on visible
-      // return because the IntersectionObserver did not re-fire (element
-      // hadn't moved), leaving the CTA-band ambient motion frozen forever
-      // after a single tab-switch.
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) layer.classList.add('paused');
         else layer.classList.toggle('paused', !inView);
       });
     });
+  })();
+
+  /* ======================================================================
+     ATTRIBUTION LINE: fixed left-gutter SVG line self-drawing on scroll.
+     stroke-dashoffset goes from 1 to 0 as page scroll progresses 0 to 1.
+     Milestone circles + labels light up as their normalized scroll
+     position is passed.
+     ====================================================================== */
+  (function attribution() {
+    var line = document.querySelector('.attr-line');
+    if (!line) return;
+    var nodes = [].slice.call(document.querySelectorAll('.attribution [data-node]'));
+
+    function tick() {
+      var scrolled = window.scrollY || window.pageYOffset;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var p = max > 0 ? Math.min(scrolled / max, 1) : 0;
+      line.style.strokeDashoffset = (1 - p).toFixed(4);
+      nodes.forEach(function (n) {
+        var at = parseFloat(n.getAttribute('data-node')) || 0;
+        n.classList.toggle('lit', p >= at);
+      });
+    }
+    // Also fire once on load so the line has an initial state
+    tick();
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(function () { tick(); ticking = false; }); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', tick, { passive: true });
   })();
 
   /* Header state, scroll progress, gutter chapter */
@@ -495,10 +529,7 @@
   }, { passive: true });
   onScroll();
 
-  /* FAQ disclosure height.
-     Guarded against rapid re-click: while a transition is in flight, further
-     summary clicks are ignored so the height-animation state stays coherent
-     instead of stacking two transitionend listeners on the same body. */
+  /* FAQ disclosure height, race-guarded */
   [].forEach.call(document.querySelectorAll('.faq details'), function (d) {
     var body = d.querySelector('.answer-wrap');
     if (!body) return;
