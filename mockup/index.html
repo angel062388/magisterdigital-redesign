@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Magister Digital · Marketing Run by Operators</title>
+<title>Magister Digital: Marketing Run by Operators</title>
 <meta name="description" content="Marketing run by operators for home services, medical and legal businesses. Measured in booked jobs, signed cases and new patients.">
 <link rel="icon" href="img/magister-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,32 +71,6 @@ body::after{content:""; position:fixed; inset:0; z-index:9; pointer-events:none;
 .rule.light{background:var(--rule-light)}
 .in .rule,.rule.in{transform:scaleX(1)}
 
-/* SIGNATURE MOVE 2: LETTERPRESS LINE REVEAL
-   Rewrote to be MORE visible: 2s wipe (was 1.05s), gold trailing bar at
-   full opacity, larger stroke width. Fires on the .in class add via IO
-   or via the 300ms safety timeout in motion.js. */
-.lp .ln{display:block; overflow:hidden; position:relative}
-.lp .ln > span{display:block; clip-path:inset(0 100% 0 0);
-  transition:clip-path 1.4s cubic-bezier(.16,1,.3,1);
-  transition-delay:calc(var(--ln,0)*160ms)}
-.lp .ln::after{content:""; position:absolute; inset:0 100% 0 0; background:var(--gold);
-  opacity:0; transition:inset 1.4s cubic-bezier(.16,1,.3,1), opacity .3s ease;
-  transition-delay:calc(var(--ln,0)*160ms)}
-.in.lp .ln > span,.lp.in .ln > span,.in .lp .ln > span{clip-path:inset(0 0 0 0)}
-.in.lp .ln::after,.lp.in .ln::after,.in .lp .ln::after{inset:0 0 0 100%; opacity:1}
-.reduced-motion .lp .ln > span{clip-path:none}
-.reduced-motion .lp .ln::after{display:none}
-
-/* Hero outcome words: each italic gold word wipes in sequence after the
-   headline lands. Adds a distinctive kinetic beat over and above the
-   whole-line letterpress reveal. */
-.mk{position:relative; display:inline-block; overflow:hidden; padding-bottom:.05em}
-.mk > .mkw{display:inline-block; clip-path:inset(0 100% 0 0);
-  transition:clip-path 1.05s cubic-bezier(.16,1,.3,1);
-  transition-delay:calc(1.2s + var(--mk,0)*.28s)}
-.in .mk > .mkw,.mk.in > .mkw{clip-path:inset(0 0 0 0)}
-.reduced-motion .mk > .mkw{clip-path:none}
-
 [data-stagger]{opacity:0; transform:translate3d(-14px,0,0);
   transition:opacity .7s ease, transform .9s cubic-bezier(.16,1,.3,1);
   transition-delay:calc(var(--i,0)*90ms)}
@@ -105,9 +79,6 @@ body::after{content:""; position:fixed; inset:0; z-index:9; pointer-events:none;
 
 /* FAILSAFE */
 html:not(.js) [data-stagger]{opacity:1; transform:none}
-html:not(.js) .lp .ln > span{clip-path:none}
-html:not(.js) .lp .ln::after{display:none}
-html:not(.js) .mk > .mkw{clip-path:none}
 html:not(.js) .rule{transform:scaleX(1)}
 html:not(.js) .answer-wrap{height:auto}
 html:not(.js) .pillar-media{max-height:190px}
@@ -148,12 +119,24 @@ html:not(.js) .pillar-media{max-height:190px}
 .site-header .wrap{display:flex; align-items:center; gap:var(--sp-4); min-height:80px;
   transition:min-height .4s var(--ease)}
 .site-header.is-stuck .wrap{min-height:64px}
-.brand{display:flex; align-items:center; text-decoration:none; margin-right:auto}
-.brand-logo{height:44px; width:auto; transition:height .4s var(--ease)}
+/* flex:0 0 auto on BOTH the brand and its image is load-bearing. The nav,
+   phone and CTA are all no-shrink, so without this the brand is the only
+   item left that can absorb a tight row: it shrinks, the global
+   img{max-width:100%} caps the logo's width below its natural size while
+   height stays pinned at 44px, and the wordmark renders horizontally
+   squashed (measured 3.47:1 against its true 5.07:1 at 960px). */
+.brand{display:flex; align-items:center; text-decoration:none; margin-right:auto;
+  flex:0 0 auto}
+.brand-logo{height:44px; width:auto; max-width:none; flex:0 0 auto;
+  transition:height .4s var(--ease)}
 .site-header.is-stuck .brand-logo{height:34px}
 .site-nav{display:none}
+/* white-space:nowrap stops "Case Studies" breaking onto a second line and
+   knocking the whole header row out of vertical alignment. flex-shrink:0
+   keeps the flex container from squeezing the items instead of wrapping. */
 .site-nav a{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--text-muted-dark); text-decoration:none; padding:6px 0; position:relative}
+  color:var(--text-muted-dark); text-decoration:none; padding:6px 0; position:relative;
+  white-space:nowrap; flex:0 0 auto}
 .site-nav a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
   background:var(--gold); transition:right .45s cubic-bezier(.16,1,.3,1)}
 .site-nav a:hover{color:var(--paper)} .site-nav a:hover::after{right:0}
@@ -161,7 +144,7 @@ html:not(.js) .pillar-media{max-height:190px}
 
 .header-phone{display:none; font-family:var(--font-mono); font-size:.8125rem;
   color:var(--gold); text-decoration:underline; text-underline-offset:4px;
-  text-decoration-color:rgba(212,175,55,.6);
+  text-decoration-color:rgba(212,175,55,.6); white-space:nowrap; flex:0 0 auto;
   transition:color .28s var(--ease), text-decoration-color .28s var(--ease)}
 .header-phone:hover{color:var(--gold-light); text-decoration-color:var(--gold-light)}
 .header-phone:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
@@ -174,7 +157,7 @@ html:not(.js) .pillar-media{max-height:190px}
    ========================================================================== */
 .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.7ch;
   font-family:var(--font-mono); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
-  font-weight:600; text-decoration:none; padding:16px 30px;
+  font-weight:600; text-decoration:none; padding:16px 30px; white-space:nowrap;
   background:var(--gold); color:var(--ink);
   border:1px solid var(--gold); border-radius:6px;
   box-shadow:0 6px 18px rgba(212,175,55,.22), inset 0 -2px 0 rgba(0,0,0,.14);
@@ -192,7 +175,13 @@ html:not(.js) .pillar-media{max-height:190px}
   box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1)}
 .btn-ghost:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);
   box-shadow:0 10px 22px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
-.btn-sm{padding:12px 22px; font-size:.6875rem}
+/* Header CTA. Same physical language as the primary button, only smaller:
+   full elevation shadow + inset dark bottom line, hover lift, press sink.
+   flex-shrink:0 so the nav can never compress it into a sliver. */
+.btn-sm{padding:13px 24px; font-size:.6875rem; white-space:nowrap; flex:0 0 auto;
+  box-shadow:0 6px 18px rgba(212,175,55,.26), inset 0 -2px 0 rgba(0,0,0,.16)}
+.btn-sm:hover{box-shadow:0 11px 26px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.2)}
+.btn-sm:active{box-shadow:0 3px 9px rgba(212,175,55,.24), inset 0 -1px 0 rgba(0,0,0,.18)}
 .band-light .btn{background:var(--gold-deep); border-color:var(--gold-deep); color:var(--paper);
   box-shadow:0 6px 18px rgba(110,86,26,.28), inset 0 -2px 0 rgba(0,0,0,.15)}
 .band-light .btn:hover{background:#5A4514; border-color:#5A4514; color:var(--paper)}
@@ -218,26 +207,76 @@ html:not(.js) .pillar-media{max-height:190px}
 .hero-glow.b{bottom:-24%; right:-16%; opacity:.55; animation:drift 28s ease-in-out infinite alternate-reverse}
 @keyframes drift{to{transform:translate3d(calc(var(--px) + 46px), calc(var(--py) - 34px),0) scale(1.12)}}
 .hero .wrap{position:relative; z-index:10; width:100%}
+/* HERO GRID: content left, gold logo right on >=900px. Mobile stacks. */
+.hero-grid{display:grid; gap:var(--sp-6); align-items:center}
+.hero-content{min-width:0}
+/* Hidden until the hero actually splits into two columns. Below that the
+   header logo is already on screen, and a second full-width wordmark
+   under the ledger would just add scroll for no information. */
+.hero-visual{display:none; align-items:center; justify-content:center; position:relative;
+  min-width:0}
+.hero-logo{width:100%; max-width:520px; height:auto; opacity:1;
+  filter:drop-shadow(0 24px 60px rgba(212,175,55,.32));
+  animation:heroLogoIn 1.4s cubic-bezier(.16,1,.3,1) both}
+.hero-visual::after{content:""; position:absolute; inset:-6% -8% -8% -8%; z-index:-1;
+  background:radial-gradient(circle at 50% 55%, rgba(212,175,55,.16), transparent 62%);
+  filter:blur(30px); pointer-events:none}
+@keyframes heroLogoIn{from{opacity:0; transform:translateY(20px) scale(.94)}}
+.reduced-motion .hero-logo{animation:none}
+/* DRIFTING GOLD PARTICLES IN THE HERO.
+   Reuses the shared .ambient module; motion.js populates it. Sits at z-2,
+   above the hero image gradient and the two glows (z-0/1) and below the
+   content .wrap.
+   The z-10 line is load-bearing, not decoration: the generic
+   `.has-ambient > .wrap{z-index:1}` rule further down this stylesheet has
+   the same specificity as `.hero .wrap{z-index:10}` and comes later, so it
+   wins and drops the hero content to z-1, i.e. UNDER the particle layer.
+   `.hero.has-ambient > .wrap` outranks both and puts it back.
+   Both selectors below are deliberately over-qualified for the same
+   reason: the shared `.ambient` module is defined LOWER in this
+   stylesheet and also sets z-index, so a plain `.hero-ambient` rule
+   loses to it on source order and the layer computes back to 0,
+   sinking the particles under the hero glows. */
+.hero.has-ambient > .ambient.hero-ambient{z-index:2; opacity:.85}
+.hero.has-ambient > .wrap{position:relative; z-index:10}
+/* Soft gold halo on the hero particles only, so they read as drifting
+   motes of light rather than flat dots. Scoped so the CTA band's
+   existing ambient layer is untouched. */
+.hero-ambient .p{box-shadow:0 0 6px 1px rgba(212,175,55,.45)}
 .hero-top{display:flex; flex-wrap:wrap; gap:var(--sp-4) var(--sp-6); align-items:baseline;
   margin-bottom:var(--sp-6)}
 .hero h1{font-size:clamp(2.05rem,5.2vw,4.15rem); font-weight:700; max-width:19ch;
   text-wrap:balance}
-.hero h1 .ln > span{line-height:1.02}
 .hero h1 em{font-style:italic; font-weight:600; color:var(--accent-on-dark)}
 .hero-foot{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
 .hero-lede{color:var(--text-muted-dark); font-size:1.0625rem; max-width:46ch}
 .hero-cta{display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-5); position:relative; z-index:20}
 
-.hero-tel{font-family:var(--font-mono); font-size:.9375rem;
-  color:var(--gold); text-decoration:underline; text-underline-offset:5px;
-  text-decoration-color:rgba(212,175,55,.6); text-decoration-thickness:1px;
-  transition:color .28s var(--ease), text-decoration-color .28s var(--ease)}
-.hero-tel .tag{color:var(--muted-on-dark); text-decoration:none}
-.hero-tel b{color:var(--gold-light); font-weight:600}
-.hero-tel:hover{color:var(--gold-light); text-decoration-color:var(--gold-light)}
+/* HERO TEL: ghost button, matches .btn-ghost shape and hover.
+   Transparent background, gold border+text, radius, shadow, lift on hover,
+   fills gold on hover. Cursor pointer. Focus ring visible. */
+.hero-tel{position:relative; display:inline-flex; align-items:center; gap:.7ch;
+  font-family:var(--font-mono); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+  font-weight:600; text-decoration:none; padding:16px 26px; white-space:nowrap;
+  background:transparent; color:var(--gold);
+  border:1px solid var(--gold); border-radius:6px;
+  box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1);
+  cursor:pointer;
+  transition:background .25s var(--ease), color .25s var(--ease),
+             transform .18s var(--ease), box-shadow .3s var(--ease), border-color .25s var(--ease)}
+.hero-tel .tag{color:var(--muted-on-dark); font-weight:500;
+  transition:color .25s var(--ease)}
+.hero-tel b{color:var(--gold-light); font-weight:600;
+  transition:color .25s var(--ease)}
+.hero-tel:hover{background:var(--gold); color:var(--ink); border-color:var(--gold);
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
+.hero-tel:hover .tag,.hero-tel:hover b{color:var(--ink)}
 .hero-tel:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.hero-tel:active{transform:translateY(0);
+  box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
 
-/* LEDGER: ONE illustrative note for the whole row, not per cell. */
+/* LEDGER */
 .ledger{display:grid; grid-template-columns:repeat(2,1fr); gap:0;
   border-top:1px solid var(--rule); margin-top:var(--sp-7)}
 .ledger .cell{padding:var(--sp-5) var(--sp-5) var(--sp-4) 0;
@@ -247,10 +286,6 @@ html:not(.js) .pillar-media{max-height:190px}
 .ledger .v .unit{color:var(--gold); font-size:.75em; letter-spacing:.02em}
 .ledger .k{font-size:.75rem; color:var(--muted-on-dark); margin-top:12px; line-height:1.4;
   letter-spacing:.04em; max-width:26ch}
-.ledger-note{margin-top:var(--sp-4); font-family:var(--font-mono); font-size:.625rem;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--gold-dark)}
-.ledger-note::before{content:""; display:inline-block; width:10px; height:1px; background:var(--gold-dark);
-  vertical-align:middle; margin-right:10px}
 
 /* TICKER (plain slash separator, zero dash characters of any kind) */
 .ticker{border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
@@ -267,9 +302,46 @@ html:not(.js) .pillar-media{max-height:190px}
    the previous side-by-side pattern that left a big void beside every
    heading. Meta on top, heading full-width, rule, optional lede below. */
 .sec{padding:var(--sp-9) 0; position:relative}
+
+/* CHAPTER NUMERAL: the dead space to the right of every section heading
+   becomes deliberate editorial composition. Large outlined Playfair
+   numeral drawn from the section's own data-mark, so the number can
+   never drift out of sync with the meta label beside the heading.
+   Outline only (transparent fill + 1px stroke) so it reads as a
+   watermark and never competes with the heading for attention.
+   The "/ ''" alt-text syntax keeps it out of the accessibility tree,
+   with a plain content declaration first as the fallback for engines
+   that do not parse the alt form. Hidden below 900px where there is
+   no dead space to fill. */
+.sec[data-mark]{position:relative}
+.sec[data-mark]::before{
+  content: attr(data-mark);
+  content: attr(data-mark) / "";
+  position:absolute; top:var(--sp-8); z-index:0;
+  /* Anchored to the CONTENT column, not the viewport. .sec is full bleed,
+     so a plain right:var(--sp-7) parks the numeral in the outer margin on
+     wide monitors: at 1920px the wrap ends at 1542 while the numeral would
+     sit out at ~1872, roughly 330px adrift from the heading it is meant to
+     sit beside. The 1180px below must track .wrap's max-width. */
+  right:max(var(--sp-7), calc((100% - 1180px) / 2 + var(--sp-5)));
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(5rem,10vw,10rem); line-height:.8;
+  letter-spacing:-.04em; color:transparent;
+  -webkit-text-stroke:1px rgba(212,175,55,.28);
+  pointer-events:none; user-select:none}
+.sec.band-light[data-mark]::before{-webkit-text-stroke-color:rgba(110,86,26,.32)}
+/* 899.98 not 900: the desktop section layout starts at min-width:900px, and
+   a max-width:900px rule matches at exactly 900 too, so the numeral would be
+   missing on the one viewport width where the desktop layout first applies. */
+@media (max-width:899.98px){.sec[data-mark]::before{display:none}}
+.sec > .wrap{position:relative; z-index:1}
+
 .sec-head{display:flex; flex-direction:column; align-items:flex-start;
   gap:var(--sp-4); margin-bottom:var(--sp-8); max-width:920px}
-.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.3rem); max-width:24ch; line-height:1.02}
+/* text-wrap:balance evens the lines so a single short word ("nationwide"
+   on LOCATIONS) can never be left stranded on its own line. */
+.sec-head h2{font-size:clamp(1.9rem,4.6vw,3.3rem); max-width:22ch; line-height:1.02;
+  text-wrap:balance}
 .sec-head h2 em{font-style:italic; color:var(--accent-on-dark)}
 .band-light .sec-head h2 em{color:var(--accent-on-light)}
 .sec-head .rule{width:100%; align-self:stretch}
@@ -426,6 +498,52 @@ html:not(.js) .pillar-media{max-height:190px}
 .loc-globe-wrap::before{content:""; position:absolute; inset:-8%; z-index:-1;
   background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
   filter:blur(30px); pointer-events:none}
+
+/* ---- PER METRO MAP -------------------------------------------------------
+   Clicking a metro swaps the globe for a Google Maps embed of that city.
+   Declared AFTER the .static and .reduced-motion fallback rules above
+   because it matches at the same specificity and has to win when both
+   classes are present: on a device that never loads the WebGL globe, the
+   map still opens, and Show globe returns to the static SVG rather than
+   to a canvas that was never started.
+   visibility (not just opacity) is what keeps the Show globe button and
+   the iframe out of the tab order while the map is closed. */
+.loc-map{position:absolute; inset:0; z-index:2; opacity:0; visibility:hidden;
+  border:1px solid var(--rule); border-radius:10px; overflow:hidden;
+  background:var(--ink-deep); box-shadow:0 18px 44px rgba(0,0,0,.5);
+  transition:opacity .4s var(--ease), visibility 0s linear .4s}
+.loc-map-frame{position:absolute; inset:0}
+/* Light desaturation only. The rest of the site's imagery is heavily
+   grayscaled, but a map has to stay readable, so this stops well short
+   of the treatment used on photography. */
+.loc-map iframe{width:100%; height:100%; border:0; display:block;
+  filter:grayscale(.3) contrast(1.02)}
+/* visibility is stepped, not eased: 0s delay on open so the Show globe
+   button is focusable in the same tick the class lands (an eased
+   visibility transition still computes as hidden on the opening frame,
+   which silently swallowed the keyboard focus move), and a .4s delay on
+   close so the fade-out is actually seen before the element goes away. */
+.loc-globe-wrap.map-on .loc-map{opacity:1; visibility:visible;
+  transition:opacity .4s var(--ease), visibility 0s linear 0s}
+.loc-globe-wrap.map-on .loc-globe,
+.loc-globe-wrap.map-on .loc-fallback{opacity:0; visibility:hidden}
+/* Ghost button over the map, same physical language as .btn-ghost. */
+.loc-map-back{position:absolute; top:12px; right:12px; z-index:3;
+  display:inline-flex; align-items:center; gap:.6ch;
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:600;
+  padding:10px 18px; cursor:pointer;
+  background:rgba(15,17,21,.86); color:var(--gold);
+  border:1px solid var(--gold); border-radius:6px;
+  backdrop-filter:saturate(150%) blur(6px);
+  box-shadow:0 4px 14px rgba(0,0,0,.45), inset 0 -1px 0 rgba(0,0,0,.2);
+  transition:background .25s var(--ease), color .25s var(--ease),
+             transform .18s var(--ease), box-shadow .3s var(--ease)}
+.loc-map-back:hover{background:var(--gold); color:var(--ink); transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(212,175,55,.3), inset 0 -1px 0 rgba(0,0,0,.16)}
+.loc-map-back:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+.loc-map-back:active{transform:translateY(0);
+  box-shadow:0 3px 9px rgba(0,0,0,.4), inset 0 -1px 0 rgba(0,0,0,.2)}
 .loc-list{display:grid; gap:var(--sp-6); align-content:start}
 .loc-hq{border-top:2px solid var(--gold); padding-top:var(--sp-5)}
 .loc-hq .meta{margin-bottom:var(--sp-3); display:inline-block}
@@ -703,11 +821,17 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .ambient .p{position:absolute; width:3px; height:3px; border-radius:50%; background:var(--gold);
   opacity:0; will-change:transform,opacity;
   animation:rise linear infinite; animation-delay:calc(var(--d)*1s); animation-duration:calc(var(--s)*1s)}
+/* --dy is a PIXEL distance set per particle by motion.js from the ambient
+   layer's own height. It must not be a percentage: percentages on the Y
+   axis of a transform resolve against the element's OWN height, and these
+   particles are 1.4px to 5px tall, so the previous -118% moved each one
+   about 2px to 6px and the drift was invisible. The -118vh fallback keeps
+   them travelling if the JS value is ever missing. */
 @keyframes rise{
   0%{transform:translate3d(0,0,0) scale(.6); opacity:0}
   12%{opacity:var(--o)}
   80%{opacity:var(--o)}
-  100%{transform:translate3d(var(--dx),-118%,0) scale(1.15); opacity:0}
+  100%{transform:translate3d(var(--dx),var(--dy,-118vh),0) scale(1.15); opacity:0}
 }
 .ambient.paused .mesh,.ambient.paused .p{animation-play-state:paused}
 .has-ambient{position:relative; isolation:isolate}
@@ -773,8 +897,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   .pillar{grid-template-columns:120px 1fr; gap:var(--sp-6)}
 }
 @media (min-width:900px){
-  .site-nav{display:flex; gap:var(--sp-5); margin-right:var(--sp-6)}
-  .header-phone{display:inline-block; margin-right:var(--sp-5)}
   .gutter{display:flex}
   .wrap{padding:0 var(--sp-7)}
   .hero-foot{grid-template-columns:1.1fr .9fr; align-items:end}
@@ -796,6 +918,48 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   .founder:nth-child(3){margin-top:var(--sp-8)}
   .footgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}
   .footbar{grid-template-columns:1fr auto; align-items:center}
+}
+/* HEADER NAV BREAKPOINTS.
+   The six nav items measure ~407px, the brand logo ~220px and the CTA
+   ~154px. At 900px the content box is only 804px, so the row physically
+   cannot hold all three plus the phone: that is what was pushing
+   "Case Studies" onto a second line. Nav now appears at 960px where it
+   fits on one line, and the phone (already carried by the hero button
+   and the footer NAP) waits until 1180px where there is room for it. */
+/* 1024, not 960. Measured: with nothing in the row allowed to shrink, the
+   brand + six nav links + CTA need about 982px of viewport. At 960 the
+   header overflowed its wrap by 22px. This was invisible before the brand
+   was pinned, because the logo silently absorbed the deficit by squashing. */
+@media (min-width:1024px){
+  .site-nav{display:flex; flex-wrap:nowrap; gap:clamp(14px,1.9vw,30px);
+    margin-right:var(--sp-4)}
+}
+/* TWO-COLUMN HERO. Held back to 1080px on purpose: at 900px the left
+   column drops to ~460px, which squeezes the CTA row hard enough that
+   both button labels break onto two lines. Below this the hero runs
+   full width exactly as it did before, and the logo stays hidden. */
+@media (min-width:1080px){
+  .hero-grid{grid-template-columns:1.4fr .8fr; gap:var(--sp-8); align-items:center}
+  .hero-visual{display:flex}
+}
+/* Margins stay at sp-4 here rather than widening to sp-5. The wrap caps at
+   1180px, so beyond that the row stops gaining room while the phone link
+   adds ~109px: with sp-5 on both the CTA pushed 3px past the content box. */
+@media (min-width:1180px){
+  .header-phone{display:inline-block; margin-right:var(--sp-4)}
+}
+/* SMALL SCREENS. Now that the brand cannot shrink, the full size logo plus
+   the CTA no longer fit a 390px row: they overflowed by 23px. Scale both
+   down explicitly rather than letting the flex row distort the wordmark. */
+@media (max-width:640px){
+  .brand-logo{height:30px}
+  .site-header.is-stuck .brand-logo{height:26px}
+  .btn-sm{padding:11px 16px; font-size:.625rem; letter-spacing:.1em}
+}
+/* 320px (iPhone SE gen 1) is 8px short even at the sizes above. */
+@media (max-width:360px){
+  .brand-logo{height:26px}
+  .btn-sm{padding:10px 13px}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important; transition:none!important; scroll-behavior:auto}
@@ -855,51 +1019,57 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 <main id="main">
 
   <!-- HERO -->
-  <section class="hero" data-reveal data-mark="00">
+  <section class="hero has-ambient" data-reveal data-mark="00">
     <div class="hero-img">
       <img src="https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg?auto=compress&cs=tinysrgb&w=1920"
            alt="" aria-hidden="true" fetchpriority="high">
     </div>
     <div class="hero-glow a"></div>
     <div class="hero-glow b"></div>
+    <div class="ambient hero-ambient" aria-hidden="true" data-ambient></div>
 
     <div class="wrap">
-      <div class="hero-top">
-        <span class="meta" data-flap="00 / OPERATORS">00 / OPERATORS</span>
-        <span class="meta dim">Home services / Medical / Legal</span>
-      </div>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-top">
+            <span class="meta" data-flap="00 / OPERATORS">00 / OPERATORS</span>
+            <span class="meta dim">Home services / Medical / Legal</span>
+          </div>
 
-      <h1 class="lp">
-        <span class="ln"><span>Marketing run by operators, measured in <em class="mk" style="--mk:0"><span class="mkw">booked jobs</span></em>, <em class="mk" style="--mk:1"><span class="mkw">signed cases</span></em>, and <em class="mk" style="--mk:2"><span class="mkw">new patients</span></em></span></span>
-      </h1>
+          <h1>Marketing run by operators, measured in <em>booked jobs</em>, <em>signed cases</em>, and <em>new patients</em></h1>
 
-      <div class="hero-foot">
-        <p class="hero-lede">We are not a reporting agency. We run these channels inside businesses we hold a stake in, and we answer to the only number that makes payroll: revenue that actually arrived.</p>
-        <div class="hero-cta">
-          <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-          <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+          <div class="hero-foot">
+            <p class="hero-lede">We are not a reporting agency. We run these channels inside businesses we hold a stake in, and we answer to the only number that makes payroll: revenue that actually arrived.</p>
+            <div class="hero-cta">
+              <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+              <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+            </div>
+          </div>
+
+          <div class="ledger" aria-label="Illustrative capacity indicators">
+            <div class="cell">
+              <div class="v">$12<span class="unit">M+</span></div>
+              <div class="k">Managed media under our accounts</div>
+            </div>
+            <div class="cell">
+              <div class="v">40<span class="unit">yr</span></div>
+              <div class="k">Combined operator experience across three founders</div>
+            </div>
+            <div class="cell">
+              <div class="v">50<span class="unit">+</span></div>
+              <div class="k">Operators served since founding</div>
+            </div>
+            <div class="cell">
+              <div class="v">30<span class="unit">days</span></div>
+              <div class="k">Typical window to the first attributed lift</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <img src="img/magister-logo.png" alt="" class="hero-logo" width="745" height="147">
         </div>
       </div>
-
-      <div class="ledger" aria-label="Illustrative capacity indicators">
-        <div class="cell">
-          <div class="v">$12<span class="unit">M+</span></div>
-          <div class="k">Managed media under our accounts</div>
-        </div>
-        <div class="cell">
-          <div class="v">40<span class="unit">yr</span></div>
-          <div class="k">Combined operator experience across three founders</div>
-        </div>
-        <div class="cell">
-          <div class="v">50<span class="unit">+</span></div>
-          <div class="k">Operators served since founding</div>
-        </div>
-        <div class="cell">
-          <div class="v">30<span class="unit">days</span></div>
-          <div class="k">Typical window to the first attributed lift</div>
-        </div>
-      </div>
-      <p class="ledger-note">Illustrative figures. Verified numbers land at launch.</p>
     </div>
   </section>
 
@@ -1154,9 +1324,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </header>
 
       <div class="loc-grid">
-        <div class="loc-globe-wrap" data-globe-mount aria-hidden="true">
-          <canvas class="loc-globe" data-globe></canvas>
-          <div class="loc-fallback">
+        <!-- aria-hidden moved off the wrapper and onto the two decorative
+             children. The wrapper now contains a real focusable control
+             (Show globe) and an iframe, and neither may sit inside an
+             aria-hidden subtree. -->
+        <div class="loc-globe-wrap" data-globe-mount>
+          <canvas class="loc-globe" data-globe aria-hidden="true"></canvas>
+          <div class="loc-fallback" aria-hidden="true">
             <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
               <defs>
                 <radialGradient id="sphere" cx="35%" cy="35%" r="80%">
@@ -1175,6 +1349,15 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
                 <circle cx="230" cy="142" r="2.5"/>
               </g>
             </svg>
+          </div>
+
+          <!-- Per-metro map. The iframe is created by JS on first use, so
+               nothing loads from Google unless a visitor actually clicks a
+               metro. Hidden with visibility:hidden, which also keeps the
+               Show globe button out of the tab order while the globe is up. -->
+          <div class="loc-map">
+            <div class="loc-map-frame" data-loc-frame></div>
+            <button class="loc-map-back" type="button" data-loc-globe-back>Show globe</button>
           </div>
         </div>
         <div class="loc-list">
@@ -1201,6 +1384,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
               <li><button class="loc-metro" type="button" data-lat="39.9526" data-long="-75.1652">Philadelphia</button></li>
               <li><button class="loc-metro" type="button" data-lat="40.7128" data-long="-74.0060">New York</button></li>
             </ul>
+            <p class="sr-only" role="status" data-loc-status></p>
           </div>
         </div>
       </div>

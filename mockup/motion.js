@@ -1,5 +1,14 @@
 /* ==========================================================================
    MAGISTER DIGITAL, MOTION
+   Revision 4 (2026-08-05):
+   - Metro click now swaps the globe for a Google Maps embed of that city,
+     with a Show globe control to return. Iframe is built on first use and
+     its src is dropped on close. Keyboard activation moves focus to the
+     Show globe button; closing returns focus to the selected metro.
+   - Hero H1 kinetic wipe removed (.lp / .mkw are gone from markup and CSS).
+     Hero is now a two-column grid: content left, gold logo right, with the
+     shared .ambient particle module drifting behind it.
+
    Revision 3 (2026-08-05):
    - Attribution line: fixed left-gutter SVG stroke that draws itself as the
      visitor scrolls (stroke-dashoffset from 1 to 0 tied to scroll progress).
@@ -167,24 +176,94 @@
   // pendingLon remembers the last metro clicked before the globe finished
   // loading; when loadGlobe assigns globeState.rotateTo, it replays the
   // pending selection so an early click still ends up rotating the globe.
-  var globeState = { targetPhi: null, currentPhi: null, rotateTo: null, pendingLon: null };
+  var globeState = { targetPhi: null, currentPhi: null, rotateTo: null, pendingLon: null,
+                     covered: false };
+
+  /* ======================================================================
+     METRO MAP: clicking a metro replaces the globe with a Google Maps
+     embed of that city. The iframe is built on first use, so a visitor
+     who never clicks a metro never loads anything from Google.
+
+     Runs for everyone, including prefers-reduced-motion and low-power
+     devices. A map embed is not an animation, and withholding it there
+     would leave those visitors clicking metros with nothing happening.
+     What the fallback still governs is what "Show globe" returns TO: on
+     those devices the canvas never boots, so it returns to the static
+     SVG, exactly as before.
+     ====================================================================== */
+  var locMap = (function () {
+    var noop = { show: function () {}, hide: function () {}, remember: function () {} };
+    var wrap = document.querySelector('[data-globe-mount]');
+    var host = wrap && wrap.querySelector('[data-loc-frame]');
+    var back = wrap && wrap.querySelector('[data-loc-globe-back]');
+    if (!wrap || !host || !back) return noop;
+
+    var status = document.querySelector('[data-loc-status]');
+    var frame = null;
+    var lastMetro = null;
+
+    function show(name, lat, lon, moveFocus) {
+      if (!frame) {
+        frame = document.createElement('iframe');
+        frame.setAttribute('loading', 'lazy');
+        frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        host.appendChild(frame);
+      }
+      frame.setAttribute('title', 'Map of ' + name);
+      frame.src = 'https://maps.google.com/maps?q=' + lat + ',' + lon + '&z=10&output=embed';
+      wrap.classList.add('map-on');
+      globeState.covered = true;
+      if (status) status.textContent = 'Showing map of ' + name +
+        '. Use the show globe button to return to the globe view.';
+      // Only pull focus when the metro was activated from the keyboard
+      // (Enter and Space report event.detail 0). The Show globe button sits
+      // BEFORE the metro list in the DOM, so without this a keyboard user
+      // would have to shift-tab back through the list to find it. A mouse
+      // user keeps their focus where it was.
+      // Deferred a frame on purpose: the button is visibility:hidden until
+      // .map-on lands, and calling focus() in the same tick as the class
+      // add silently does nothing because the style has not recalculated.
+      if (moveFocus) requestAnimationFrame(function () { back.focus(); });
+    }
+
+    function hide() {
+      if (!wrap.classList.contains('map-on')) return;
+      wrap.classList.remove('map-on');
+      globeState.covered = false;
+      // Drop the src so the embed stops running while it is not visible.
+      if (frame) frame.removeAttribute('src');
+      if (status) status.textContent = 'Map closed. Globe view restored.';
+      if (lastMetro) lastMetro.focus();
+    }
+
+    back.addEventListener('click', hide);
+    return { show: show, hide: hide, remember: function (el) { lastMetro = el; } };
+  })();
 
   (function wireMetros() {
     var metros = [].slice.call(document.querySelectorAll('.loc-metro'));
     if (!metros.length) return;
     metros.forEach(function (btn) { btn.setAttribute('aria-pressed', 'false'); });
     metros.forEach(function (btn) {
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function (ev) {
         metros.forEach(function (m) {
           m.classList.remove('active');
           m.setAttribute('aria-pressed', 'false');
         });
         btn.classList.add('active');
         btn.setAttribute('aria-pressed', 'true');
+
+        var lat = parseFloat(btn.getAttribute('data-lat'));
         var lon = parseFloat(btn.getAttribute('data-long'));
-        if (isNaN(lon)) return;
+        if (isNaN(lat) || isNaN(lon)) return;
+
+        // Rotate the globe underneath as before, so returning to the globe
+        // shows the metro that is selected rather than a stale position.
         globeState.pendingLon = lon;
         if (typeof globeState.rotateTo === 'function') globeState.rotateTo(lon);
+
+        locMap.remember(btn);
+        locMap.show(btn.textContent.trim(), lat, lon, ev && ev.detail === 0);
       });
     });
   })();
@@ -268,7 +347,12 @@
           glowColor:   [0.42, 0.32, 0.09],
           markers: markers,
           onRender: function (state) {
-            if (paused) { state.phi = phi; return; }
+            // globeState.covered is set while the metro map is over the
+            // canvas. The viewport IntersectionObserver below cannot catch
+            // that case: the section is still on screen, so no IO event
+            // fires and the sphere would keep spinning behind an opaque
+            // map for as long as the visitor leaves it open.
+            if (paused || globeState.covered) { state.phi = phi; return; }
             // targetPhi wins over pointer + auto-rotation: a metro click
             // can never be silently beaten by a stale drag state.
             if (globeState.targetPhi !== null) {
@@ -422,9 +506,11 @@
   }
 
   /* Reveals: fire on IO, plus a 300ms safety timeout that force-reveals
-     any [data-reveal] currently in the viewport. That guarantees the hero
-     letterpress + rule-draw animations always fire on load, even if the
-     IntersectionObserver missed because the section was already in view. */
+     any [data-reveal] currently in the viewport. That guarantees the
+     rule-draw and stagger animations always fire on load, even if the
+     IntersectionObserver missed because the section was already in view.
+     (The hero letterpress wipe this originally also covered was removed
+     in revision 4; the H1 renders statically now.) */
   observe('[data-reveal]', function (el) {
     [].forEach.call(el.querySelectorAll('[data-stagger]'), function (kid, i) {
       kid.style.setProperty('--i', i);
@@ -461,6 +547,11 @@
     [].forEach.call(document.querySelectorAll('[data-ambient]'), function (layer) {
       var COUNT = window.innerWidth < 700 ? 16 : 30;
       var frag = document.createDocumentFragment();
+      // Travel distance in PIXELS, measured from the layer itself. A
+      // percentage here would resolve against each particle's own 1.4px
+      // to 5px height and the drift would be invisible.
+      var layerH = Math.round(layer.getBoundingClientRect().height) || window.innerHeight;
+      var rise = '-' + Math.round(layerH * 1.15) + 'px';
       for (var i = 0; i < COUNT; i++) {
         var p = document.createElement('span');
         p.className = 'p';
@@ -470,6 +561,7 @@
         p.style.setProperty('--s', (16 + Math.random() * 18).toFixed(2));
         p.style.setProperty('--o', (0.18 + Math.random() * 0.42).toFixed(2));
         p.style.setProperty('--dx', (Math.random() * 60 - 30).toFixed(1) + 'px');
+        p.style.setProperty('--dy', rise);
         var sc = (0.6 + Math.random() * 1.5).toFixed(2);
         p.style.width = p.style.height = sc * 2.4 + 'px';
         frag.appendChild(p);
