@@ -376,8 +376,53 @@ html:not(.js) .pillar-media{max-height:190px}
 .band-light .sec-head h2 em{color:var(--accent-on-light)}
 .sec-head .rule{width:100%; align-self:stretch}
 .sec-lede{color:var(--text-muted-dark); max-width:64ch; font-size:1.0625rem; margin-top:var(--sp-2)}
-.band-light{background:var(--paper); color:var(--text-on-light)}
+/* ==========================================================================
+   LIGHT BAND: SURFACE TOKEN REMAP
+   Every component in this page reads its colours from the same small set of
+   tokens, so a light section is handled by re-pointing those tokens once
+   here rather than by writing a light variant of each component.
+
+   Deliberately NOT remapped:
+   --paper  is the light background itself AND is used as bright text inside
+            two dark tiles that sit ON a light band (the INDUSTRIES photo
+            panels). Remapping it would turn this section's own background
+            dark, because an element sees its own custom properties.
+   --ink    is the text colour on gold buttons and the background of those
+            same dark tiles.
+   --gold-dark is used by .cs-flag, which sits on a dark photo thumbnail
+            where the deep gold would fail. Handled per component below.
+   ========================================================================== */
+.band-light{background:var(--paper); color:var(--text-on-light);
+  --gold:            var(--gold-deep);
+  --gold-light:      var(--gold-deep);
+  --accent-on-dark:  var(--gold-deep);
+  --text-on-dark:    var(--ink);
+  --text-muted-dark: var(--muted);
+  --muted-on-dark:   var(--muted-2);
+  --rule:            var(--rule-light);
+  --bg-raised:       var(--paper-2);
+  --ink-deep:        var(--paper-3)}
 .band-light .sec-lede{color:var(--text-muted-light)}
+/* The INDUSTRIES panels are DARK tiles sitting on a light band, so the
+   remap above is wrong inside them: it dropped their gold kicker from
+   8.52:1 to 2.57:1 against the tile's own ink background. Re-assert the
+   dark surface palette within the tile. Values are the literal ramp,
+   because the tokens they would otherwise reference are the remapped ones. */
+.band-light .panel{
+  --gold:            #D4AF37;
+  --gold-light:      #E3C24E;
+  --accent-on-dark:  #D4AF37;
+  --text-on-dark:    #F7F7F5;
+  --text-muted-dark: #C0C3C7;
+  --muted-on-dark:   #868A90;
+  --rule:            #2A2C31;
+  --bg-raised:       #1C1D21}
+
+/* Per component exceptions to the remap above. */
+.band-light .rev-flag{color:var(--gold-deep); border-color:rgba(110,86,26,.55)}
+.band-light .cs-cta{text-decoration-color:rgba(110,86,26,.6)}
+.band-light .fit-items li{border-bottom-color:rgba(60,60,70,.14)}
+.band-light .fit-no .fit-items li::after{background:rgba(69,71,76,.45)}
 .band-deep{background:var(--ink-deep)}
 
 /* ==========================================================================
@@ -404,7 +449,9 @@ html:not(.js) .pillar-media{max-height:190px}
   padding:var(--sp-4) 0; border-bottom:1px solid rgba(120,120,130,.14);
   font-size:.9375rem; line-height:1.55}
 .fit-items li:last-child{border-bottom:0}
-.fit-yes .fit-items li{color:var(--paper)}
+/* --text-on-dark, not --paper: this has to flip with the surface, and
+   --paper is deliberately left un-remapped on light bands. */
+.fit-yes .fit-items li{color:var(--text-on-dark)}
 .fit-no .fit-items li{color:var(--muted-on-dark); position:relative}
 .fit-no .fit-items li::after{content:""; position:absolute; left:32px; right:0; top:50%;
   height:1px; background:rgba(93,96,102,.35); transform:scaleX(0); transform-origin:left;
@@ -681,13 +728,15 @@ html:not(.js) .pillar-media{max-height:190px}
   background:linear-gradient(180deg, transparent 45%, rgba(15,17,21,.85) 100%)}
 .cs-flag{position:absolute; top:12px; left:12px; z-index:2;
   font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.22em; text-transform:uppercase;
-  padding:3px 8px; color:var(--gold-dark); background:rgba(15,17,21,.75);
-  border:1px dashed rgba(168,132,42,.7)}
+  /* Sits on a near black chip over the thumbnail, so it needs the LIGHT end
+     of the ramp. --gold-dark measured 3.09:1 here at 9px, under the 4.5 floor. */
+  padding:3px 8px; color:#E3C24E; background:rgba(15,17,21,.78);
+  border:1px dashed rgba(212,175,55,.7)}
 .cs-body{padding:var(--sp-5) var(--sp-5) var(--sp-6)}
 .cs-kicker{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
   color:var(--gold); margin-bottom:var(--sp-3); display:block}
 .cs-headline{font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.45rem); font-weight:600;
-  line-height:1.2; margin-bottom:var(--sp-4); color:var(--paper)}
+  line-height:1.2; margin-bottom:var(--sp-4); color:var(--text-on-dark)}
 .cs-tags{display:flex; flex-wrap:wrap; gap:8px}
 .cs-tag{font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.16em; text-transform:uppercase;
   padding:3px 8px; color:var(--muted-on-dark); border:1px solid var(--rule)}
@@ -722,8 +771,10 @@ html:not(.js) .pillar-media{max-height:190px}
   transition:transform .4s cubic-bezier(.16,1,.3,1), background .3s var(--ease)}
 .vid-flag{position:absolute; top:12px; left:12px; z-index:2;
   font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.22em; text-transform:uppercase;
-  padding:3px 8px; color:var(--gold-dark); background:rgba(15,17,21,.75);
-  border:1px dashed rgba(168,132,42,.7)}
+  /* Sits on a near black chip over the thumbnail, so it needs the LIGHT end
+     of the ramp. --gold-dark measured 3.09:1 here at 9px, under the 4.5 floor. */
+  padding:3px 8px; color:#E3C24E; background:rgba(15,17,21,.78);
+  border:1px dashed rgba(212,175,55,.7)}
 .vid-body{padding:var(--sp-4) var(--sp-5) var(--sp-5)}
 .vid-cat{font-family:var(--font-mono); font-size:.5625rem; letter-spacing:.2em; text-transform:uppercase;
   color:var(--gold); margin-bottom:8px; display:block}
@@ -1115,7 +1166,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 
   <!-- 01 SELF-SELECT -->
-  <section class="sec" id="fit" data-reveal data-mark="01">
+  <section class="sec band-light" id="fit" data-reveal data-mark="01">
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="01 / FIT">01 / FIT</span>
@@ -1156,7 +1207,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 02 SERVICES -->
-  <section class="sec" id="services" data-reveal data-mark="02">
+  <section class="sec band-light" id="services" data-reveal data-mark="02">
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="02 / SERVICES">02 / SERVICES</span>
@@ -1426,7 +1477,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 06 FOUNDERS with REAL headshots (mockup/img/*) -->
-  <section class="sec" id="founders" data-reveal data-mark="06">
+  <section class="sec band-light" id="founders" data-reveal data-mark="06">
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="06 / PEOPLE">06 / PEOPLE</span>
@@ -1496,7 +1547,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- CASE STUDIES -->
-  <section class="sec" id="case-studies" data-reveal>
+  <section class="sec band-light" id="case-studies" data-reveal>
     <div class="wrap">
       <header class="sec-head">
         <span class="meta">Case studies</span>
@@ -1620,7 +1671,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 08 REVIEWS -->
-  <section class="sec" id="reviews" data-reveal data-mark="08">
+  <section class="sec band-light" id="reviews" data-reveal data-mark="08">
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="08 / TRUST">08 / TRUST</span>
