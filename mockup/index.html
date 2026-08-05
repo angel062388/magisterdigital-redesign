@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="preconnect" href="https://esm.sh" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tokens.css?v=11">
+<link rel="stylesheet" href="tokens.css?v=13">
 <style>
 /* ==========================================================================
    MAGISTER DIGITAL, HOMEPAGE
@@ -497,7 +497,6 @@ html:not(.js) .pillar-media{max-height:380px}
    sits on the left edge of each box. */
 .fit-split{display:grid; gap:var(--sp-5); margin-top:var(--sp-5)}
 .fit-panel{padding:var(--sp-7) var(--sp-6); position:relative; overflow:hidden;
-  display:flex; flex-direction:column;
   border:1px solid var(--rule); border-radius:12px}
 .fit-yes{background:var(--bg-raised); border-left:3px solid var(--gold)}
 .fit-no{background:var(--ink-deep); border-left:3px solid var(--muted)}
@@ -512,9 +511,10 @@ html:not(.js) .pillar-media{max-height:380px}
 .fit-yes .fit-caption{color:var(--gold-light)}
 .fit-no .fit-caption{color:var(--muted-on-dark)}
 .fit-items{list-style:none; margin:0; padding:0}
-/* margin-top:auto pins the button to the bottom of the panel, so the
-   two buttons line up even though the lists are different lengths. */
-.fit-cta{margin-top:auto; padding-top:var(--sp-6)}
+/* One shared call to action under BOTH panels rather than a button
+   inside each, so the section closes on a single next step. */
+.fit-actions{display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+  gap:var(--sp-5); margin-top:var(--sp-7)}
 .fit-items li{display:grid; grid-template-columns:32px 1fr; gap:var(--sp-3);
   padding:var(--sp-4) 0; border-bottom:1px solid rgba(120,120,130,.14);
   font-size:.9375rem; line-height:1.55}
@@ -1294,7 +1294,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <li style="--i:4"><span class="fit-check" aria-hidden="true">&check;</span>Accept being measured on booked work rather than rankings and impressions.</li>
             <li style="--i:5"><span class="fit-check" aria-hidden="true">&check;</span>Want one team across search, paid, automation and the site, not four vendors blaming each other.</li>
           </ol>
-          <div class="fit-cta"><a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a></div>
         </div>
         <div class="fit-panel fit-no" data-stagger>
           <div class="fit-mark">
@@ -1308,8 +1307,12 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <li style="--i:3"><span class="fit-check" aria-hidden="true">&times;</span>Would rather attribution stayed vague so the numbers keep looking good.</li>
             <li style="--i:4"><span class="fit-check" aria-hidden="true">&times;</span>Are still testing whether the offer sells at all.</li>
           </ol>
-          <div class="fit-cta"><a class="btn btn-ghost" href="#faq">Read the FAQ</a></div>
         </div>
+      </div>
+
+      <div class="fit-actions">
+        <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
       </div>
     </div>
   </section>
@@ -1441,7 +1444,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           <h3>Operator experience</h3>
           <p>Every one of us has carried the risk on a business, not just the reporting for one. It changes which levers get pulled first, and it is why we will tell you to fix intake before we sell you more traffic.</p>
           <div class="tag">Skin in the game</div>
-          <div class="pillar-media"><img src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg?auto=compress&cs=tinysrgb&w=1400&h=490&fit=crop" alt="" loading="lazy"></div>
+          <div class="pillar-media"><img src="https://images.pexels.com/photos/3183146/pexels-photo-3183146.jpeg?auto=compress&cs=tinysrgb&w=1400&h=490&fit=crop" alt="" loading="lazy"></div>
         </div>
       </div>
       <div class="pillar" data-stagger>
@@ -1982,6 +1985,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 </div>
 
-<script src="motion.js?v=11" defer></script>
+<script src="motion.js?v=13" defer></script>
 </body>
 </html>
