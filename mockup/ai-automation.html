@@ -67,6 +67,43 @@
     font-size:.85rem; color:var(--muted-on-dark,#868A90); max-width:56ch; line-height:1.6}
   .aa-hero .lede code{background:var(--ink-3,#1C1E23); border:1px solid var(--border,#2A2C31);
     padding:2px 8px; border-radius:3px; color:var(--paper,#F7F7F5)}
+
+  /* CANVAS (workflow + log two-column) */
+  .aa-canvas{display:grid; grid-template-columns:1.6fr 1fr; gap:0;
+    margin:40px auto; max-width:1400px; border:1px solid var(--border,#2A2C31);
+    border-radius:6px; overflow:hidden; background:var(--ink-2,#16171A)}
+  @media (max-width:900px){ .aa-canvas{grid-template-columns:1fr} }
+  .aa-canvas-head{grid-column:1/-1; display:flex; align-items:center;
+    padding:10px 18px; border-bottom:1px solid var(--border,#2A2C31);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  .aa-canvas-head .live{color:#3FB984; display:flex; align-items:center; gap:8px}
+  .aa-canvas-head .live::before{content:""; width:6px; height:6px; border-radius:50%;
+    background:#3FB984; box-shadow:0 0 0 3px rgba(63,185,132,.18); animation:aaPulse 1.6s ease-in-out infinite}
+  @keyframes aaPulse{50%{box-shadow:0 0 0 8px rgba(63,185,132,0)}}
+  .aa-canvas-head .path-pill{color:var(--paper,#F7F7F5); margin-left:16px}
+  .aa-canvas-head .right{margin-left:auto; color:var(--muted-2,#5E6066)}
+
+  /* FLOW panel */
+  .aa-flow{position:relative; padding:36px 28px; min-height:380px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(212,175,55,.06), transparent 45%),
+      linear-gradient(180deg, var(--ink-2,#16171A), var(--ink,#0F1115))}
+  .aa-flow svg{width:100%; height:auto; display:block}
+  .aa-node text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:11px; fill:var(--paper,#F7F7F5); letter-spacing:.06em}
+  .aa-node .sub{font-size:9.5px; fill:var(--muted-on-dark,#868A90); letter-spacing:.04em}
+  .aa-node rect{fill:var(--ink-3,#1C1E23); stroke:var(--border,#2A2C31); stroke-width:1}
+  .aa-node.active rect{stroke:var(--gold,#D4AF37); stroke-width:1.6; fill:rgba(212,175,55,.08)}
+  .aa-node.active text{fill:var(--gold,#D4AF37)}
+  .aa-node.done rect{stroke:#3FB984; fill:rgba(63,185,132,.06)}
+  .aa-node.done text{fill:#3FB984}
+  .aa-edge{stroke:var(--border,#2A2C31); stroke-width:1.4; fill:none}
+  .aa-edge.hot{stroke:var(--gold,#D4AF37); stroke-width:1.8; stroke-dasharray:6 6;
+    animation:aaDash 1s linear infinite}
+  @keyframes aaDash{to{stroke-dashoffset:-24}}
+  .aa-marker{fill:var(--border,#2A2C31)}
+  .aa-marker.hot{fill:var(--gold,#D4AF37)}
 </style>
 </head>
 <body>
@@ -99,6 +136,73 @@
     Live workflow, live log. Watch a real inbound qualify, book itself, and write to an audit row.
     Run against your own inbox during the audit call. Ships inside <code>your CRM</code>, not ours.
   </p>
+</section>
+
+<section class="aa-canvas" data-mark="02" aria-label="Live workflow diagram">
+  <div class="aa-canvas-head">
+    <span class="live">LIVE</span>
+    <span class="path-pill">workflow.lead_qualify.v3</span>
+    <span class="right">step <span data-step-idx>1</span> of 5 &middot; cycle <span data-cycle>001</span></span>
+  </div>
+
+  <div class="aa-flow" id="aaFlow">
+    <svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid meet" role="img"
+      aria-label="Live diagram of an inbound lead being triggered, qualified, decided on, booked or handed to a human, and logged.">
+      <defs>
+        <marker id="aaArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" class="aa-marker"/>
+        </marker>
+        <marker id="aaArrHot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" class="aa-marker hot"/>
+        </marker>
+      </defs>
+
+      <g class="aa-node" data-node="trigger">
+        <rect x="16" y="150" width="140" height="70" rx="4"/>
+        <text x="86" y="182" text-anchor="middle">TRIGGER</text>
+        <text x="86" y="200" text-anchor="middle" class="sub">webhook &middot; inquiry</text>
+      </g>
+      <path d="M158 185 L 218 185" class="aa-edge" data-edge="trigger" marker-end="url(#aaArr)"/>
+
+      <g class="aa-node" data-node="qualify">
+        <rect x="220" y="150" width="140" height="70" rx="4"/>
+        <text x="290" y="182" text-anchor="middle">QUALIFY</text>
+        <text x="290" y="200" text-anchor="middle" class="sub">two questions</text>
+      </g>
+      <path d="M362 185 L 422 185" class="aa-edge" data-edge="qualify" marker-end="url(#aaArr)"/>
+
+      <g class="aa-node" data-node="decide">
+        <rect x="424" y="150" width="140" height="70" rx="4"/>
+        <text x="494" y="182" text-anchor="middle">DECIDE</text>
+        <text x="494" y="200" text-anchor="middle" class="sub">book &middot; handoff</text>
+      </g>
+      <path d="M566 175 C 600 175, 600 100, 634 100" class="aa-edge" data-edge="decide-book" marker-end="url(#aaArr)"/>
+      <path d="M566 195 C 600 195, 600 270, 634 270" class="aa-edge" data-edge="decide-hand" marker-end="url(#aaArr)"/>
+
+      <g class="aa-node" data-node="route">
+        <rect x="636" y="66" width="152" height="70" rx="4"/>
+        <text x="712" y="98" text-anchor="middle">BOOK</text>
+        <text x="712" y="116" text-anchor="middle" class="sub">calendly &middot; slot found</text>
+      </g>
+      <g class="aa-node" data-node="handoff">
+        <rect x="636" y="236" width="152" height="70" rx="4"/>
+        <text x="712" y="268" text-anchor="middle">HANDOFF</text>
+        <text x="712" y="286" text-anchor="middle" class="sub">slack &middot; on-call</text>
+      </g>
+
+      <path d="M712 136 L 712 185" class="aa-edge" opacity=".35" data-edge="log-in-a" stroke-dasharray="3 4"/>
+      <path d="M712 236 L 712 190" class="aa-edge" opacity=".35" data-edge="log-in-b" stroke-dasharray="3 4"/>
+
+      <g class="aa-node" data-node="log">
+        <rect x="636" y="150" width="152" height="70" rx="4"/>
+        <text x="712" y="182" text-anchor="middle">LOG</text>
+        <text x="712" y="200" text-anchor="middle" class="sub">audit row &middot; v2</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- log panel populated by Task 4 -->
+
 </section>
 
 </main>
