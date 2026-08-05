@@ -158,6 +158,19 @@
     // matching Beth's 'clickable card' spec. Skipped when the click
     // target is already the inner button so we don't fire twice, and
     // when the target is a link/input the user meant to reach directly.
+    // SERVICE ROWS: the row used to be one big anchor, which meant the new
+    // Book a call button would have been a link nested inside a link. The row
+    // is a plain container now and the service name carries the real link, so
+    // clicking anywhere else on the row is restored here. Clicks that land on
+    // a genuine control are left alone so the button still does its own job.
+    [].forEach.call(document.querySelectorAll('[data-svc-row]'), function (row) {
+      row.addEventListener('click', function (e) {
+        if (e.target.closest('a, button, input, textarea, select, label')) return;
+        var href = row.getAttribute('data-href');
+        if (href) window.location.href = href;
+      });
+    });
+
     [].forEach.call(document.querySelectorAll('[data-card-modal]'), function (card) {
       card.addEventListener('click', function (e) {
         if (e.target.closest('button, a, input, textarea, select, label')) return;
