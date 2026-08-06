@@ -248,11 +248,11 @@
       // a pointer is anywhere near the page: a slow figure-of-eight tilt,
       // a rise and fall, and a highlight that sweeps the mark roughly every
       // six seconds. The logo animates on its own with no input at all.
-      var autoRy = Math.sin(t * 0.42) * 9;
-      var autoRx = Math.sin(t * 0.31) * 5.5;
-      var autoFy = Math.sin(t * 0.5) * 9;
-      var cycle  = (t * 0.17) % 1;
-      var autoSx = cycle < 0.4 ? -80 + (cycle / 0.4) * 265 : 185;
+      var autoRy = Math.sin(t * 0.55) * 15;
+      var autoRx = Math.sin(t * 0.41) * 9;
+      var autoFy = Math.sin(t * 0.65) * 18;
+      var cycle  = (t * 0.25) % 1;
+      var autoSx = cycle < 0.45 ? -80 + (cycle / 0.45) * 265 : 185;
 
       // Pointer influence decays to zero after it leaves, so the automatic
       // motion is never left frozen at wherever the cursor happened to be.
