@@ -159,9 +159,8 @@
   .aa-hero{position:relative; padding:120px 32px 100px; overflow:hidden; isolation:isolate;
     min-height:70vh; display:flex; align-items:center; justify-content:center;
     background:var(--ink,#0F1115)}
-  .aa-hero-bg{position:absolute; inset:0; z-index:0}
-  .aa-hero-bg img{width:100%; height:100%; object-fit:cover; display:block;
-    filter:saturate(.62) brightness(.62) contrast(1.05)}
+  .aa-hero-bg{position:absolute; inset:0; z-index:0; background:var(--ink,#0F1115)}
+  .aa-hero-canvas{display:block; width:100%; height:100%}
   /* Layered gradient overlay: darker at top/bottom edges + a soft mid vignette
      so text sits on a legible ink field regardless of where the image bright
      spots land. Gold hue kept just enough to bind the image to the palette. */
@@ -793,8 +792,14 @@
 <main>
 
 <section class="aa-hero" data-mark="01">
+  <!-- AR/VR motion graphic. Beth 2026-08-07 asked for the SVGator article's
+       "AR/VR Motion Graphics" category in the header and the previous hero
+       image removed. That article links to a designer's Dribbble rather than
+       offering an asset, so this is built from scratch: a receding spatial
+       tracking grid, UI planes anchored in depth, and a feature-point cloud,
+       all projected in perspective and parallaxed off the pointer. -->
   <div class="aa-hero-bg" aria-hidden="true">
-    <img src="img/ai-automation-hero.jpg" alt="" width="1400" height="933" fetchpriority="high">
+    <canvas class="aa-hero-canvas" data-arvr></canvas>
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
@@ -1108,7 +1113,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="23">
+<script data-v="24">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1138,6 +1143,200 @@
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* ===========================================================================
+   AR/VR MOTION GRAPHIC — hero background.
+   A spatial scene projected in perspective: a tracking grid receding to a
+   horizon, translucent UI planes anchored at different depths, and a cloud of
+   feature points wired to their neighbours. Everything parallaxes off the
+   pointer so the depth reads as real rather than as a flat pattern.
+
+   Constraints honoured:
+     - no libraries, this page loads none
+     - text legibility wins, so the centre stays quiet and detail lives at the
+       edges, underneath the existing gradient overlay
+     - pauses when off screen or the tab is hidden
+     - prefers-reduced-motion renders ONE static frame, never a loop
+     - DPR capped at 2 so a 4K display does not quadruple the fill cost
+   =========================================================================== */
+(function(){
+  const cv = document.querySelector('[data-arvr]');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const GOLD = [212,175,55];
+  let W = 0, H = 0, dpr = 1, raf = 0, running = false, t = 0;
+  const ptr = { x: 0, y: 0, tx: 0, ty: 0 };   // current + target parallax
+
+  function resize(){
+    const r = cv.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, Math.round(r.width));
+    H = Math.max(1, Math.round(r.height));
+    cv.width  = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  // ---- scene -------------------------------------------------------------
+  const FOCAL = 620;
+  let nodes = [], panels = [];
+
+  function build(){
+    // feature-point cloud, denser toward the edges so the middle stays legible
+    const count = W < 700 ? 46 : 78;
+    nodes = [];
+    for (let i = 0; i < count; i++){
+      let nx = (Math.random() * 2 - 1);
+      nx = Math.sign(nx) * Math.pow(Math.abs(nx), 0.55);   // push away from centre
+      nodes.push({
+        x: nx * 1150,
+        y: (Math.random() * 2 - 1) * 430,
+        z: 130 + Math.random() * 1500,
+        seed: Math.random() * Math.PI * 2,
+        amp: 8 + Math.random() * 20
+      });
+    }
+    // UI planes anchored in space, kept off the centre column
+    panels = [
+      { x:-780, y:-190, z: 480, w:250, h:150, seed:0.4 },
+      { x: 730, y:  90, z: 400, w:290, h:170, seed:1.9 },
+      { x:-620, y: 210, z: 900, w:210, h:130, seed:3.1 },
+      { x: 880, y:-230, z: 820, w:230, h:140, seed:4.7 },
+      { x:-980, y:  40, z:1350, w:190, h:120, seed:2.2 },
+      { x: 640, y: 280, z:1500, w:200, h:120, seed:5.5 }
+    ];
+  }
+
+  function project(x, y, z){
+    const s = FOCAL / (FOCAL + z);
+    return { X: W/2 + x * s, Y: H/2 + y * s, s };
+  }
+  const rgba = (a) => `rgba(${GOLD[0]},${GOLD[1]},${GOLD[2]},${a})`;
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // eased parallax follow
+    ptr.x += (ptr.tx - ptr.x) * 0.045;
+    ptr.y += (ptr.ty - ptr.y) * 0.045;
+    const px = ptr.x * 46, py = ptr.y * 26;
+
+    // --- receding tracking grid (floor + ceiling) ---
+    const drift = (t * 26) % 260;
+    for (const dir of [1, -1]){
+      for (let i = 0; i < 13; i++){
+        const z = i * 260 + drift;
+        const yWorld = dir * 330;
+        const a = project(-2600, yWorld + py * .4, z);
+        const b = project( 2600, yWorld + py * .4, z);
+        const fade = Math.max(0, 1 - z / 3100) * 0.30;
+        if (fade <= 0.005) continue;
+        ctx.strokeStyle = rgba(fade * 0.55);
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(a.X + px * .5, a.Y); ctx.lineTo(b.X + px * .5, b.Y); ctx.stroke();
+      }
+      // converging rails
+      for (let k = -6; k <= 6; k++){
+        const x = k * 330;
+        const n = project(x, dir * 330 + py * .4, 60);
+        const f = project(x, dir * 330 + py * .4, 3100);
+        const g = ctx.createLinearGradient(n.X + px * .5, n.Y, f.X + px * .5, f.Y);
+        g.addColorStop(0, rgba(0.16)); g.addColorStop(1, rgba(0));
+        ctx.strokeStyle = g; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(n.X + px * .5, n.Y); ctx.lineTo(f.X + px * .5, f.Y); ctx.stroke();
+      }
+    }
+
+    // --- anchored UI planes ---
+    for (const p of panels){
+      const z = p.z + Math.sin(t * 0.5 + p.seed) * 34;
+      const c = project(p.x + px, p.y + py + Math.sin(t * .7 + p.seed) * 9, z);
+      if (c.s <= 0) continue;
+      const w = p.w * c.s, h = p.h * c.s;
+      const fade = Math.max(0, Math.min(1, 1 - (z - 300) / 1500));
+      if (fade <= 0.01) continue;
+      ctx.save();
+      ctx.translate(c.X, c.Y);
+      ctx.fillStyle = `rgba(22,23,26,${0.34 * fade})`;
+      ctx.strokeStyle = rgba(0.34 * fade);
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.rect(-w/2, -h/2, w, h); ctx.fill(); ctx.stroke();
+      // corner brackets, the AR framing cue
+      const b = Math.min(w, h) * 0.24;
+      ctx.strokeStyle = rgba(0.62 * fade); ctx.lineWidth = 1.6;
+      for (const [sx, sy] of [[-1,-1],[1,-1],[-1,1],[1,1]]){
+        const cx = sx * w/2, cy = sy * h/2;
+        ctx.beginPath();
+        ctx.moveTo(cx - sx * b, cy); ctx.lineTo(cx, cy); ctx.lineTo(cx, cy - sy * b);
+        ctx.stroke();
+      }
+      // scan sweep inside the plane
+      const sweep = ((t * 0.42 + p.seed) % 1);
+      ctx.strokeStyle = rgba(0.30 * fade);
+      ctx.beginPath();
+      ctx.moveTo(-w/2, -h/2 + h * sweep); ctx.lineTo(w/2, -h/2 + h * sweep); ctx.stroke();
+      ctx.restore();
+    }
+
+    // --- feature points + neighbour wiring ---
+    const pts = [];
+    for (const n of nodes){
+      const z = n.z;
+      const p = project(n.x + px * 1.5, n.y + py + Math.sin(t * .6 + n.seed) * n.amp, z);
+      if (p.s <= 0) continue;
+      const fade = Math.max(0, Math.min(1, 1 - (z - 120) / 1600));
+      pts.push({ X: p.X, Y: p.Y, s: p.s, fade });
+    }
+    ctx.lineWidth = 1;
+    for (let i = 0; i < pts.length; i++){
+      for (let j = i + 1; j < pts.length; j++){
+        const dx = pts[i].X - pts[j].X, dy = pts[i].Y - pts[j].Y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 > 24000) continue;
+        const a = (1 - d2 / 24000) * 0.20 * Math.min(pts[i].fade, pts[j].fade);
+        if (a <= 0.004) continue;
+        ctx.strokeStyle = rgba(a);
+        ctx.beginPath(); ctx.moveTo(pts[i].X, pts[i].Y); ctx.lineTo(pts[j].X, pts[j].Y); ctx.stroke();
+      }
+    }
+    for (const p of pts){
+      const r = Math.max(0.7, 2.1 * p.s);
+      ctx.fillStyle = rgba(0.55 * p.fade);
+      ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+
+  function loop(){
+    t += 1/60;
+    draw();
+    raf = requestAnimationFrame(loop);
+  }
+  function start(){ if (running || reduced) return; running = true; raf = requestAnimationFrame(loop); }
+  function stop(){ if (!running) return; running = false; cancelAnimationFrame(raf); }
+
+  // pointer parallax, fine pointers only
+  if (window.matchMedia('(pointer:fine)').matches && !reduced){
+    window.addEventListener('pointermove', e => {
+      ptr.tx = (e.clientX / window.innerWidth) * 2 - 1;
+      ptr.ty = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { resize(); draw(); }, 150); }, { passive: true });
+  document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+
+  resize();
+  draw();                                  // paint frame zero immediately
+  if (reduced) return;                     // static frame is the whole story
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()),
+      { threshold: 0 }).observe(cv);
+  } else start();
 })();
 
 /* FAQ disclosure height, ported from the homepage's motion.js. Race-guarded so
