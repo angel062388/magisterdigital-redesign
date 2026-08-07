@@ -170,20 +170,22 @@
       radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.22) 0%, rgba(15,17,21,.72) 78%),
       linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.30) 40%, rgba(15,17,21,.86) 100%),
       linear-gradient(90deg, rgba(15,17,21,.55) 0%, rgba(15,17,21,.10) 30%, rgba(15,17,21,.10) 70%, rgba(15,17,21,.55) 100%)}
-  .aa-hero-content{position:relative; z-index:10; max-width:820px; text-align:center;
-    margin:0 auto; padding:0 8px}
+  .aa-hero-content{position:relative; z-index:10; max-width:1240px; text-align:center;
+    margin:0 auto; padding:0 8px; width:100%}
   .aa-hero .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
     margin-bottom:20px; display:inline-flex; gap:10px; align-items:center;
     justify-content:center}
   .aa-hero .eyebrow .num{color:var(--muted-on-dark,#868A90)}
+  /* No char cap: fill the container. Beth 2026-08-07: 'the texts should
+     cover the spaces.' */
   .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:clamp(2.05rem, 5vw, 3.9rem); line-height:1.06; letter-spacing:-.015em;
-    margin:0 auto 24px; max-width:22ch; text-wrap:balance;
+    font-size:clamp(2.05rem, 5.4vw, 4.4rem); line-height:1.06; letter-spacing:-.015em;
+    margin:0 auto 24px; max-width:none; text-wrap:balance;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
   .aa-hero h1 em{font-style:italic; color:var(--gold,#D4AF37)}
   .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.88rem; color:var(--paper,#F7F7F5); max-width:58ch; line-height:1.65;
+    font-size:.92rem; color:var(--paper,#F7F7F5); max-width:88ch; line-height:1.65;
     margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
   .aa-hero .lede code{background:rgba(28,30,35,.85); border:1px solid var(--border,#2A2C31);
     padding:2px 8px; border-radius:3px; color:var(--paper,#F7F7F5)}
@@ -278,6 +280,11 @@
   .aa-sec h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
     font-size:clamp(1.6rem, 3vw, 2.4rem); line-height:1.1; margin:0 0 24px;
     max-width:none; text-wrap:balance; color:var(--paper,#F7F7F5)}
+  .aa-sec .intro{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:82ch; margin:0 0 20px}
+  .aa-sec .intro + .intro{margin-top:0}
+  .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.92rem; margin-bottom:32px}
 
   /* Three-item lands grid */
   .aa-lands{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
@@ -373,6 +380,9 @@
     border-radius:6px; border:2px solid var(--gold-dark,#A8842A);
     box-shadow:0 2px 0 rgba(0,0,0,.12); text-decoration:none}
   .aa-cta-band .tel .num{font-size:1rem}
+  .aa-cta-band .note-lede{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1.02rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:76ch; margin:0 auto 32px}
   .aa-cta-band .note{margin-top:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.72rem; color:var(--muted-on-dark,#868A90)}
 </style>
@@ -516,29 +526,32 @@
 
 <section class="aa-sec" data-mark="03">
   <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2>An audit, not a pitch. Written on a 45-minute call.</h2>
+  <h2>An AI stack audit, not a pitch.</h2>
+  <p class="intro">A 45-minute working session with the Magister Digital AI engineering team. We read your CRM data, your intake process, and your current manual workload. You leave with a written spec of the three automations we would build first, ranked by revenue impact, whether or not you ever hire us.</p>
+  <p class="intro small">If the audit shows automation is not the highest-return move for your business right now, we tell you that before we take a dollar. We will not sign an engagement we cannot specify in plain English on a single page.</p>
   <div class="aa-lands">
     <div class="item">
       <span class="idx">01</span>
       <h3>A read on your manual workload</h3>
-      <p>How many inbounds land after hours, what your team does with them now, and what falls through in the middle of the week.</p>
+      <p>We walk your intake process, follow-up, and quote drafting and show you exactly where your team is spending the most manual hours and where leads fall through between inquiry and booked appointment.</p>
     </div>
     <div class="item">
       <span class="idx">02</span>
       <h3>A written spec of three builds</h3>
-      <p>Ranked by revenue impact. The first is the one you are losing most money on tonight. The other two are next quarter.</p>
+      <p>Three specific automation builds ranked by estimated revenue impact, with the data from your own CRM that justifies the ranking. Built on Flowbots, Anthropic Claude, n8n, and custom Python, inside your stack.</p>
     </div>
     <div class="item">
       <span class="idx">03</span>
       <h3>An honest go or no-go</h3>
-      <p>If the numbers do not support the spend we will say so on the call, rather than three months in. That is the whole point of the audit.</p>
+      <p>If the math does not work for your business, we say so on the call and you keep your money. If automation is not the highest-return move right now, we tell you what is. No black-box bot, no SaaS license you cannot audit.</p>
     </div>
   </div>
 </section>
 
 <section class="aa-sec" data-mark="04">
-  <div class="eyebrow">04 &middot; Inside the build</div>
-  <h2>The first automation, on the audit call, in your stack.</h2>
+  <div class="eyebrow">04 &middot; What we would run first</div>
+  <h2>The first automation we build is the one losing you the most revenue tonight.</h2>
+  <p class="intro">A 24/7 lead qualification agent, from trigger to booked appointment, every decision written to a log your office manager can read without asking us. Trigger the moment the inquiry arrives. Qualify on your team's logic. Book on your calendar or hand to a named person on your team. Every exchange written to an audit row your team owns.</p>
   <div class="aa-spec-table">
     <div class="aa-spec-row">
       <div class="k">TRIGGER</div>
@@ -600,17 +613,17 @@
 </section>
 
 <section class="aa-sec" data-mark="06">
-  <div class="eyebrow">06 &middot; Why we work with your stack</div>
-  <h2>A system, not a platform. Built on the tools you already pay for.</h2>
+  <div class="eyebrow">06 &middot; Why this is built differently</div>
+  <h2>AI automation only pays off when it sits next to the rest of the stack, run by one team.</h2>
   <div class="aa-stack">
     <div>
-      <p>We do not sell you a login. We build workflows that sit inside your CRM, your calendar, your phone system, and your on-call Slack, using accounts your team already has.</p>
-      <p>If your stack is Go High Level, HubSpot, ServiceTitan, or a bespoke build, the automation lives there. The agents, workflows, training data, and log structure belong to your business. You do not lose access to anything when we stop working together.</p>
-      <p class="small">Ownership matters because vendors churn, contracts end, and the automation that qualified last month's leads needs to keep qualifying next month's, regardless of who built it.</p>
+      <p>An automation that books a lead is only worth what the lead is worth, and that depends on the paid media that produced it, the SEO that ranked you, the CRM that tracks it to closed, and the web that converted it. Magister Digital runs all of it as one engine. The same Anthropic Claude, n8n, and custom Python that power your intake agent also feed your attribution dashboard.</p>
+      <p>The IP stays with you. The qualification logic is read weekly by the team that built it. You are not buying a bot from a vendor, you are buying a system from operators who run TurnkeyRenovators on the same stack and answer to a named founder every Monday.</p>
+      <p class="small">Every founder who ever called AI a black box was sold a SaaS subscription instead of a build. When we spec a system, your ops manager reads the spec before we write a line. When we ship it, the logs are yours.</p>
     </div>
     <div class="quote">
-      Rankings and impressions are inputs. We instrument calls, forms, and the CRM so the reporting line ends at booked work, not clicks.
-      <cite>&mdash; from the audit brief</cite>
+      AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.
+      <cite>&mdash; from the live magisterdigital.ai/ai-automation page</cite>
     </div>
   </div>
 </section>
@@ -625,35 +638,36 @@
     </details>
     <details>
       <summary>How is this different from buying Go High Level or another platform?</summary>
-      <div class="answer">A platform gives you a canvas. We build the system that sits on it. Whether your stack is Go High Level, HubSpot, ServiceTitan, or a bespoke build, we spec the workflows against your actual intake data and deploy inside the tools your team already uses. A system is not a platform.</div>
+      <div class="answer">A SaaS platform gives you a tool. We spec, build, and operate a system trained on your actual data and your team's decision logic. Go High Level is one of the platforms we build inside, alongside HubSpot, ServiceTitan, Jobber, Housecall Pro, and custom builds. The platform is not the product. The system running on it is.</div>
     </details>
     <details>
       <summary>Can my team see what the agent is doing?</summary>
-      <div class="answer">Yes. Every decision writes an audit row with the inputs, the rule that fired, the action, and the outcome. Your team reads the log the same way they read any other queue. No vendor permission needed to see any of it.</div>
+      <div class="answer">Yes. Every agent decision writes a readable log entry: the inquiry it received, the qualification logic it applied, the response sent, and the outcome, booked or disqualified or handed to a human. Your office manager reads the log without asking us. That is a design requirement, not an add-on.</div>
     </details>
     <details>
       <summary>What if the agent makes a mistake?</summary>
-      <div class="answer">Weekly log review flags misqualifications and confidence-band anomalies. Rule adjustments and re-tuning happen in the same session, and every change is documented in the log. You are not waiting for a support ticket.</div>
+      <div class="answer">We monitor the log weekly. When the agent misqualifies a lead or drafts a quote with the wrong labor rate, we flag it, adjust the logic, and document the change. You see the adjustment in the log. We do not wait for you to notice a pattern and file a support ticket.</div>
     </details>
     <details>
       <summary>Does AI automation work for medical practices under HIPAA?</summary>
-      <div class="answer">Within limits. No PHI in automated exchanges. Booking, follow-up, and post-visit reminders are safe. The audit call defines the exact line for your practice before anything ships.</div>
+      <div class="answer">It can, within defined limits. We do not automate exchanges that involve protected health information without a formal HIPAA-compliant infrastructure review. We do automate consultation booking, follow-up on general inquiries, and content pipelines inside marketing copy. We name exactly where the compliance line sits for your practice at the audit stage.</div>
     </details>
     <details>
       <summary>How much does AI automation cost?</summary>
-      <div class="answer">Single-channel starts at $20,000 per month. Full-stack, multi-workflow deployments start at $60,000 per month. The written spec that comes out of the audit call produces your exact number, not a range.</div>
+      <div class="answer">AI automation as a single-channel engagement starts at $20K per month. Full-stack engagements that include AI automation, SEO, paid media, and CRM start at $60K per month. We scope from there based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
     </details>
   </div>
 </section>
 
 <section class="aa-cta-band" data-mark="08" id="call">
-  <div class="eyebrow">08 &middot; Book the audit</div>
+  <div class="eyebrow">08 &middot; Next step</div>
   <h2>The person who reads your spec is the person who builds the system.</h2>
+  <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
   <a class="tel" href="tel:+16193300953">
     <span>Call</span>
     <span class="num">(619) 330-0953</span>
   </a>
-  <p class="note">45 minutes. No deck. If the numbers do not support the spend we will say so on the call.</p>
+  <p class="note">45 minutes. Michael Merlino, Chief Strategist and AI Systems, runs the call.</p>
 </section>
 
 </main>
