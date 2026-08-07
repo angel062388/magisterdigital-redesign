@@ -348,6 +348,69 @@
      the right margin so the width reads as intentional composition rather than
      leftover space. Decorative only, so it carries aria-hidden semantics by
      being a pseudo element. */
+  /* FOUNDER MODAL — ported verbatim in behaviour from the homepage, with the
+     literal token values the AA page uses so it does not depend on tokens.css
+     variables the homepage happens to define. */
+  body.modal-open{overflow:hidden}
+  .modal{position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center}
+  .modal[hidden]{display:none}
+  .modal-backdrop{position:absolute; inset:0; background:rgba(4,5,7,.75);
+    backdrop-filter:blur(10px); animation:aaFadeIn .3s cubic-bezier(.16,1,.3,1)}
+  .modal-panel{position:relative; background:#1C1D21; border:1px solid #2A2C31;
+    color:#F7F7F5; width:min(600px, calc(100vw - 32px));
+    max-height:calc(100dvh - 64px); overflow:hidden; display:flex; flex-direction:column;
+    animation:aaPanelIn .5s cubic-bezier(.16,1,.3,1);
+    box-shadow:0 40px 80px rgba(0,0,0,.45); border-radius:8px}
+  @keyframes aaFadeIn{from{opacity:0}}
+  @keyframes aaPanelIn{from{opacity:0; transform:translateY(30px) scale(.98)}}
+  .modal-close{position:absolute; top:14px; right:16px; background:rgba(15,17,21,.7);
+    border:0; padding:8px 14px; color:#F7F7F5;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.2rem; cursor:pointer; line-height:1; z-index:5; border-radius:4px;
+    transition:color .28s cubic-bezier(.16,1,.3,1), background .28s cubic-bezier(.16,1,.3,1)}
+  .modal-close:hover{color:#D4AF37; background:rgba(15,17,21,.9)}
+  .modal-close:focus-visible{outline:2px solid #E3C24E; outline-offset:2px}
+  .modal-hero{position:relative; aspect-ratio:16/10; overflow:hidden; flex:none;
+    animation:aaPhotoRise .6s cubic-bezier(.16,1,.3,1) both}
+  @keyframes aaPhotoRise{from{opacity:0; transform:translateY(80px) scale(.9)}}
+  .modal-hero img{width:100%; height:100%; object-fit:cover; object-position:center 25%;
+    filter:grayscale(.1) brightness(.95) contrast(1.05)}
+  .modal-hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(28,29,33,.95) 100%)}
+  .modal-body{padding:28px; overflow-y:auto}
+  .modal-body h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:500; font-size:1.85rem; margin:0 0 6px; color:#F7F7F5}
+  .modal-body .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:20px}
+  .modal-body .modal-bio{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; color:var(--muted-on-dark,#868A90); line-height:1.65;
+    margin:0 0 20px; max-width:52ch}
+  .modal-flag{display:inline-block; margin-bottom:12px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.5625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:#D4AF37; padding:3px 7px; border:1px dashed rgba(168,132,42,.7)}
+  /* the card is a hover affordance; the BUTTON is the semantic control */
+  .aa-founder-card{position:relative; cursor:pointer;
+    transition:transform .28s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-card:hover{transform:translateY(-3px)}
+  .aa-founder-card:focus-within{outline:2px solid #E3C24E; outline-offset:6px}
+  .aa-founder-more{display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    background:none; border:0; padding:0; cursor:pointer;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:#6E561A; opacity:.85;
+    transition:color .25s cubic-bezier(.16,1,.3,1), gap .25s cubic-bezier(.16,1,.3,1), opacity .25s}
+  .aa-sec:not(.band-light) .aa-founder-more{color:#D4AF37}
+  .aa-founder-card:hover .aa-founder-more{opacity:1; gap:10px}
+  .aa-founder-more:hover{opacity:1; gap:12px}
+  .aa-founder-more:focus-visible{outline:2px solid #E3C24E; outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    .modal-backdrop,.modal-panel,.modal-hero{animation:none}
+    .aa-founder-card{transition:none}
+    .aa-founder-card:hover{transform:none}
+  }
+
   .aa-h2-rule{display:flex; align-items:center; gap:22px}
   .aa-h2-rule::after{content:""; flex:1 1 auto; height:1px; min-width:40px;
     background:linear-gradient(90deg, rgba(212,175,55,.55), rgba(212,175,55,0))}
@@ -917,26 +980,29 @@
   <div class="eyebrow">07 &middot; Who you will work with</div>
   <h2>Three founders. You will speak to <em>one of them.</em></h2>
   <div class="aa-founders">
-    <div class="aa-founder-card">
+    <div class="aa-founder-card" data-card-modal="brian">
       <div class="aa-founder-img">
         <img src="img/brian-hong.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
       </div>
       <h3>Brian Hong</h3>
       <div class="role">Co-founder &amp; CEO</div>
+      <button class="aa-founder-more" type="button" data-modal="brian" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
     </div>
-    <div class="aa-founder-card">
+    <div class="aa-founder-card" data-card-modal="michael">
       <div class="aa-founder-img">
         <img src="img/michael-merlino.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
       </div>
       <h3>Michael Merlino</h3>
       <div class="role">Co-founder, Strategy &amp; AI systems</div>
+      <button class="aa-founder-more" type="button" data-modal="michael" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
     </div>
-    <div class="aa-founder-card">
+    <div class="aa-founder-card" data-card-modal="dimitry">
       <div class="aa-founder-img">
         <img src="img/dimitry-morgan.png" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
       </div>
       <h3>Dimitry Morgan</h3>
       <div class="role">Co-founder, Head of paid media</div>
+      <button class="aa-founder-more" type="button" data-modal="dimitry" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
     </div>
   </div>
 </section>
@@ -959,12 +1025,34 @@
 
 </main>
 
+<!-- FOUNDER MODAL — ported from the homepage per Beth 2026-08-07 ('you didnt
+     copy the homepage. these profiles are clickable with bio'). Same markup,
+     same behaviour: focus moves to the close button, siblings go inert, Esc
+     closes, focus returns to the trigger, and the photo-rise entrance is
+     restarted on every open so it fires for the 2nd and 3rd founder too. -->
+<div class="modal" id="founder-modal" role="dialog" aria-modal="true" aria-labelledby="founder-modal-title" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" type="button" aria-label="Close" data-modal-close>&times;</button>
+    <div class="modal-hero">
+      <img data-modal-photo src="" alt="">
+    </div>
+    <div class="modal-body">
+      <span class="modal-flag">Bio pending sign-off</span>
+      <h2 id="founder-modal-title" data-modal-title>Founder</h2>
+      <div class="role" data-modal-role>Role</div>
+      <p class="modal-bio" data-modal-bio></p>
+      <a class="btn btn-ghost" data-modal-link href="#"><span class="t">Full profile</span><span class="ar" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+
 <footer class="aa-footer">
   <div><b>Magister Digital</b> &middot; San Diego HQ &middot; 1135 Garnet Ave #13</div>
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="20">
+<script data-v="21">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -994,6 +1082,125 @@
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* FOUNDER MODAL. Behaviour ported from the homepage's motion.js, which this
+   page does not load. Same contract: focus to the close button on open,
+   siblings inert while open, Esc closes, focus tab-trapped inside the panel,
+   focus returns to the triggering button on close, and the entrance animation
+   is restarted every open so it fires for the 2nd and 3rd founder too. */
+(function(){
+  const modal = document.getElementById('founder-modal');
+  if (!modal) return;
+
+  const titleEl = modal.querySelector('[data-modal-title]');
+  const roleEl  = modal.querySelector('[data-modal-role]');
+  const photoEl = modal.querySelector('[data-modal-photo]');
+  const bioEl   = modal.querySelector('[data-modal-bio]');
+  const linkEl  = modal.querySelector('[data-modal-link]');
+  const heroEl  = modal.querySelector('.modal-hero');
+  const panelEl = modal.querySelector('.modal-panel');
+
+  /* Bios are the homepage's, unchanged. They are deliberately flagged
+     "pending sign-off" because no founder credential in the audit is
+     verified. Do not write invented biography here. */
+  const FOUNDERS = {
+    brian: {
+      name: 'Brian Hong', role: 'Co-founder & CEO',
+      photo: 'img/brian-hong.jpg',
+      alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
+      bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
+      link: '/brian-hong/'
+    },
+    michael: {
+      name: 'Michael Merlino', role: 'Co-founder, Strategy & AI systems',
+      photo: 'img/michael-merlino.jpg',
+      alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
+      bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
+      link: '/michael-merlino/'
+    },
+    dimitry: {
+      name: 'Dimitry Morgan', role: 'Co-founder, Head of paid media',
+      photo: 'img/dimitry-morgan.png',
+      alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
+      bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
+      link: '/dimitry-morgan/'
+    }
+  };
+
+  let trigger = null;
+
+  function siblings(){
+    return [
+      document.querySelector('.aa-sysbar'),
+      document.querySelector('.aa-hdr'),
+      document.querySelector('header'),
+      document.querySelector('main'),
+      document.querySelector('.aa-footer')
+    ].filter(Boolean).filter(el => !el.contains(modal));
+  }
+  function focusables(){
+    return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  }
+  function restart(el){
+    if (!el) return;
+    el.style.animation = 'none';
+    void el.offsetWidth;          // reflow so it registers as a fresh animation
+    el.style.animation = '';
+  }
+  function open(key, from){
+    const d = FOUNDERS[key];
+    if (!d) return;
+    trigger = from;
+    titleEl.textContent = d.name;
+    roleEl.textContent  = d.role;
+    photoEl.setAttribute('src', d.photo);
+    photoEl.setAttribute('alt', d.alt);
+    bioEl.textContent = d.bio;
+    linkEl.setAttribute('href', d.link);
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    siblings().forEach(el => el.setAttribute('inert',''));
+    restart(heroEl); restart(panelEl);
+    document.addEventListener('keydown', onKey);
+    const close = modal.querySelector('.modal-close');
+    if (close) close.focus();
+  }
+  function close(){
+    if (modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    siblings().forEach(el => el.removeAttribute('inert'));
+    document.removeEventListener('keydown', onKey);
+    if (trigger && trigger.focus) trigger.focus();
+    trigger = null;
+  }
+  function onKey(e){
+    if (e.key === 'Escape'){ e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables();
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      open(btn.getAttribute('data-modal'), btn);
+    });
+  });
+  // clicking anywhere on the card opens it too, but the button stays the
+  // semantic control for keyboard and screen readers
+  document.querySelectorAll('[data-card-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const btn = card.querySelector('[data-modal]');
+      open(card.getAttribute('data-card-modal'), btn || card);
+    });
+  });
+  modal.querySelectorAll('[data-modal-close]').forEach(el =>
+    el.addEventListener('click', close));
 })();
 
 /* Section 04 spec-table pipeline. Walks the five steps on a loop while the
