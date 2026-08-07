@@ -16,7 +16,7 @@
   html,body{margin:0; background:var(--ink-2,#16171A); color:var(--paper,#F7F7F5);
     font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.5}
-  ::selection{background:var(--gold,#D4AF37); color:var(--ink,#0F1115)}
+  ::selection{background:rgba(212,175,55,.30)}
   a{color:inherit; text-decoration:none}
 
   /* SYSTEM BAR */
@@ -181,7 +181,7 @@
      cover the spaces.' */
   .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
     font-size:clamp(2.05rem, 5.2vw, 4.15rem); line-height:1.2; letter-spacing:-.015em;
-    margin:0 auto 24px; max-width:none; text-wrap:balance;
+    margin:0 auto 24px; max-width:none;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
   /* Skylead-style rounded pill behind the highlighted phrase. Beth
      2026-08-07: 'copy how the text in the hero banner highlighted', then
@@ -327,7 +327,7 @@
     margin-bottom:12px}
   .aa-sec h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
     font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.1; margin:0 0 24px;
-    max-width:none; text-wrap:balance; color:var(--paper,#F7F7F5)}
+    max-width:none; color:var(--paper,#F7F7F5)}
   .aa-sec .intro{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
     font-size:1.0625rem; line-height:1.65; color:var(--paper,#F7F7F5);
     max-width:none; margin:0 0 20px}
@@ -482,7 +482,9 @@
     transition:border-color .25s ease}
   .aa-founder-img img{width:100%; height:100%; object-fit:cover;
     object-position:center 20%;
-    filter:grayscale(1) brightness(.9) contrast(1.05)}
+    filter:grayscale(1) brightness(.9) contrast(1.05);
+    transition:filter .6s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-card:hover .aa-founder-img img{filter:grayscale(0) brightness(1) contrast(1)}
   .aa-founder-img::after{content:""; position:absolute; inset:0;
     background:linear-gradient(180deg, transparent 60%, rgba(15,17,21,.20) 100%);
     pointer-events:none}
@@ -670,7 +672,7 @@
     transition:transform .18s ease}
   .aa-faq details[open] summary::after{content:"\2212"; transform:none} /* minus sign */
   .aa-faq .answer{padding:0 4px 24px; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
-    font-size:.95rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:70ch}
+    font-size:.95rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
 
   /* CTA BAND */
   .aa-cta-band{position:relative; padding:112px 32px; text-align:center; overflow:hidden;
@@ -697,7 +699,7 @@
     gap:18px; margin-top:8px; position:relative; z-index:2}
   .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
     font-size:clamp(1.9rem, 5vw, 3.4rem); line-height:1.2; margin:0 auto 26px;
-    max-width:none; color:var(--paper,#F7F7F5); text-wrap:balance; letter-spacing:-.015em;
+    max-width:none; color:var(--paper,#F7F7F5); letter-spacing:-.015em;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
   .aa-cta-band .tel{display:inline-flex; align-items:center; gap:14px;
     padding:18px 28px; background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
@@ -768,7 +770,7 @@
 
 <section class="aa-sec band-light aa-intro-band">
   <div class="eyebrow">02 &middot; See how it works</div>
-  <h2>Watch the qualification agent run.</h2>
+  <h2>Watch the qualification agent run</h2>
   <p class="intro">A live simulation of the lead-qualify workflow. Every tick advances a real step. Every log line writes to the audit row your team owns.</p>
 </section>
 
@@ -914,7 +916,7 @@
 
 <section class="aa-sec band-light" data-mark="05">
   <div class="eyebrow">05 &middot; Why this is built differently</div>
-  <h2 class="aa-h2-oneline">One team runs the whole stack.</h2>
+  <h2 class="aa-h2-oneline">One team runs the whole stack</h2>
 
   <ul class="aa-services" aria-label="The other six channels we operate">
     <li><a class="aa-service-card" href="index.html#services">
@@ -948,7 +950,7 @@
 
 <section class="aa-sec" data-mark="06" id="faq">
   <div class="eyebrow">06 &middot; Questions operators ask first</div>
-  <h2>The questions a careful buyer is already holding.</h2>
+  <h2>The questions a careful buyer is already holding</h2>
   <div class="aa-faq">
     <details>
       <summary>What happens to the automation when the engagement ends?</summary>
@@ -979,7 +981,7 @@
 
 <section class="aa-sec band-light" data-mark="07">
   <div class="eyebrow">07 &middot; Who you will work with</div>
-  <h2>Three founders. You will speak to <em>one of them.</em></h2>
+  <h2>Three founders. You will speak to <em>one of them</em></h2>
   <div class="aa-founders">
     <div class="aa-founder-card" data-card-modal="brian">
       <div class="aa-founder-img">
@@ -1014,7 +1016,7 @@
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">08 &middot; Next step</div>
-    <h2>The person who <em>reads your spec</em> is the person who <em>builds the system</em>.</h2>
+    <h2>The person who <em>reads your spec</em> is the person who <em>builds the system</em></h2>
     <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
