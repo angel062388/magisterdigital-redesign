@@ -411,6 +411,20 @@
     .aa-founder-card:hover{transform:none}
   }
 
+  /* Section-level CTA pair, same .btn + .hero-tel as the homepage and the hero.
+     LIGHT-BAND VARIANT IS MANDATORY: the locked button rule says the gold FILL
+     never changes surface to surface, but bright gold TEXT on paper is 1.96:1
+     and unreadable, so the outlined phone button takes dark ink text and the
+     darker gold border that carries the 3:1 boundary. */
+  .aa-sec-cta{display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-top:36px}
+  .aa-sec.band-light .aa-sec-cta .hero-tel{color:#16171A; border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel .tag{color:#5E6066}
+  .aa-sec.band-light .aa-sec-cta .hero-tel b{color:#6E561A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover{background:#D4AF37; color:#16171A;
+    border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover .tag{color:#16171A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover b{color:#16171A}
+
   .aa-h2-rule{display:flex; align-items:center; gap:22px}
   .aa-h2-rule::after{content:""; flex:1 1 auto; height:1px; min-width:40px;
     background:linear-gradient(90deg, rgba(212,175,55,.55), rgba(212,175,55,0))}
@@ -946,6 +960,15 @@
   </ul>
 
   <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="index.html#verticals">home services</a>, <a href="index.html#verticals">medical and dental</a>, or <a href="index.html#verticals">legal</a>.</p>
+
+  <!-- Beth 2026-08-07: "ADD THE SAME BUTTONS COPY THE BUTTONS OF THE HOMEPAGE".
+       Same .btn + .hero-tel pair the homepage and the hero use, unchanged. On a
+       light band the outlined phone button takes dark ink text per the locked
+       button-colour rule, handled by .aa-sec.band-light below. -->
+  <div class="aa-sec-cta">
+    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
 </section>
 
 <section class="aa-sec" data-mark="06" id="faq">
