@@ -281,10 +281,10 @@
     font-size:clamp(1.6rem, 3vw, 2.4rem); line-height:1.1; margin:0 0 24px;
     max-width:none; text-wrap:balance; color:var(--paper,#F7F7F5)}
   .aa-sec .intro{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
-    font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5);
-    max-width:82ch; margin:0 0 20px}
+    font-size:1.05rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:none; margin:0 0 20px}
   .aa-sec .intro + .intro{margin-top:0}
-  .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.92rem; margin-bottom:32px}
+  .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.94rem; margin-bottom:32px}
 
   /* Section-level illustrative image (Pexels). Sits above the section body
      content. Modest max-width so it does not dominate the copy. */
@@ -327,14 +327,15 @@
   .aa-sec.band-light .aa-faq .answer{color:#45474C}
 
   /* Intro band that introduces the workflow canvas. Beth 2026-08-07 flagged
-     the empty vertical gap between hero and canvas + asked for a section
-     header on a white background. Content centered, tight vertical padding
-     so it does not compete with the canvas visual right below. */
-  .aa-intro-band{text-align:center; padding-top:80px; padding-bottom:48px}
+     the empty white space on the sides — text needs to fill the horizontal
+     space, same complaint she raised on the hero H1. So: no char cap on H2,
+     bigger H2 font-size (matches hero scale), lede widened to 82ch. */
+  .aa-intro-band{text-align:center; padding-top:80px; padding-bottom:56px}
   .aa-intro-band .eyebrow{display:inline-flex; gap:10px; align-items:center;
-    justify-content:center}
-  .aa-intro-band h2{margin:0 auto 18px; max-width:24ch}
-  .aa-intro-band .intro{margin:0 auto; max-width:64ch}
+    justify-content:center; margin-bottom:20px}
+  .aa-intro-band h2{margin:0 auto 22px; max-width:none;
+    font-size:clamp(2.2rem, 4.4vw, 3.6rem); line-height:1.06; letter-spacing:-.015em}
+  .aa-intro-band .intro{margin:0 auto; max-width:82ch; font-size:1.05rem}
 
   /* Three-item lands grid */
   .aa-lands{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
@@ -413,16 +414,32 @@
     font-size:.95rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:70ch}
 
   /* CTA BAND */
-  .aa-cta-band{padding:56px 32px; text-align:center; border-top:1px solid var(--border,#2A2C31);
+  .aa-cta-band{position:relative; padding:112px 32px; text-align:center; overflow:hidden;
+    isolation:isolate;
+    border-top:1px solid var(--border,#2A2C31);
     background:
       radial-gradient(circle at 50% 0%, rgba(212,175,55,.10), transparent 55%),
       var(--ink,#0F1115)}
   .aa-cta-band .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
     margin-bottom:16px}
+  /* Full-bleed background image + dark gradient overlay so the closing CTA
+     bookends the hero visually. Beth 2026-08-07: "add image background add
+     buttons." */
+  .aa-cta-bg{position:absolute; inset:0; z-index:0}
+  .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(.62) brightness(.5) contrast(1.05)}
+  .aa-cta-bg::after{content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.25) 0%, rgba(15,17,21,.75) 78%),
+      linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.45) 40%, rgba(15,17,21,.90) 100%)}
+  .aa-cta-wrap{position:relative; z-index:1; max-width:1240px; margin:0 auto}
+  .aa-cta-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:8px; position:relative; z-index:2}
   .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:clamp(1.8rem, 3.4vw, 2.8rem); line-height:1.1; margin:0 auto 32px;
-    max-width:22ch; color:var(--paper,#F7F7F5); text-wrap:balance}
+    font-size:clamp(2.2rem, 4.6vw, 3.8rem); line-height:1.06; margin:0 auto 26px;
+    max-width:none; color:var(--paper,#F7F7F5); text-wrap:balance; letter-spacing:-.015em;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
   .aa-cta-band .tel{display:inline-flex; align-items:center; gap:14px;
     padding:18px 28px; background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-weight:600;
@@ -431,8 +448,9 @@
     box-shadow:0 2px 0 rgba(0,0,0,.12); text-decoration:none}
   .aa-cta-band .tel .num{font-size:1rem}
   .aa-cta-band .note-lede{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
-    font-size:1.02rem; line-height:1.65; color:var(--paper,#F7F7F5);
-    max-width:76ch; margin:0 auto 32px}
+    font-size:1.05rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:78ch; margin:0 auto 36px;
+    text-shadow:0 1px 12px rgba(15,17,21,.55)}
   .aa-cta-band .note{margin-top:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.72rem; color:var(--muted-on-dark,#868A90)}
 </style>
@@ -475,7 +493,7 @@
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
-    <h1>Stop losing the lead that comes in at 11pm to a competitor who answered <em>first</em></h1>
+    <h1>Stop <em>losing the lead</em> that comes in at 11pm to a competitor <em>who answered first</em></h1>
     <p class="lede">
       A specced, built, and operated AI system that lives inside <code>your CRM</code>, not ours.
       One team reads your intake data, maps your best dispatcher's decision logic, ships the agent,
@@ -721,14 +739,19 @@
 </section>
 
 <section class="aa-cta-band" data-mark="08" id="call">
-  <div class="eyebrow">08 &middot; Next step</div>
-  <h2>The person who reads your spec is the person who builds the system.</h2>
-  <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
-  <a class="tel" href="tel:+16193300953">
-    <span>Call</span>
-    <span class="num">(619) 330-0953</span>
-  </a>
-  <p class="note">45 minutes. Michael Merlino, Chief Strategist and AI Systems, runs the call.</p>
+  <div class="aa-cta-bg" aria-hidden="true">
+    <img src="img/ai-automation-hero.jpg" alt="" width="1400" height="933" loading="lazy">
+  </div>
+  <div class="aa-cta-wrap">
+    <div class="eyebrow">08 &middot; Next step</div>
+    <h2>The person who reads your spec is the person who builds the system.</h2>
+    <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
+    <div class="aa-cta-cta">
+      <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+    </div>
+    <p class="note">45 minutes. Michael Merlino, Chief Strategist and AI Systems, runs the call.</p>
+  </div>
 </section>
 
 </main>
