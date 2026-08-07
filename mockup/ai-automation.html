@@ -1108,7 +1108,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="22">
+<script data-v="23">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1150,28 +1150,45 @@ document.documentElement.classList.add('js');
     if (!body) return;
     if (d.open) body.style.height = 'auto';
     var animating = false;
+
+    /* Settle once, whether transitionend fires or not. Without the fallback a
+       missed event latches `animating` and the panel can never be reopened.
+       That is not hypothetical: closing from height:auto does not interpolate,
+       so no transition starts and no transitionend is ever dispatched. */
+    function settle(fn){
+      var done = false;
+      function finish(){
+        if (done) return;
+        done = true;
+        body.removeEventListener('transitionend', onEnd);
+        clearTimeout(timer);
+        fn();
+        animating = false;
+      }
+      function onEnd(e){ if (e.target === body && e.propertyName === 'height') finish(); }
+      body.addEventListener('transitionend', onEnd);
+      var timer = setTimeout(finish, 700);   // transition is .5s
+      return finish;
+    }
+
     d.querySelector('summary').addEventListener('click', function(e){
       e.preventDefault();
       if (animating) return;
       animating = true;
       if (d.open){
+        // pin the current height in px FIRST and force a reflow, so the
+        // browser has a concrete value to animate away from
         body.style.height = body.scrollHeight + 'px';
+        void body.offsetHeight;
         requestAnimationFrame(function(){ body.style.height = '0px'; });
-        body.addEventListener('transitionend', function done(){
-          d.open = false; body.style.height = '';
-          body.removeEventListener('transitionend', done);
-          animating = false;
-        });
+        settle(function(){ d.open = false; body.style.height = ''; });
       } else {
         d.open = true;
         var h = body.scrollHeight;
         body.style.height = '0px';
+        void body.offsetHeight;
         requestAnimationFrame(function(){ body.style.height = h + 'px'; });
-        body.addEventListener('transitionend', function done(){
-          body.style.height = 'auto';
-          body.removeEventListener('transitionend', done);
-          animating = false;
-        });
+        settle(function(){ body.style.height = 'auto'; });
       }
     });
   });
