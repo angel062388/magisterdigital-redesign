@@ -1113,7 +1113,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="24">
+<script data-v="25">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1326,8 +1326,24 @@
     }, { passive: true });
   }
 
-  let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { resize(); draw(); }, 150); }, { passive: true });
+  /* Size off the element itself, not the window. A window-resize listener
+     alone measured the canvas before layout had settled and left the backing
+     store at 1901x629 inside a 2028x671 box, i.e. a stretched, soft scene.
+     ResizeObserver cannot miss that, and it also covers the scrollbar
+     appearing and the font swap reflowing the hero. */
+  if ('ResizeObserver' in window){
+    let rq = false;
+    new ResizeObserver(() => {
+      if (rq) return;
+      rq = true;
+      requestAnimationFrame(() => { rq = false; resize(); draw(); });
+    }).observe(cv);
+  } else {
+    let rt;
+    window.addEventListener('resize', () => {
+      clearTimeout(rt); rt = setTimeout(() => { resize(); draw(); }, 150);
+    }, { passive: true });
+  }
   document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
 
   resize();
