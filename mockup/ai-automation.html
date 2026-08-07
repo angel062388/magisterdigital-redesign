@@ -286,6 +286,34 @@
   .aa-sec .intro + .intro{margin-top:0}
   .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.94rem; margin-bottom:32px}
 
+  /* SECTION 06 — 'Why this is built differently.' Two-column redesign per
+     Beth 2026-08-07: 'u did not redesign.' Image on the left in a framed
+     card, H2 + body paragraphs + pull-quote stacked on the right. Below
+     960px stacks image on top of body. */
+  .aa-why-sec .eyebrow{margin-bottom:24px}
+  .aa-why-grid{display:grid; gap:48px; align-items:start}
+  .aa-why-visual{border-radius:8px; overflow:hidden;
+    border:1px solid var(--border,#2A2C31); background:#000;
+    box-shadow:0 24px 60px rgba(0,0,0,.55)}
+  .aa-why-visual img{display:block; width:100%; height:auto;
+    filter:saturate(.9) brightness(.95)}
+  .aa-why-body h2{margin-top:0}
+  .aa-why-body p{font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    margin:0 0 18px}
+  .aa-why-body p.small{color:var(--muted-on-dark,#868A90); font-size:.92rem}
+  .aa-why-body .quote{margin-top:32px; padding:22px;
+    border-left:2px solid var(--gold,#D4AF37);
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-size:1.1rem; line-height:1.5;
+    color:var(--paper,#F7F7F5)}
+  .aa-why-body .quote cite{display:block; margin-top:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-style:normal; font-size:.72rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  @media (min-width:960px){
+    .aa-why-grid{grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center}
+  }
+
   /* Section-level illustrative image (Pexels). Sits above the section body
      content. Modest max-width so it does not dominate the copy. */
   .aa-sec-img{margin:0 0 36px; max-width:1080px; border-radius:8px; overflow:hidden;
@@ -664,45 +692,33 @@
     <div class="aa-price">
       <div class="tier">Single channel</div>
       <h3>$20,000 <span class="u">/ mo</span></h3>
-      <p class="summary">One automation, one channel, one team. Written spec, built inside your stack.</p>
-      <ul>
-        <li>One workflow, deployed and monitored</li>
-        <li>Weekly log review with your team</li>
-        <li>Rule adjustments as the data comes in</li>
-        <li>Full ownership: agents, workflows, training data, log structure</li>
-      </ul>
-      <div class="note">Fits home services and single-line legal or medical practices.</div>
+      <p class="summary">AI automation as a single-channel engagement starts here.</p>
+      <div class="note">We scope from here based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
     </div>
     <div class="aa-price">
       <div class="tier">Full stack</div>
       <h3>$60,000 <span class="u">/ mo</span></h3>
-      <p class="summary">Multi-workflow, cross-channel, with a Magister engineer sitting next to your operations.</p>
-      <ul>
-        <li>Three to seven workflows in production</li>
-        <li>CRM, calendar, Slack, and phone integrated</li>
-        <li>Real-time log dashboard, weekly working sessions</li>
-        <li>Engineer on call for edge-case tuning</li>
-      </ul>
-      <div class="note">Fits multi-location groups and firms with 8+ inbound channels.</div>
+      <p class="summary">Full-stack engagements that include AI automation, SEO, paid media, and CRM start here.</p>
+      <div class="note">We scope from here based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
     </div>
   </div>
 </section>
 
-<section class="aa-sec" data-mark="06">
+<section class="aa-sec aa-why-sec" data-mark="06">
   <div class="eyebrow">06 &middot; Why this is built differently</div>
-  <h2>AI automation only pays off when it sits next to the rest of the stack, run by one team.</h2>
-  <div class="aa-sec-img">
-    <img src="img/one-engine.jpg" alt="Circuit board close-up with warm accent traces, standing in for the one-engine idea: paid media, SEO, CRM, and AI automation running on the same hardware and the same team." width="1400" height="2100" loading="lazy">
-  </div>
-  <div class="aa-stack">
-    <div>
+  <div class="aa-why-grid">
+    <div class="aa-why-visual">
+      <img src="img/one-engine.jpg" alt="Circuit board close-up with warm accent traces, standing in for the one-engine idea: paid media, SEO, CRM, and AI automation running on the same hardware and the same team." width="1400" height="2100" loading="lazy">
+    </div>
+    <div class="aa-why-body">
+      <h2>AI automation only pays off when it sits next to the rest of the stack, run by one team.</h2>
       <p>An automation that books a lead is only worth what the lead is worth, and that depends on the paid media that produced it, the SEO that ranked you, the CRM that tracks it to closed, and the web that converted it. Magister Digital runs all of it as one engine. The same Anthropic Claude, n8n, and custom Python that power your intake agent also feed your attribution dashboard.</p>
       <p>The IP stays with you. The qualification logic is read weekly by the team that built it. You are not buying a bot from a vendor, you are buying a system from operators who run TurnkeyRenovators on the same stack and answer to a named founder every Monday.</p>
       <p class="small">Every founder who ever called AI a black box was sold a SaaS subscription instead of a build. When we spec a system, your ops manager reads the spec before we write a line. When we ship it, the logs are yours.</p>
-    </div>
-    <div class="quote">
-      AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.
-      <cite>&mdash; from the live magisterdigital.ai/ai-automation page</cite>
+      <div class="quote">
+        AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.
+        <cite>from the live magisterdigital.ai/ai-automation page</cite>
+      </div>
     </div>
   </div>
 </section>
