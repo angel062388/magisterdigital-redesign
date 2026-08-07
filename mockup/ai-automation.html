@@ -471,21 +471,22 @@
   .aa-founders{display:grid; gap:32px; margin-top:16px;
     grid-template-columns:1fr}
   @media (min-width:900px){ .aa-founders{grid-template-columns:repeat(3,1fr); gap:32px} }
-  .aa-founder-card{display:block; position:relative;
-    transition:transform .5s cubic-bezier(.16,1,.3,1)}
-  .aa-founder-card:hover{transform:translateY(-3px)}
+  /* Beth 2026-08-07 "dont like the animation here". Removed the card lift and
+     the slow photo zoom/desaturate. NOTE there were TWO .aa-founder-card
+     blocks in this file and the later one won on source order, so deleting
+     only the first one changed nothing. The photo now holds one fixed state.
+     The gold border on hover stays because it is a colour cue, not motion. */
+  .aa-founder-card{display:block; position:relative}
   .aa-founder-img{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;
-    border:1px solid #E5E4DF; margin-bottom:20px; background:#000}
+    border:1px solid #E5E4DF; margin-bottom:20px; background:#000;
+    transition:border-color .25s ease}
   .aa-founder-img img{width:100%; height:100%; object-fit:cover;
     object-position:center 20%;
-    filter:grayscale(1) brightness(.9) contrast(1.05);
-    transform:scale(1.03);
-    transition:filter .6s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1)}
+    filter:grayscale(1) brightness(.9) contrast(1.05)}
   .aa-founder-img::after{content:""; position:absolute; inset:0;
     background:linear-gradient(180deg, transparent 60%, rgba(15,17,21,.20) 100%);
     pointer-events:none}
   .aa-founder-card:hover .aa-founder-img{border-color:#D4AF37}
-  .aa-founder-card:hover .aa-founder-img img{filter:grayscale(.05) brightness(1); transform:scale(1)}
   .aa-founder-card h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
     font-size:1.35rem; font-weight:500; margin:0; color:#16171A}
   .aa-founder-card .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
