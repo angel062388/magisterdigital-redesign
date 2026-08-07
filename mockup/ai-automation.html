@@ -168,6 +168,7 @@
   .aa-hero-bg{position:absolute; inset:0; z-index:0; background:var(--ink,#0F1115)}
   .arvr-stage{position:absolute; inset:0; perspective:1400px; overflow:hidden;
     --rx:0deg; --ry:0deg}
+  .arvr-net{position:absolute; inset:0; width:100%; height:100%; display:block; opacity:.85}
   .arvr-panel{position:absolute; left:50%; top:50%; width:min(1080px, 86%);
     aspect-ratio:16/9;
     transform:translate(-50%,-50%) rotateX(calc(6deg + var(--rx))) rotateY(calc(-13deg + var(--ry)));
@@ -540,57 +541,67 @@
   /* SIX OTHER SERVICE CARDS — Beth 2026-08-07: 'we need to redesign this and
      include them here.' Six gold-bordered cards on the light band showing
      the other Magister channels. Each links to homepage services section. */
-  .aa-services{list-style:none; padding:0; margin:0 0 32px;
-    display:grid; gap:14px; grid-template-columns:1fr}
-  @media (min-width:600px){ .aa-services{grid-template-columns:repeat(2,1fr)} }
-  @media (min-width:960px){ .aa-services{grid-template-columns:repeat(3,1fr); gap:16px} }
-  /* Beth 2026-08-07: 'use real images fr pexels'. Cards carry a real photo
-     above the label. Six distinct subjects (tablet / laptop / phone / data UI /
-     wireframe / print reports) so the row does not read as one photo six times.
-     No faces, per the standing rule. */
-  .aa-service-card{display:flex; flex-direction:column; overflow:hidden;
-    border:1.5px solid #D4AF37; border-radius:10px;
-    background:#FFFFFF; color:#16171A; text-decoration:none;
+  /* SERVICE ROWS — Beth 2026-08-07: "we need to copy this" (the homepage's
+     alternating service list) "just remove the ai automation from the list
+     because that is the page we are creating". Ported from index.html .svc,
+     scoped with an .aa- prefix, six rows renumbered 01 to 06, on the light
+     band so the ghost button and name take the dark/deep-gold variants. */
+  .aa-svc-list{list-style:none; margin:40px 0 0; padding:0}
+  .aa-svc{border-top:1px solid #E5E4DF}
+  .aa-svc:last-child{border-bottom:1px solid #E5E4DF}
+  .aa-svc-link{display:grid; grid-template-columns:1fr; gap:20px; padding:28px 0;
+    position:relative}
+  .aa-svc-visual{position:relative; aspect-ratio:16/10; overflow:hidden; background:#EDEDEA}
+  .aa-svc-visual img{width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) brightness(.95) contrast(1.03);
+    transition:filter .6s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-visual img,
+  .aa-svc-link:focus-within .aa-svc-visual img{filter:grayscale(0) brightness(1) contrast(1);
+    transform:scale(1.04)}
+  .aa-svc-idx{position:absolute; top:12px; left:12px; z-index:2;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.85rem; font-weight:600; letter-spacing:.03em;
-    box-shadow:0 4px 14px rgba(212,175,55,.10);
-    transition:transform .25s cubic-bezier(.16,1,.3,1),
-               box-shadow .25s cubic-bezier(.16,1,.3,1),
-               background .25s cubic-bezier(.16,1,.3,1)}
-  .aa-service-card .pic{display:block; aspect-ratio:16/9; overflow:hidden;
-    background:#EDEDEA; border-bottom:1px solid rgba(212,175,55,.45)}
-  .aa-service-card .pic img{display:block; width:100%; height:100%; object-fit:cover;
-    transition:transform .45s cubic-bezier(.16,1,.3,1)}
-  .aa-service-card .lbl{display:flex; align-items:center; justify-content:space-between;
-    padding:18px 22px}
-  /* Beth 2026-08-07: "the text here should be the same as the text and font
-     used here, check the homepage". Copied from index.html .svc-name: Playfair
-     italic 600, the same clamp, and the gold underline that draws in on hover.
-     The label colour also changes on hover of the image OR the text, which is
-     why the trigger is the whole card rather than the label. */
-  .aa-service-card .t{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:.625rem; letter-spacing:.16em; color:#16171A;
+    background:rgba(247,247,245,.9); padding:4px 8px}
+  .aa-svc-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
     font-style:italic; font-weight:600;
-    font-size:clamp(1.35rem,2.6vw,2rem); letter-spacing:-.02em; line-height:1.05;
-    text-transform:none; position:relative; display:block; padding-bottom:8px;
-    color:#16171A; transition:color .3s cubic-bezier(.16,1,.3,1)}
-  .aa-service-card .t::after{content:""; position:absolute; left:0; bottom:0;
+    font-size:clamp(1.75rem,4vw,2.8rem); letter-spacing:-.02em; line-height:1.02;
+    display:block; position:relative; padding-bottom:12px;
+    color:#16171A; text-decoration:none;
+    transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-name::after{content:""; position:absolute; left:0; bottom:0;
     height:1px; width:80px; background:#6E561A; transform:scaleX(0); transform-origin:left;
     transition:transform .55s cubic-bezier(.16,1,.3,1)}
-  .aa-service-card .ar{color:#6E561A; font-size:1.15rem; margin-left:12px;
+  .aa-svc-link:hover .aa-svc-name,
+  .aa-svc-link:focus-within .aa-svc-name{color:#6E561A}
+  .aa-svc-link:hover .aa-svc-name::after,
+  .aa-svc-link:focus-within .aa-svc-name::after{transform:scaleX(1)}
+  .aa-svc-name:focus-visible{outline:2px solid #6E561A; outline-offset:3px}
+  .aa-svc-outcome{display:block; margin-top:16px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.6; color:#45474C; max-width:52ch}
+  .aa-svc-actions{margin-top:20px}
+  .aa-svc-arrow{position:absolute; top:28px; right:0;
+    font-size:1.25rem; color:#6E561A;
     transition:transform .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
-  .aa-service-card:hover{transform:translateY(-2px);
-    box-shadow:0 12px 26px rgba(212,175,55,.24); background:#FFFBEE}
-  .aa-service-card:hover .pic img{transform:scale(1.05)}
-  .aa-service-card:hover .t,
-  .aa-service-card:focus-within .t{color:#6E561A}
-  .aa-service-card:hover .t::after,
-  .aa-service-card:focus-within .t::after{transform:scaleX(1)}
-  .aa-service-card:hover .ar{color:#D4AF37; transform:translateX(4px)}
-  .aa-service-card:focus-visible{outline:2px solid #D4AF37; outline-offset:3px}
+  .aa-svc-link:hover .aa-svc-arrow,
+  .aa-svc-link:focus-within .aa-svc-arrow{color:#D4AF37; transform:translateX(6px)}
+  @media (min-width:900px){
+    .aa-svc-link{grid-template-columns:.9fr 1.1fr 44px; gap:48px; padding:28px 0 28px 16px;
+      align-items:center}
+    /* alternate the image side, exactly as the homepage does */
+    .aa-svc:nth-child(even) .aa-svc-visual{order:2}
+    .aa-svc:nth-child(even) .aa-svc-body{order:1; padding-right:24px}
+    .aa-svc:nth-child(even) .aa-svc-arrow{order:3}
+    .aa-svc-arrow{position:relative; top:auto; right:auto; text-align:right; align-self:center}
+  }
+  /* ghost button variant, absent from this page until now */
+  .btn-ghost{background:transparent; color:#16171A; border-color:#D4AF37;
+    box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1)}
+  .btn-ghost:hover{background:#D4AF37; color:#16171A; border-color:#A8842A;
+    box-shadow:0 10px 22px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
   @media (prefers-reduced-motion:reduce){
-    .aa-service-card,.aa-service-card .pic img,.aa-service-card .ar{transition:none}
-    .aa-service-card:hover{transform:none}
-    .aa-service-card:hover .pic img{transform:none}
+    .aa-svc-visual img,.aa-svc-name,.aa-svc-name::after,.aa-svc-arrow{transition:none}
+    .aa-svc-link:hover .aa-svc-visual img{transform:none}
   }
 
   .aa-verticals{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
@@ -922,6 +933,12 @@
        all projected in perspective and parallaxed off the pointer. -->
   <div class="aa-hero-bg" aria-hidden="true">
     <div class="arvr-stage" data-arvr>
+      <!-- Beth 2026-08-07: "can the background be ai related". A neural mesh
+           sits behind the glass: nodes drifting, edges forming and fading as
+           they come into range, and a signal pulse travelling an edge now and
+           then. It is behind the panel and under the overlay, so it never has
+           to carry text. -->
+      <canvas class="arvr-net" data-arvr-net></canvas>
       <div class="arvr-panel">
         <div class="arvr-bar">
           <span class="dot"></span>
@@ -1135,31 +1152,91 @@
   <div class="eyebrow">05 &middot; Why this is built differently</div>
   <h2 class="aa-h2-oneline">One team runs the whole stack</h2>
 
-  <ul class="aa-services" aria-label="The other six channels we operate">
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-seo.jpg" alt="An analytics dashboard open on a tablet, tracking organic search performance." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">SEO</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-google-ads.jpg" alt="A laptop showing campaign performance charts and spend reporting." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">Google Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-meta-ads.jpg" alt="Social platform app icons close up on a phone screen." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">Meta Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-crm.jpg" alt="A data interface of linked records and routing rules." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">CRM Development</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-web-design.jpg" alt="A landing page wireframe sketched out on a tablet beside a pencil." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">Web Design</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
-    <li><a class="aa-service-card" href="index.html#services">
-      <span class="pic"><img src="img/svc-full-stack.jpg" alt="Printed performance reports and charts spread across a desk." width="800" height="450" loading="lazy"></span>
-      <span class="lbl"><span class="t">Full-Stack Marketing</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
-    </a></li>
+  <ul class="aa-svc-list" role="list" aria-label="The other six channels we operate">
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-seo.jpg" alt="An analytics dashboard open on a tablet, tracking organic search performance." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">01</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">SEO</a>
+          <span class="aa-svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-google-ads.jpg" alt="A laptop showing campaign performance charts and spend reporting." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">02</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">Google Ads</a>
+          <span class="aa-svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-meta-ads.jpg" alt="Social platform app icons close up on a phone screen." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">03</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">Meta Ads</a>
+          <span class="aa-svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-crm.jpg" alt="A data interface of linked records and routing rules." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">04</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">Custom CRM Development</a>
+          <span class="aa-svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-full-stack.jpg" alt="Printed performance reports and charts spread across a desk." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">05</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">Full-Stack Marketing</a>
+          <span class="aa-svc-outcome">One team across search, paid, automation and the site, so no vendor blame layer eats your budget.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="img/svc-web-design.jpg" alt="A landing page wireframe sketched out on a tablet beside a pencil." width="800" height="450" loading="lazy">
+          <span class="aa-svc-idx">06</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="index.html#services">Web Design</a>
+          <span class="aa-svc-outcome">Sites written to convert the traffic we send, instrumented for booked work end to end.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
   </ul>
 
   <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="index.html#verticals">home services</a>, <a href="index.html#verticals">medical and dental</a>, or <a href="index.html#verticals">legal</a>.</p>
@@ -1281,7 +1358,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="28">
+<script data-v="29">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1311,6 +1388,95 @@
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* AI NEURAL MESH — the backdrop the glass panel floats over. Nodes drift,
+   edges appear between neighbours and fade with distance, and a signal
+   occasionally runs an edge. Canvas because it is thousands of thin strokes a
+   frame, which DOM would choke on. It carries no text, so a sub-1 DPR is fine.
+   Stops off screen and on tab hide; reduced motion paints one static frame. */
+(function(){
+  const cv = document.querySelector('[data-arvr-net]');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const GOLD = '212,175,55';
+  let W=0, H=0, dpr=1, nodes=[], pulses=[], raf=0, live=false;
+
+  function size(){
+    const r = cv.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n = W < 700 ? 34 : 62;
+    nodes = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*0.22, vy: (Math.random()-.5)*0.22,
+      r: 1 + Math.random()*1.7
+    }));
+    pulses = [];
+  }
+
+  const LINK2 = 190*190;
+  function step(){
+    ctx.clearRect(0,0,W,H);
+    for (const p of nodes){
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -30) p.x = W+30; if (p.x > W+30) p.x = -30;
+      if (p.y < -30) p.y = H+30; if (p.y > H+30) p.y = -30;
+    }
+    // edges
+    ctx.lineWidth = 1;
+    for (let i=0;i<nodes.length;i++){
+      for (let j=i+1;j<nodes.length;j++){
+        const dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
+        const d2 = dx*dx+dy*dy;
+        if (d2 > LINK2) continue;
+        const a = (1 - d2/LINK2) * 0.30;
+        ctx.strokeStyle = `rgba(${GOLD},${a})`;
+        ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
+      }
+    }
+    // nodes
+    for (const p of nodes){
+      ctx.fillStyle = `rgba(${GOLD},0.62)`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    }
+    // signals travelling an edge, the "inference" cue
+    if (pulses.length < 5 && Math.random() < 0.035 && nodes.length > 2){
+      const a = nodes[(Math.random()*nodes.length)|0];
+      const b = nodes[(Math.random()*nodes.length)|0];
+      if (a !== b) pulses.push({a,b,t:0});
+    }
+    for (let i=pulses.length-1;i>=0;i--){
+      const s = pulses[i];
+      s.t += 0.012;
+      if (s.t >= 1){ pulses.splice(i,1); continue; }
+      const x = s.a.x + (s.b.x-s.a.x)*s.t, y = s.a.y + (s.b.y-s.a.y)*s.t;
+      const fade = Math.sin(s.t*Math.PI);
+      ctx.fillStyle = `rgba(235,206,114,${0.9*fade})`;
+      ctx.beginPath(); ctx.arc(x,y,2.4,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = `rgba(${GOLD},${0.34*fade})`;
+      ctx.beginPath(); ctx.moveTo(s.a.x,s.a.y); ctx.lineTo(s.b.x,s.b.y); ctx.stroke();
+    }
+  }
+  function loop(){ step(); raf = requestAnimationFrame(loop); }
+  function start(){ if (!live && !reduced){ live = true; raf = requestAnimationFrame(loop); } }
+  function stop(){ if (live){ live = false; cancelAnimationFrame(raf); } }
+
+  if ('ResizeObserver' in window){
+    let q=false;
+    new ResizeObserver(()=>{ if(q) return; q=true;
+      requestAnimationFrame(()=>{ q=false; size(); step(); }); }).observe(cv);
+  }
+  document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
+  size(); step();
+  if (reduced) return;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()),
+      {threshold:0}).observe(cv);
+  } else start();
 })();
 
 /* AR/VR MOTION GRAPHIC — pointer parallax on the floating interface panel.
