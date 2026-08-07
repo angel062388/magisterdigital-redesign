@@ -416,7 +416,8 @@
      never changes surface to surface, but bright gold TEXT on paper is 1.96:1
      and unreadable, so the outlined phone button takes dark ink text and the
      darker gold border that carries the 3:1 boundary. */
-  .aa-sec-cta{display:flex; flex-wrap:wrap; align-items:center; gap:18px; margin-top:36px}
+  .aa-sec-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:36px}
   .aa-sec.band-light .aa-sec-cta .hero-tel{color:#16171A; border-color:#A8842A}
   .aa-sec.band-light .aa-sec-cta .hero-tel .tag{color:#5E6066}
   .aa-sec.band-light .aa-sec-cta .hero-tel b{color:#6E561A}
@@ -683,20 +684,39 @@
     font-style:normal; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
     color:var(--muted-on-dark,#868A90)}
 
-  /* FAQ */
-  .aa-faq{border-top:1px solid var(--border,#2A2C31)}
+  /* FAQ — Beth 2026-08-07: "the FAQ from the ai automation page should follow
+     the format of the homepage". Ported from index.html .faq: the smooth
+     height expand via .answer-wrap, and the plus built from two crossing bars
+     where the vertical one rotates away to leave a minus. Typography matches
+     the homepage's clamp. Colours are the dark-band equivalents because Beth
+     moved this section to dark earlier today. */
+  .aa-faq{border-top:1px solid var(--border,#2A2C31); margin-top:40px}
   .aa-faq details{border-bottom:1px solid var(--border,#2A2C31)}
-  .aa-faq summary{list-style:none; cursor:pointer; padding:24px 4px; display:flex;
-    align-items:baseline; justify-content:space-between; gap:16px;
-    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:1.2rem; color:var(--paper,#F7F7F5); line-height:1.25}
+  .aa-faq summary{cursor:pointer; list-style:none; padding:26px 56px 26px 0;
+    position:relative; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:600;
+    color:var(--paper,#F7F7F5); transition:color .3s cubic-bezier(.16,1,.3,1)}
   .aa-faq summary::-webkit-details-marker{display:none}
-  .aa-faq summary::after{content:"+"; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    color:var(--gold,#D4AF37); font-size:1.4rem; font-weight:400; margin-left:16px; flex-shrink:0;
-    transition:transform .18s ease}
-  .aa-faq details[open] summary::after{content:"\2212"; transform:none} /* minus sign */
-  .aa-faq .answer{padding:0 4px 24px; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
-    font-size:.95rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
+  .aa-faq summary::after,.aa-faq summary::before{content:""; position:absolute; right:6px; top:50%;
+    background:var(--gold,#D4AF37); transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::after{width:15px; height:1px; transform:translateY(-50%)}
+  .aa-faq summary::before{width:1px; height:15px; right:13px; transform:translateY(-50%)}
+  .aa-faq details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
+  .aa-faq summary:hover{color:var(--gold,#D4AF37)}
+  .aa-faq summary:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:2px}
+  .answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
+  html:not(.js) .answer-wrap{height:auto}
+  .aa-faq .answer{padding:0 56px 26px 0; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
+  @media (prefers-reduced-motion:reduce){
+    .answer-wrap{transition:none}
+    .aa-faq summary::after,.aa-faq summary::before{transition:none}
+  }
+  /* light-band variant kept in case the section flips back */
+  .aa-sec.band-light .aa-faq summary{color:#16171A}
+  .aa-sec.band-light .aa-faq summary:hover{color:#6E561A}
+  .aa-sec.band-light .aa-faq summary::after,
+  .aa-sec.band-light .aa-faq summary::before{background:#6E561A}
 
   /* CTA BAND */
   .aa-cta-band{position:relative; padding:112px 32px; text-align:center; overflow:hidden;
@@ -987,27 +1007,27 @@
   <div class="aa-faq">
     <details>
       <summary>What happens to the automation when the engagement ends?</summary>
-      <div class="answer">The agents, workflows, training data, and log structure belong to your business. They live in your CRM and your infrastructure. You do not lose access to anything when we stop working together.</div>
+      <div class="answer-wrap"><div class="answer">The agents, workflows, training data, and log structure belong to your business. They live in your CRM and your infrastructure. You do not lose access to anything when we stop working together.</div></div>
     </details>
     <details>
       <summary>How is this different from buying Go High Level or another platform?</summary>
-      <div class="answer">A SaaS platform gives you a tool. We spec, build, and operate a system trained on your actual data and your team's decision logic. Go High Level is one of the platforms we build inside, alongside HubSpot, ServiceTitan, Jobber, Housecall Pro, and custom builds. The platform is not the product. The system running on it is.</div>
+      <div class="answer-wrap"><div class="answer">A SaaS platform gives you a tool. We spec, build, and operate a system trained on your actual data and your team's decision logic. Go High Level is one of the platforms we build inside, alongside HubSpot, ServiceTitan, Jobber, Housecall Pro, and custom builds. The platform is not the product. The system running on it is.</div></div>
     </details>
     <details>
       <summary>Can my team see what the agent is doing?</summary>
-      <div class="answer">Yes. Every agent decision writes a readable log entry: the inquiry it received, the qualification logic it applied, the response sent, and the outcome, booked or disqualified or handed to a human. Your office manager reads the log without asking us. That is a design requirement, not an add-on.</div>
+      <div class="answer-wrap"><div class="answer">Yes. Every agent decision writes a readable log entry: the inquiry it received, the qualification logic it applied, the response sent, and the outcome, booked or disqualified or handed to a human. Your office manager reads the log without asking us. That is a design requirement, not an add-on.</div></div>
     </details>
     <details>
       <summary>What if the agent makes a mistake?</summary>
-      <div class="answer">We monitor the log weekly. When the agent misqualifies a lead or drafts a quote with the wrong labor rate, we flag it, adjust the logic, and document the change. You see the adjustment in the log. We do not wait for you to notice a pattern and file a support ticket.</div>
+      <div class="answer-wrap"><div class="answer">We monitor the log weekly. When the agent misqualifies a lead or drafts a quote with the wrong labor rate, we flag it, adjust the logic, and document the change. You see the adjustment in the log. We do not wait for you to notice a pattern and file a support ticket.</div></div>
     </details>
     <details>
       <summary>Does AI automation work for medical practices under HIPAA?</summary>
-      <div class="answer">It can, within defined limits. We do not automate exchanges that involve protected health information without a formal HIPAA-compliant infrastructure review. We do automate consultation booking, follow-up on general inquiries, and content pipelines inside marketing copy. We name exactly where the compliance line sits for your practice at the audit stage.</div>
+      <div class="answer-wrap"><div class="answer">It can, within defined limits. We do not automate exchanges that involve protected health information without a formal HIPAA-compliant infrastructure review. We do automate consultation booking, follow-up on general inquiries, and content pipelines inside marketing copy. We name exactly where the compliance line sits for your practice at the audit stage.</div></div>
     </details>
     <details>
       <summary>How much does AI automation cost?</summary>
-      <div class="answer">AI automation as a single-channel engagement starts at $20K per month. Full-stack engagements that include AI automation, SEO, paid media, and CRM start at $60K per month. We scope from there based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
+      <div class="answer-wrap"><div class="answer">AI automation as a single-channel engagement starts at $20K per month. Full-stack engagements that include AI automation, SEO, paid media, and CRM start at $60K per month. We scope from there based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div></div>
     </details>
   </div>
 </section>
@@ -1088,7 +1108,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="21">
+<script data-v="22">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1118,6 +1138,43 @@
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* FAQ disclosure height, ported from the homepage's motion.js. Race-guarded so
+   a fast double-click cannot leave a panel stuck at a fixed height. Marks the
+   document as js-enabled so the no-JS fallback (answers open) is correct. */
+document.documentElement.classList.add('js');
+(function(){
+  document.querySelectorAll('.aa-faq details').forEach(function(d){
+    var body = d.querySelector('.answer-wrap');
+    if (!body) return;
+    if (d.open) body.style.height = 'auto';
+    var animating = false;
+    d.querySelector('summary').addEventListener('click', function(e){
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+      if (d.open){
+        body.style.height = body.scrollHeight + 'px';
+        requestAnimationFrame(function(){ body.style.height = '0px'; });
+        body.addEventListener('transitionend', function done(){
+          d.open = false; body.style.height = '';
+          body.removeEventListener('transitionend', done);
+          animating = false;
+        });
+      } else {
+        d.open = true;
+        var h = body.scrollHeight;
+        body.style.height = '0px';
+        requestAnimationFrame(function(){ body.style.height = h + 'px'; });
+        body.addEventListener('transitionend', function done(){
+          body.style.height = 'auto';
+          body.removeEventListener('transitionend', done);
+          animating = false;
+        });
+      }
+    });
+  });
 })();
 
 /* FOUNDER MODAL. Behaviour ported from the homepage's motion.js, which this
