@@ -183,7 +183,17 @@
     font-size:clamp(2.05rem, 5.4vw, 4.4rem); line-height:1.06; letter-spacing:-.015em;
     margin:0 auto 24px; max-width:none; text-wrap:balance;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
-  .aa-hero h1 em{font-style:italic; color:var(--gold,#D4AF37)}
+  /* Skylead-style rounded pill behind the highlighted phrase. Beth
+     2026-08-07: 'copy how the text in the hero banner highlighted'
+     (skylead.io). Pill is solid gold #D4AF37 with dark ink text on top =
+     8.52:1 AAA. Kept on one line with white-space:nowrap so the pill does
+     not split across line breaks. No animation per Beth's standing hold. */
+  .aa-hero h1 em{position:relative; display:inline-block; font-style:normal;
+    color:#16171A; padding:2px 18px; margin:0 4px;
+    white-space:nowrap; z-index:0}
+  .aa-hero h1 em::before{content:""; position:absolute; inset:0;
+    background:#D4AF37; border-radius:50px; z-index:-1;
+    box-shadow:0 4px 18px rgba(212,175,55,.30)}
   .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.92rem; color:var(--paper,#F7F7F5); max-width:88ch; line-height:1.65;
     margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
@@ -286,6 +296,78 @@
   .aa-sec .intro + .intro{margin-top:0}
   .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.94rem; margin-bottom:32px}
 
+  /* TWO-COLUMN SECTION HEAD — Beth 2026-08-07 flagged empty right side beside
+     H2s. Splits eyebrow+H2 (left) from intro paragraphs (right) at >=960px.
+     Below that, everything stacks. */
+  .aa-two-col-head{margin-bottom:48px}
+  .aa-two-col-head .head-left .eyebrow{margin-bottom:16px}
+  .aa-two-col-head .head-left h2{margin:0}
+  @media (min-width:960px){
+    .aa-two-col-head{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:end}
+    .aa-two-col-head .head-right p{margin:0 0 18px}
+    .aa-two-col-head .head-right p:last-child{margin-bottom:0}
+  }
+  .aa-sec.band-light .aa-two-col-head .head-right .intro{color:#16171A}
+  .aa-sec.band-light .aa-two-col-head .head-right .intro.small{color:#45474C}
+
+  /* SIX OTHER SERVICE CARDS — Beth 2026-08-07: 'we need to redesign this and
+     include them here.' Six gold-bordered cards on the light band showing
+     the other Magister channels. Each links to homepage services section. */
+  .aa-services{list-style:none; padding:0; margin:0 0 32px;
+    display:grid; gap:14px; grid-template-columns:1fr}
+  @media (min-width:600px){ .aa-services{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:960px){ .aa-services{grid-template-columns:repeat(3,1fr); gap:16px} }
+  .aa-service-card{display:flex; align-items:center; justify-content:space-between;
+    padding:22px 26px; border:1.5px solid #D4AF37; border-radius:10px;
+    background:#FFFFFF; color:#16171A; text-decoration:none;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.85rem; font-weight:600; letter-spacing:.03em;
+    box-shadow:0 4px 14px rgba(212,175,55,.10);
+    transition:transform .25s cubic-bezier(.16,1,.3,1),
+               box-shadow .25s cubic-bezier(.16,1,.3,1),
+               background .25s cubic-bezier(.16,1,.3,1)}
+  .aa-service-card .ar{color:#6E561A; font-size:1.15rem; margin-left:12px;
+    transition:transform .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
+  .aa-service-card:hover{transform:translateY(-2px);
+    box-shadow:0 12px 26px rgba(212,175,55,.24); background:#FFFBEE}
+  .aa-service-card:hover .ar{color:#D4AF37; transform:translateX(4px)}
+  .aa-service-card:focus-visible{outline:2px solid #D4AF37; outline-offset:3px}
+
+  .aa-verticals{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.98rem; line-height:1.6; color:#45474C; margin:0}
+  .aa-verticals a{color:#16171A; text-decoration:underline; text-decoration-color:#D4AF37;
+    text-underline-offset:3px; text-decoration-thickness:1.5px;
+    transition:color .2s cubic-bezier(.16,1,.3,1)}
+  .aa-verticals a:hover{color:#6E561A}
+
+  /* FOUNDERS — copied from homepage index.html per Beth 2026-08-07 ('copy
+     from the homepage as in copy'). 3-column at >=900px, grayscale headshots
+     with warm-up on hover, mono role caption, no modal (AA page has no
+     founder-modal wiring yet). Classes .aa- prefixed to avoid collision. */
+  .aa-founders{display:grid; gap:32px; margin-top:16px;
+    grid-template-columns:1fr}
+  @media (min-width:900px){ .aa-founders{grid-template-columns:repeat(3,1fr); gap:32px} }
+  .aa-founder-card{display:block; position:relative;
+    transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-card:hover{transform:translateY(-3px)}
+  .aa-founder-img{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;
+    border:1px solid #E5E4DF; margin-bottom:20px; background:#000}
+  .aa-founder-img img{width:100%; height:100%; object-fit:cover;
+    object-position:center 20%;
+    filter:grayscale(1) brightness(.9) contrast(1.05);
+    transform:scale(1.03);
+    transition:filter .6s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-img::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(15,17,21,.20) 100%);
+    pointer-events:none}
+  .aa-founder-card:hover .aa-founder-img{border-color:#D4AF37}
+  .aa-founder-card:hover .aa-founder-img img{filter:grayscale(.05) brightness(1); transform:scale(1)}
+  .aa-founder-card h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.35rem; font-weight:500; margin:0; color:#16171A}
+  .aa-founder-card .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; text-transform:uppercase;
+    color:#5E6066; margin-top:10px}
+
   /* SECTION 06 — 'Why this is built differently.' Two-column redesign per
      Beth 2026-08-07: 'u did not redesign.' Image on the left in a framed
      card, H2 + body paragraphs + pull-quote stacked on the right. Below
@@ -297,21 +379,28 @@
     box-shadow:0 24px 60px rgba(0,0,0,.55)}
   .aa-why-visual img{display:block; width:100%; height:auto;
     filter:saturate(.9) brightness(.95)}
-  .aa-why-body h2{margin-top:0}
-  .aa-why-body p{font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5);
-    margin:0 0 18px}
-  .aa-why-body p.small{color:var(--muted-on-dark,#868A90); font-size:.92rem}
-  .aa-why-body .quote{margin-top:32px; padding:22px;
+  .aa-why-body h2{margin-top:0; margin-bottom:28px;
+    font-size:clamp(1.9rem, 3.8vw, 3.1rem); line-height:1.08;
+    letter-spacing:-.01em; max-width:none}
+  .aa-why-body p{font-size:1.02rem; line-height:1.75; color:var(--paper,#F7F7F5);
+    margin:0 0 24px}
+  .aa-why-body p.small{color:var(--muted-on-dark,#868A90); font-size:.94rem;
+    line-height:1.7}
+  .aa-why-body .quote{margin-top:40px; padding:26px 28px;
     border-left:2px solid var(--gold,#D4AF37);
     font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-style:italic; font-size:1.1rem; line-height:1.5;
+    font-style:italic; font-size:1.15rem; line-height:1.55;
     color:var(--paper,#F7F7F5)}
-  .aa-why-body .quote cite{display:block; margin-top:14px;
+  .aa-why-body .quote cite{display:block; margin-top:16px;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-style:normal; font-size:.72rem; letter-spacing:.14em;
     text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
   @media (min-width:960px){
-    .aa-why-grid{grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center}
+    /* Right column much wider — Beth 2026-08-07 flagged the text was
+       'crumpled together' inside the tight right column. Also 0.85fr
+       left made the image dominate. New ratio gives the copy room to
+       breathe, image reads as supporting visual. */
+    .aa-why-grid{grid-template-columns:.55fr 1.45fr; gap:56px; align-items:center}
   }
 
   /* Section-level illustrative image (Pexels). Sits above the section body
@@ -626,10 +715,16 @@
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
-  <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2>An AI stack audit, not a pitch.</h2>
-  <p class="intro">A 45-minute working session with the Magister Digital AI engineering team. We read your CRM data, your intake process, and your current manual workload. You leave with a written spec of the three automations we would build first, ranked by revenue impact, whether or not you ever hire us.</p>
-  <p class="intro small">If the audit shows automation is not the highest-return move for your business right now, we tell you that before we take a dollar. We will not sign an engagement we cannot specify in plain English on a single page.</p>
+  <div class="aa-two-col-head">
+    <div class="head-left">
+      <div class="eyebrow">03 &middot; What lands in your inbox</div>
+      <h2>An AI stack audit, not a pitch.</h2>
+    </div>
+    <div class="head-right">
+      <p class="intro">A 45-minute working session with the Magister Digital AI engineering team. We read your CRM data, your intake process, and your current manual workload. You leave with a written spec of the three automations we would build first, ranked by revenue impact, whether or not you ever hire us.</p>
+      <p class="intro small">If the audit shows automation is not the highest-return move for your business right now, we tell you that before we take a dollar. We will not sign an engagement we cannot specify in plain English on a single page.</p>
+    </div>
+  </div>
   <div class="aa-lands">
     <div class="item">
       <span class="idx">01</span>
@@ -651,7 +746,7 @@
 
 <section class="aa-sec" data-mark="04">
   <div class="eyebrow">04 &middot; What we would run first</div>
-  <h2>The first automation we build is the one losing you the most revenue tonight.</h2>
+  <h2>The first automation we build is the one losing you the most revenue tonight</h2>
   <p class="intro">A 24/7 lead qualification agent, from trigger to booked appointment, every decision written to a log your office manager can read without asking us. Trigger the moment the inquiry arrives. Qualify on your team's logic. Book on your calendar or hand to a named person on your team. Every exchange written to an audit row your team owns.</p>
   <div class="aa-sec-img">
     <img src="img/workflow-code.jpg" alt="Code editor showing the workflow definition for a lead-qualification agent, the kind of build that ships inside your CRM." width="1400" height="933" loading="lazy">
@@ -685,46 +780,33 @@
   </div>
 </section>
 
+
 <section class="aa-sec band-light" data-mark="05">
-  <div class="eyebrow">05 &middot; Pricing</div>
-  <h2>Two tiers. The audit produces your exact number.</h2>
-  <div class="aa-prices">
-    <div class="aa-price">
-      <div class="tier">Single channel</div>
-      <h3>$20,000 <span class="u">/ mo</span></h3>
-      <p class="summary">AI automation as a single-channel engagement starts here.</p>
-      <div class="note">We scope from here based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
-    </div>
-    <div class="aa-price">
-      <div class="tier">Full stack</div>
-      <h3>$60,000 <span class="u">/ mo</span></h3>
-      <p class="summary">Full-stack engagements that include AI automation, SEO, paid media, and CRM start here.</p>
-      <div class="note">We scope from here based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
-    </div>
-  </div>
-</section>
-
-<section class="aa-sec aa-why-sec" data-mark="06">
-  <div class="eyebrow">06 &middot; Why this is built differently</div>
-  <div class="aa-why-grid">
-    <div class="aa-why-visual">
-      <img src="img/one-engine.jpg" alt="Circuit board close-up with warm accent traces, standing in for the one-engine idea: paid media, SEO, CRM, and AI automation running on the same hardware and the same team." width="1400" height="2100" loading="lazy">
-    </div>
-    <div class="aa-why-body">
+  <div class="aa-two-col-head">
+    <div class="head-left">
+      <div class="eyebrow">05 &middot; Why this is built differently</div>
       <h2>AI automation only pays off when it sits next to the rest of the stack, run by one team.</h2>
-      <p>An automation that books a lead is only worth what the lead is worth, and that depends on the paid media that produced it, the SEO that ranked you, the CRM that tracks it to closed, and the web that converted it. Magister Digital runs all of it as one engine. The same Anthropic Claude, n8n, and custom Python that power your intake agent also feed your attribution dashboard.</p>
-      <p>The IP stays with you. The qualification logic is read weekly by the team that built it. You are not buying a bot from a vendor, you are buying a system from operators who run TurnkeyRenovators on the same stack and answer to a named founder every Monday.</p>
-      <p class="small">Every founder who ever called AI a black box was sold a SaaS subscription instead of a build. When we spec a system, your ops manager reads the spec before we write a line. When we ship it, the logs are yours.</p>
-      <div class="quote">
-        AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.
-        <cite>from the live magisterdigital.ai/ai-automation page</cite>
-      </div>
+    </div>
+    <div class="head-right">
+      <p class="intro">An automation that books a lead is only worth what the lead is worth, and that depends on the paid media that produced it, the SEO that ranked you, the CRM that tracks it to closed, and the web that converted it. Magister Digital runs all of it as one engine.</p>
+      <p class="intro small">AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.</p>
     </div>
   </div>
+
+  <ul class="aa-services" aria-label="The other six channels we operate">
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">SEO</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">Google Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">Meta Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">CRM Development</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">Web Design</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services"><span class="t">Full-Stack Marketing</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+  </ul>
+
+  <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="index.html#verticals">home services</a>, <a href="index.html#verticals">medical and dental</a>, or <a href="index.html#verticals">legal</a>.</p>
 </section>
 
-<section class="aa-sec band-light" data-mark="07" id="faq">
-  <div class="eyebrow">07 &middot; Questions operators ask first</div>
+<section class="aa-sec band-light" data-mark="06" id="faq">
+  <div class="eyebrow">06 &middot; Questions operators ask first</div>
   <h2>The questions a careful buyer is already holding.</h2>
   <div class="aa-faq">
     <details>
@@ -751,6 +833,34 @@
       <summary>How much does AI automation cost?</summary>
       <div class="answer">AI automation as a single-channel engagement starts at $20K per month. Full-stack engagements that include AI automation, SEO, paid media, and CRM start at $60K per month. We scope from there based on the number of builds, your CRM environment, and how much of the operation we run. The audit produces a specific number before you commit.</div>
     </details>
+  </div>
+</section>
+
+<section class="aa-sec band-light" data-mark="07">
+  <div class="eyebrow">07 &middot; Who you will work with</div>
+  <h2>Three founders. You will speak to <em>one of them.</em></h2>
+  <div class="aa-founders">
+    <div class="aa-founder-card">
+      <div class="aa-founder-img">
+        <img src="img/brian-hong.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
+      </div>
+      <h3>Brian Hong</h3>
+      <div class="role">Co-founder &amp; CEO</div>
+    </div>
+    <div class="aa-founder-card">
+      <div class="aa-founder-img">
+        <img src="img/michael-merlino.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
+      </div>
+      <h3>Michael Merlino</h3>
+      <div class="role">Co-founder, Strategy &amp; AI systems</div>
+    </div>
+    <div class="aa-founder-card">
+      <div class="aa-founder-img">
+        <img src="img/dimitry-morgan.png" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
+      </div>
+      <h3>Dimitry Morgan</h3>
+      <div class="role">Co-founder, Head of paid media</div>
+    </div>
   </div>
 </section>
 
