@@ -15,8 +15,7 @@
   *{box-sizing:border-box}
   html,body{margin:0; background:var(--ink-2,#16171A); color:var(--paper,#F7F7F5);
     font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
-    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.5;
-    overflow-x:hidden}
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.5}
   ::selection{background:var(--gold,#D4AF37); color:var(--ink,#0F1115)}
   a{color:inherit; text-decoration:none}
 
@@ -296,18 +295,16 @@
     max-height:420px; filter:saturate(.85) brightness(.92)}
 
   /* LIGHT BAND — Beth 2026-08-07: 'the automation page is too dark it should
-     have white same as the homepage.' Follows homepage .band-light pattern:
-     ink -> paper background, paper -> ink text, gold -> gold-deep for text
-     to hold AA on paper (raw gold on paper is 1.96:1, fails), muted tokens
-     remap to darker greys that pass on paper. Buttons stay literal bright
-     gold per Beth's 2026-08-05 rule (locked in the /* BUTTONS */ block above).
-     Full-bleed background painted with a ::before that spans viewport width
-     via left/right:calc(-50vw + 50%); isolation:isolate keeps the -1 z-index
-     bounded to the section's own stacking context. */
-  .aa-sec.band-light{position:relative; isolation:isolate; color:#16171A}
-  .aa-sec.band-light::before{content:""; position:absolute; top:0; bottom:0;
-    left:calc(-50vw + 50%); right:calc(-50vw + 50%);
-    background:#F7F7F5; z-index:-1}
+     have white same as the homepage.'
+     v2 approach: the section itself goes full viewport width and paints its
+     own paper background, and internal padding pushes content back into a
+     1400px-max content area. Simpler and bulletproof than the earlier ::before
+     pseudo which failed to paint (body overflow-x:hidden was masking it and
+     the isolation stacking context was fighting the parent's background).
+     Buttons stay literal bright gold per Beth's 2026-08-05 rule. */
+  .aa-sec.band-light{max-width:none; margin:0;
+    padding:64px max(32px, calc((100vw - 1336px) / 2));
+    background:#F7F7F5; color:#16171A}
   .aa-sec.band-light .eyebrow{color:#6E561A}
   .aa-sec.band-light h2{color:#16171A}
   .aa-sec.band-light .intro{color:#16171A}
@@ -328,6 +325,16 @@
   .aa-sec.band-light .aa-faq summary{color:#16171A}
   .aa-sec.band-light .aa-faq summary::after{color:#6E561A}
   .aa-sec.band-light .aa-faq .answer{color:#45474C}
+
+  /* Intro band that introduces the workflow canvas. Beth 2026-08-07 flagged
+     the empty vertical gap between hero and canvas + asked for a section
+     header on a white background. Content centered, tight vertical padding
+     so it does not compete with the canvas visual right below. */
+  .aa-intro-band{text-align:center; padding-top:80px; padding-bottom:48px}
+  .aa-intro-band .eyebrow{display:inline-flex; gap:10px; align-items:center;
+    justify-content:center}
+  .aa-intro-band h2{margin:0 auto 18px; max-width:24ch}
+  .aa-intro-band .intro{margin:0 auto; max-width:64ch}
 
   /* Three-item lands grid */
   .aa-lands{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
@@ -468,7 +475,7 @@
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
-    <h1>Stop losing the lead that comes in at 11pm to a competitor who answered <em>first.</em></h1>
+    <h1>Stop losing the lead that comes in at 11pm to a competitor who answered <em>first</em></h1>
     <p class="lede">
       A specced, built, and operated AI system that lives inside <code>your CRM</code>, not ours.
       One team reads your intake data, maps your best dispatcher's decision logic, ships the agent,
@@ -479,11 +486,16 @@
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
-    <div class="aa-hero-byline"><b>Michael Merlino</b> &middot; Chief Strategist and AI Systems</div>
   </div>
 </section>
 
-<section class="aa-canvas" data-mark="02" aria-label="Live workflow diagram">
+<section class="aa-sec band-light aa-intro-band">
+  <div class="eyebrow">02 &middot; See how it works</div>
+  <h2>Watch the qualification agent run.</h2>
+  <p class="intro">A live simulation of the lead-qualify workflow. Every tick advances a real step. Every log line writes to the audit row your team owns.</p>
+</section>
+
+<section class="aa-canvas" data-mark="02b" aria-label="Live workflow diagram">
   <div class="aa-canvas-head">
     <span class="live">LIVE</span>
     <span class="path-pill">workflow.lead_qualify.v3</span>
