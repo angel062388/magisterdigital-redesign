@@ -153,69 +153,47 @@
     .btn-sm{padding:10px 13px}
   }
 
-  /* HERO — two-column with image on the right at wide screens, stacked mobile.
-     This REPLACES the old text-only .aa-hero pattern. */
-  .aa-hero{position:relative; padding:56px 32px 40px; max-width:1400px; margin:0 auto;
-    overflow:hidden; isolation:isolate}
-  .aa-hero::before{content:""; position:absolute; top:-20%; right:-10%; width:60vw; height:60vw;
-    max-width:800px; max-height:800px; border-radius:50%; pointer-events:none; z-index:0;
-    background:radial-gradient(circle, rgba(212,175,55,.14), transparent 62%); filter:blur(10px);
-    animation:aaHeroDrift 22s ease-in-out infinite alternate}
-  .aa-hero::after{content:""; position:absolute; bottom:-30%; left:-14%; width:56vw; height:56vw;
-    max-width:720px; max-height:720px; border-radius:50%; pointer-events:none; z-index:0;
-    background:radial-gradient(circle, rgba(212,175,55,.10), transparent 62%); filter:blur(14px);
-    animation:aaHeroDrift 28s ease-in-out infinite alternate-reverse}
-  @keyframes aaHeroDrift{to{transform:translate3d(46px,-34px,0) scale(1.12)}}
-  .aa-hero-grid{position:relative; z-index:2; display:grid; gap:32px; align-items:center}
-  .aa-hero-content{min-width:0}
+  /* HERO — full-width AI-automation image as BACKGROUND, text centered on top.
+     Beth 2026-08-07: "the image should be in the background the texts should
+     be in the middle." No animation yet, waiting for her direction on that. */
+  .aa-hero{position:relative; padding:120px 32px 100px; overflow:hidden; isolation:isolate;
+    min-height:70vh; display:flex; align-items:center; justify-content:center;
+    background:var(--ink,#0F1115)}
+  .aa-hero-bg{position:absolute; inset:0; z-index:0}
+  .aa-hero-bg img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(.62) brightness(.62) contrast(1.05)}
+  /* Layered gradient overlay: darker at top/bottom edges + a soft mid vignette
+     so text sits on a legible ink field regardless of where the image bright
+     spots land. Gold hue kept just enough to bind the image to the palette. */
+  .aa-hero-bg::after{content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.22) 0%, rgba(15,17,21,.72) 78%),
+      linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.30) 40%, rgba(15,17,21,.86) 100%),
+      linear-gradient(90deg, rgba(15,17,21,.55) 0%, rgba(15,17,21,.10) 30%, rgba(15,17,21,.10) 70%, rgba(15,17,21,.55) 100%)}
+  .aa-hero-content{position:relative; z-index:10; max-width:820px; text-align:center;
+    margin:0 auto; padding:0 8px}
   .aa-hero .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
-    margin-bottom:16px; display:flex; gap:10px; align-items:center}
+    margin-bottom:20px; display:inline-flex; gap:10px; align-items:center;
+    justify-content:center}
   .aa-hero .eyebrow .num{color:var(--muted-on-dark,#868A90)}
   .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:clamp(2rem, 4.4vw, 3.4rem); line-height:1.06; letter-spacing:-.015em;
-    margin:0 0 22px; max-width:22ch; text-wrap:balance}
+    font-size:clamp(2.05rem, 5vw, 3.9rem); line-height:1.06; letter-spacing:-.015em;
+    margin:0 auto 24px; max-width:22ch; text-wrap:balance;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
   .aa-hero h1 em{font-style:italic; color:var(--gold,#D4AF37)}
   .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.85rem; color:var(--muted-on-dark,#868A90); max-width:52ch; line-height:1.6;
-    margin:0 0 28px}
-  .aa-hero .lede code{background:var(--ink-3,#1C1E23); border:1px solid var(--border,#2A2C31);
+    font-size:.88rem; color:var(--paper,#F7F7F5); max-width:58ch; line-height:1.65;
+    margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
+  .aa-hero .lede code{background:rgba(28,30,35,.85); border:1px solid var(--border,#2A2C31);
     padding:2px 8px; border-radius:3px; color:var(--paper,#F7F7F5)}
-  .aa-hero-cta{display:flex; flex-wrap:wrap; align-items:center; gap:18px; position:relative; z-index:20}
-  .aa-hero-byline{margin-top:26px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+  .aa-hero-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; position:relative; z-index:20}
+  .aa-hero-byline{margin-top:28px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
   .aa-hero-byline b{color:var(--paper,#F7F7F5); font-weight:600}
-
-  /* HERO VISUAL: contains the AI-automation image with subtle vignette + gold halo.
-     No sheen (photograph, not a wordmark). Float animation is CSS-only. */
-  .aa-hero-visual{display:none; position:relative; align-items:center; justify-content:center;
-    perspective:1000px; min-width:0}
-  .aa-hero-frame{position:relative; width:100%; max-width:560px; border-radius:10px;
-    overflow:hidden; border:1px solid rgba(212,175,55,.22);
-    box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.4) inset;
-    animation:aaHeroImgFloat 8s ease-in-out infinite alternate}
-  .aa-hero-frame img{display:block; width:100%; height:auto;
-    filter:saturate(.75) brightness(.9) contrast(1.05)}
-  .aa-hero-frame::before{content:""; position:absolute; inset:0; pointer-events:none; z-index:2;
-    background:
-      radial-gradient(ellipse at 30% 30%, transparent 42%, rgba(15,17,21,.55) 100%),
-      linear-gradient(180deg, transparent 60%, rgba(15,17,21,.35) 100%)}
-  .aa-hero-frame::after{content:""; position:absolute; inset:0; pointer-events:none; z-index:3;
-    background:linear-gradient(135deg, rgba(212,175,55,.12), transparent 45%);
-    mix-blend-mode:overlay}
-  .aa-hero-visual::before{content:""; position:absolute; inset:-8%; z-index:-1;
-    background:radial-gradient(circle at 50% 55%, rgba(212,175,55,.20), transparent 62%);
-    filter:blur(30px); pointer-events:none}
-  @keyframes aaHeroImgFloat{
-    from{transform:translateY(-8px) rotateX(1deg) rotateY(-2deg)}
-    to  {transform:translateY(10px) rotateX(-1deg) rotateY(2deg)}
-  }
-  @media (min-width:960px){
-    .aa-hero-grid{grid-template-columns:1.25fr 1fr; gap:56px}
-    .aa-hero-visual{display:flex}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .aa-hero-frame,.aa-hero::before,.aa-hero::after{animation:none}
+  @media (max-width:640px){
+    .aa-hero{padding:72px 20px 64px; min-height:64vh}
   }
 
   /* CANVAS (workflow + log two-column) */
@@ -432,28 +410,23 @@
 <main>
 
 <section class="aa-hero" data-mark="01">
-  <div class="aa-hero-grid">
-    <div class="aa-hero-content">
-      <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
-      <h1>Stop losing the lead that comes in at 11pm to a competitor who answered <em>first.</em></h1>
-      <p class="lede">
-        A specced, built, and operated AI system that lives inside <code>your CRM</code>, not ours.
-        One team reads your intake data, maps your best dispatcher's decision logic, ships the agent,
-        and reviews the logs weekly. When the engagement ends, the agents, workflows, and training
-        data stay with you.
-      </p>
-      <div class="aa-hero-cta">
-        <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
-      </div>
-      <div class="aa-hero-byline"><b>Michael Merlino</b> &middot; Chief Strategist and AI Systems</div>
+  <div class="aa-hero-bg" aria-hidden="true">
+    <img src="img/ai-automation-hero.jpg" alt="" width="1400" height="933" fetchpriority="high">
+  </div>
+  <div class="aa-hero-content">
+    <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> AI Automation</div>
+    <h1>Stop losing the lead that comes in at 11pm to a competitor who answered <em>first.</em></h1>
+    <p class="lede">
+      A specced, built, and operated AI system that lives inside <code>your CRM</code>, not ours.
+      One team reads your intake data, maps your best dispatcher's decision logic, ships the agent,
+      and reviews the logs weekly. When the engagement ends, the agents, workflows, and training
+      data stay with you.
+    </p>
+    <div class="aa-hero-cta">
+      <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
-
-    <div class="aa-hero-visual" aria-hidden="true">
-      <div class="aa-hero-frame">
-        <img src="img/ai-automation-hero.jpg" alt="" width="1400" height="933" fetchpriority="high">
-      </div>
-    </div>
+    <div class="aa-hero-byline"><b>Michael Merlino</b> &middot; Chief Strategist and AI Systems</div>
   </div>
 </section>
 
