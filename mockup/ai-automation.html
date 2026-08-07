@@ -180,20 +180,54 @@
   /* No char cap: fill the container. Beth 2026-08-07: 'the texts should
      cover the spaces.' */
   .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:clamp(2.05rem, 5.4vw, 4.4rem); line-height:1.06; letter-spacing:-.015em;
+    font-size:clamp(2.05rem, 5.4vw, 4.4rem); line-height:1.2; letter-spacing:-.015em;
     margin:0 auto 24px; max-width:none; text-wrap:balance;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
   /* Skylead-style rounded pill behind the highlighted phrase. Beth
-     2026-08-07: 'copy how the text in the hero banner highlighted'
-     (skylead.io). Pill is solid gold #D4AF37 with dark ink text on top =
-     8.52:1 AAA. Kept on one line with white-space:nowrap so the pill does
-     not split across line breaks. No animation per Beth's standing hold. */
-  .aa-hero h1 em{position:relative; display:inline-block; font-style:normal;
-    color:#16171A; padding:2px 18px; margin:0 4px;
+     2026-08-07: 'copy how the text in the hero banner highlighted', then
+     'no animation it was only highlighted'. Measured off skylead.io directly:
+     their pill is a ::before whose WIDTH animates 0 -> 100% over 1s on
+     cubic-bezier(.33,1,.68,1), radius 50px, fill-mode forwards.
+     Pill is solid gold #D4AF37 with dark ink text = 8.52:1 AAA.
+
+     One difference from Skylead that matters: their headline is dark text on
+     a LIGHT page, so it stays readable whether or not the pill has drawn.
+     Ours is ink text on a DARK hero, so before the pill arrives the text
+     would be invisible. So the base state is a FULL pill (correct with JS
+     off and under reduced motion), the sweep only runs when .animate is
+     added, and the ink colour is held back until the pill has passed. */
+  /* Beth 2026-08-07 'P is covered here': at line-height 1.06 the pill box was
+     taller than the line box, so a pill on line 2 painted over the descender
+     of line 1 (the p in 11pm). Two changes together fix it: the headline
+     line-height opens to 1.2, and the pill is a fixed 1.12em tall centred on
+     the text rather than filling the full inline-block height. */
+  .aa-hero h1 em,
+  .aa-cta-band h2 em{position:relative; display:inline-block; font-style:normal;
+    color:#16171A; padding:0 18px; margin:0 4px;
     white-space:nowrap; z-index:0}
-  .aa-hero h1 em::before{content:""; position:absolute; inset:0;
+  .aa-hero h1 em::before,
+  .aa-cta-band h2 em::before{content:""; position:absolute; left:0;
+    top:50%; transform:translateY(-50%);
+    width:100%; height:1.12em;
     background:#D4AF37; border-radius:50px; z-index:-1;
     box-shadow:0 4px 18px rgba(212,175,55,.30)}
+  .aa-hero h1 em.animate::before,
+  .aa-cta-band h2 em.animate::before{
+    animation:aaHighlight .95s cubic-bezier(.33,1,.68,1) forwards}
+  .aa-hero h1 em.animate,
+  .aa-cta-band h2 em.animate{
+    animation:aaHighlightInk .95s cubic-bezier(.33,1,.68,1) forwards}
+  /* second pill follows the first so they read in sentence order */
+  .aa-hero h1 em.animate.is-2::before,
+  .aa-hero h1 em.animate.is-2,
+  .aa-cta-band h2 em.animate.is-2::before,
+  .aa-cta-band h2 em.animate.is-2{animation-delay:.40s}
+  @keyframes aaHighlight{from{width:0} to{width:100%}}
+  @keyframes aaHighlightInk{0%{color:#F7F7F5} 55%{color:#F7F7F5} 100%{color:#16171A}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-hero h1 em.animate::before,
+    .aa-hero h1 em.animate{animation:none}
+  }
   .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.92rem; color:var(--paper,#F7F7F5); max-width:88ch; line-height:1.65;
     margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
@@ -299,16 +333,12 @@
   /* TWO-COLUMN SECTION HEAD — Beth 2026-08-07 flagged empty right side beside
      H2s. Splits eyebrow+H2 (left) from intro paragraphs (right) at >=960px.
      Below that, everything stacks. */
-  .aa-two-col-head{margin-bottom:48px}
-  .aa-two-col-head .head-left .eyebrow{margin-bottom:16px}
-  .aa-two-col-head .head-left h2{margin:0}
-  @media (min-width:960px){
-    .aa-two-col-head{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:end}
-    .aa-two-col-head .head-right p{margin:0 0 18px}
-    .aa-two-col-head .head-right p:last-child{margin-bottom:0}
-  }
-  .aa-sec.band-light .aa-two-col-head .head-right .intro{color:#16171A}
-  .aa-sec.band-light .aa-two-col-head .head-right .intro.small{color:#45474C}
+  /* Beth 2026-08-07: the right-hand intro columns were X'd out of sections 03
+     and 05, so the two-column head is gone. Heads now use the same flat
+     eyebrow + h2 pattern as section 04, which cannot leave a void beside the
+     heading. .aa-h2-oneline keeps a short head on a single line. */
+  .aa-h2-oneline{white-space:nowrap}
+  @media (max-width:640px){ .aa-h2-oneline{white-space:normal} }
 
   /* SIX OTHER SERVICE CARDS — Beth 2026-08-07: 'we need to redesign this and
      include them here.' Six gold-bordered cards on the light band showing
@@ -317,8 +347,12 @@
     display:grid; gap:14px; grid-template-columns:1fr}
   @media (min-width:600px){ .aa-services{grid-template-columns:repeat(2,1fr)} }
   @media (min-width:960px){ .aa-services{grid-template-columns:repeat(3,1fr); gap:16px} }
-  .aa-service-card{display:flex; align-items:center; justify-content:space-between;
-    padding:22px 26px; border:1.5px solid #D4AF37; border-radius:10px;
+  /* Beth 2026-08-07: 'use real images fr pexels'. Cards carry a real photo
+     above the label. Six distinct subjects (tablet / laptop / phone / data UI /
+     wireframe / print reports) so the row does not read as one photo six times.
+     No faces, per the standing rule. */
+  .aa-service-card{display:flex; flex-direction:column; overflow:hidden;
+    border:1.5px solid #D4AF37; border-radius:10px;
     background:#FFFFFF; color:#16171A; text-decoration:none;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.85rem; font-weight:600; letter-spacing:.03em;
@@ -326,12 +360,24 @@
     transition:transform .25s cubic-bezier(.16,1,.3,1),
                box-shadow .25s cubic-bezier(.16,1,.3,1),
                background .25s cubic-bezier(.16,1,.3,1)}
+  .aa-service-card .pic{display:block; aspect-ratio:16/9; overflow:hidden;
+    background:#EDEDEA; border-bottom:1px solid rgba(212,175,55,.45)}
+  .aa-service-card .pic img{display:block; width:100%; height:100%; object-fit:cover;
+    transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-service-card .lbl{display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px}
   .aa-service-card .ar{color:#6E561A; font-size:1.15rem; margin-left:12px;
     transition:transform .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
   .aa-service-card:hover{transform:translateY(-2px);
     box-shadow:0 12px 26px rgba(212,175,55,.24); background:#FFFBEE}
+  .aa-service-card:hover .pic img{transform:scale(1.05)}
   .aa-service-card:hover .ar{color:#D4AF37; transform:translateX(4px)}
   .aa-service-card:focus-visible{outline:2px solid #D4AF37; outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    .aa-service-card,.aa-service-card .pic img,.aa-service-card .ar{transition:none}
+    .aa-service-card:hover{transform:none}
+    .aa-service-card:hover .pic img{transform:none}
+  }
 
   .aa-verticals{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
     font-size:.98rem; line-height:1.6; color:#45474C; margin:0}
@@ -546,7 +592,7 @@
   .aa-cta-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
     gap:18px; margin-top:8px; position:relative; z-index:2}
   .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
-    font-size:clamp(2.2rem, 4.6vw, 3.8rem); line-height:1.06; margin:0 auto 26px;
+    font-size:clamp(2.2rem, 4.6vw, 3.8rem); line-height:1.2; margin:0 auto 26px;
     max-width:none; color:var(--paper,#F7F7F5); text-wrap:balance; letter-spacing:-.015em;
     text-shadow:0 2px 24px rgba(15,17,21,.6)}
   .aa-cta-band .tel{display:inline-flex; align-items:center; gap:14px;
@@ -707,16 +753,8 @@
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
-  <div class="aa-two-col-head">
-    <div class="head-left">
-      <div class="eyebrow">03 &middot; What lands in your inbox</div>
-      <h2>An AI stack audit, not a pitch.</h2>
-    </div>
-    <div class="head-right">
-      <p class="intro">A 45-minute working session with the Magister Digital AI engineering team. We read your CRM data, your intake process, and your current manual workload. You leave with a written spec of the three automations we would build first, ranked by revenue impact, whether or not you ever hire us.</p>
-      <p class="intro small">If the audit shows automation is not the highest-return move for your business right now, we tell you that before we take a dollar. We will not sign an engagement we cannot specify in plain English on a single page.</p>
-    </div>
-  </div>
+  <div class="eyebrow">03 &middot; What lands in your inbox</div>
+  <h2>An AI stack audit, not a pitch.</h2>
   <div class="aa-lands">
     <div class="item">
       <span class="idx">01</span>
@@ -771,24 +809,34 @@
 
 
 <section class="aa-sec band-light" data-mark="05">
-  <div class="aa-two-col-head">
-    <div class="head-left">
-      <div class="eyebrow">05 &middot; Why this is built differently</div>
-      <h2>AI automation only pays off when it sits next to the rest of the stack, run by one team.</h2>
-    </div>
-    <div class="head-right">
-      <p class="intro">An automation that books a lead is only worth what the lead is worth, and that depends on the paid media that produced it, the SEO that ranked you, the CRM that tracks it to closed, and the web that converted it. Magister Digital runs all of it as one engine.</p>
-      <p class="intro small">AI automation is one of seven channels we operate. Pick where your revenue leaks, and the same team owns the fix.</p>
-    </div>
-  </div>
+  <div class="eyebrow">05 &middot; Why this is built differently</div>
+  <h2 class="aa-h2-oneline">One team runs the whole stack.</h2>
 
   <ul class="aa-services" aria-label="The other six channels we operate">
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">SEO</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">Google Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">Meta Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">CRM Development</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">Web Design</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
-    <li><a class="aa-service-card" href="index.html#services"><span class="t">Full-Stack Marketing</span><span class="ar" aria-hidden="true">&rsaquo;</span></a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-seo.jpg" alt="An analytics dashboard open on a tablet, tracking organic search performance." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">SEO</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-google-ads.jpg" alt="A laptop showing campaign performance charts and spend reporting." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">Google Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-meta-ads.jpg" alt="Social platform app icons close up on a phone screen." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">Meta Ads</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-crm.jpg" alt="A data interface of linked records and routing rules." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">CRM Development</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-web-design.jpg" alt="A landing page wireframe sketched out on a tablet beside a pencil." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">Web Design</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
+    <li><a class="aa-service-card" href="index.html#services">
+      <span class="pic"><img src="img/svc-full-stack.jpg" alt="Printed performance reports and charts spread across a desk." width="800" height="450" loading="lazy"></span>
+      <span class="lbl"><span class="t">Full-Stack Marketing</span><span class="ar" aria-hidden="true">&rsaquo;</span></span>
+    </a></li>
   </ul>
 
   <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="index.html#verticals">home services</a>, <a href="index.html#verticals">medical and dental</a>, or <a href="index.html#verticals">legal</a>.</p>
@@ -859,7 +907,7 @@
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">08 &middot; Next step</div>
-    <h2>The person who reads your spec is the person who builds the system.</h2>
+    <h2>The person who <em>reads your spec</em> is the person who <em>builds the system</em>.</h2>
     <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -876,7 +924,37 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="18">
+<script data-v="19">
+/* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
+   .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
+   section 08 pair waits until the band is actually on screen so the effect is
+   not spent above the fold. Under reduced motion nothing is added and the CSS
+   base state already shows the finished pill. */
+(function(){
+  const rmq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function arm(scope){
+    const pills = scope.querySelectorAll('em');
+    pills.forEach((el,i) => { if (i === 1) el.classList.add('is-2'); });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pills.forEach(el => el.classList.add('animate'));
+    }));
+  }
+  function init(){
+    if (rmq.matches) return;                       // base CSS = finished pill
+    const hero = document.querySelector('.aa-hero h1');
+    if (hero) arm(hero);
+    const cta = document.querySelector('.aa-cta-band h2');
+    if (!cta) return;
+    if (!('IntersectionObserver' in window)) { arm(cta); return; }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting){ arm(cta); obs.disconnect(); } });
+    }, { threshold: .35 });
+    io.observe(cta);
+  }
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 (function(){
   const templates = [
     ['TRIGGER',  '<span class="good">webhook.hvac_inquiry</span> queued'],
