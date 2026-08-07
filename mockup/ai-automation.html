@@ -343,6 +343,17 @@
      heading. .aa-h2-oneline keeps a short head on a single line. */
   .aa-h2-oneline{white-space:nowrap}
   @media (max-width:640px){ .aa-h2-oneline{white-space:normal} }
+  /* Beth 2026-08-07 'space is there': a short heading left a void to its right,
+     which she treats as a defect. A hairline runs from the end of the words to
+     the right margin so the width reads as intentional composition rather than
+     leftover space. Decorative only, so it carries aria-hidden semantics by
+     being a pseudo element. */
+  .aa-h2-rule{display:flex; align-items:center; gap:22px}
+  .aa-h2-rule::after{content:""; flex:1 1 auto; height:1px; min-width:40px;
+    background:linear-gradient(90deg, rgba(212,175,55,.55), rgba(212,175,55,0))}
+  .aa-sec.band-light .aa-h2-rule::after{
+    background:linear-gradient(90deg, rgba(110,86,26,.55), rgba(110,86,26,0))}
+  @media (max-width:640px){ .aa-h2-rule{display:block} .aa-h2-rule::after{display:none} }
 
   /* SIX OTHER SERVICE CARDS — Beth 2026-08-07: 'we need to redesign this and
      include them here.' Six gold-bordered cards on the light band showing
@@ -509,7 +520,32 @@
     font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
 
   /* Spec table (Inside the build) */
-  .aa-spec-table{border:1px solid var(--border,#2A2C31); border-radius:6px; overflow:hidden}
+  /* SECTION 04 PIPELINE ANIMATION — Beth 2026-08-07 approved the recommendation
+     to animate the five step rows rather than the headline. A gold pulse walks
+     TRIGGER -> QUALIFY -> DECIDE -> ACT -> LOG on a loop, a rail draws down the
+     left edge as it goes, and the rows cascade in the first time the table is
+     seen. The loop runs ONLY while the table is on screen, so it never becomes
+     perpetual mid-page motion. Reuses the canvas's gold-pulse vocabulary above
+     rather than inventing a second unrelated effect. */
+  .aa-spec-table{border:1px solid var(--border,#2A2C31); border-radius:6px;
+    overflow:hidden; position:relative}
+  .aa-spec-table::before{content:""; position:absolute; left:0; top:0; width:2px;
+    height:var(--rail,0%); background:linear-gradient(180deg,
+      rgba(212,175,55,.9), rgba(212,175,55,.25));
+    transition:height .55s cubic-bezier(.16,1,.3,1); z-index:2; pointer-events:none}
+  .aa-spec-row{transition:background .45s ease}
+  .aa-spec-row .k{transition:color .35s ease, text-shadow .35s ease}
+  .aa-spec-row.is-step{background:rgba(212,175,55,.055)}
+  .aa-spec-row.is-step .k{color:#EBCE72; text-shadow:0 0 16px rgba(212,175,55,.5)}
+  .aa-spec-table.is-in .aa-spec-row{animation:aaRowIn .5s cubic-bezier(.16,1,.3,1) both;
+    animation-delay:calc(var(--i,0) * 85ms)}
+  @keyframes aaRowIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-spec-table::before{display:none}
+    .aa-spec-table.is-in .aa-spec-row{animation:none}
+    .aa-spec-row.is-step{background:none}
+    .aa-spec-row.is-step .k{color:var(--gold,#D4AF37); text-shadow:none}
+  }
   .aa-spec-row{display:grid; grid-template-columns:120px 1fr 100px; gap:24px;
     padding:20px 24px; border-bottom:1px solid var(--border,#2A2C31);
     align-items:baseline; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
@@ -758,7 +794,7 @@
 
 <section class="aa-sec band-light" data-mark="03">
   <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2>An AI stack audit, not a pitch.</h2>
+  <h2 class="aa-h2-rule">An AI stack audit, not a pitch</h2>
   <div class="aa-lands">
     <div class="item">
       <span class="idx">01</span>
@@ -846,7 +882,7 @@
   <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="index.html#verticals">home services</a>, <a href="index.html#verticals">medical and dental</a>, or <a href="index.html#verticals">legal</a>.</p>
 </section>
 
-<section class="aa-sec band-light" data-mark="06" id="faq">
+<section class="aa-sec" data-mark="06" id="faq">
   <div class="eyebrow">06 &middot; Questions operators ask first</div>
   <h2>The questions a careful buyer is already holding.</h2>
   <div class="aa-faq">
@@ -928,7 +964,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="19">
+<script data-v="20">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -958,6 +994,48 @@
   if (document.readyState === 'loading')
     document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+
+/* Section 04 spec-table pipeline. Walks the five steps on a loop while the
+   table is on screen and stops the timer the moment it leaves, so it is not
+   perpetual motion mid-page. Base state (no JS, reduced motion) is the plain
+   static table, which is already correct. */
+(function(){
+  const table = document.querySelector('.aa-spec-table');
+  if (!table) return;
+  const rows = [...table.querySelectorAll('.aa-spec-row')];
+  if (!rows.length) return;
+  rows.forEach((r,i) => r.style.setProperty('--i', i));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  let timer = null, step = -1;
+  function tick(){
+    if (step >= 0) rows[step].classList.remove('is-step');
+    step = (step + 1) % rows.length;
+    rows[step].classList.add('is-step');
+    table.style.setProperty('--rail', (((step + 1) / rows.length) * 100) + '%');
+  }
+  function start(){
+    if (timer) return;
+    tick();
+    timer = setInterval(tick, 1100);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ table.classList.add('is-in'); start(); }
+      else stop();
+    });
+  }, { threshold: .25 });
+  io.observe(table);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
 })();
 (function(){
   const templates = [
