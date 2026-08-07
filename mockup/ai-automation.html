@@ -166,9 +166,8 @@
      spots land. Gold hue kept just enough to bind the image to the palette. */
   .aa-hero-bg::after{content:""; position:absolute; inset:0; pointer-events:none;
     background:
-      radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.22) 0%, rgba(15,17,21,.72) 78%),
-      linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.30) 40%, rgba(15,17,21,.86) 100%),
-      linear-gradient(90deg, rgba(15,17,21,.55) 0%, rgba(15,17,21,.10) 30%, rgba(15,17,21,.10) 70%, rgba(15,17,21,.55) 100%)}
+      radial-gradient(ellipse at 50% 52%, rgba(15,17,21,.62) 0%, rgba(15,17,21,.12) 62%, rgba(15,17,21,0) 80%),
+      linear-gradient(180deg, rgba(15,17,21,.72) 0%, rgba(15,17,21,0) 34%, rgba(15,17,21,0) 66%, rgba(15,17,21,.72) 100%)}
   .aa-hero-content{position:relative; z-index:10; max-width:1240px; text-align:center;
     margin:0 auto; padding:0 8px; width:100%}
   .aa-hero .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
@@ -1113,7 +1112,7 @@
   <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
 </footer>
 
-<script data-v="25">
+<script data-v="26">
 /* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
    .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
    section 08 pair waits until the band is actually on screen so the effect is
@@ -1233,7 +1232,7 @@
         const yWorld = dir * 330;
         const a = project(-2600, yWorld + py * .4, z);
         const b = project( 2600, yWorld + py * .4, z);
-        const fade = Math.max(0, 1 - z / 3100) * 0.30;
+        const fade = Math.max(0, 1 - z / 3100) * 0.62;
         if (fade <= 0.005) continue;
         ctx.strokeStyle = rgba(fade * 0.55);
         ctx.lineWidth = 1;
@@ -1245,7 +1244,7 @@
         const n = project(x, dir * 330 + py * .4, 60);
         const f = project(x, dir * 330 + py * .4, 3100);
         const g = ctx.createLinearGradient(n.X + px * .5, n.Y, f.X + px * .5, f.Y);
-        g.addColorStop(0, rgba(0.16)); g.addColorStop(1, rgba(0));
+        g.addColorStop(0, rgba(0.34)); g.addColorStop(1, rgba(0));
         ctx.strokeStyle = g; ctx.lineWidth = 1;
         ctx.beginPath(); ctx.moveTo(n.X + px * .5, n.Y); ctx.lineTo(f.X + px * .5, f.Y); ctx.stroke();
       }
@@ -1261,13 +1260,13 @@
       if (fade <= 0.01) continue;
       ctx.save();
       ctx.translate(c.X, c.Y);
-      ctx.fillStyle = `rgba(22,23,26,${0.34 * fade})`;
-      ctx.strokeStyle = rgba(0.34 * fade);
+      ctx.fillStyle = `rgba(22,23,26,${0.46 * fade})`;
+      ctx.strokeStyle = rgba(0.58 * fade);
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.rect(-w/2, -h/2, w, h); ctx.fill(); ctx.stroke();
       // corner brackets, the AR framing cue
       const b = Math.min(w, h) * 0.24;
-      ctx.strokeStyle = rgba(0.62 * fade); ctx.lineWidth = 1.6;
+      ctx.strokeStyle = rgba(0.92 * fade); ctx.lineWidth = 1.8;
       for (const [sx, sy] of [[-1,-1],[1,-1],[-1,1],[1,1]]){
         const cx = sx * w/2, cy = sy * h/2;
         ctx.beginPath();
@@ -1276,7 +1275,7 @@
       }
       // scan sweep inside the plane
       const sweep = ((t * 0.42 + p.seed) % 1);
-      ctx.strokeStyle = rgba(0.30 * fade);
+      ctx.strokeStyle = rgba(0.52 * fade);
       ctx.beginPath();
       ctx.moveTo(-w/2, -h/2 + h * sweep); ctx.lineTo(w/2, -h/2 + h * sweep); ctx.stroke();
       ctx.restore();
@@ -1297,15 +1296,15 @@
         const dx = pts[i].X - pts[j].X, dy = pts[i].Y - pts[j].Y;
         const d2 = dx*dx + dy*dy;
         if (d2 > 24000) continue;
-        const a = (1 - d2 / 24000) * 0.20 * Math.min(pts[i].fade, pts[j].fade);
+        const a = (1 - d2 / 24000) * 0.38 * Math.min(pts[i].fade, pts[j].fade);
         if (a <= 0.004) continue;
         ctx.strokeStyle = rgba(a);
         ctx.beginPath(); ctx.moveTo(pts[i].X, pts[i].Y); ctx.lineTo(pts[j].X, pts[j].Y); ctx.stroke();
       }
     }
     for (const p of pts){
-      const r = Math.max(0.7, 2.1 * p.s);
-      ctx.fillStyle = rgba(0.55 * p.fade);
+      const r = Math.max(0.9, 2.6 * p.s);
+      ctx.fillStyle = rgba(0.88 * p.fade);
       ctx.beginPath(); ctx.arc(p.X, p.Y, r, 0, Math.PI * 2); ctx.fill();
     }
   }
