@@ -211,12 +211,16 @@
     width:100%; height:1.12em;
     background:#D4AF37; border-radius:50px; z-index:-1;
     box-shadow:0 4px 18px rgba(212,175,55,.30)}
+  /* fill-mode BOTH, not forwards: the second pill has a delay, and with
+     `forwards` it sat at its base full width for those 400ms and then snapped
+     back to zero to sweep. `both` applies the 0% frame during the delay too.
+     Caught by sampling computed width mid-animation, not by eye. */
   .aa-hero h1 em.animate::before,
   .aa-cta-band h2 em.animate::before{
-    animation:aaHighlight .95s cubic-bezier(.33,1,.68,1) forwards}
+    animation:aaHighlight .95s cubic-bezier(.33,1,.68,1) both}
   .aa-hero h1 em.animate,
   .aa-cta-band h2 em.animate{
-    animation:aaHighlightInk .95s cubic-bezier(.33,1,.68,1) forwards}
+    animation:aaHighlightInk .95s cubic-bezier(.33,1,.68,1) both}
   /* second pill follows the first so they read in sentence order */
   .aa-hero h1 em.animate.is-2::before,
   .aa-hero h1 em.animate.is-2,
