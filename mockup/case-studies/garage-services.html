@@ -993,7 +993,57 @@
   .aa-sec.band-light .cs-metro-row .v.up{color:#0F6E3C}
   .aa-sec.band-light .cs-metro-row .v.dn{color:#B01B1B}
 
-  /* 06 OUTLINE - the "sections still to build" teaser. */
+  /* KPI STRIP override - 3 tiles instead of 4 across, so each tile gets more
+     room and Dimi's longer labels do not get cramped. */
+  .aa-kpi-strip.cs-kpi-3{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:820px){ .aa-kpi-strip.cs-kpi-3{grid-template-columns:1fr} }
+  .aa-kpi-strip.cs-kpi-3 .aa-kpi:nth-child(3n){border-right:none}
+  .aa-kpi-strip.cs-kpi-3 .aa-kpi:nth-child(4n){border-right:1px solid var(--border,#2A2C31)}
+
+  /* 03 DIAGNOSIS THREE-CARD - stacked cards, one per sub-section. Dark by
+     default, invert to paper on light bands. */
+  .cs-diag3{display:grid; grid-template-columns:1fr; gap:20px; margin-top:28px}
+  .cs-diag3-card{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:24px 28px}
+  .aa-sec.band-light .cs-diag3-card{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-diag3-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); margin-bottom:14px; padding-bottom:12px;
+    border-bottom:1px solid var(--border,#2A2C31); display:flex; align-items:baseline; gap:0}
+  .aa-sec.band-light .cs-diag3-head{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-diag3-card p{margin:0; font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-diag3-card p{color:var(--ink,#16171A)}
+
+  /* 04 CONTROLLED-FIRST-STEP GRID - 5 tiles: 3 across on desktop, wrap on
+     narrower viewports. Last tile ("Did not do") gets a muted accent so it
+     reads as the deliberate negation. */
+  .cs-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+  @media (max-width:1000px){ .cs-steps{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .cs-steps{grid-template-columns:1fr} }
+  .cs-step{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:22px 24px}
+  .aa-sec.band-light .cs-step{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-step-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); margin-bottom:12px; padding-bottom:10px;
+    border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-step-head{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-step p{margin:0; font-size:.9375rem; line-height:1.55; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-step p{color:var(--ink,#16171A)}
+  .cs-step-neg{border-color:rgba(232,106,90,0.25); background:rgba(232,106,90,0.03)}
+  .aa-sec.band-light .cs-step-neg{border-color:rgba(176,27,27,0.20); background:rgba(176,27,27,0.02)}
+  .cs-step-neg .cs-step-head{color:#E86A5A}
+  .aa-sec.band-light .cs-step-neg .cs-step-head{color:#B01B1B}
+
+  /* Chain row 07 (Cost) + row 11 (Conversion value) carry a small caption
+     inside the delta cell. Stack vertically. */
+  .cs-chain-row .delta em{font-style:normal; display:block}
+  .cs-chain-row .delta small{display:block; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6rem; letter-spacing:.06em; color:var(--muted-on-dark,#868A90);
+    margin-top:2px; text-transform:none; font-weight:400}
+  .aa-sec.band-light .cs-chain-row .delta small{color:var(--muted-2,#5E6066)}
+
+    /* 06 OUTLINE - the "sections still to build" teaser. */
   .cs-outline{list-style:none; padding:0; margin:28px 0 0;
     border-top:1px solid var(--border,#2A2C31)}
   .aa-sec.band-light .cs-outline{border-top-color:#E5E4DF}
@@ -1056,11 +1106,11 @@
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Garage services <span class="sep">/</span> Four U.S. metros</div>
-    <h1>Leads up <em>67%</em> at 26% lower cost, proven with a <em>controlled test</em></h1>
+    <h1>Leads up <em>67%</em> at 26% lower cost, proven with a <em>controlled test</em>, and none of it tied to revenue</h1>
     <p class="lede">
-      An anonymized four-metro garage-services account. Roughly <code>$250K</code> in H1 media
-      across Google and Meta. Six months of cleanup, one controlled test, and a reporting layer
-      that finally showed what was moving.
+      A multi-location garage services company, storage and organization systems, across four
+      major U.S. metropolitan markets, engaged January 2026. Roughly <code>$250K</code> in H1
+      media managed across Google and Meta.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -1069,33 +1119,31 @@
   </div>
 </section>
 
-<!-- 02 - KPI strip. Reuses .aa-kpi-* from AA page. -->
+<!-- 01b - Hero KPI strip. Three figures Dimi leads with; captions
+     copied verbatim from garage-services-case-study.netlify.app. -->
 <section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline results">
-  <div class="aa-kpi-strip">
+  <div class="aa-kpi-strip cs-kpi-3">
     <div class="aa-kpi">
-      <div class="l">Google Ads leads</div>
+      <div class="l">Google Ads leads, all four markets</div>
       <div class="v">+67%</div>
-      <div class="d">274 &rarr; 457, at 26% lower CPL</div>
+      <div class="d">274 &rarr; 457, at 26% lower cost per conversion &middot; last 90 days vs prior 90</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Meta CPL, controlled test</div>
+      <div class="l">Average Meta cost per lead, controlled test</div>
       <div class="v">-45%</div>
-      <div class="d">Phase 1 lookalike vs Phase 2 + customer data</div>
+      <div class="d">Up to 61% in one market &middot; March 2026 phased rollout</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Leads marked qualified</div>
+      <div class="l">Leads marked qualified in CallRail</div>
       <div class="v">5 / 2,739</div>
-      <div class="d">In the client&#39;s own CallRail</div>
-    </div>
-    <div class="aa-kpi">
-      <div class="l">Reporting layer</div>
-      <div class="v">Rebuilt</div>
-      <div class="d">Attribution honest end-to-end</div>
+      <div class="d">Across six months, all sources, flagship brand &middot; Jan&ndash;Jun 2026</div>
     </div>
   </div>
 </section>
 
-<!-- 02 - The situation (light band, split layout: image left, content right) -->
+<!-- 02 - The situation (light band, split layout: image left, findings right).
+     Copy taken from Dimi's Netlify mockup verbatim, compressed into three
+     structural findings so the split layout stays readable. -->
 <section class="aa-sec band-light" data-mark="02">
   <div class="cs-split">
     <figure class="cs-split-img">
@@ -1103,123 +1151,159 @@
     </figure>
     <div class="cs-split-body">
       <div class="eyebrow">02 &middot; The situation</div>
-      <h2>Two questions on the table, in this order</h2>
-      <p class="intro small">Storage and organization systems for garages, four US metros, roughly $250,000 in H1 media across Google and Meta.</p>
+      <h2>On paper it looked measured &mdash; in practice the structure worked against them at every level</h2>
+      <p class="intro small">An established multi-location advertiser spending six figures a quarter with call tracking already in place. The trouble sat one layer up.</p>
       <ol class="cs-questions">
         <li>
           <span class="cs-q-num">01</span>
-          <span class="cs-q-text">Is the money working?</span>
+          <span class="cs-q-text">Five separate websites, five separate ad accounts, one per market &mdash; splitting organic authority across five domains and starving each account of the data pool it needed to optimise</span>
         </li>
         <li>
           <span class="cs-q-num">02</span>
-          <span class="cs-q-text">Does the reporting explain what&#39;s happening?</span>
+          <span class="cs-q-text">Reporting ran through hand-keyed spreadsheets maintained by an outside fractional-CMO layer, adding approval steps without adding data</span>
+        </li>
+        <li>
+          <span class="cs-q-num">03</span>
+          <span class="cs-q-text">Performance was benchmarked against 2021, a lockdown-era peak for home-improvement demand, and judged week by week &mdash; a window too short for any ad platform to demonstrate anything</span>
         </li>
       </ol>
-      <p class="intro small">We spent the first two weeks reading the account without touching a lever, on the theory that &ldquo;cut Meta&rdquo; is a fast answer if it is the right one and a very expensive answer if it is not.</p>
     </div>
   </div>
 </section>
 
-<!-- 03 - The diagnosis (dark) -->
+<!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
+     copy compressed but true to the mockup. -->
 <section class="aa-sec" data-mark="03">
   <figure class="cs-banner">
     <img src="https://images.pexels.com/photos/7484795/pexels-photo-7484795.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall of neatly organised hand tools hanging in place" loading="lazy" width="1600" height="460">
   </figure>
   <div class="eyebrow">03 &middot; The diagnosis</div>
-  <h2>The dashboard and the account <em>disagreed at three points</em></h2>
-  <p class="intro">Each item on the left is what the internal dashboard read. Each item on the right is what the raw account said once we compared it against what the platforms reported directly.</p>
-  <div class="cs-diag">
-    <div class="cs-diag-col">
-      <div class="cs-diag-head">What they thought</div>
-      <ul class="cs-diag-list">
-        <li><span class="cs-idx">01</span>Google Ads was doing the heavy lifting.</li>
-        <li><span class="cs-idx">02</span>Meta was underperforming and worth cutting.</li>
-        <li><span class="cs-idx">03</span>The reporting dashboard was reading the numbers correctly.</li>
-      </ul>
-    </div>
-    <div class="cs-diag-col cs-diag-col-found">
-      <div class="cs-diag-head">What we found</div>
-      <ul class="cs-diag-list">
-        <li><span class="cs-idx">01</span>Google Ads was healthy, but conversion accounting was double-counting.</li>
-        <li><span class="cs-idx">02</span>Meta was misconfigured. CBO was pulling budget out of tests before they finished.</li>
-        <li><span class="cs-idx">03</span>CallRail marked leads as &ldquo;qualified&rdquo; by hand from sales notes, not by source, so quality-per-channel was invisible.</li>
-      </ul>
-    </div>
+  <h2>The measurement problem was the smaller of two &mdash; <em>the constraint sat behind it</em></h2>
+  <div class="cs-diag3">
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">01</span>What they thought the problem was</div>
+      <p>They could not tell what their previous marketing companies had actually been doing, and the numbers those companies reported did not survive contact. Prior campaigns were built around keywords with no connection to buying intent, and the conversion goals counted duplicates, so the reported cost per lead looked far lower than the true one. The business was steering off instruments that read wrong.</p>
+    </article>
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">02</span>The constraint we found</div>
+      <p>Once we cleaned the lead flow, deduplicated conversion counting, and rebuilt tracking so every source reported honestly, the marketing measurement problem was solved. What that exposed was the layer behind it: a sales operation and company structure that never picked the leads up. 2,739 leads reached the client&#39;s own CallRail in six months; 5 were marked qualified, and three systems (the ad platform, the CRM, and call tracking) each held a different lead count with no reconciliation between them. The constraint was never lead volume &mdash; it was everything after the lead.</p>
+    </article>
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">03</span>What the cleanup exposed</div>
+      <p>The company&#39;s CRM had built-in call tracking. It had never been used. The prior marketing operation, run under the same fractional-CMO layer, marketed itself as specialist in that exact platform, and the platform&#39;s most basic measurement feature sat switched off for the entire relationship. When we cleaned the phone tracking and the attribution, years of broken automations surfaced at once, and the fix was blamed for the mess it revealed. That is the pattern: when measurement finally works, it exposes everything built on top of the old numbers, and the messenger takes the hit.</p>
+    </article>
   </div>
 </section>
 
-<!-- 04 - Google Ads chain (light band) -->
+<!-- 04 - The controlled first step (light band, 5 tiles).
+     Dimi's five named steps + the "did not do" tile at the end. -->
 <section class="aa-sec band-light" data-mark="04">
-  <div class="eyebrow">04 &middot; Google Ads &middot; the full diagnostic chain</div>
-  <h2>The gains landed at <em>the last two rows</em></h2>
-  <p class="intro">Six metrics tell the account&#39;s full story, in causal order. Above-the-click activity moved. The click step neither hurt nor helped. Everything the client felt landed on Leads and CPL.</p>
+  <div class="eyebrow">04 &middot; The controlled first step</div>
+  <h2>Structure before scale &mdash; five moves, in order</h2>
+  <p class="intro small">Nothing on the accounts was touched for the first two weeks. Then five moves ran in sequence so every later result could be attributed to a specific decision, not to the sum.</p>
+  <div class="cs-steps">
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">01</span>Consolidate the web</div>
+      <p>Merged five market-siloed websites into one multi-location site, pooling five domains&#39; worth of fragmented organic authority into a single domain that could actually rank.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">02</span>Consolidate the ads</div>
+      <p>Same logic on Google Ads: unified the market-siloed account structure so the platform sees the whole business&#39;s conversion data, not five starved slices of it.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">03</span>Standardise conversions</div>
+      <p>As the accounts stabilised, we built exact-match conversion actions across Google, Meta and Google Business Profile &mdash; one definition of a lead, counted once, everywhere. This is what made every number on this page comparable.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">04</span>Then test, controlled</div>
+      <p>With clean measurement in place, we ran a phased Meta experiment: 12 days on lookalike audiences alone as the control, then first-party customer data layered in, so any change in cost per lead could be attributed to the data, not to luck.</p>
+    </article>
+    <article class="cs-step cs-step-neg">
+      <div class="cs-step-head"><span class="cs-idx">05</span>Did not do</div>
+      <p>Did not raise total budget to chase volume. Did not adopt the weekly evaluation cadence or the 2021 baseline. Did not take over the client&#39;s internal lead qualification, which sat outside the ad accounts and turned out to be the binding constraint.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 05 - Google Ads chain (dark band). Full 11-metric chain, Dimi's verified
+     numbers, last 90 days vs prior 90 across all four markets. -->
+<section class="aa-sec" data-mark="05">
+  <div class="eyebrow">05 &middot; Google Ads &middot; the full diagnostic chain</div>
+  <h2>Every controllable metric improved &mdash; <em>the one zero is the loop the client never closed</em></h2>
+  <p class="intro">The account the way an auditor reads it: every stage from search to conversion, last 90 days against the prior 90, all four markets, enabled and paused campaigns included so nothing is cherry-picked.</p>
   <div class="cs-chain">
     <div class="cs-chain-row cs-chain-head" aria-hidden="true">
-      <span>Step</span><span>Group</span><span>Metric</span><span>Before &rarr; After</span><span>Change</span>
+      <span>#</span><span>Group</span><span>Metric</span><span>Before &rarr; After</span><span>Change</span>
     </div>
-    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Before the click</span><span class="metric">Impressions</span><span class="from-to">2.10M &rarr; 2.77M</span><span class="delta up">+32%</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Before the click</span><span class="metric">Clicks</span><span class="from-to">48.0K &rarr; 58.1K</span><span class="delta up">+21%</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">The click</span><span class="metric">CPC</span><span class="from-to">$1.12 &rarr; $1.07</span><span class="delta up">-4%</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">04</span><span class="grp">The click</span><span class="metric">CTR</span><span class="from-to">2.29% &rarr; 2.10%</span><span class="delta dn">-8%</span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">05</span><span class="grp">The conversion</span><span class="metric">Leads</span><span class="from-to">274 &rarr; 457</span><span class="delta up">+67%</span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">06</span><span class="grp">The conversion</span><span class="metric">CPL</span><span class="from-to">$97.30 &rarr; $71.75</span><span class="delta up">-26%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Before the click</span><span class="metric">Search volume</span><span class="from-to">364,468 &rarr; 435,522</span><span class="delta up">+19%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Before the click</span><span class="metric">Impressions</span><span class="from-to">78,628 &rarr; 95,176</span><span class="delta up">+21%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">Before the click</span><span class="metric">Search impression share</span><span class="from-to">21.57% &rarr; 21.85%</span><span class="delta up">+1%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">04</span><span class="grp">The click</span><span class="metric">Clicks</span><span class="from-to">5,251 &rarr; 6,943</span><span class="delta up">+32%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">05</span><span class="grp">The click</span><span class="metric">Click-through rate</span><span class="from-to">6.68% &rarr; 7.29%</span><span class="delta up">+9%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">06</span><span class="grp">The click</span><span class="metric">Cost per click</span><span class="from-to">$15.47 &rarr; $14.41</span><span class="delta up">-7%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">07</span><span class="grp">The click</span><span class="metric">Cost</span><span class="from-to">$81,239 &rarr; $100,040</span><span class="delta"><em>+23%</em><small>Scaled deliberately</small></span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">08</span><span class="grp">The conversion</span><span class="metric">Conversions (leads)</span><span class="from-to">273.6 &rarr; 456.9</span><span class="delta up">+67%</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">09</span><span class="grp">The conversion</span><span class="metric">Cost per conversion</span><span class="from-to">$296.97 &rarr; $218.93</span><span class="delta up">-26%</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">10</span><span class="grp">The conversion</span><span class="metric">Conversion rate</span><span class="from-to">5.21% &rarr; 6.58%</span><span class="delta up">+26%</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">11</span><span class="grp">The conversion</span><span class="metric">Conversion value</span><span class="from-to">&mdash; &rarr; $0.00</span><span class="delta"><em>Loop open</em><small>Only the client&#39;s systems could supply it</small></span></div>
   </div>
-  <p class="intro small cs-illus">Rows 01&ndash;04 are illustrative and pending verified pull. Rows 05 and 06 (Leads and CPL) are verified.</p>
+  <p class="intro small">Reading the chain: more people searched, we captured a slightly larger share, bought clicks 7% cheaper at a higher click-through rate, and converted them 26% more efficiently into 67% more leads. Cost rose 23% by design, to fund the added volume. Every controllable metric improved. The one zero on the board is the number only the client&#39;s own systems could supply, and it never arrived.</p>
 </section>
 
-<!-- 05 - Same story, market by market (dark) -->
-<section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; Same story, market by market</div>
-  <h2>Every metro moved in the <em>same direction</em></h2>
-  <p class="intro">An aggregate lift is only as good as its weakest market. If one metro carries the number and three are flat, the pattern does not transfer. Not the case here.</p>
+<!-- 06 - Same story, market by market (light band). Verified numbers from
+     Dimi's mockup for each of four anonymised metros. -->
+<section class="aa-sec band-light" data-mark="06">
+  <div class="eyebrow">06 &middot; The same story, market by market</div>
+  <h2>Every market moved &mdash; none carried the average alone</h2>
+  <p class="intro">Leads up 35% to 123% in every market. Cost per conversion fell in three of four. In Metropolitan 4 spend nearly doubled to capture a 135% surge in search demand, and cost per conversion held within 5% while leads rose 89%. Buying 89% more leads at roughly flat unit cost during a demand spike is a win, and it is disclosed as the trade it was.</p>
   <div class="cs-metros">
     <div class="cs-metro">
-      <div class="cs-metro-name">Metro A</div>
-      <div class="cs-metro-row"><span class="k">Leads</span><span class="v up">+&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">CPL</span><span class="v up">-&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">Conv rate</span><span class="v up">+&mdash;%</span></div>
+      <div class="cs-metro-name">Metropolitan 1</div>
+      <div class="cs-metro-row"><span class="k">Leads</span><span class="v"><b>153</b> vs 114 &nbsp;<em class="up">+35%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Cost per lead</span><span class="v"><b>$331</b> vs $453 &nbsp;<em class="up">-27%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Conversion rate</span><span class="v"><em class="up">+44%</em></span></div>
     </div>
     <div class="cs-metro">
-      <div class="cs-metro-name">Metro B</div>
-      <div class="cs-metro-row"><span class="k">Leads</span><span class="v up">+&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">CPL</span><span class="v up">-&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">Conv rate</span><span class="v up">+&mdash;%</span></div>
+      <div class="cs-metro-name">Metropolitan 2</div>
+      <div class="cs-metro-row"><span class="k">Leads</span><span class="v"><b>96</b> vs 43 &nbsp;<em class="up">+123%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Cost per lead</span><span class="v"><b>$165</b> vs $247 &nbsp;<em class="up">-33%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Conversion rate</span><span class="v"><em class="up">+34%</em></span></div>
     </div>
     <div class="cs-metro">
-      <div class="cs-metro-name">Metro C</div>
-      <div class="cs-metro-row"><span class="k">Leads</span><span class="v up">+&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">CPL</span><span class="v up">-&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">Conv rate</span><span class="v up">+&mdash;%</span></div>
+      <div class="cs-metro-name">Metropolitan 3</div>
+      <div class="cs-metro-row"><span class="k">Leads</span><span class="v"><b>77</b> vs 42 &nbsp;<em class="up">+83%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Cost per lead</span><span class="v"><b>$200</b> vs $242 &nbsp;<em class="up">-17%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Conversion rate</span><span class="v"><em class="up">+7%</em></span></div>
     </div>
     <div class="cs-metro">
-      <div class="cs-metro-name">Metro D</div>
-      <div class="cs-metro-row"><span class="k">Leads</span><span class="v up">+&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">CPL</span><span class="v up">-&mdash;%</span></div>
-      <div class="cs-metro-row"><span class="k">Conv rate</span><span class="v up">+&mdash;%</span></div>
+      <div class="cs-metro-name">Metropolitan 4</div>
+      <div class="cs-metro-row"><span class="k">Leads</span><span class="v"><b>66</b> vs 35 &nbsp;<em class="up">+89%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Cost per lead</span><span class="v"><b>$180</b> vs $172 &nbsp;<em class="dn">+5%</em></span></div>
+      <div class="cs-metro-row"><span class="k">Conversion rate</span><span class="v"><em class="dn">-9%</em></span></div>
     </div>
   </div>
-  <p class="intro small cs-illus">Per-metro figures pending. Aggregate holds: +67% / -26% averaged across the four markets.</p>
 </section>
 
-<!-- 06 - Sections still to build (light band, teaser outline) -->
-<section class="aa-sec band-light" data-mark="06">
+<!-- 07 - The rest of the story (dark band, teaser). Section list mirrors
+     Dimi's page order for the ten sections still to build here. -->
+<section class="aa-sec" data-mark="07">
   <figure class="cs-banner">
     <img src="https://images.pexels.com/photos/30361320/pexels-photo-30361320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall filled with various tools hanging for easy access" loading="lazy" width="1600" height="460">
   </figure>
-  <div class="eyebrow">06 &middot; The rest of the story</div>
+  <div class="eyebrow">07 &middot; The rest of the story</div>
   <h2>Ten more sections in the pipeline</h2>
-  <p class="intro">The full 18-section writeup covers the Meta customer-data test, cross-market summary, organic and local, the before/after ledger, what went sideways, what the client acknowledged, limitations, why this transfers, and how to trust the numbers. Preview outline below; each ships in the same rhythm as the sections above.</p>
+  <p class="intro">Preview outline below; each ships in the same rhythm as the sections above, using the numbers already verified on Dimi&#39;s mockup.</p>
   <ul class="cs-outline">
-    <li><span class="cs-idx">07</span>Meta customer-data test &mdash; 4 per-metro phased tables (Phase 1 lookalike vs Phase 2 + customer data)</li>
-    <li><span class="cs-idx">08</span>Cross-market summary &mdash; 5 rows &times; 6 columns</li>
-    <li><span class="cs-idx">09</span>Organic and local &mdash; rankings + traffic KPI grids</li>
-    <li><span class="cs-idx">10</span>Local search &mdash; leads nobody pays for (48% callout + horizontal bar chart)</li>
-    <li><span class="cs-idx">11</span>The result &mdash; 10-row before/after table with &ldquo;Loop open&rdquo; on the two revenue rows</li>
-    <li><span class="cs-idx">12</span>What went sideways &mdash; Meta Q2 decline + reporting layer</li>
-    <li><span class="cs-idx">13</span>What the client acknowledged &mdash; on the data / on the revenue column</li>
-    <li><span class="cs-idx">14</span>Limitations and where this transfers</li>
-    <li><span class="cs-idx">15</span>Why this matters for you</li>
-    <li><span class="cs-idx">16</span>How to trust these numbers &mdash; 4-item numbered list</li>
+    <li><span class="cs-idx">08</span>The Meta customer-data test &mdash; four per-metro phased tables (Phase 1 lookalike vs Phase 2 + customer data)</li>
+    <li><span class="cs-idx">09</span>Cross-market summary &mdash; average CPL $51.08 &rarr; $27.70, -45%</li>
+    <li><span class="cs-idx">10</span>Organic and local &mdash; rankings, traffic, non-brand share, +62% clicks, ~2.8&times; est. traffic value</li>
+    <li><span class="cs-idx">11</span>Local search &mdash; 48% of all leads from Business Profile / Maps at zero media cost</li>
+    <li><span class="cs-idx">12</span>The result &mdash; 10-row before/after table with &ldquo;Loop open&rdquo; on the two revenue rows</li>
+    <li><span class="cs-idx">13</span>What went sideways &mdash; Meta Q2 decline + the manual reporting layer</li>
+    <li><span class="cs-idx">14</span>What the client acknowledged &mdash; on the data / on the revenue column</li>
+    <li><span class="cs-idx">15</span>Limitations and where this transfers</li>
+    <li><span class="cs-idx">16</span>Why this matters for you</li>
+    <li><span class="cs-idx">17</span>How to trust these numbers &mdash; four-point evidence design</li>
   </ul>
 </section>
 
@@ -1228,7 +1312,7 @@
     <img src="../img/ai-automation-hero.jpg" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">17 &middot; Next step</div>
+    <div class="eyebrow">18 &middot; Next step</div>
     <h2>Bring <em>your numbers</em> and we will tell you <em>what they say</em></h2>
     <p class="note-lede">This case study is one account. Yours will look different. Same method: read the raw account before touching a lever, run the diagnostic chain end-to-end, structure a controlled test, ship it, and hold the reporting layer honest to what the platforms actually reported.</p>
     <div class="aa-cta-cta">
