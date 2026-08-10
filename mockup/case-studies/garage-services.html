@@ -806,6 +806,36 @@
     font-size:.72rem; color:var(--muted-on-dark,#868A90)}
 
   /* ==========================================================================
+     GARAGE HERO ANIMATION - page-specific hero background for the garage
+     services case study. Abstract storage-bay lattice with a diagonal wave of
+     gold-lit cells sweeping through. Sits inside .aa-hero-bg beneath the same
+     overlay used on the AA page, so text contrast never suffers.
+     ========================================================================== */
+  .garage-grid{position:absolute; inset:0; z-index:1; display:grid;
+    grid-template-columns:repeat(16,1fr); grid-template-rows:repeat(9,1fr);
+    gap:1px; padding:0; background:transparent; overflow:hidden}
+  .garage-tile{background:transparent;
+    border:1px solid rgba(212,175,55,0.05);
+    animation:garageWave 7.5s ease-in-out infinite;
+    animation-delay:var(--d, 0s); will-change:background, box-shadow}
+  @keyframes garageWave{
+    0%,80%,100%{background:transparent; box-shadow:none;
+      border-color:rgba(212,175,55,0.05)}
+    30%,55%{background:rgba(212,175,55,0.14);
+      box-shadow:0 0 24px rgba(212,175,55,0.20) inset;
+      border-color:rgba(212,175,55,0.35)}
+  }
+  .garage-orb{position:absolute; z-index:2; border-radius:50%;
+    filter:blur(80px); pointer-events:none; opacity:.55}
+  .garage-orb.g1{width:520px; height:520px; left:-80px; top:-80px;
+    background:radial-gradient(circle, rgba(212,175,55,0.36), transparent 65%)}
+  .garage-orb.g2{width:720px; height:720px; right:-160px; bottom:-160px;
+    background:radial-gradient(circle, rgba(212,175,55,0.14), transparent 70%)}
+  @media (prefers-reduced-motion:reduce){
+    .garage-tile{animation:none; background:rgba(212,175,55,0.04)}
+  }
+
+  /* ==========================================================================
      CASE STUDY - page-specific components. All prefixed .cs- so they cannot
      collide with anything on index.html or ai-automation.html.
      ========================================================================== */
@@ -959,20 +989,18 @@
        tracking grid, UI planes anchored in depth, and a feature-point cloud,
        all projected in perspective and parallaxed off the pointer. -->
   <div class="aa-hero-bg" aria-hidden="true">
-    <div class="arvr-stage" data-arvr>
-      <!-- Beth 2026-08-07: "can the background be ai related". A neural mesh
-           sits behind the glass: nodes drifting, edges forming and fading as
-           they come into range, and a signal pulse travelling an edge now and
-           then. It is behind the panel and under the overlay, so it never has
-           to carry text. -->
-      <canvas class="arvr-net" data-arvr-net></canvas>
-      <span class="arvr-orb o1"></span>
-      <span class="arvr-orb o2"></span>
-    </div>
+    <!-- GARAGE STORAGE-BAY GRID: page-specific hero animation for the garage
+         services case study. Metaphor is organisation: a 16x9 lattice of empty
+         bays with a diagonal wave of gold cells rippling through, as if the
+         space is being catalogued cell by cell. Cells are generated in JS so
+         the delay pattern stays clean. -->
+    <div class="garage-grid" data-garage-grid></div>
+    <span class="garage-orb g1"></span>
+    <span class="garage-orb g2"></span>
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Garage services <span class="sep">/</span> Four U.S. metros</div>
-    <h1>Leads up <em>67%</em> at 26% lower cost, proven with a <em>controlled test.</em></h1>
+    <h1>Leads up <em>67%</em> at 26% lower cost, proven with a <em>controlled test</em></h1>
     <p class="lede">
       An anonymized four-metro garage-services account. Roughly <code>$250K</code> in H1 media
       across Google and Meta. Six months of cleanup, one controlled test, and a reporting layer
@@ -1015,7 +1043,7 @@
 <!-- 02 - The situation (light band) -->
 <section class="aa-sec band-light" data-mark="02">
   <div class="eyebrow">02 &middot; The situation</div>
-  <h2>Two questions on the table, in this order.</h2>
+  <h2>Two questions on the table, in this order</h2>
   <p class="intro">Storage and organization systems for garages, four US metros, roughly $250,000 in H1 media across Google and Meta. The client asked <em class="cs-lift">is the money working</em>, and <em class="cs-lift">does the reporting explain what&#39;s happening</em>.</p>
   <p class="intro">We spent the first two weeks reading the account without touching a lever, on the theory that &ldquo;cut Meta&rdquo; is a fast answer if it is the right one and a very expensive answer if it is not.</p>
 </section>
@@ -1023,7 +1051,7 @@
 <!-- 03 - The diagnosis (dark) -->
 <section class="aa-sec" data-mark="03">
   <div class="eyebrow">03 &middot; The diagnosis</div>
-  <h2>The dashboard and the account <em>disagreed at three points.</em></h2>
+  <h2>The dashboard and the account <em>disagreed at three points</em></h2>
   <p class="intro">Each item on the left is what the internal dashboard read. Each item on the right is what the raw account said once we compared it against what the platforms reported directly.</p>
   <div class="cs-diag">
     <div class="cs-diag-col">
@@ -1048,7 +1076,7 @@
 <!-- 04 - Google Ads chain (light band) -->
 <section class="aa-sec band-light" data-mark="04">
   <div class="eyebrow">04 &middot; Google Ads &middot; the full diagnostic chain</div>
-  <h2>The gains landed at <em>the last two rows.</em></h2>
+  <h2>The gains landed at <em>the last two rows</em></h2>
   <p class="intro">Six metrics tell the account&#39;s full story, in causal order. Above-the-click activity moved. The click step neither hurt nor helped. Everything the client felt landed on Leads and CPL.</p>
   <div class="cs-chain">
     <div class="cs-chain-row cs-chain-head" aria-hidden="true">
@@ -1067,7 +1095,7 @@
 <!-- 05 - Same story, market by market (dark) -->
 <section class="aa-sec" data-mark="05">
   <div class="eyebrow">05 &middot; Same story, market by market</div>
-  <h2>Every metro moved in the <em>same direction.</em></h2>
+  <h2>Every metro moved in the <em>same direction</em></h2>
   <p class="intro">An aggregate lift is only as good as its weakest market. If one metro carries the number and three are flat, the pattern does not transfer. Not the case here.</p>
   <div class="cs-metros">
     <div class="cs-metro">
@@ -1101,7 +1129,7 @@
 <!-- 06 - Sections still to build (light band, teaser outline) -->
 <section class="aa-sec band-light" data-mark="06">
   <div class="eyebrow">06 &middot; The rest of the story</div>
-  <h2>Ten more sections in the pipeline.</h2>
+  <h2>Ten more sections in the pipeline</h2>
   <p class="intro">The full 18-section writeup covers the Meta customer-data test, cross-market summary, organic and local, the before/after ledger, what went sideways, what the client acknowledged, limitations, why this transfers, and how to trust the numbers. Preview outline below; each ships in the same rhythm as the sections above.</p>
   <ul class="cs-outline">
     <li><span class="cs-idx">07</span>Meta customer-data test &mdash; 4 per-metro phased tables (Phase 1 lookalike vs Phase 2 + customer data)</li>
@@ -1123,7 +1151,7 @@
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">17 &middot; Next step</div>
-    <h2>Bring <em>your numbers.</em> We will tell you <em>what they say.</em></h2>
+    <h2>Bring <em>your numbers</em> and we will tell you <em>what they say</em></h2>
     <p class="note-lede">This case study is one account. Yours will look different. Same method: read the raw account before touching a lever, run the diagnostic chain end-to-end, structure a controlled test, ship it, and hold the reporting layer honest to what the platforms actually reported.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -1593,6 +1621,30 @@ document.documentElement.classList.add('js');
     ['trigger','qualify','decide','route','log'].forEach(k => markDone(k));
     appendLog(['LOG','automation paused, respecting your motion preferences']);
   }
+})();
+</script>
+
+<script data-v="1">
+/* GARAGE HERO GRID: generate a 16x9 lattice inside .garage-grid. Each tile
+   receives an animation-delay proportional to (col + row) so the wave sweeps
+   diagonally from top-left to bottom-right. Under reduced motion the CSS
+   suppresses the keyframes and the grid becomes a static muted lattice. */
+(function(){
+  const grid = document.querySelector('[data-garage-grid]');
+  if (!grid) return;
+  const COLS = 16, ROWS = 9, TOTAL = COLS * ROWS;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < TOTAL; i++){
+    const tile = document.createElement('div');
+    tile.className = 'garage-tile';
+    const col = i % COLS, row = Math.floor(i / COLS);
+    // 0.08s per diagonal step; wrap the wave every ~12 diagonals so the last
+    // cells reset before the first fires again on the 7.5s loop.
+    const delay = ((col + row) % 14) * 0.08;
+    tile.style.setProperty('--d', delay.toFixed(2) + 's');
+    frag.appendChild(tile);
+  }
+  grid.appendChild(frag);
 })();
 </script>
 
