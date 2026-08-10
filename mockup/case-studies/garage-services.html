@@ -807,23 +807,31 @@
 
   /* ==========================================================================
      GARAGE HERO ANIMATION - page-specific hero background for the garage
-     services case study. Abstract storage-bay lattice with a diagonal wave of
-     gold-lit cells sweeping through. Sits inside .aa-hero-bg beneath the same
-     overlay used on the AA page, so text contrast never suffers.
+     services case study. Top-down blueprint of a garage bay: outer walls,
+     roll-up door segments, side shelving, back workbench, a car silhouette,
+     three labelled bays. Every element is a path or text with a staggered
+     stroke-dashoffset (or opacity) animation, so the whole plan draws
+     itself over ~5 seconds and holds. Sits inside .aa-hero-bg beneath the
+     same dark overlay used on the AA page, so text contrast never suffers.
      ========================================================================== */
-  .garage-grid{position:absolute; inset:0; z-index:1; display:grid;
-    grid-template-columns:repeat(16,1fr); grid-template-rows:repeat(9,1fr);
-    gap:1px; padding:0; background:transparent; overflow:hidden}
-  .garage-tile{background:transparent;
-    border:1px solid rgba(212,175,55,0.05);
-    animation:garageWave 7.5s ease-in-out infinite;
-    animation-delay:var(--d, 0s); will-change:background, box-shadow}
-  @keyframes garageWave{
-    0%,80%,100%{background:transparent; box-shadow:none;
-      border-color:rgba(212,175,55,0.05)}
-    30%,55%{background:rgba(212,175,55,0.14);
-      box-shadow:0 0 24px rgba(212,175,55,0.20) inset;
-      border-color:rgba(212,175,55,0.35)}
+  .garage-plan{position:absolute; inset:0; z-index:1; width:100%; height:100%;
+    display:block; overflow:hidden}
+  .garage-plan .gp-line{
+    stroke-dasharray:2400; stroke-dashoffset:2400;
+    animation:garagePlanDraw 12s cubic-bezier(.4,0,.2,1) infinite;
+    animation-delay:var(--gd, 0s); will-change:stroke-dashoffset, opacity}
+  @keyframes garagePlanDraw{
+    0%{stroke-dashoffset:2400; opacity:.85}
+    38%,88%{stroke-dashoffset:0; opacity:1}
+    100%{stroke-dashoffset:0; opacity:.3}
+  }
+  .garage-plan .gp-label{
+    opacity:0; animation:garagePlanFade 12s ease-in-out infinite;
+    animation-delay:var(--gd, 0s)}
+  @keyframes garagePlanFade{
+    0%,32%{opacity:0}
+    46%,88%{opacity:1}
+    100%{opacity:.35}
   }
   .garage-orb{position:absolute; z-index:2; border-radius:50%;
     filter:blur(80px); pointer-events:none; opacity:.55}
@@ -832,7 +840,8 @@
   .garage-orb.g2{width:720px; height:720px; right:-160px; bottom:-160px;
     background:radial-gradient(circle, rgba(212,175,55,0.14), transparent 70%)}
   @media (prefers-reduced-motion:reduce){
-    .garage-tile{animation:none; background:rgba(212,175,55,0.04)}
+    .garage-plan .gp-line{animation:none; stroke-dashoffset:0; opacity:.6}
+    .garage-plan .gp-label{animation:none; opacity:.6}
   }
 
   /* ==========================================================================
@@ -1095,12 +1104,58 @@
        tracking grid, UI planes anchored in depth, and a feature-point cloud,
        all projected in perspective and parallaxed off the pointer. -->
   <div class="aa-hero-bg" aria-hidden="true">
-    <!-- GARAGE STORAGE-BAY GRID: page-specific hero animation for the garage
-         services case study. Metaphor is organisation: a 16x9 lattice of empty
-         bays with a diagonal wave of gold cells rippling through, as if the
-         space is being catalogued cell by cell. Cells are generated in JS so
-         the delay pattern stays clean. -->
-    <div class="garage-grid" data-garage-grid></div>
+    <!-- GARAGE FLOOR PLAN: page-specific hero animation. A top-down blueprint
+         of a garage bay draws itself in thin gold strokes across the dark
+         ink: outer walls, roll-up door segments, side shelving units, back
+         workbench, a car silhouette in the middle, and three bay labels.
+         Each element carries a staggered stroke-dashoffset animation so the
+         whole plan renders as a technical drawing being drafted. Reduced
+         motion holds the finished plan without the draw effect. -->
+    <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(212,175,55,0.055)" stroke-width="1"/>
+        </pattern>
+      </defs>
+
+      <!-- floor lattice everywhere -->
+      <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
+
+      <!-- blueprint linework, all children share the .gp-line class + draw
+           animation with staggered delays. -->
+      <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 01 · outer walls (draws first) -->
+        <path class="gp-line" style="--gd:0s" d="M200 140 L1400 140 L1400 780 L200 780 Z"/>
+        <!-- 02 · roll-up door segments along the bottom wall -->
+        <path class="gp-line" style="--gd:0.9s" d="M280 780 L280 800 M380 780 L380 800 M480 780 L480 800 M580 780 L580 800 M680 780 L680 800 M780 780 L780 800 M880 780 L880 800 M980 780 L980 800 M1080 780 L1080 800 M1180 780 L1180 800 M1280 780 L1280 800"/>
+        <!-- 03 · workbench along the back wall -->
+        <path class="gp-line" style="--gd:1.5s" d="M420 140 L420 200 L1180 200 L1180 140"/>
+        <path class="gp-line" style="--gd:1.5s" d="M480 200 L480 220 M560 200 L560 220 M640 200 L640 220 M720 200 L720 220 M800 200 L800 220 M880 200 L880 220 M960 200 L960 220 M1040 200 L1040 220 M1120 200 L1120 220"/>
+        <!-- 04 · left shelving unit -->
+        <path class="gp-line" style="--gd:2s" d="M200 260 L320 260 L320 720 L200 720"/>
+        <path class="gp-line" style="--gd:2.2s" d="M200 360 L320 360 M200 460 L320 460 M200 560 L320 560 M200 660 L320 660"/>
+        <!-- 05 · right shelving unit -->
+        <path class="gp-line" style="--gd:2s" d="M1400 260 L1280 260 L1280 720 L1400 720"/>
+        <path class="gp-line" style="--gd:2.2s" d="M1280 360 L1400 360 M1280 460 L1400 460 M1280 560 L1400 560 M1280 660 L1400 660"/>
+        <!-- 06 · car silhouette parked in the middle bay (simplified top-down) -->
+        <path class="gp-line" style="--gd:2.8s" d="M720 380 L680 400 L680 460 L720 480 L880 480 L920 460 L920 400 L880 380 Z"/>
+        <path class="gp-line" style="--gd:2.9s" d="M700 400 L700 460 M900 400 L900 460 M750 400 L750 480 M850 400 L850 480"/>
+        <path class="gp-line" style="--gd:2.9s" d="M700 420 L680 420 M900 420 L920 420 M700 440 L680 440 M900 440 L920 440"/>
+        <!-- 07 · bay dividers (dashed lines dividing the floor into 3 bays) -->
+        <path class="gp-line" style="--gd:3.4s; stroke-dasharray:6 8; opacity:0.55" d="M600 220 L600 720 M1000 220 L1000 720"/>
+      </g>
+
+      <!-- Bay labels fade in after the plan is drawn. -->
+      <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
+        <text class="gp-label" style="--gd:3.9s" x="450" y="708">BAY 01</text>
+        <text class="gp-label" style="--gd:4.1s" x="750" y="708">BAY 02</text>
+        <text class="gp-label" style="--gd:4.3s" x="1060" y="708">BAY 03</text>
+        <text class="gp-label" style="--gd:4.5s" x="500" y="180" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">WORKBENCH</text>
+        <text class="gp-label" style="--gd:4.5s" x="220" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; L</text>
+        <text class="gp-label" style="--gd:4.5s" x="1290" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; R</text>
+      </g>
+    </svg>
+
     <span class="garage-orb g1"></span>
     <span class="garage-orb g2"></span>
   </div>
