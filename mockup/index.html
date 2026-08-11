@@ -1610,7 +1610,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </svg>
           </div>
           <div class="sb-figure">
-            <span class="sb-num">4.8x</span>
+            <span class="sb-num" data-count-to="4.8" data-count-suffix="x" data-count-decimals="1">0.0x</span>
             <span class="sb-unit">Return on ad spend</span>
           </div>
           <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 38% vs prior period</span>
@@ -1627,7 +1627,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </svg>
           </div>
           <div class="sb-figure">
-            <span class="sb-num">312</span>
+            <span class="sb-num" data-count-to="312">0</span>
             <span class="sb-unit">Booked calls</span>
           </div>
           <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 24% vs prior period</span>
@@ -1644,7 +1644,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </svg>
           </div>
           <div class="sb-figure">
-            <span class="sb-num">47</span>
+            <span class="sb-num" data-count-to="47">0</span>
             <span class="sb-unit">Keywords in top 3</span>
           </div>
           <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 19 new this quarter</span>
@@ -1661,7 +1661,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </svg>
           </div>
           <div class="sb-figure">
-            <span class="sb-num">1,284</span>
+            <span class="sb-num" data-count-to="1284" data-count-comma="1">0</span>
             <span class="sb-unit">Organic clicks, 28 days</span>
           </div>
           <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 128K impressions</span>
@@ -1669,6 +1669,53 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </div>
     </div>
   </section>
+  <script>
+    /* Scoreboard count-up: numbers roll from 0 to their data-count-to value
+       once motion.js adds .in to the section. easeOutCubic lands with a
+       soft catch. Respects prefers-reduced-motion by jumping to the final
+       value immediately. Fires once. */
+    (function(){
+      var sec = document.getElementById('scoreboard');
+      if (!sec) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function fmt(n, dec, comma, suffix){
+        var s = dec > 0 ? n.toFixed(dec) : String(Math.round(n));
+        if (comma) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return s + (suffix || '');
+      }
+      function run(){
+        var nums = sec.querySelectorAll('.sb-num[data-count-to]');
+        if (!nums.length) return;
+        [].forEach.call(nums, function(el, i){
+          var target = parseFloat(el.getAttribute('data-count-to'));
+          var dec = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+          var comma = el.getAttribute('data-count-comma') === '1';
+          var suffix = el.getAttribute('data-count-suffix') || '';
+          if (reduce || !isFinite(target)) {
+            el.textContent = fmt(target, dec, comma, suffix);
+            return;
+          }
+          var dur = 1600, delay = 60 + i * 130, t0 = null;
+          function step(t){
+            if (t0 === null) t0 = t;
+            var p = Math.min(1, (t - t0 - delay) / dur);
+            if (p < 0) { requestAnimationFrame(step); return; }
+            var eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = fmt(target * eased, dec, comma, suffix);
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }
+      var fired = false;
+      function fire(){ if (fired) return; fired = true; run(); }
+      if (sec.classList.contains('in')) { fire(); return; }
+      var mo = new MutationObserver(function(){
+        if (sec.classList.contains('in')) { fire(); mo.disconnect(); }
+      });
+      mo.observe(sec, { attributes:true, attributeFilter:['class'] });
+    })();
+  </script>
 
   <!-- 05 LOCATIONS -->
   <section class="sec band-deep" id="locations" data-reveal data-mark="05">
