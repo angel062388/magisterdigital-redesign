@@ -1205,13 +1205,52 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .sb-delta .sb-arrow{font-size:.7rem; line-height:1}
 @media (max-width:520px){
   .sb-card{grid-template-columns:1fr; grid-template-rows:auto auto auto auto auto;
-    padding:var(--sp-4); min-height:0}
+    padding:var(--sp-4); min-height:0; gap:6px 0}
   .sb-trail{grid-column:1; grid-row:2; text-align:left}
-  .sb-chart{grid-column:1; grid-row:3; align-self:auto}
-  .sb-figure{grid-column:1; grid-row:4; align-items:flex-start; text-align:left; margin-top:8px}
+  .sb-chart{grid-column:1; grid-row:3; align-self:auto; margin:8px 0 4px}
+  .sb-figure{grid-column:1; grid-row:4; align-items:flex-start; text-align:left; margin-top:2px}
   .sb-unit{text-align:left}
   .sb-num{font-size:2.4rem}
-  .sb-delta{grid-row:5; justify-self:start}
+  .sb-delta{grid-row:5; justify-self:start; margin-top:10px}
+}
+
+/* CTA under the scoreboard grid. Centered pair: primary Book a call button
+   plus the tel: fallback. Wraps to stacked on narrow screens. */
+.sb-cta{display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+  gap:var(--sp-4); margin-top:var(--sp-6)}
+@media (max-width:520px){
+  .sb-cta{gap:var(--sp-3); margin-top:var(--sp-5)}
+  .sb-cta .btn,.sb-cta .hero-tel{width:100%; max-width:280px; justify-content:center}
+}
+
+/* FLOATING SCROLL NAV: single gold pill fixed bottom-right. Chevron rotates
+   180deg when the user has scrolled past ~60% of the page to become a
+   back-to-top control. Hidden inside the first 200px of the page. */
+.scroll-nav{position:fixed; right:22px; bottom:22px; z-index:60;
+  width:52px; height:52px; border-radius:50%; padding:0;
+  background:var(--gold); color:var(--ink);
+  border:2px solid var(--gold-light);
+  box-shadow:0 6px 18px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.25);
+  display:inline-flex; align-items:center; justify-content:center;
+  cursor:pointer; opacity:0; visibility:hidden;
+  transform:translateY(12px);
+  transition:opacity .28s var(--ease), transform .35s var(--ease), background .2s var(--ease), visibility 0s .35s}
+.scroll-nav.is-visible{opacity:1; visibility:visible; transform:translateY(0);
+  transition:opacity .28s var(--ease), transform .35s var(--ease), background .2s var(--ease), visibility 0s 0s}
+.scroll-nav:hover{background:var(--gold-light)}
+.scroll-nav:focus-visible{outline:3px solid var(--gold-light); outline-offset:3px}
+.scroll-nav:active{transform:translateY(1px)}
+.scroll-nav svg{width:20px; height:20px; display:block;
+  transition:transform .35s cubic-bezier(.68,-.55,.27,1.55)}
+.scroll-nav[data-dir="up"] svg{transform:rotate(180deg)}
+.scroll-nav .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+@media (max-width:520px){
+  .scroll-nav{right:14px; bottom:14px; width:46px; height:46px}
+  .scroll-nav svg{width:18px; height:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .scroll-nav,.scroll-nav svg{transition:opacity .1s linear!important; transform:none!important}
 }
 </style>
 </head>
@@ -1671,6 +1710,11 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
           <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 128K impressions</span>
         </article>
+      </div>
+
+      <div class="sb-cta">
+        <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
       </div>
     </div>
   </section>
@@ -2220,6 +2264,58 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </div>
 </div>
 
+<!-- Floating scroll nav: down chevron below 60% scroll, up chevron above -->
+<button type="button" class="scroll-nav" data-dir="down" aria-label="Scroll down one section">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <polyline points="4,8 12,16 20,8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <span class="sr-only" data-scroll-label>Scroll down</span>
+</button>
+<script data-v="1">
+  /* Floating scroll nav. Shows after 200px scrolled. Below 60% scroll,
+     chevron points DOWN and clicking scrolls one viewport height forward.
+     At 60% or more, chevron flips UP (via [data-dir="up"]) and clicking
+     jumps to the top. Respects prefers-reduced-motion by using instant
+     scrolls. Passive scroll listener with rAF-throttled state check. */
+  (function(){
+    var nav = document.querySelector('.scroll-nav');
+    if (!nav) return;
+    var label = nav.querySelector('[data-scroll-label]');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var behavior = reduce ? 'auto' : 'smooth';
+    var ticking = false;
+    function update(){
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      var pct = y / max;
+      if (y > 200) nav.classList.add('is-visible');
+      else nav.classList.remove('is-visible');
+      if (pct >= 0.6) {
+        nav.setAttribute('data-dir','up');
+        nav.setAttribute('aria-label','Back to top');
+        if (label) label.textContent = 'Back to top';
+      } else {
+        nav.setAttribute('data-dir','down');
+        nav.setAttribute('aria-label','Scroll down one section');
+        if (label) label.textContent = 'Scroll down';
+      }
+    }
+    function onScroll(){
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onScroll, { passive:true });
+    update();
+    nav.addEventListener('click', function(){
+      if (nav.getAttribute('data-dir') === 'up') {
+        window.scrollTo({ top: 0, behavior: behavior });
+      } else {
+        window.scrollBy({ top: Math.round(window.innerHeight * 0.9), behavior: behavior });
+      }
+    });
+  })();
+</script>
 <script src="motion.js?v=17" defer></script>
 </body>
 </html>
