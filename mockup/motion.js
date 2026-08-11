@@ -48,7 +48,6 @@
     var roleEl   = modal.querySelector('[data-modal-role]');
     var photoEl  = modal.querySelector('[data-modal-photo]');
     var bioEl    = modal.querySelector('[data-modal-bio]');
-    var flagEl   = modal.querySelector('[data-modal-flag]');
     var heroEl   = modal.querySelector('.modal-hero');
     var panelEl  = modal.querySelector('.modal-panel');
 
@@ -110,10 +109,6 @@
       photoEl.setAttribute('src', data.photo);
       photoEl.setAttribute('alt', data.alt);
       bioEl.textContent = data.bio;
-      if (flagEl) {
-        if (data.pending) flagEl.removeAttribute('hidden');
-        else flagEl.setAttribute('hidden', '');
-      }
       modal.hidden = false;
       document.body.classList.add('modal-open');
       siblings().forEach(function (el) { el.setAttribute('inert', ''); });
