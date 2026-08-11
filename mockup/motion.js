@@ -48,7 +48,7 @@
     var roleEl   = modal.querySelector('[data-modal-role]');
     var photoEl  = modal.querySelector('[data-modal-photo]');
     var bioEl    = modal.querySelector('[data-modal-bio]');
-    var linkEl   = modal.querySelector('[data-modal-link]');
+    var flagEl   = modal.querySelector('[data-modal-flag]');
     var heroEl   = modal.querySelector('.modal-hero');
     var panelEl  = modal.querySelector('.modal-panel');
 
@@ -58,24 +58,21 @@
         role: 'Co-founder & CEO',
         photo: 'img/brian-hong.jpg',
         alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
-        bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
-        link: '/brian-hong/'
+        bio: 'Brian has been active in SEO since 2000 and running Infintech Designs since 2008. He co-owns TurnkeyRenovators, a multi-seven-figure construction operator, is a partner in a 13-location med spa chain, and founded Flowbots.ai and BigEasyData.ai to build the AI automation and data infrastructure his own companies needed first. Every playbook he ships to a Magister client was tested inside a business he already runs. His focus today is the AI-native SEO stack, machine-learning attribution, and the answer engines quietly rewriting how buyers find operators like his.'
       },
       michael: {
         name: 'Michael Merlino',
         role: 'Co-founder, Strategy & AI systems',
         photo: 'img/michael-merlino.jpg',
         alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
-        bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
-        link: '/michael-merlino/'
+        bio: 'Michael calls himself the Godfather of Branded SEO, and the technical scope backs it up. Schema markup, canonical strategy, Core Web Vitals, negative-keyword architecture, the plumbing under the ranking and increasingly the plumbing under the answer. At Magister he owns positioning, strategy and AI systems, which in 2026 means the same technical rigor pointed at large language models and the answer engines quietly replacing the ten-blue-links page. His job is making sure clients live in the retrieval layer AI tools actually cite, not the pile of AI slop they scroll past.'
       },
       dimitry: {
         name: 'Dimitry Morgan',
         role: 'Co-founder, Head of paid media',
         photo: 'img/dimitry-morgan.png',
         alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
-        bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
-        link: '/dimitry-morgan/'
+        bio: 'Dimitry ran service calls before he ran ad accounts. Fifteen years inside Google Ads, Performance Max and Meta after the HVAC-truck years give him field context most media buyers do not have. He knows what a booked job is worth on a Saturday in July and what idle techs cost on a Wednesday in February, so at Magister he does not chase cost-per-click as the metric. Cost-per-booked-appointment is the number. He runs the machine-learning attribution work that ties every campaign back to the calendar it should have filled.'
       }
     };
 
@@ -113,7 +110,10 @@
       photoEl.setAttribute('src', data.photo);
       photoEl.setAttribute('alt', data.alt);
       bioEl.textContent = data.bio;
-      linkEl.setAttribute('href', data.link);
+      if (flagEl) {
+        if (data.pending) flagEl.removeAttribute('hidden');
+        else flagEl.setAttribute('hidden', '');
+      }
       modal.hidden = false;
       document.body.classList.add('modal-open');
       siblings().forEach(function (el) { el.setAttribute('inert', ''); });
