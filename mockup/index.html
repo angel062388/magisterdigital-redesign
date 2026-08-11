@@ -1669,11 +1669,12 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </div>
     </div>
   </section>
-  <script>
-    /* Scoreboard count-up: numbers roll from 0 to their data-count-to value
-       once motion.js adds .in to the section. easeOutCubic lands with a
-       soft catch. Respects prefers-reduced-motion by jumping to the final
-       value immediately. Fires once. */
+  <script data-v="2">
+    /* Scoreboard count-up, v2. Self-contained: uses its OWN IntersectionObserver
+       on the section so it does not depend on motion.js .in class arriving.
+       Also carries a scroll+timer fallback for older browsers, and a 4s
+       last-resort hard fire so the numbers never sit at zero. Roll is 2.2s
+       easeOutCubic with a .18s stagger per card, slow enough to read. */
     (function(){
       var sec = document.getElementById('scoreboard');
       if (!sec) return;
@@ -1683,9 +1684,11 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
         if (comma) s = s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         return s + (suffix || '');
       }
+      var fired = false;
       function run(){
+        if (fired) return;
+        fired = true;
         var nums = sec.querySelectorAll('.sb-num[data-count-to]');
-        if (!nums.length) return;
         [].forEach.call(nums, function(el, i){
           var target = parseFloat(el.getAttribute('data-count-to'));
           var dec = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
@@ -1695,7 +1698,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             el.textContent = fmt(target, dec, comma, suffix);
             return;
           }
-          var dur = 1600, delay = 60 + i * 130, t0 = null;
+          var dur = 2200, delay = 80 + i * 180, t0 = null;
           function step(t){
             if (t0 === null) t0 = t;
             var p = Math.min(1, (t - t0 - delay) / dur);
@@ -1707,13 +1710,43 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           requestAnimationFrame(step);
         });
       }
-      var fired = false;
-      function fire(){ if (fired) return; fired = true; run(); }
-      if (sec.classList.contains('in')) { fire(); return; }
-      var mo = new MutationObserver(function(){
-        if (sec.classList.contains('in')) { fire(); mo.disconnect(); }
+      /* Trigger 1: own IntersectionObserver, threshold .05 so the roll starts
+         the moment any pixel of the section enters the viewport. */
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if (e.isIntersecting) { run(); io.disconnect(); }
+          });
+        }, { threshold: 0.05 });
+        io.observe(sec);
+      }
+      /* Trigger 2: scroll fallback for browsers without IO. */
+      function scrollCheck(){
+        var r = sec.getBoundingClientRect();
+        if (r.top < window.innerHeight * 0.95 && r.bottom > 0) {
+          run();
+          window.removeEventListener('scroll', scrollCheck);
+        }
+      }
+      window.addEventListener('scroll', scrollCheck, { passive:true });
+      /* Trigger 3: safety timer. If nothing else fired within 4s of DOM ready
+         (section above the fold or IO missed), roll anyway. */
+      var kick = function(){
+        setTimeout(function(){
+          var r = sec.getBoundingClientRect();
+          if (r.top < window.innerHeight) run();
+        }, 4000);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', kick, { once: true });
+      } else {
+        kick();
+      }
+      /* Sync-fire if the section already sits in the initial viewport. */
+      requestAnimationFrame(function(){
+        var r = sec.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) run();
       });
-      mo.observe(sec, { attributes:true, attributeFilter:['class'] });
     })();
   </script>
 
