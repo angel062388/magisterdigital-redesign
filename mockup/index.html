@@ -1669,12 +1669,12 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </div>
     </div>
   </section>
-  <script data-v="2">
-    /* Scoreboard count-up, v2. Self-contained: uses its OWN IntersectionObserver
-       on the section so it does not depend on motion.js .in class arriving.
-       Also carries a scroll+timer fallback for older browsers, and a 4s
-       last-resort hard fire so the numbers never sit at zero. Roll is 2.2s
-       easeOutCubic with a .18s stagger per card, slow enough to read. */
+  <script data-v="3">
+    /* Scoreboard count-up, v3. Self-contained: own IntersectionObserver plus
+       scroll and safety-timer fallbacks. Roll extended to 4.2s per card at a
+       .35s stagger between cards, so the four figures climb visibly one
+       after another. Uses easeOutQuart for a longer tail so the last third
+       of the roll is where the eye lands. */
     (function(){
       var sec = document.getElementById('scoreboard');
       if (!sec) return;
@@ -1698,12 +1698,12 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             el.textContent = fmt(target, dec, comma, suffix);
             return;
           }
-          var dur = 2200, delay = 80 + i * 180, t0 = null;
+          var dur = 4200, delay = 120 + i * 350, t0 = null;
           function step(t){
             if (t0 === null) t0 = t;
             var p = Math.min(1, (t - t0 - delay) / dur);
             if (p < 0) { requestAnimationFrame(step); return; }
-            var eased = 1 - Math.pow(1 - p, 3);
+            var eased = 1 - Math.pow(1 - p, 4);
             el.textContent = fmt(target * eased, dec, comma, suffix);
             if (p < 1) requestAnimationFrame(step);
           }
