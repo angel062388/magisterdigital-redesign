@@ -1153,6 +1153,61 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   .hero-img img{transform:none}
   .cta::before{transform:none!important}
 }
+
+/* SCOREBOARD: proof band ported from Angel's dev site, between INDUSTRIES
+   and LOCATIONS. Dark ink, 4 cards, italic-serif figure, yellow glow line
+   chart, green delta. The chart line draws in staggered when the section
+   reveals (hooks the .in class motion.js already sets on [data-reveal]). */
+.sec-scoreboard .sec-lede{max-width:640px}
+.sb-grid{display:grid; gap:var(--sp-4); margin-top:var(--sp-6)}
+@media (min-width:820px){ .sb-grid{grid-template-columns:1fr 1fr; gap:var(--sp-5)} }
+.sb-card{position:relative; padding:var(--sp-5); border:1px solid var(--rule);
+  background:var(--bg-raised); overflow:hidden;
+  display:grid; grid-template-columns:1fr auto;
+  grid-template-rows:auto 1fr auto; gap:8px 20px; min-height:210px}
+.sb-card::before{content:""; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, transparent, var(--gold) 12%, var(--gold) 88%, transparent)}
+.sb-kicker{grid-column:1; grid-row:1;
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold)}
+.sb-trail{grid-column:2; grid-row:1; align-self:start; text-align:right;
+  font-family:var(--font-mono); font-size:.625rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted-on-dark)}
+.sb-chart{grid-column:1; grid-row:2; align-self:center; margin-top:6px}
+.sb-chart svg{width:100%; height:auto; max-height:78px; display:block}
+.sb-chart .sb-grid-line{stroke:rgba(255,255,255,.06); stroke-width:1;
+  stroke-dasharray:2 5; fill:none}
+.sb-chart .sb-line{stroke:var(--gold); stroke-width:2.2; fill:none;
+  stroke-linecap:round; stroke-linejoin:round;
+  filter:drop-shadow(0 0 6px rgba(212,175,55,.55));
+  stroke-dasharray:600; stroke-dashoffset:600}
+.sec-scoreboard.in .sb-card:nth-child(1) .sb-line{animation:sb-draw 1.4s var(--ease) .05s forwards}
+.sec-scoreboard.in .sb-card:nth-child(2) .sb-line{animation:sb-draw 1.4s var(--ease) .18s forwards}
+.sec-scoreboard.in .sb-card:nth-child(3) .sb-line{animation:sb-draw 1.4s var(--ease) .32s forwards}
+.sec-scoreboard.in .sb-card:nth-child(4) .sb-line{animation:sb-draw 1.4s var(--ease) .46s forwards}
+@keyframes sb-draw{ to{stroke-dashoffset:0} }
+.sb-figure{grid-column:2; grid-row:2; align-self:center; text-align:right;
+  display:flex; flex-direction:column; align-items:flex-end; gap:4px}
+.sb-num{font-family:var(--font-display); font-style:italic; font-weight:600;
+  font-size:clamp(2.4rem, 5vw, 3.4rem); line-height:.9;
+  color:var(--paper); letter-spacing:-.02em}
+.sb-unit{font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.06em;
+  color:var(--muted-on-dark); max-width:200px; text-align:right; line-height:1.25}
+.sb-delta{grid-column:1 / -1; grid-row:3; justify-self:end; align-self:end;
+  margin-top:8px;
+  font-family:var(--font-mono); font-size:.75rem; letter-spacing:.02em;
+  color:#5EE0A7; display:inline-flex; align-items:center; gap:6px}
+.sb-delta .sb-arrow{font-size:.7rem; line-height:1}
+@media (max-width:520px){
+  .sb-card{grid-template-columns:1fr; grid-template-rows:auto auto auto auto auto;
+    padding:var(--sp-4); min-height:0}
+  .sb-trail{grid-column:1; grid-row:2; text-align:left}
+  .sb-chart{grid-column:1; grid-row:3; align-self:auto}
+  .sb-figure{grid-column:1; grid-row:4; align-items:flex-start; text-align:left; margin-top:8px}
+  .sb-unit{text-align:left}
+  .sb-num{font-size:2.4rem}
+  .sb-delta{grid-row:5; justify-self:start}
+}
 </style>
 </head>
 <body>
@@ -1530,6 +1585,87 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOREBOARD (unnumbered proof band, ported from Angel) -->
+  <section class="sec band-deep sec-scoreboard" id="scoreboard" data-reveal>
+    <div class="wrap">
+      <header class="sec-head">
+        <h2>Every channel, <em>one scoreboard</em></h2>
+        <div class="rule gold"></div>
+        <p class="sec-lede">Meta, Google, organic rankings and site data on one screen, tied to booked work rather than clicks. The view a founder signs off on each week.</p>
+      </header>
+
+      <div class="sb-grid">
+        <article class="sb-card" data-stagger>
+          <span class="sb-kicker">Meta Ads</span>
+          <span class="sb-trail">Trailing 6 months</span>
+          <div class="sb-chart" aria-hidden="true">
+            <svg viewBox="0 0 260 70" preserveAspectRatio="none">
+              <line class="sb-grid-line" x1="0" y1="23" x2="260" y2="23"/>
+              <line class="sb-grid-line" x1="0" y1="47" x2="260" y2="47"/>
+              <polyline class="sb-line" points="8,54 55,50 100,52 145,32 190,20 245,10"/>
+            </svg>
+          </div>
+          <div class="sb-figure">
+            <span class="sb-num">4.8x</span>
+            <span class="sb-unit">Return on ad spend</span>
+          </div>
+          <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 38% vs prior period</span>
+        </article>
+
+        <article class="sb-card" data-stagger>
+          <span class="sb-kicker">Google Ads</span>
+          <span class="sb-trail">Trailing 6 months</span>
+          <div class="sb-chart" aria-hidden="true">
+            <svg viewBox="0 0 260 70" preserveAspectRatio="none">
+              <line class="sb-grid-line" x1="0" y1="23" x2="260" y2="23"/>
+              <line class="sb-grid-line" x1="0" y1="47" x2="260" y2="47"/>
+              <polyline class="sb-line" points="8,55 55,53 100,42 145,32 190,20 245,12"/>
+            </svg>
+          </div>
+          <div class="sb-figure">
+            <span class="sb-num">312</span>
+            <span class="sb-unit">Booked calls</span>
+          </div>
+          <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 24% vs prior period</span>
+        </article>
+
+        <article class="sb-card" data-stagger>
+          <span class="sb-kicker">SEO Rankings</span>
+          <span class="sb-trail">Top-3 keywords</span>
+          <div class="sb-chart" aria-hidden="true">
+            <svg viewBox="0 0 260 70" preserveAspectRatio="none">
+              <line class="sb-grid-line" x1="0" y1="23" x2="260" y2="23"/>
+              <line class="sb-grid-line" x1="0" y1="47" x2="260" y2="47"/>
+              <polyline class="sb-line" points="8,52 55,48 100,42 145,36 190,22 245,14"/>
+            </svg>
+          </div>
+          <div class="sb-figure">
+            <span class="sb-num">47</span>
+            <span class="sb-unit">Keywords in top 3</span>
+          </div>
+          <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 19 new this quarter</span>
+        </article>
+
+        <article class="sb-card" data-stagger>
+          <span class="sb-kicker">Website Clicks &amp; Impressions</span>
+          <span class="sb-trail">Search Console</span>
+          <div class="sb-chart" aria-hidden="true">
+            <svg viewBox="0 0 260 70" preserveAspectRatio="none">
+              <line class="sb-grid-line" x1="0" y1="23" x2="260" y2="23"/>
+              <line class="sb-grid-line" x1="0" y1="47" x2="260" y2="47"/>
+              <polyline class="sb-line" points="8,56 55,50 100,44 145,30 190,20 245,10"/>
+            </svg>
+          </div>
+          <div class="sb-figure">
+            <span class="sb-num">1,284</span>
+            <span class="sb-unit">Organic clicks, 28 days</span>
+          </div>
+          <span class="sb-delta"><span class="sb-arrow" aria-hidden="true">&#9650;</span> 128K impressions</span>
+        </article>
       </div>
     </div>
   </section>
