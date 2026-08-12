@@ -1110,6 +1110,22 @@
     .cs-cta-pair{gap:12px; margin-top:24px}
     .cs-cta-pair .btn,.cs-cta-pair .hero-tel{width:100%; max-width:320px; justify-content:center}
   }
+  /* LIGHT-BAND OVERRIDES for .cs-cta-pair, mirroring homepage index.html:257-267.
+     On paper backgrounds the default bright-gold border/text washes out; the
+     homepage swaps to a darker gold-deep border (#A8842A) and dark ink text
+     for readability. The dark CTA cards (.cs-cta-buttons inside .cs-step-cta
+     or .cs-metro-cta) are NOT included in this override because the card
+     itself is dark ink background, so their buttons keep the dark-band style. */
+  .aa-sec.band-light .cs-cta-pair .btn{background:#D4AF37; border-color:#A8842A; color:#16171A;
+    box-shadow:0 6px 18px rgba(212,175,55,.30), inset 0 -2px 0 rgba(0,0,0,.16)}
+  .aa-sec.band-light .cs-cta-pair .btn:hover{background:#E3C24E; border-color:#A8842A; color:#16171A;
+    box-shadow:0 12px 28px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.18)}
+  .aa-sec.band-light .cs-cta-pair .hero-tel{color:#16171A; border-color:#D4AF37}
+  .aa-sec.band-light .cs-cta-pair .hero-tel .tag{color:#5E6066}
+  .aa-sec.band-light .cs-cta-pair .hero-tel b{color:#6E561A}
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover{background:#D4AF37; color:#16171A; border-color:#A8842A}
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover .tag,
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover b{color:#16171A}
 
   /* Chain row 07 (Cost) + row 11 (Conversion value) carry a small caption
      inside the delta cell. Stack vertically. */
