@@ -894,13 +894,13 @@ html:not(.js) .pillar-media{max-height:380px}
   .vid-grid{grid-template-columns:repeat(2,1fr); gap:var(--sp-5)}
 }
 
-/* 08 REVIEWS - boxed cards on light band, 2-col at wide */
+/* 08 REVIEWS - boxed cards on dark band, 2-col at wide */
 .rev-grid{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
 @media (min-width:820px){ .rev-grid{grid-template-columns:1fr 1fr} }
 .rev{margin:0; padding:var(--sp-6) var(--sp-6) var(--sp-5); position:relative;
-  border:1px solid var(--rule-light,#E5E4DF); background:#FFFFFF;
+  border:1px solid var(--rule); background:var(--bg-raised);
   border-radius:8px;
-  box-shadow:0 2px 12px rgba(15,17,21,.04)}
+  box-shadow:0 4px 20px rgba(0,0,0,.25)}
 .rev.pending{opacity:.9}
 .rev::before{content:"\201C"; position:absolute; top:8px; left:14px;
   font-family:var(--font-display); font-size:4.5rem; line-height:.8; color:var(--gold);
@@ -2112,7 +2112,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   </section>
 
   <!-- 08 REVIEWS -->
-  <section class="sec band-light" id="reviews" data-reveal data-mark="10">
+  <section class="sec band-deep" id="reviews" data-reveal data-mark="10">
     <div class="wrap">
       <header class="sec-head">
         <span class="meta" data-flap="10 / TRUST">10 / TRUST</span>
