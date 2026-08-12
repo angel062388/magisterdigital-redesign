@@ -1252,6 +1252,37 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 @media (prefers-reduced-motion:reduce){
   .scroll-nav,.scroll-nav svg{transition:opacity .1s linear!important; transform:none!important}
 }
+
+/* CASE STUDIES NAV DROPDOWN: reveals a menu of individual case-study
+   pages on hover or keyboard focus of the "Case Studies" nav link.
+   Positioned absolute so it does not disturb the main nav's flex row. */
+.site-nav-drop{position:relative}
+.site-nav-drop > a{display:inline-flex; align-items:center; gap:6px}
+.site-nav-drop > a::after{content:"\25BE"; font-size:.55em; opacity:.5;
+  transition:transform .2s ease, opacity .2s ease}
+.site-nav-drop:hover > a::after,
+.site-nav-drop:focus-within > a::after{transform:rotate(-180deg); opacity:1}
+.site-nav-menu{position:absolute; top:calc(100% + 8px); left:-8px;
+  min-width:280px; padding:8px 0;
+  background:rgba(15,17,21,.98); backdrop-filter:saturate(150%) blur(12px);
+  border:1px solid var(--rule); border-radius:6px;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+  opacity:0; visibility:hidden; transform:translateY(6px);
+  transition:opacity .22s ease, transform .22s ease, visibility 0s .22s;
+  z-index:70}
+.site-nav-drop:hover .site-nav-menu,
+.site-nav-drop:focus-within .site-nav-menu{
+  opacity:1; visibility:visible; transform:translateY(0);
+  transition:opacity .22s ease, transform .22s ease, visibility 0s 0s}
+.site-nav-menu a{display:block; padding:12px 20px;
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-muted-dark); white-space:nowrap;
+  text-decoration:none;
+  transition:color .2s ease, background .2s ease}
+.site-nav-menu a::after{content:none !important}
+.site-nav-menu a:hover,.site-nav-menu a:focus-visible{
+  color:var(--gold); background:rgba(212,175,55,.06); outline:none}
+.site-nav-menu a.active{color:var(--gold)}
 </style>
 </head>
 <body>
@@ -1307,7 +1338,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
     <nav class="site-nav" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#verticals">Industries</a>
-      <a href="#case-studies">Case Studies</a>
+      <div class="site-nav-drop">
+        <a href="#case-studies">Case Studies</a>
+        <div class="site-nav-menu" role="menu">
+          <a href="case-studies/garage-services.html" role="menuitem">Garage services &middot; Google Ads</a>
+          <a href="case-studies/what-garage-operators-are-up-against.html" role="menuitem">Meta competitive research</a>
+        </div>
+      </div>
       <a href="#videos">Videos</a>
       <a href="#founders">About</a>
       <a href="#locations">Locations</a>

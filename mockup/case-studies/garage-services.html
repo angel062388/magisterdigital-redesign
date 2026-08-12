@@ -1067,6 +1067,36 @@
   .aa-sec.band-light .cs-outline li{color:var(--ink,#16171A); border-bottom-color:#E5E4DF}
   .cs-outline li:last-child{border-bottom:0}
   .cs-outline li .cs-idx{flex:0 0 auto}
+
+  /* CASE STUDIES NAV DROPDOWN */
+  .site-nav-drop{position:relative}
+  .site-nav-drop > a{display:inline-flex; align-items:center; gap:6px}
+  .site-nav-drop > a::after{content:"\25BE"; font-size:.55em; opacity:.5;
+    transition:transform .2s ease, opacity .2s ease}
+  .site-nav-drop:hover > a::after,
+  .site-nav-drop:focus-within > a::after{transform:rotate(-180deg); opacity:1}
+  .site-nav-menu{position:absolute; top:calc(100% + 8px); left:-8px;
+    min-width:280px; padding:8px 0;
+    background:rgba(15,17,21,.98); backdrop-filter:saturate(150%) blur(12px);
+    border:1px solid var(--border,#2A2C31); border-radius:6px;
+    box-shadow:0 12px 32px rgba(0,0,0,.35);
+    opacity:0; visibility:hidden; transform:translateY(6px);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s .22s;
+    z-index:70}
+  .site-nav-drop:hover .site-nav-menu,
+  .site-nav-drop:focus-within .site-nav-menu{
+    opacity:1; visibility:visible; transform:translateY(0);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s 0s}
+  .site-nav-menu a{display:block; padding:12px 20px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#B0B3B8); white-space:nowrap;
+    text-decoration:none;
+    transition:color .2s ease, background .2s ease}
+  .site-nav-menu a::after{content:none !important}
+  .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
+    color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
+  .site-nav-menu a.active{color:var(--gold,#D4AF37)}
 </style>
 </head>
 <body>
@@ -1090,7 +1120,13 @@
     <nav class="site-nav" aria-label="Primary">
       <a href="../index.html#services">Services</a>
       <a href="../ai-automation.html">AI Automation</a>
-      <a href="../index.html#case-studies" class="active" aria-current="page">Case Studies</a>
+      <div class="site-nav-drop">
+        <a href="../index.html#case-studies" class="active" aria-current="page">Case Studies</a>
+        <div class="site-nav-menu" role="menu">
+          <a href="garage-services.html" class="active" role="menuitem">Garage services &middot; Google Ads</a>
+          <a href="what-garage-operators-are-up-against.html" role="menuitem">Meta competitive research</a>
+        </div>
+      </div>
       <a href="../index.html#founders">Founders</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
