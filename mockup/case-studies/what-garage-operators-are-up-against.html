@@ -985,11 +985,19 @@
 
   /* 05 MARKETS - 4-card grid. */
   .cs-metros{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:28px}
-  /* 5-market variant: 3 across at wide (5 items = 3+2 rows), 2 at medium,
-     1 at narrow. 3-col cards get ~380px each so label/value pairs breathe. */
-  .cs-metros.cs-metros-5{grid-template-columns:repeat(3,1fr); gap:20px}
+  /* 5-market variant: 6-col track so 5 items land as 3 across (each spans 2)
+     in row 1 + 2 across (each spans 3) in row 2, no empty slots and no need
+     for a filler card. Cards on row 2 are naturally half-wider than row 1,
+     which matches the 5-item auction-map narrative. */
+  .cs-metros.cs-metros-5{grid-template-columns:repeat(6,1fr); gap:20px}
+  .cs-metros.cs-metros-5 > .cs-metro{grid-column:span 2}
+  .cs-metros.cs-metros-5 > .cs-metro:nth-child(4),
+  .cs-metros.cs-metros-5 > .cs-metro:nth-child(5){grid-column:span 3}
   @media (max-width:1100px){ .cs-metros{grid-template-columns:repeat(2,1fr)}
-    .cs-metros.cs-metros-5{grid-template-columns:repeat(2,1fr)} }
+    .cs-metros.cs-metros-5{grid-template-columns:repeat(2,1fr)}
+    .cs-metros.cs-metros-5 > .cs-metro,
+    .cs-metros.cs-metros-5 > .cs-metro:nth-child(4),
+    .cs-metros.cs-metros-5 > .cs-metro:nth-child(5){grid-column:span 1} }
   @media (max-width:600px){ .cs-metros{grid-template-columns:1fr}
     .cs-metros.cs-metros-5{grid-template-columns:1fr} }
   .cs-metro{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
@@ -1046,8 +1054,19 @@
      narrower viewports. Last tile ("Did not do") gets a muted accent so it
      reads as the deliberate negation. */
   .cs-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
-  @media (max-width:1000px){ .cs-steps{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:600px){ .cs-steps{grid-template-columns:1fr} }
+  /* 5-step variant: same 6-col + span 2/3 trick as .cs-metros-5 so the last
+     row is not half empty. Applied to section 03 which holds exactly 5 items. */
+  .cs-steps.cs-steps-5{grid-template-columns:repeat(6,1fr)}
+  .cs-steps.cs-steps-5 > .cs-step{grid-column:span 2}
+  .cs-steps.cs-steps-5 > .cs-step:nth-child(4),
+  .cs-steps.cs-steps-5 > .cs-step:nth-child(5){grid-column:span 3}
+  @media (max-width:1000px){ .cs-steps{grid-template-columns:repeat(2,1fr)}
+    .cs-steps.cs-steps-5{grid-template-columns:repeat(2,1fr)}
+    .cs-steps.cs-steps-5 > .cs-step,
+    .cs-steps.cs-steps-5 > .cs-step:nth-child(4),
+    .cs-steps.cs-steps-5 > .cs-step:nth-child(5){grid-column:span 1} }
+  @media (max-width:600px){ .cs-steps{grid-template-columns:1fr}
+    .cs-steps.cs-steps-5{grid-template-columns:1fr} }
   .cs-step{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
     border-radius:6px; padding:22px 24px}
   .aa-sec.band-light .cs-step{background:#FFFFFF; border-color:#E5E4DF}
@@ -1301,7 +1320,7 @@
   <div class="eyebrow">03 &middot; The method</div>
   <h2>Five steps, <em>before anyone writes copy</em></h2>
   <p class="intro small">We map the market before we write the copy. This is the part most agencies skip, because it is slow and produces nothing billable on day one.</p>
-  <div class="cs-steps">
+  <div class="cs-steps cs-steps-5">
     <article class="cs-step">
       <div class="cs-step-head"><span class="cs-idx">01</span>Find every advertiser</div>
       <p>Not the obvious ones. Franchise location pages, local independents, and national e-commerce brands each behave differently, so each is pulled separately. In Southern California that meant checking 22 companies across five counties to establish that only three were running ads.</p>
@@ -1321,14 +1340,6 @@
     <article class="cs-step">
       <div class="cs-step-head"><span class="cs-idx">05</span>Separate evidence from belief</div>
       <p>Longevity proves commitment, not profit. A heavily duplicated ad proves confidence, not lead quality. Those boundaries get flagged, not dressed up as fact.</p>
-    </article>
-    <article class="cs-step cs-step-cta">
-      <span class="cs-cta-kicker">Next step</span>
-      <div class="cs-cta-line">Bring us your market, we will run the same five steps on it.</div>
-      <div class="cs-cta-buttons">
-        <a class="btn btn-sm" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
-        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
-      </div>
     </article>
   </div>
 </section>
@@ -1374,14 +1385,6 @@
       <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Technology plus rotating scarcity</span></div>
       <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">4 / 10</em></span></div>
       <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">19 established operators run nothing</span></div>
-    </div>
-    <div class="cs-metro cs-metro-cta">
-      <span class="cs-cta-kicker">Your market next</span>
-      <div class="cs-cta-line">Not on this list? We will map the auction you are actually in, before you spend.</div>
-      <div class="cs-cta-buttons">
-        <a class="btn btn-sm" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
-        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
-      </div>
     </div>
   </div>
 </section>
