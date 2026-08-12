@@ -894,12 +894,16 @@ html:not(.js) .pillar-media{max-height:380px}
   .vid-grid{grid-template-columns:repeat(2,1fr); gap:var(--sp-5)}
 }
 
-/* 08 REVIEWS */
-.rev-grid{display:grid; gap:var(--sp-6); margin-top:var(--sp-6)}
-.rev{margin:0; padding:var(--sp-6) 0; position:relative; border-top:1px solid var(--rule)}
+/* 08 REVIEWS - boxed cards on light band, 2-col at wide */
+.rev-grid{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
+@media (min-width:820px){ .rev-grid{grid-template-columns:1fr 1fr} }
+.rev{margin:0; padding:var(--sp-6) var(--sp-6) var(--sp-5); position:relative;
+  border:1px solid var(--rule-light,#E5E4DF); background:#FFFFFF;
+  border-radius:8px;
+  box-shadow:0 2px 12px rgba(15,17,21,.04)}
 .rev.pending{opacity:.9}
-.rev::before{content:"\201C"; position:absolute; top:-6px; left:-6px;
-  font-family:var(--font-display); font-size:5rem; line-height:.8; color:var(--gold);
+.rev::before{content:"\201C"; position:absolute; top:8px; left:14px;
+  font-family:var(--font-display); font-size:4.5rem; line-height:.8; color:var(--gold);
   opacity:.35; pointer-events:none}
 .rev-quote{font-family:var(--font-display); font-size:clamp(1.2rem,2.3vw,1.65rem); font-weight:500;
   font-style:italic; line-height:1.35; color:var(--text-on-dark);
@@ -2124,9 +2128,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
               <span class="rev-name">Client 1</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
-            <div class="rev-meta">
-              <span class="rev-source">Google</span>
-            </div>
           </figcaption>
         </figure>
         <figure class="rev" data-stagger>
@@ -2135,9 +2136,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <div class="rev-attrib">
               <span class="rev-name">Client 2</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
-            </div>
-            <div class="rev-meta">
-              <span class="rev-source">Clutch</span>
             </div>
           </figcaption>
         </figure>
@@ -2148,9 +2146,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
               <span class="rev-name">Client 3</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
-            <div class="rev-meta">
-              <span class="rev-source">Google</span>
-            </div>
           </figcaption>
         </figure>
         <figure class="rev" data-stagger>
@@ -2159,9 +2154,6 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <div class="rev-attrib">
               <span class="rev-name">Client 4</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
-            </div>
-            <div class="rev-meta">
-              <span class="rev-source">Clutch</span>
             </div>
           </figcaption>
         </figure>
