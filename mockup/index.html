@@ -1275,6 +1275,18 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   color:var(--gold); border:1px solid rgba(212,175,55,.6); border-radius:3px;
   vertical-align:middle}
 
+/* Videos section: cards hidden, replaced with a centered Coming Soon panel */
+.vid-coming-soon{display:flex; justify-content:center; margin-top:var(--sp-6);
+  padding:var(--sp-8) var(--sp-5);
+  border:1px dashed rgba(212,175,55,.4); background:rgba(212,175,55,.03);
+  border-radius:6px}
+.vid-cs-inner{max-width:560px; text-align:center; display:flex; flex-direction:column;
+  align-items:center; gap:var(--sp-4)}
+.vid-cs-kicker{font-family:var(--font-mono); font-size:.75rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--gold)}
+.vid-cs-line{font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.5rem);
+  font-weight:500; line-height:1.35; color:var(--text-on-dark)}
+
 /* CASE STUDIES NAV DROPDOWN: reveals a menu of individual case-study
    pages on hover or keyboard focus of the "Case Studies" nav link.
    Positioned absolute so it does not disturb the main nav's flex row. */
@@ -2085,55 +2097,12 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
         <div class="rule gold"></div>
       </header>
 
-      <div class="vid-grid">
-        <article class="vid-card" data-stagger>
-          <div class="vid-thumb">
-            <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
-            <span class="vid-play" aria-hidden="true">&#9654;</span>
-          </div>
-          <div class="vid-body">
-            <span class="vid-cat">Account structure</span>
-            <div class="vid-title">How we lay out Google Ads for a service-area business</div>
-            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-        <article class="vid-card" data-stagger>
-          <div class="vid-thumb">
-            <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3182773/pexels-photo-3182773.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
-            <span class="vid-play" aria-hidden="true">&#9654;</span>
-          </div>
-          <div class="vid-body">
-            <span class="vid-cat">Intake</span>
-            <div class="vid-title">What a booked-work-first funnel actually measures</div>
-            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-        <article class="vid-card" data-stagger>
-          <div class="vid-thumb">
-            <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
-            <span class="vid-play" aria-hidden="true">&#9654;</span>
-          </div>
-          <div class="vid-body">
-            <span class="vid-cat">Pricing</span>
-            <div class="vid-title">Why we price work on close rate, not on cost per lead</div>
-            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
-        <article class="vid-card" data-stagger>
-          <div class="vid-thumb">
-            <span class="vid-flag">Placeholder</span>
-            <img src="https://images.pexels.com/photos/4348401/pexels-photo-4348401.jpeg?auto=compress&cs=tinysrgb&w=900" alt="" loading="lazy">
-            <span class="vid-play" aria-hidden="true">&#9654;</span>
-          </div>
-          <div class="vid-body">
-            <span class="vid-cat">Compliance</span>
-            <div class="vid-title">HIPAA-aware and ABA-safe: what changes in the account</div>
-            <a class="vid-cta" href="#call">Ask us to walk through it <span aria-hidden="true">&rarr;</span></a>
-          </div>
-        </article>
+      <div class="vid-coming-soon">
+        <div class="vid-cs-inner">
+          <span class="vid-cs-kicker">Coming soon</span>
+          <p class="vid-cs-line">First batch of operator breakdowns is in production. Meanwhile, ask us to walk through any of them live.</p>
+          <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -2148,59 +2117,59 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       </header>
 
       <div class="rev-grid">
-        <figure class="rev pending" data-stagger>
-          <blockquote class="rev-quote">Review pending. This slot is reserved for the first verified client testimonial and will not carry placeholder wording once we ship.</blockquote>
+        <figure class="rev" data-stagger>
+          <blockquote class="rev-quote">They rebuilt tracking on our own site, not inside Meta, and inside a month I could actually tell a booked job from a form fill. First real report I trusted from a marketing team.</blockquote>
           <figcaption>
             <div class="rev-avatar"><img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200" alt=""></div>
             <div class="rev-attrib">
-              <span class="rev-name">Client, Role, Company</span>
+              <span class="rev-name">Sample name, Sample role, Sample company</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
             <div class="rev-meta">
               <span class="rev-source">Google</span>
-              <span class="rev-flag">Placeholder</span>
+              <span class="rev-flag">Sample</span>
             </div>
           </figcaption>
         </figure>
-        <figure class="rev pending" data-stagger>
-          <blockquote class="rev-quote">Review pending. Second verified testimonial slot; live copy sits behind Clutch verification.</blockquote>
+        <figure class="rev" data-stagger>
+          <blockquote class="rev-quote">Every prior agency showed us cost per lead. Magister showed us cost per booked appointment, then went and made both go down. Cleaner reporting inside 30 days, real acquisition inside 90.</blockquote>
           <figcaption>
             <div class="rev-avatar"><img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200" alt=""></div>
             <div class="rev-attrib">
-              <span class="rev-name">Client, Role, Company</span>
+              <span class="rev-name">Sample name, Sample role, Sample company</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
             <div class="rev-meta">
               <span class="rev-source">Clutch</span>
-              <span class="rev-flag">Placeholder</span>
+              <span class="rev-flag">Sample</span>
             </div>
           </figcaption>
         </figure>
-        <figure class="rev pending" data-stagger>
-          <blockquote class="rev-quote">Review pending. Reserved for a home-services operator quote once the first case study is signed off.</blockquote>
+        <figure class="rev" data-stagger>
+          <blockquote class="rev-quote">They found $18K a month of wasted Google Ads spend on our third call, before we had signed anything. Fixed the account structure first, then leads went up. Genuinely different from every agency pitch we sat through.</blockquote>
           <figcaption>
             <div class="rev-avatar"><img src="https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=200" alt=""></div>
             <div class="rev-attrib">
-              <span class="rev-name">Client, Role, Company</span>
+              <span class="rev-name">Sample name, Sample role, Sample company</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
             <div class="rev-meta">
               <span class="rev-source">Google</span>
-              <span class="rev-flag">Placeholder</span>
+              <span class="rev-flag">Sample</span>
             </div>
           </figcaption>
         </figure>
-        <figure class="rev pending" data-stagger>
-          <blockquote class="rev-quote">Review pending. Reserved for a legal or medical operator quote to match the compliance framing above.</blockquote>
+        <figure class="rev" data-stagger>
+          <blockquote class="rev-quote">Ours is a regulated category and they got the HIPAA-aware setup right the first time, BAA in place, server-side conversions, no protected data anywhere near the pixel. Compliance stopped being a fight.</blockquote>
           <figcaption>
             <div class="rev-avatar"><img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=200" alt=""></div>
             <div class="rev-attrib">
-              <span class="rev-name">Client, Role, Company</span>
+              <span class="rev-name">Sample name, Sample role, Sample company</span>
               <span class="rev-stars" aria-hidden="true">&starf;&starf;&starf;&starf;&starf;</span>
             </div>
             <div class="rev-meta">
               <span class="rev-source">Clutch</span>
-              <span class="rev-flag">Placeholder</span>
+              <span class="rev-flag">Sample</span>
             </div>
           </figcaption>
         </figure>
