@@ -1064,30 +1064,39 @@
   .aa-sec.band-light .cs-step-neg .cs-step-head{color:#B01B1B}
 
   /* CTA CARD VARIANT: fills the empty 6th slot in 5-item grids so the last
-     row of a 3-col layout is not half empty. Gold accent border + centered
-     content + button, works inside .cs-steps and .cs-metros grids. Beth's
-     rule: "fix empty space by FILLING the row, never centering or
-     collapsing." */
+     row of a 3-col layout is not half empty. Always dark ink background
+     regardless of section band, so the CTA reads as an action on both
+     the dark and light bands (the light-band pale-gold version washed
+     out against the paper background). Beth's rule: "fix empty space by
+     FILLING the row, never centering or collapsing." */
   .cs-step.cs-step-cta,
   .cs-metro.cs-metro-cta{
-    background:linear-gradient(135deg,rgba(212,175,55,0.08) 0%,rgba(212,175,55,0.02) 100%);
-    border-color:rgba(212,175,55,0.35);
+    background:linear-gradient(135deg,#1C1D21 0%,#16171A 100%);
+    border-color:rgba(212,175,55,0.55);
+    box-shadow:0 4px 20px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(212,175,55,0.10);
     display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
     gap:14px; padding:26px}
+  /* Explicit override so the .aa-sec.band-light .cs-step / .cs-metro rules
+     do not repaint the CTA card white. */
   .aa-sec.band-light .cs-step.cs-step-cta,
   .aa-sec.band-light .cs-metro.cs-metro-cta{
-    background:linear-gradient(135deg,#FFF5D6 0%,#FFFDF3 100%);
-    border-color:#D4AF37}
+    background:linear-gradient(135deg,#1C1D21 0%,#16171A 100%);
+    border-color:rgba(212,175,55,0.55)}
   .cs-cta-kicker{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
     color:var(--gold,#D4AF37)}
-  .aa-sec.band-light .cs-cta-kicker{color:var(--gold-deep,#6E561A)}
+  .aa-sec.band-light .cs-cta-kicker{color:var(--gold,#D4AF37)}
   .cs-cta-line{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
     font-size:1.15rem; font-weight:600; line-height:1.25;
     color:var(--paper,#F7F7F5)}
-  .aa-sec.band-light .cs-cta-line{color:var(--ink,#16171A)}
-  .cs-step.cs-step-cta .btn,
-  .cs-metro.cs-metro-cta .btn{margin-top:auto; width:auto}
+  .aa-sec.band-light .cs-cta-line{color:var(--paper,#F7F7F5)}
+  /* Button pair inside a CTA card: primary .btn + secondary tel: pill,
+     wrap when the card gets narrow. */
+  .cs-cta-buttons{display:flex; flex-wrap:wrap; align-items:center; gap:12px;
+    margin-top:auto; width:100%}
+  .cs-cta-buttons .btn,.cs-cta-buttons .hero-tel{flex:0 0 auto}
+  .cs-cta-buttons .hero-tel{font-size:.75rem; padding:8px 12px}
+  .cs-cta-buttons .hero-tel b{font-size:.875rem}
 
   /* CTA BUTTON PAIR: centered flex row of Book-a-call + tel:. Sits under
      prose sections and tables. Mobile stacks to 100% width. */
@@ -1296,7 +1305,10 @@
     <article class="cs-step cs-step-cta">
       <span class="cs-cta-kicker">Next step</span>
       <div class="cs-cta-line">Bring us your market, we will run the same five steps on it.</div>
-      <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+      <div class="cs-cta-buttons">
+        <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
+      </div>
     </article>
   </div>
 </section>
@@ -1346,7 +1358,10 @@
     <div class="cs-metro cs-metro-cta">
       <span class="cs-cta-kicker">Your market next</span>
       <div class="cs-cta-line">Not on this list? We will map the auction you are actually in, before you spend.</div>
-      <a class="btn" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+      <div class="cs-cta-buttons">
+        <a class="btn" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
+      </div>
     </div>
   </div>
 </section>
