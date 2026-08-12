@@ -985,30 +985,41 @@
 
   /* 05 MARKETS - 4-card grid. */
   .cs-metros{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:28px}
-  .cs-metros.cs-metros-5{grid-template-columns:repeat(5,1fr); gap:12px}
-  @media (max-width:1280px){ .cs-metros.cs-metros-5{grid-template-columns:repeat(3,1fr)} }
+  /* 5-market variant: 3 across at wide (5 items = 3+2 rows), 2 at medium,
+     1 at narrow. 3-col cards get ~380px each so label/value pairs breathe. */
+  .cs-metros.cs-metros-5{grid-template-columns:repeat(3,1fr); gap:20px}
   @media (max-width:1100px){ .cs-metros{grid-template-columns:repeat(2,1fr)}
     .cs-metros.cs-metros-5{grid-template-columns:repeat(2,1fr)} }
   @media (max-width:600px){ .cs-metros{grid-template-columns:1fr}
     .cs-metros.cs-metros-5{grid-template-columns:1fr} }
   .cs-metro{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
-    border-radius:6px; padding:20px}
+    border-radius:6px; padding:24px}
   .aa-sec.band-light .cs-metro{background:#FFFFFF; border-color:#E5E4DF}
   .cs-metro-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-weight:600; font-size:1.15rem; color:var(--gold,#D4AF37); margin-bottom:14px;
-    padding-bottom:10px; border-bottom:1px solid var(--border,#2A2C31)}
+    font-weight:600; font-size:1.35rem; color:var(--gold,#D4AF37); margin-bottom:18px;
+    padding-bottom:12px; border-bottom:1px solid var(--border,#2A2C31)}
   .aa-sec.band-light .cs-metro-name{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
-  .cs-metro-row{display:flex; justify-content:space-between; align-items:baseline;
-    padding:8px 0; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.875rem}
-  .cs-metro-row .k{color:var(--muted-on-dark,#868A90)}
+  /* Stacked row: small uppercase kicker label on top of the actual value.
+     Fixes the previous space-between layout where narrow columns wrapped
+     labels into 2 lines and left values dangling at odd positions. */
+  .cs-metro-row{display:block; padding:10px 0;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace)}
+  .cs-metro-row + .cs-metro-row{border-top:1px solid rgba(255,255,255,.05)}
+  .aa-sec.band-light .cs-metro-row + .cs-metro-row{border-top-color:#F0EEE7}
+  .cs-metro-row .k{display:block; font-size:.625rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted-on-dark,#868A90); margin-bottom:6px}
   .aa-sec.band-light .cs-metro-row .k{color:var(--muted,#45474C)}
-  .cs-metro-row .v{font-weight:700; color:var(--paper,#F7F7F5)}
+  .cs-metro-row .v{display:block; font-weight:600; font-size:1rem; line-height:1.35;
+    color:var(--paper,#F7F7F5)}
   .aa-sec.band-light .cs-metro-row .v{color:var(--ink,#16171A)}
-  .cs-metro-row .v.up{color:#3FB984}
-  .cs-metro-row .v.dn{color:#E86A5A}
-  .aa-sec.band-light .cs-metro-row .v.up{color:#0F6E3C}
-  .aa-sec.band-light .cs-metro-row .v.dn{color:#B01B1B}
+  .cs-metro-row .v b{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:700; font-size:1.25rem; color:var(--gold,#D4AF37); margin-right:4px}
+  .aa-sec.band-light .cs-metro-row .v b{color:var(--gold-deep,#6E561A)}
+  .cs-metro-row .v em{font-style:normal; font-weight:700}
+  .cs-metro-row .v em.up{color:#3FB984}
+  .cs-metro-row .v em.dn{color:#E86A5A}
+  .aa-sec.band-light .cs-metro-row .v em.up{color:#0F6E3C}
+  .aa-sec.band-light .cs-metro-row .v em.dn{color:#B01B1B}
 
   /* KPI STRIP override - 3 tiles instead of 4 across, so each tile gets more
      room and Dimi's longer labels do not get cramped. */
@@ -1209,26 +1220,16 @@
      Copy taken from Dimi's Netlify mockup verbatim, compressed into three
      structural findings so the split layout stays readable. -->
 <section class="aa-sec band-light" data-mark="02">
-  <div class="cs-split">
-    <figure class="cs-split-img">
-      <img src="https://images.pexels.com/photos/17181949/pexels-photo-17181949.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1100&amp;fit=crop" alt="Interior of a spacious garage with organised wall storage, shelves, and hanging tools" loading="lazy" width="900" height="1100">
-    </figure>
-    <div class="cs-split-body">
-      <div class="eyebrow">02 &middot; The position operators are in</div>
-      <h2>Most competitors, <em>not running ads at all</em></h2>
-      <p class="intro small">If you sell garage floors, storage, or cabinets, most of your local competitors are not advertising on Meta at all. Of the 42 companies we audited across five markets, <b>26 ran no Meta ads</b>.</p>
-      <p class="intro small">The ones who do advertise tend to run the same national template, a pain hook, a dollars-off offer, and a lifetime warranty, into a local auction that does not resemble the one two states over. That is the position most operators are in when they decide whether Meta is worth it: guessing at who they are bidding against, and worried the answer from an agency will be a generic package built on national best practices.</p>
-      <p class="intro small">The owners we built this for had usually been sold copy before, three headlines, a stock photo of a clean garage, a lead form, and a cost-per-lead report, and wanted to know what actually runs in their market before spending into it.</p>
-    </div>
-  </div>
+  <div class="eyebrow">02 &middot; The position operators are in</div>
+  <h2>Most competitors, <em>not running ads at all</em></h2>
+  <p class="intro small">If you sell garage floors, storage, or cabinets, most of your local competitors are not advertising on Meta at all. Of the 42 companies we audited across five markets, <b>26 ran no Meta ads</b>.</p>
+  <p class="intro small">The ones who do advertise tend to run the same national template, a pain hook, a dollars-off offer, and a lifetime warranty, into a local auction that does not resemble the one two states over. That is the position most operators are in when they decide whether Meta is worth it: guessing at who they are bidding against, and worried the answer from an agency will be a generic package built on national best practices.</p>
+  <p class="intro small">The owners we built this for had usually been sold copy before, three headlines, a stock photo of a clean garage, a lead form, and a cost-per-lead report, and wanted to know what actually runs in their market before spending into it.</p>
 </section>
 
 <!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
      copy compressed but true to the mockup. -->
 <section class="aa-sec" data-mark="03">
-  <figure class="cs-banner">
-    <img src="https://images.pexels.com/photos/7484795/pexels-photo-7484795.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall of neatly organised hand tools hanging in place" loading="lazy" width="1600" height="460">
-  </figure>
   <div class="eyebrow">03 &middot; The method</div>
   <h2>Five steps, <em>before anyone writes copy</em></h2>
   <p class="intro small">We map the market before we write the copy. This is the part most agencies skip, because it is slow and produces nothing billable on day one.</p>
@@ -1362,9 +1363,6 @@
 <!-- 07 - The rest of the story (dark band, teaser). Section list mirrors
      Dimi's page order for the ten sections still to build here. -->
 <section class="aa-sec" data-mark="07">
-  <figure class="cs-banner">
-    <img src="https://images.pexels.com/photos/30361320/pexels-photo-30361320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall filled with various tools hanging for easy access" loading="lazy" width="1600" height="460">
-  </figure>
   <div class="eyebrow">07 &middot; What this shows and what it does not</div>
   <h2>What this proves, <em>and what it does not</em></h2>
   <p class="intro">Four boundaries stated plainly, so nothing on this page is read as more than it is.</p>
