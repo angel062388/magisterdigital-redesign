@@ -873,7 +873,7 @@
      situation. 50/50 columns at wide viewports, stacks with image on top
      under 900px. Portrait image aspect keeps the garage subject visible
      rather than being cropped down to a floor sliver. */
-  .cs-split{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:stretch}
+  .cs-split{display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:start}
   @media (max-width:900px){ .cs-split{grid-template-columns:1fr; gap:28px} }
   /* No fixed aspect ratio: the image stretches to fill the grid cell so the
      column matches the content column's height. min-height is a floor so a
@@ -1259,6 +1259,9 @@
   <div class="cs-split">
     <figure class="cs-split-img">
       <img src="https://images.pexels.com/photos/17181949/pexels-photo-17181949.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1100&amp;fit=crop" alt="Interior of a spacious garage with organised wall storage, shelves, and hanging tools" loading="lazy" width="900" height="1100">
+    </figure>
+    <figure class="cs-split-img">
+      <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=700&amp;fit=crop" alt="Close-up of code and workflow patterns on a technical surface" loading="lazy" width="900" height="700">
     </figure>
     <div class="cs-split-body">
       <div class="eyebrow">02 &middot; The situation</div>
