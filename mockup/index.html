@@ -1258,6 +1258,16 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   .scroll-nav,.scroll-nav svg{transition:opacity .1s linear!important; transform:none!important}
 }
 
+/* Industry panel "See how we work" link. Sits below the ul in the expanded
+   panel body; only appears when the panel is expanded (parent visibility). */
+.vert-link{display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-4);
+  font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); text-decoration:underline; text-underline-offset:4px;
+  text-decoration-color:rgba(212,175,55,.6);
+  transition:color .28s var(--ease), text-decoration-color .28s var(--ease), gap .28s var(--ease)}
+.vert-link:hover{color:var(--gold-light); text-decoration-color:var(--gold-light); gap:10px}
+.vert-link:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+
 /* CASE STUDIES NAV DROPDOWN: reveals a menu of individual case-study
    pages on hover or keyboard focus of the "Case Studies" nav link.
    Positioned absolute so it does not disturb the main nav's flex row. */
@@ -1487,13 +1497,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 
       <ul class="svc-list" role="list">
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/seo/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/seo/">
             <div class="svc-visual">
               <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
               <span class="svc-idx">01</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/seo/">SEO</a>
+              <a class="svc-name" href="https://magisterdigital.ai/seo/">SEO</a>
               <span class="svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1501,13 +1511,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/google-ads/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/google-ads/">
             <div class="svc-visual">
               <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
               <span class="svc-idx">02</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/google-ads/">Google Ads</a>
+              <a class="svc-name" href="https://magisterdigital.ai/google-ads/">Google Ads</a>
               <span class="svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1515,13 +1525,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/meta-ads/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/meta-ads/">
             <div class="svc-visual">
               <img src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
               <span class="svc-idx">03</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/meta-ads/">Meta Ads</a>
+              <a class="svc-name" href="https://magisterdigital.ai/meta-ads/">Meta Ads</a>
               <span class="svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1529,13 +1539,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/ai-automation/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/ai-automation/">
             <div class="svc-visual">
               <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
               <span class="svc-idx">04</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/ai-automation/">AI Automation</a>
+              <a class="svc-name" href="https://magisterdigital.ai/ai-automation/">AI Automation</a>
               <span class="svc-outcome">Missed-call recovery, intake scoring and after-hours triage that get more leads booked without more staff.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1543,13 +1553,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/crm/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/crm/">
             <div class="svc-visual">
               <img src="img/crm.jpg" alt="" loading="lazy">
               <span class="svc-idx">05</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/crm/">Custom CRM Development</a>
+              <a class="svc-name" href="https://magisterdigital.ai/crm/">Custom CRM Development</a>
               <span class="svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1557,13 +1567,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/full-stack-marketing/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/full-stack-marketing/">
             <div class="svc-visual">
               <img src="img/full-stack-marketing.jpg" alt="" loading="lazy">
               <span class="svc-idx">06</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/full-stack-marketing/">Full-Stack Marketing</a>
+              <a class="svc-name" href="https://magisterdigital.ai/full-stack-marketing/">Full-Stack Marketing</a>
               <span class="svc-outcome">One team across search, paid, automation and the site, so no vendor blame layer eats your budget.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1571,13 +1581,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
           </div>
         </li>
         <li class="svc" data-stagger>
-          <div class="svc-link" data-svc-row data-href="/web-design/">
+          <div class="svc-link" data-svc-row data-href="https://magisterdigital.ai/web-design/">
             <div class="svc-visual">
               <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
               <span class="svc-idx">07</span>
             </div>
             <div class="svc-body">
-              <a class="svc-name" href="/web-design/">Web Design</a>
+              <a class="svc-name" href="https://magisterdigital.ai/web-design/">Web Design</a>
               <span class="svc-outcome">Sites written to convert the traffic we send, instrumented for booked work end to end.</span>
               <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
             </div>
@@ -1647,6 +1657,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <div class="body">
               <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone is answered.</p>
               <ul><li>Local Service Ads and the map pack</li><li>Storm and seasonal surge planning</li><li>Call tracking wired into the CRM</li></ul>
+              <a class="vert-link" href="https://magisterdigital.ai/home-services/">See how we work with home services <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </div>
@@ -1658,6 +1669,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <div class="body">
               <p>Patient acquisition without putting protected health information into a pixel payload.</p>
               <ul><li>HIPAA-aware tracking, BAA in place</li><li>Server-side conversion measurement</li><li>Reported as ranges, never single-patient guarantees</li></ul>
+              <a class="vert-link" href="https://magisterdigital.ai/medical-dental/">See how we work with medical &amp; dental <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </div>
@@ -1669,6 +1681,7 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
             <div class="body">
               <p>Long cycles, expensive clicks, and advertising rules a generalist agency will get you in trouble with.</p>
               <ul><li>ABA Rule 7.1 compliant messaging</li><li>Signed-case attribution, not form fills</li><li>Intake quality scoring</li></ul>
+              <a class="vert-link" href="https://magisterdigital.ai/legal/">See how we work with legal <span aria-hidden="true">&rarr;</span></a>
             </div>
           </div>
         </div>
@@ -2255,9 +2268,9 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
       <div class="footcol">
         <h4>Services</h4>
         <ul>
-          <li><a href="/seo/">SEO</a></li><li><a href="/google-ads/">Google Ads</a></li>
-          <li><a href="/meta-ads/">Meta Ads</a></li><li><a href="/ai-automation/">AI automation</a></li>
-          <li><a href="/crm/">Custom CRM</a></li><li><a href="/full-stack-marketing/">Full-Stack Marketing</a></li>
+          <li><a href="https://magisterdigital.ai/seo/">SEO</a></li><li><a href="https://magisterdigital.ai/google-ads/">Google Ads</a></li>
+          <li><a href="https://magisterdigital.ai/meta-ads/">Meta Ads</a></li><li><a href="/ai-automation/">AI automation</a></li>
+          <li><a href="/crm/">Custom CRM</a></li><li><a href="https://magisterdigital.ai/full-stack-marketing/">Full-Stack Marketing</a></li>
           <li><a href="/web-design/">Web design</a></li>
         </ul>
       </div>
