@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Case Study: what garage operators are up against on Meta | Magister Digital</title>
+<title>Case Study: addiction-treatment provider, 14 qualified leads in 9 days | Magister Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -873,7 +873,7 @@
      situation. 50/50 columns at wide viewports, stacks with image on top
      under 900px. Portrait image aspect keeps the garage subject visible
      rather than being cropped down to a floor sliver. */
-  .cs-split{display:grid; grid-template-columns:5fr 7fr; gap:48px; align-items:start}
+  .cs-split{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:stretch}
   @media (max-width:900px){ .cs-split{grid-template-columns:1fr; gap:28px} }
   /* No fixed aspect ratio: the image stretches to fill the grid cell so the
      column matches the content column's height. min-height is a floor so a
@@ -985,49 +985,28 @@
 
   /* 05 MARKETS - 4-card grid. */
   .cs-metros{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:28px}
-  /* 5-market variant: 6-col track so 5 items land as 3 across (each spans 2)
-     in row 1 + 2 across (each spans 3) in row 2, no empty slots and no need
-     for a filler card. Cards on row 2 are naturally half-wider than row 1,
-     which matches the 5-item auction-map narrative. */
-  .cs-metros.cs-metros-5{grid-template-columns:repeat(6,1fr); gap:20px}
-  .cs-metros.cs-metros-5 > .cs-metro{grid-column:span 2}
-  .cs-metros.cs-metros-5 > .cs-metro:nth-child(4),
-  .cs-metros.cs-metros-5 > .cs-metro:nth-child(5){grid-column:span 3}
-  @media (max-width:1100px){ .cs-metros{grid-template-columns:repeat(2,1fr)}
-    .cs-metros.cs-metros-5{grid-template-columns:repeat(2,1fr)}
-    .cs-metros.cs-metros-5 > .cs-metro,
-    .cs-metros.cs-metros-5 > .cs-metro:nth-child(4),
-    .cs-metros.cs-metros-5 > .cs-metro:nth-child(5){grid-column:span 1} }
-  @media (max-width:600px){ .cs-metros{grid-template-columns:1fr}
-    .cs-metros.cs-metros-5{grid-template-columns:1fr} }
+  @media (max-width:1100px){ .cs-metros{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .cs-metros{grid-template-columns:1fr} }
   .cs-metro{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
-    border-radius:6px; padding:24px}
+    border-radius:6px; padding:20px}
   .aa-sec.band-light .cs-metro{background:#FFFFFF; border-color:#E5E4DF}
   .cs-metro-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-weight:600; font-size:1.35rem; color:var(--gold,#D4AF37); margin-bottom:18px;
-    padding-bottom:12px; border-bottom:1px solid var(--border,#2A2C31)}
+    font-weight:600; font-size:1.15rem; color:var(--gold,#D4AF37); margin-bottom:14px;
+    padding-bottom:10px; border-bottom:1px solid var(--border,#2A2C31)}
   .aa-sec.band-light .cs-metro-name{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
-  /* Stacked row: small uppercase kicker label on top of the actual value.
-     Fixes the previous space-between layout where narrow columns wrapped
-     labels into 2 lines and left values dangling at odd positions. */
-  .cs-metro-row{display:block; padding:10px 0;
-    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace)}
   .cs-metro-row + .cs-metro-row{border-top:1px solid rgba(255,255,255,.10)}
   .aa-sec.band-light .cs-metro-row + .cs-metro-row{border-top-color:#E5E4DF}
-  .cs-metro-row .k{display:block; font-size:.625rem; letter-spacing:.16em;
-    text-transform:uppercase; color:var(--muted-on-dark,#868A90); margin-bottom:6px}
+  .cs-metro-row{display:flex; justify-content:space-between; align-items:baseline;
+    padding:8px 0; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.875rem}
+  .cs-metro-row .k{color:var(--muted-on-dark,#868A90)}
   .aa-sec.band-light .cs-metro-row .k{color:var(--muted,#45474C)}
-  .cs-metro-row .v{display:block; font-weight:600; font-size:1rem; line-height:1.35;
-    color:var(--paper,#F7F7F5)}
+  .cs-metro-row .v{font-weight:700; color:var(--paper,#F7F7F5)}
   .aa-sec.band-light .cs-metro-row .v{color:var(--ink,#16171A)}
-  .cs-metro-row .v b{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-weight:700; font-size:1.25rem; color:var(--gold,#D4AF37); margin-right:4px}
-  .aa-sec.band-light .cs-metro-row .v b{color:var(--gold-deep,#6E561A)}
-  .cs-metro-row .v em{font-style:normal; font-weight:700}
-  .cs-metro-row .v em.up{color:#3FB984}
-  .cs-metro-row .v em.dn{color:#E86A5A}
-  .aa-sec.band-light .cs-metro-row .v em.up{color:#0F6E3C}
-  .aa-sec.band-light .cs-metro-row .v em.dn{color:#B01B1B}
+  .cs-metro-row .v.up{color:#3FB984}
+  .cs-metro-row .v.dn{color:#E86A5A}
+  .aa-sec.band-light .cs-metro-row .v.up{color:#0F6E3C}
+  .aa-sec.band-light .cs-metro-row .v.dn{color:#B01B1B}
 
   /* KPI STRIP override - 3 tiles instead of 4 across, so each tile gets more
      room and Dimi's longer labels do not get cramped. */
@@ -1054,8 +1033,8 @@
      narrower viewports. Last tile ("Did not do") gets a muted accent so it
      reads as the deliberate negation. */
   .cs-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
-  /* 5-step variant: same 6-col + span 2/3 trick as .cs-metros-5 so the last
-     row is not half empty. Applied to section 03 which holds exactly 5 items. */
+  /* 5-step variant: 6-col track so 5 items land 3+2 (row 1 span 2, row 2 span 3)
+     with no empty slot. Same trick used on the sibling case study. */
   .cs-steps.cs-steps-5{grid-template-columns:repeat(6,1fr)}
   .cs-steps.cs-steps-5 > .cs-step{grid-column:span 2}
   .cs-steps.cs-steps-5 > .cs-step:nth-child(4),
@@ -1082,70 +1061,6 @@
   .aa-sec.band-light .cs-step-neg{border-color:rgba(176,27,27,0.20); background:rgba(176,27,27,0.02)}
   .cs-step-neg .cs-step-head{color:#E86A5A}
   .aa-sec.band-light .cs-step-neg .cs-step-head{color:#B01B1B}
-
-  /* CTA CARD VARIANT: fills the empty 6th slot in 5-item grids so the last
-     row of a 3-col layout is not half empty. Always dark ink background
-     regardless of section band, so the CTA reads as an action on both
-     the dark and light bands (the light-band pale-gold version washed
-     out against the paper background). Beth's rule: "fix empty space by
-     FILLING the row, never centering or collapsing." */
-  .cs-step.cs-step-cta,
-  .cs-metro.cs-metro-cta{
-    background:linear-gradient(135deg,#1C1D21 0%,#16171A 100%);
-    border-color:rgba(212,175,55,0.55);
-    box-shadow:0 4px 20px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(212,175,55,0.10);
-    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
-    gap:14px; padding:26px}
-  /* Explicit override so the .aa-sec.band-light .cs-step / .cs-metro rules
-     do not repaint the CTA card white. */
-  .aa-sec.band-light .cs-step.cs-step-cta,
-  .aa-sec.band-light .cs-metro.cs-metro-cta{
-    background:linear-gradient(135deg,#1C1D21 0%,#16171A 100%);
-    border-color:rgba(212,175,55,0.55)}
-  .cs-cta-kicker{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
-    color:var(--gold,#D4AF37)}
-  .aa-sec.band-light .cs-cta-kicker{color:var(--gold,#D4AF37)}
-  .cs-cta-line{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-size:1.15rem; font-weight:600; line-height:1.25;
-    color:var(--paper,#F7F7F5)}
-  .aa-sec.band-light .cs-cta-line{color:var(--paper,#F7F7F5)}
-  /* Button pair inside a CTA card: uses .btn-sm proportions on both the
-     primary and the tel: pill so they match. Homepage .btn is 16/30
-     padding; that overflows the ~380px CTA card. .btn-sm is 13/24 at
-     .6875rem and the .hero-tel gets the same padding + font so the pair
-     reads as one unit at the same visual weight. Wraps to two rows when
-     the card narrows below fit. */
-  .cs-cta-buttons{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
-    margin-top:auto; width:100%}
-  .cs-cta-buttons .btn,.cs-cta-buttons .hero-tel{flex:0 0 auto}
-  .cs-cta-buttons .hero-tel{padding:13px 20px; font-size:.6875rem}
-  .cs-cta-buttons .hero-tel b{font-size:.75rem}
-
-  /* CTA BUTTON PAIR: centered flex row of Book-a-call + tel:. Sits under
-     prose sections and tables. Mobile stacks to 100% width. */
-  .cs-cta-pair{display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
-    gap:18px; margin-top:36px}
-  @media (max-width:520px){
-    .cs-cta-pair{gap:12px; margin-top:24px}
-    .cs-cta-pair .btn,.cs-cta-pair .hero-tel{width:100%; max-width:320px; justify-content:center}
-  }
-  /* LIGHT-BAND OVERRIDES for .cs-cta-pair, mirroring homepage index.html:257-267.
-     On paper backgrounds the default bright-gold border/text washes out; the
-     homepage swaps to a darker gold-deep border (#A8842A) and dark ink text
-     for readability. The dark CTA cards (.cs-cta-buttons inside .cs-step-cta
-     or .cs-metro-cta) are NOT included in this override because the card
-     itself is dark ink background, so their buttons keep the dark-band style. */
-  .aa-sec.band-light .cs-cta-pair .btn{background:#D4AF37; border-color:#A8842A; color:#16171A;
-    box-shadow:0 6px 18px rgba(212,175,55,.30), inset 0 -2px 0 rgba(0,0,0,.16)}
-  .aa-sec.band-light .cs-cta-pair .btn:hover{background:#E3C24E; border-color:#A8842A; color:#16171A;
-    box-shadow:0 12px 28px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.18)}
-  .aa-sec.band-light .cs-cta-pair .hero-tel{color:#16171A; border-color:#D4AF37}
-  .aa-sec.band-light .cs-cta-pair .hero-tel .tag{color:#5E6066}
-  .aa-sec.band-light .cs-cta-pair .hero-tel b{color:#6E561A}
-  .aa-sec.band-light .cs-cta-pair .hero-tel:hover{background:#D4AF37; color:#16171A; border-color:#A8842A}
-  .aa-sec.band-light .cs-cta-pair .hero-tel:hover .tag,
-  .aa-sec.band-light .cs-cta-pair .hero-tel:hover b{color:#16171A}
 
   /* Chain row 07 (Cost) + row 11 (Conversion value) carry a small caption
      inside the delta cell. Stack vertically. */
@@ -1222,8 +1137,8 @@
         <a href="../index.html#case-studies" class="active" aria-current="page">Case Studies</a>
         <div class="site-nav-menu" role="menu">
           <a href="garage-services.html" role="menuitem">Garage services &middot; Google Ads</a>
-          <a href="what-garage-operators-are-up-against.html" class="active" role="menuitem">Meta competitive research</a>
-          <a href="addiction-treatment-leads.html" role="menuitem">Addiction treatment &middot; Meta attribution</a>
+          <a href="what-garage-operators-are-up-against.html" role="menuitem">Meta competitive research</a>
+          <a href="addiction-treatment-leads.html" class="active" role="menuitem">Addiction treatment &middot; Meta attribution</a>
         </div>
       </div>
       <a href="../index.html#founders">Founders</a>
@@ -1300,13 +1215,13 @@
     <span class="garage-orb g2"></span>
   </div>
   <div class="aa-hero-content">
-    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Competitive research <span class="sep">/</span> Five U.S. markets</div>
-    <h1>42 companies, ~300 ads, five markets that <em>do not resemble each other</em></h1>
+    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Addiction treatment <span class="sep">/</span> Meta lead attribution</div>
+    <h1>Fourteen qualified leads in <em>nine days</em>, proven with source tracking the <em>client owns</em></h1>
     <p class="lede">
-      Before we launch a single campaign, we map the market. <code>42 companies audited</code>
-      and about 300 ads read individually across five U.S. markets in the public Meta Ads
-      Library, and the finding that mattered most is that the five markets do not resemble
-      each other.
+      A national LegitScript-certified addiction-treatment provider on its fourth agency,
+      spending on Meta with an empty results column, needed one thing before signing:
+      <code>proof</code> that qualified inquiries could move and that each source could be
+      verified without another long ramp.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -1317,22 +1232,22 @@
 
 <!-- 01b - Hero KPI strip. Three figures Dimi leads with; captions
      copied verbatim from garage-services-case-study.netlify.app. -->
-<section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline research figures">
+<section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline results">
   <div class="aa-kpi-strip cs-kpi-3">
     <div class="aa-kpi">
-      <div class="l">Companies audited, ads read before any spend</div>
-      <div class="v">42 / ~300</div>
-      <div class="d">Five markets, every advertiser in the public Meta Ads Library, each ad transcribed by hand</div>
+      <div class="l">Client-verified qualified leads in 9 days</div>
+      <div class="v">14</div>
+      <div class="d">Client's admissions team scored each inbound as qualified in CallRail &middot; Aug 1&ndash;9, 2026</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Distinct competitive auctions</div>
-      <div class="v">5</div>
-      <div class="d">Dallas, Atlanta, Las Vegas, Orlando, Southern California, none of them alike</div>
+      <div class="l">Media cost per qualified lead</div>
+      <div class="v">$127.55</div>
+      <div class="d">$1,785.65 Meta spend &divide; 14 qualified &middot; media only, not full CAC</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Blended cost per lead across our launched campaigns</div>
-      <div class="v">$29.07</div>
-      <div class="d">245 leads across 8 campaigns in 4 markets &middot; July 2026</div>
+      <div class="l">First-contact leads captured with a verified source</div>
+      <div class="v">91</div>
+      <div class="d">27 calls + 64 forms via CallRail, where the prior setup attributed none</div>
     </div>
   </div>
 </section>
@@ -1343,18 +1258,26 @@
 <section class="aa-sec band-light" data-mark="02">
   <div class="cs-split">
     <figure class="cs-split-img">
-      <img src="https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=700&amp;fit=crop" alt="Laptop screen showing analytics dashboards next to an open notebook with market notes" loading="lazy" width="900" height="700">
+      <img src="https://images.pexels.com/photos/17181949/pexels-photo-17181949.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1100&amp;fit=crop" alt="Interior of a spacious garage with organised wall storage, shelves, and hanging tools" loading="lazy" width="900" height="1100">
     </figure>
     <div class="cs-split-body">
-  <div class="eyebrow">02 &middot; The position operators are in</div>
-  <h2>Most competitors, <em>not running ads at all</em></h2>
-  <p class="intro small">If you sell garage floors, storage, or cabinets, most of your local competitors are not advertising on Meta at all. Of the 42 companies we audited across five markets, <b>26 ran no Meta ads</b>.</p>
-  <p class="intro small">The ones who do advertise tend to run the same national template, a pain hook, a dollars-off offer, and a lifetime warranty, into a local auction that does not resemble the one two states over. That is the position most operators are in when they decide whether Meta is worth it: guessing at who they are bidding against, and worried the answer from an agency will be a generic package built on national best practices.</p>
-  <p class="intro small">The owners we built this for had usually been sold copy before, three headlines, a stock photo of a clean garage, a lead form, and a cost-per-lead report, and wanted to know what actually runs in their market before spending into it.</p>
-  <div class="cs-cta-pair">
-    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
-  </div>
+      <div class="eyebrow">02 &middot; The situation</div>
+      <h2>Fourth agency in, <em>and still no verified source</em></h2>
+      <p class="intro small">A LegitScript-certified addiction-treatment provider advertising on Meta across multiple states. Admissions in this category move on the phone and on the form, and a call that is not answered or a lead that cannot be traced is revenue that quietly leaves.</p>
+      <ol class="cs-questions">
+        <li>
+          <span class="cs-q-num">01</span>
+          <span class="cs-q-text">Spending on Facebook and Instagram, seeing impressions and spend in Ads Manager, and looking at an empty results column, unable to tell a qualified inquiry from a wasted click</span>
+        </li>
+        <li>
+          <span class="cs-q-num">02</span>
+          <span class="cs-q-text">On its fourth agency and still could not get quality leads at a workable cost, or verify where the leads came from, with three prior teams pointing at the same media buy</span>
+        </li>
+        <li>
+          <span class="cs-q-num">03</span>
+          <span class="cs-q-text">Needed narrow proof before signing: that someone could get qualified inquiries moving and prove the source of each one, without another long ramp</span>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
@@ -1362,32 +1285,16 @@
 <!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
      copy compressed but true to the mockup. -->
 <section class="aa-sec" data-mark="03">
-  <figure class="cs-banner">
-    <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Close-up of code and workflow patterns on a technical surface" loading="lazy" width="1600" height="460">
-  </figure>
-  <div class="eyebrow">03 &middot; The method</div>
-  <h2>Five steps, <em>before anyone writes copy</em></h2>
-  <p class="intro small">We map the market before we write the copy. This is the part most agencies skip, because it is slow and produces nothing billable on day one.</p>
-  <div class="cs-steps cs-steps-5">
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">01</span>Find every advertiser</div>
-      <p>Not the obvious ones. Franchise location pages, local independents, and national e-commerce brands each behave differently, so each is pulled separately. In Southern California that meant checking 22 companies across five counties to establish that only three were running ads.</p>
+  <div class="eyebrow">03 &middot; The diagnosis</div>
+  <h2>Not a media problem, <em>a measurement problem</em></h2>
+  <div class="cs-diag3">
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">01</span>What they thought the problem was</div>
+      <p>Cheaper leads and sharper targeting. The assumption after three prior agencies was that the media buy was the thing to fix. Everyone before us pointed at Meta bidding, audience selection, or creative refresh, and the client had been buying into that cycle for long enough that another agency in the same posture would have looked like more of the same.</p>
     </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">02</span>Read the winners without spend data</div>
-      <p>The US Ads Library hides impressions and spend for commercial advertisers, so we use the two signals it does expose: how long an ad has run continuously, and how many near-identical variants are live. Both cost the advertiser money, so both signal confidence.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">03</span>Transcribe the copy verbatim</div>
-      <p>Offers, price framing, warranty language, install-speed claims, and proof stacks are recorded as written, not paraphrased. About 300 ads went through this. It is the slow part, and it is the part that produces everything useful.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">04</span>Treat each market as its own problem</div>
-      <p>The single largest finding in the study is that the five markets barely resemble each other. A strategy built for one of them can be actively wrong in another.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">05</span>Separate evidence from belief</div>
-      <p>Longevity proves commitment, not profit. A heavily duplicated ad proves confidence, not lead quality. Those boundaries get flagged, not dressed up as fact.</p>
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">02</span>The constraint we found</div>
+      <p>Measurement, not volume or price. Meta could not attribute conversions: one form campaign had spent $1,107.80 across 15,033 impressions with an empty results column, so the optimizer was learning from nothing. The setup also leaned on Facebook lead forms, which in a certification-gated health category tend to return lower-intent, harder-to-verify contacts. Fixing the buy without fixing the wiring would have produced more of the same unaccountable spend.</p>
     </article>
   </div>
 </section>
@@ -1395,125 +1302,82 @@
 <!-- 04 - The controlled first step (light band, 5 tiles).
      Dimi's five named steps + the "did not do" tile at the end. -->
 <section class="aa-sec band-light" data-mark="04">
-  <div class="eyebrow">04 &middot; The five markets</div>
-  <h2>Five markets, <em>five different auctions</em></h2>
-  <p class="intro small">Nothing about winning in one market transfers cleanly to the next. Advertising counts are companies actually running ads against the number audited. Competitive intensity is a read of how contested the auction is, not a published figure.</p>
-  <div class="cs-metros cs-metros-5">
-    <div class="cs-metro">
-      <div class="cs-metro-name">Dallas &ndash; Fort Worth</div>
-      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>6</b> of 8</span></div>
-      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Price war, price-matching</span></div>
-      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">9 / 10</em></span></div>
-      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Nobody differentiates on risk reversal</span></div>
-    </div>
-    <div class="cs-metro">
-      <div class="cs-metro-name">Atlanta</div>
-      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>4</b> of 6</span></div>
-      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Dollar-off urgency plus proof</span></div>
-      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">6 / 10</em></span></div>
-      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Local independents absent entirely</span></div>
-    </div>
-    <div class="cs-metro">
-      <div class="cs-metro-name">Las Vegas</div>
-      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>1</b> of 4</span></div>
-      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Reputation, no discounting</span></div>
-      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">3 / 10</em></span></div>
-      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Zero storage advertisers exist</span></div>
-    </div>
-    <div class="cs-metro">
-      <div class="cs-metro-name">Orlando</div>
-      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>3</b> of 6</span></div>
-      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">The emotional makeover</span></div>
-      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">6 / 10</em></span></div>
-      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">No price-anchored storage offer</span></div>
-    </div>
-    <div class="cs-metro">
-      <div class="cs-metro-name">Southern California</div>
-      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>3</b> of 22</span></div>
-      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Technology plus rotating scarcity</span></div>
-      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">4 / 10</em></span></div>
-      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">19 established operators run nothing</span></div>
-    </div>
+  <div class="eyebrow">04 &middot; The controlled first step</div>
+  <h2>Foundation first, <em>before a dollar of scale</em></h2>
+  <p class="intro small">Readiness was foundation, not scale. Fix measurement and lead quality on a small, contained budget before adding spend. The stop condition was written before the start.</p>
+  <div class="cs-steps cs-steps-5">
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">01</span>Readiness</div>
+      <p>Foundation, or crawl phase. Fix measurement and lead quality first, on a contained budget, before any conversation about scaling spend.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">02</span>Initial scope</div>
+      <p>Rebuild source tracking, move conversions off Facebook lead forms and onto the client's own website, run a limited Meta budget against a corrected ICP.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">03</span>Success threshold</div>
+      <p>Source-tagged, client-verifiable qualified leads flowing inside the first two weeks at a workable cost. Anything softer than "verifiable" did not count.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">04</span>Review + stop condition</div>
+      <p>End of week one (this report), then week two. If qualified inquiries did not appear or could not be tied to a source, pause and re-scope before adding a dollar of budget.</p>
+    </article>
+    <article class="cs-step cs-step-neg">
+      <div class="cs-step-head"><span class="cs-idx">05</span>Did not do</div>
+      <p>Did not scale spend, did not add channels, did not touch the client's admissions process. This window is about proving the wiring, not about volume or revenue attribution.</p>
+    </article>
   </div>
 </section>
 
 <!-- 05 - Google Ads chain (dark band). Full 11-metric chain, Dimi's verified
      numbers, last 90 days vs prior 90 across all four markets. -->
 <section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; Ads we ran &middot; July 2026</div>
-  <h2>Eight campaigns, <em>forty-five days of learning</em></h2>
-  <p class="intro">Real campaigns we created in early July 2026 across four of these markets. Every figure is pulled from the ad account, nothing is modelled. A lead is a completed Meta lead-form submission recorded in the account, not a qualified appointment.</p>
-  <div class="cs-chain">
-    <div class="cs-chain-row cs-chain-head" aria-hidden="true">
-      <span>#</span><span>Market</span><span>Campaign</span><span>Spend &rarr; Leads</span><span>CPL</span>
-    </div>
-    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Dallas</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,105 &rarr; 40 leads</span><span class="delta up">$27.63</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Dallas</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$596 &rarr; 17 leads</span><span class="delta">$35.07</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">Atlanta</span><span class="metric">Garage floors &amp; cabinets, Jul 4</span><span class="from-to">$1,365 &rarr; 39 leads</span><span class="delta">$35.00</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">04</span><span class="grp">Atlanta</span><span class="metric">Overhead racks, Jul 4</span><span class="from-to">$652 &rarr; 24 leads</span><span class="delta up">$27.18</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">05</span><span class="grp">Las Vegas</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,099 &rarr; 29 leads</span><span class="delta"><em>$37.89</em><small>Highest in set</small></span></div>
-    <div class="cs-chain-row"><span class="cs-idx">06</span><span class="grp">Las Vegas</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$588 &rarr; 17 leads</span><span class="delta">$34.58</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">07</span><span class="grp">Orlando</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,121 &rarr; 41 leads</span><span class="delta up">$27.35</span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">08</span><span class="grp">Orlando</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$595 &rarr; 38 leads</span><span class="delta up"><em>$15.66</em><small>Lowest in set</small></span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">&Sigma;</span><span class="grp">All markets</span><span class="metric">Eight campaigns, total</span><span class="from-to">$7,122 &rarr; 245 leads</span><span class="delta up">$29.07</span></div>
-  </div>
-  <p class="intro small">Blended cost per lead across the eight campaigns is $29.07. Orlando racks delivered the cheapest leads in the set at $15.66; Las Vegas floors the most expensive at $37.89, still inside the range operators told us they could work with. Media cost is shown, agency fee and production are not itemised here, so this is cost-per-lead, not full customer-acquisition cost.</p>
-  <div class="cs-cta-pair">
-    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  <div class="eyebrow">05 &middot; What moved the result</div>
+  <h2>Three moves, <em>from unverified to attributed</em></h2>
+  <p class="intro">The changes that made the 14-in-9 possible. Each one addresses a specific reason the prior setup could not produce verifiable qualified leads.</p>
+  <div class="cs-steps">
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">01</span>Corrected the ICP and built to it</div>
+      <p>Rebuilt targeting around the actual buyer for this service rather than a broad audience, so the inquiries arriving were closer to fit. This addressed lead quality, not just lead count.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">02</span>Moved conversions off Facebook lead forms</div>
+      <p>Onto the website. In a certification-gated health category, lead forms tend to produce lower-intent, harder-to-verify contacts. Routing to the site raised intent and let real tracking fire on the client's own property.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">03</span>Stood up independent call and form tracking</div>
+      <p>CallRail captured every call and form with its source, so leads were counted and attributed outside Meta's blind reporting. In nine days that surfaced 91 source-tagged first contacts, 14 of which the client's admissions team scored as qualified.</p>
+    </article>
   </div>
 </section>
 
 <!-- 06 - Same story, market by market (light band). Verified numbers from
      Dimi's mockup for each of four anonymised metros. -->
 <section class="aa-sec band-light" data-mark="06">
-  <div class="eyebrow">06 &middot; What survives</div>
-  <h2>Six ingredients, <em>in every long-running ad</em></h2>
-  <p class="intro">Strip every long-running ad in the study down to its parts and the same six show up. This is not an invented template; it is what is left when the winners are reduced to their shared components.</p>
-  <div class="cs-steps">
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">01</span>A hook that names the pain</div>
-      <p>The opening line describes the garage the homeowner is embarrassed by: clutter, cracks, stains, a car stuck in the driveway.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">02</span>A hard number</div>
-      <p>A price, a range, or a dollars-off figure. Every ad in the study still running past six months contained one.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">03</span>Speed of transformation</div>
-      <p>&ldquo;1 day&rdquo; or &ldquo;2 days&rdquo; appears in nearly every long-running flooring ad read.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">04</span>Warranty as risk reversal</div>
-      <p>Lifetime coverage is effectively table stakes among franchise advertisers. Independents that omit it compete without a net.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">05</span>Quantified proof</div>
-      <p>Counts, not adjectives: reviews, floors installed, garages transformed, years in business, local awards.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">06</span>An identity marker</div>
-      <p>Who the owner is. It closes the trust gap created by letting a stranger install something permanent in your home.</p>
-    </article>
-  </div>
-  <p class="intro small">Across all five markets, <b>every ad still running after six months named a price, a count, a warranty term, or a timeframe.</b> Not one long-running winner relied on adjectives alone.</p>
+  <div class="eyebrow">06 &middot; What the client changed</div>
+  <h2>The client's calls, <em>load-bearing on the numbers</em></h2>
+  <p class="intro small">Two decisions on the client's side are what makes this a real report rather than our estimate.</p>
+  <p class="intro small"><b>The admissions team scored each inbound lead as qualified or not.</b> That is what makes the 14 a verified number rather than something we inferred from platform signals. Every "qualified" on this page reflects a human decision inside CallRail, made by the people who take the calls.</p>
+  <p class="intro small"><b>The provider accepted moving off Facebook lead forms to the website.</b> That change trades some raw volume for higher intent, and in a category where a low-quality lead consumes admissions time without producing an admit, that trade is the right shape. Both calls are the client's, and both are load-bearing for the numbers below.</p>
 </section>
 
 <!-- 07 - The rest of the story (dark band, teaser). Section list mirrors
      Dimi's page order for the ten sections still to build here. -->
 <section class="aa-sec" data-mark="07">
-  <figure class="cs-banner">
-    <img src="https://images.pexels.com/photos/6474346/pexels-photo-6474346.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Modern garage storage cabinets and organized workspace, wide banner view" loading="lazy" width="1600" height="460">
-  </figure>
-  <div class="eyebrow">07 &middot; What this shows and what it does not</div>
-  <h2>What this proves, <em>and what it does not</em></h2>
-  <p class="intro">Four boundaries stated plainly, so nothing on this page is read as more than it is.</p>
-  <ul class="cs-outline">
-    <li><span class="cs-idx">01</span>Competitor &ldquo;winners&rdquo; are inferred, not measured. The US Meta Ads Library publishes impressions and spend only for political advertising, so we read commitment and confidence from continuous run-time and variant count. Neither proves a competitor&#39;s profitability or lead quality.</li>
-    <li><span class="cs-idx">02</span>The snapshot is dated and moves. Ad counts are approximate, listings change daily, and all quoted copy was current during the research window of July 23 to August 9, 2026.</li>
-    <li><span class="cs-idx">03</span>Our own numbers stop at the lead. The eight campaigns show lead volume and cost per lead over a partial delivery window as captured in the account. They do not establish booked jobs, close rate, or revenue.</li>
-    <li><span class="cs-idx">04</span>The accounts belong to the client. Campaigns, creative, and data sit on ad accounts the client owns and can take with them. Results are specific to this client&#39;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes.</li>
-  </ul>
+  <div class="eyebrow">07 &middot; The result</div>
+  <h2>Fourteen qualified, <em>at $127 media per lead</em></h2>
+  <p class="intro">Week one, Aug 1&ndash;9, 2026. Source capture via CallRail (calls + forms). Cost per qualified lead is media only, not full CAC.</p>
+  <div class="cs-chain">
+    <div class="cs-chain-row cs-chain-head" aria-hidden="true">
+      <span>#</span><span>Group</span><span>Metric</span><span>Before &rarr; After</span><span>Change</span>
+    </div>
+    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Revenue loop</span><span class="metric">Acquired customers (admissions)</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Attribution build in progress</small></span></div>
+    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Revenue loop</span><span class="metric">Revenue</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Waits on admits + LTV</small></span></div>
+    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">Revenue loop</span><span class="metric">Cost per acquired customer (CAC)</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Full cost + admits pending</small></span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">04</span><span class="grp">The conversion</span><span class="metric">Client-verified qualified leads</span><span class="from-to">None tracked &rarr; 14</span><span class="delta up">+14</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">05</span><span class="grp">The conversion</span><span class="metric">First-contact leads (calls + forms)</span><span class="from-to">None attributed &rarr; 91</span><span class="delta up">+91</span></div>
+  </div>
+  <p class="intro small">CallRail call list and form-submission export, Aug 1&ndash;9, 2026 (9 days). Media spend $1,785.65 (Meta), client-confirmed. Cost per qualified lead is media spend &divide; 14 = $127.55 and is media only, not full CAC, because agency fee, software, and internal labor for the window are not itemized here. Qualified lead is defined as an inbound lead the client's admissions team scored "Qualified Lead" in CallRail. 18 of the 64 forms have been scored so far (14 qualified, 4 not a lead); 46 are not yet scored.</p>
 </section>
 
 <section class="aa-cta-band" data-mark="08" id="call">
@@ -1522,13 +1386,13 @@
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">08 &middot; Next step</div>
-    <h2>Bring <em>your market</em> and we will map <em>the auction</em></h2>
-    <p class="note-lede">The first question is not which headline. It is which auction you are actually in, and whether your leads turn into booked jobs. A Magister audit maps your competitive field, your channel concentration, and the gap between a lead and a sale, before you increase spend.</p>
+    <h2>Bring us your ad account and <em>we will find the leaks</em></h2>
+    <p class="note-lede">Same method: read the raw account before touching a lever, verify what the platform actually attributes, stand up source-tagged tracking outside the platform, and prove qualified leads on a contained budget before scaling. If we cannot find the money in your account, we say so on the call.</p>
     <div class="aa-cta-cta">
-      <a class="btn" href="tel:+16193300953"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+      <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
-    <p class="note">45 minutes. No deck. No pitch. References available under NDA on qualified sales calls.</p>
+    <p class="note">45 minutes. No deck. No pitch. If we cannot find the money in your account, we say so on the call.</p>
   </div>
 </section>
 
