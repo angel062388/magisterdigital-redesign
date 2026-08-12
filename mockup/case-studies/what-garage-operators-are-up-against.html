@@ -1,0 +1,1883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Case Study: what garage operators are up against on Meta | Magister Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css?v=16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316171A'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23D4AF37'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2316171A'/%3E%3C/svg%3E">
+<style>
+  /* Page-scoped styles (aa- prefix prevents bleed to homepage) */
+  *{box-sizing:border-box}
+  html,body{margin:0; background:var(--ink-2,#16171A); color:var(--paper,#F7F7F5);
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.5}
+  ::selection{background:rgba(212,175,55,.30)}
+  a{color:inherit; text-decoration:none}
+
+  /* SYSTEM BAR */
+  .aa-sysbar{display:flex; align-items:center; gap:16px; padding:14px 32px;
+    border-bottom:1px solid var(--border,#2A2C31); font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90); letter-spacing:.04em}
+  .aa-sysbar .dot{width:8px; height:8px; border-radius:50%; background:#3FB984;
+    box-shadow:0 0 0 4px rgba(63,185,132,.14)}
+  .aa-sysbar .path{color:var(--paper,#F7F7F5)}
+  .aa-sysbar .path .accent{color:var(--gold,#D4AF37)}
+  .aa-sysbar .sep{opacity:.35}
+  .aa-sysbar .right{margin-left:auto; display:flex; gap:16px}
+
+  /* SITE HEADER */
+  .aa-hdr{display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-brand{display:flex; align-items:center; gap:10px; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.15rem; font-weight:600; letter-spacing:.02em; color:var(--paper,#F7F7F5)}
+  .aa-brand::before{content:""; width:22px; height:22px; background:var(--gold,#D4AF37);
+    mask:radial-gradient(circle at center,transparent 25%,#000 26%); border-radius:3px}
+  .aa-nav{display:flex; gap:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  .aa-nav a.active{color:var(--gold,#D4AF37)}
+  .aa-cta{display:inline-flex; align-items:center; gap:10px; padding:10px 16px;
+    background:var(--gold,#D4AF37); color:var(--ink,#0F1115); font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-weight:600; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+    border-radius:4px; border:2px solid var(--gold-dark,#A8842A)}
+  @media (max-width:820px){
+    .aa-hdr{gap:12px; padding:14px 20px}
+    .aa-nav{display:none}
+    .aa-sysbar{padding:12px 20px; gap:10px}
+    .aa-sysbar .right{display:none}
+  }
+
+  /* FOOTER (minimal, matches homepage tone) */
+  .aa-footer{padding:48px 32px 32px; border-top:1px solid var(--border,#2A2C31);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90);
+    display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
+  .aa-footer .r{text-align:right}
+  .aa-footer b{color:var(--paper,#F7F7F5); font-weight:600}
+
+  /* ==========================================================================
+     HOMEPAGE-LIFTED PRIMITIVES — unscoped on purpose, they must behave here
+     exactly as they do on index.html. Beth 2026-08-07: "navigation should
+     also match the homepage, the button colors, the text and font."
+     ========================================================================== */
+  .site-header{position:sticky; top:0; z-index:60; transition:background .4s cubic-bezier(.16,1,.3,1), border-color .4s cubic-bezier(.16,1,.3,1);
+    border-bottom:1px solid transparent}
+  .site-header.is-stuck{background:rgba(15,17,21,.9); backdrop-filter:saturate(150%) blur(12px);
+    border-bottom-color:var(--rule,#2A2C31)}
+  .site-header .wrap{display:flex; align-items:center; gap:20px; min-height:80px;
+    max-width:1400px; margin:0 auto; padding:0 32px;
+    transition:min-height .4s cubic-bezier(.16,1,.3,1)}
+  .site-header.is-stuck .wrap{min-height:64px}
+  .brand{display:flex; align-items:center; text-decoration:none; margin-right:auto; flex:0 0 auto}
+  .brand-logo{height:44px; width:auto; max-width:none; flex:0 0 auto;
+    transition:height .4s cubic-bezier(.16,1,.3,1)}
+  .site-header.is-stuck .brand-logo{height:34px}
+  .site-nav{display:none}
+  .site-nav a{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); text-decoration:none; padding:6px 0; position:relative;
+    white-space:nowrap; flex:0 0 auto; transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .site-nav a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
+    background:var(--gold,#D4AF37); transition:right .45s cubic-bezier(.16,1,.3,1)}
+  .site-nav a:hover{color:var(--paper,#F7F7F5)}
+  .site-nav a:hover::after{right:0}
+  .site-nav a.active{color:var(--gold,#D4AF37)}
+  .site-nav a.active::after{right:0}
+  .site-nav a:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:5px}
+  .header-phone{display:none; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.8125rem;
+    color:var(--gold,#D4AF37); text-decoration:underline; text-underline-offset:4px;
+    text-decoration-color:rgba(212,175,55,.6); white-space:nowrap; flex:0 0 auto;
+    transition:color .28s cubic-bezier(.16,1,.3,1), text-decoration-color .28s cubic-bezier(.16,1,.3,1)}
+  .header-phone:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
+  .header-phone:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+
+  /* BUTTONS — copied verbatim from homepage so gold, radius, elevation, hover
+     lift and press sink are identical across the site. */
+  .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.7ch;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+    font-weight:600; text-decoration:none; padding:16px 30px; white-space:nowrap;
+    background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
+    border:2px solid var(--gold,#D4AF37); border-radius:6px;
+    box-shadow:0 6px 18px rgba(212,175,55,.22), inset 0 -2px 0 rgba(0,0,0,.14);
+    cursor:pointer; z-index:20; user-select:none;
+    transition:background .25s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1),
+               transform .18s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
+  .btn .ar{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .btn:hover{background:var(--gold-light,#E3C24E); border-color:var(--gold-light,#E3C24E); color:var(--ink,#0F1115);
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(227,194,78,.32), inset 0 -2px 0 rgba(0,0,0,.18)}
+  .btn:hover .ar{transform:translateX(6px)}
+  .btn:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+  .btn:active{transform:translateY(0); box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
+  .btn-sm{padding:13px 24px; font-size:.6875rem; white-space:nowrap; flex:0 0 auto;
+    box-shadow:0 6px 18px rgba(212,175,55,.26), inset 0 -2px 0 rgba(0,0,0,.16)}
+  .btn-sm:hover{box-shadow:0 11px 26px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.2)}
+  .btn-sm:active{box-shadow:0 3px 9px rgba(212,175,55,.24), inset 0 -1px 0 rgba(0,0,0,.18)}
+  .hero-tel{position:relative; display:inline-flex; align-items:center; gap:.7ch;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+    font-weight:600; text-decoration:none; padding:16px 26px; white-space:nowrap;
+    background:transparent; color:var(--gold,#D4AF37);
+    border:2px solid var(--gold,#D4AF37); border-radius:6px;
+    box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1);
+    cursor:pointer;
+    transition:background .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1),
+               transform .18s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel .tag{color:var(--muted-on-dark,#868A90); font-weight:500;
+    transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel b{color:var(--gold-light,#E3C24E); font-weight:600;
+    transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel:hover{background:var(--gold,#D4AF37); color:var(--ink,#0F1115); border-color:var(--gold,#D4AF37);
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
+  .hero-tel:hover .tag,.hero-tel:hover b{color:var(--ink,#0F1115)}
+  .hero-tel:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+  .hero-tel:active{transform:translateY(0);
+    box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
+
+  @media (min-width:1024px){
+    .site-nav{display:flex; flex-wrap:nowrap; gap:clamp(14px,1.9vw,30px); margin-right:20px}
+  }
+  @media (min-width:1180px){
+    .header-phone{display:inline-block; margin-right:20px}
+  }
+  @media (max-width:640px){
+    .brand-logo{height:30px}
+    .site-header.is-stuck .brand-logo{height:26px}
+    .btn-sm{padding:11px 16px; font-size:.625rem; letter-spacing:.1em}
+  }
+  @media (max-width:360px){
+    .brand-logo{height:26px}
+    .btn-sm{padding:10px 13px}
+  }
+
+  /* HERO — full-width AI-automation image as BACKGROUND, text centered on top.
+     Beth 2026-08-07: "the image should be in the background the texts should
+     be in the middle." No animation yet, waiting for her direction on that. */
+  .aa-hero{position:relative; padding:120px 32px 100px; overflow:hidden; isolation:isolate;
+    min-height:70vh; display:flex; align-items:center; justify-content:center;
+    background:var(--ink,#0F1115)}
+  /* AR/VR MOTION GRAPHIC — Beth's reference is the SVGator article's AR/VR
+     entry: a floating translucent interface panel hovering in space with a
+     card grid, a toolbar and a tab bar. Built in DOM rather than canvas so the
+     glass is real backdrop-filter and the edges stay crisp at any DPR.
+     It sits behind the headline, so the panel is deliberately dimmed and the
+     overlay keeps a dark pool under the text. */
+  .aa-hero-bg{position:absolute; inset:0; z-index:0; background:var(--ink,#0F1115)}
+  .arvr-stage{position:absolute; inset:0; perspective:1400px; overflow:hidden;
+    --rx:0deg; --ry:0deg}
+  .arvr-net{position:absolute; inset:0; width:100%; height:100%; display:block; opacity:1}
+  /* soft light sources so the mesh reads as sitting in a space */
+  .arvr-orb{position:absolute; border-radius:50%; filter:blur(64px); opacity:.5}
+  .arvr-orb.o1{width:520px; height:520px; left:4%; top:6%;
+    background:radial-gradient(circle, rgba(212,175,55,.34), transparent 70%)}
+  .arvr-orb.o2{width:600px; height:600px; right:2%; bottom:2%;
+    background:radial-gradient(circle, rgba(90,120,190,.24), transparent 70%)}
+  @media (prefers-reduced-motion:reduce){
+    .arvr-orb{animation:none}
+  }
+  /* Layered gradient overlay: darker at top/bottom edges + a soft mid vignette
+     so text sits on a legible ink field regardless of where the image bright
+     spots land. Gold hue kept just enough to bind the image to the palette. */
+  .aa-hero-bg::after{content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse at 50% 52%, rgba(15,17,21,.62) 0%, rgba(15,17,21,.12) 62%, rgba(15,17,21,0) 80%),
+      linear-gradient(180deg, rgba(15,17,21,.72) 0%, rgba(15,17,21,0) 34%, rgba(15,17,21,0) 66%, rgba(15,17,21,.72) 100%)}
+  .aa-hero-content{position:relative; z-index:10; max-width:1240px; text-align:center;
+    margin:0 auto; padding:0 8px; width:100%}
+  .aa-hero .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:20px; display:inline-flex; gap:10px; align-items:center;
+    justify-content:center}
+  .aa-hero .eyebrow .num{color:var(--muted-on-dark,#868A90)}
+  /* No char cap: fill the container. Beth 2026-08-07: 'the texts should
+     cover the spaces.' */
+  .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(2.05rem, 5.2vw, 4.15rem); line-height:1.42; letter-spacing:-.015em;
+    margin:0 auto 24px; max-width:none;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
+  /* Skylead-style rounded pill behind the highlighted phrase. Beth
+     2026-08-07: 'copy how the text in the hero banner highlighted', then
+     'no animation it was only highlighted'. Measured off skylead.io directly:
+     their pill is a ::before whose WIDTH animates 0 -> 100% over 1s on
+     cubic-bezier(.33,1,.68,1), radius 50px, fill-mode forwards.
+     Pill is solid gold #D4AF37 with dark ink text = 8.52:1 AAA.
+
+     One difference from Skylead that matters: their headline is dark text on
+     a LIGHT page, so it stays readable whether or not the pill has drawn.
+     Ours is ink text on a DARK hero, so before the pill arrives the text
+     would be invisible. So the base state is a FULL pill (correct with JS
+     off and under reduced motion), the sweep only runs when .animate is
+     added, and the ink colour is held back until the pill has passed. */
+  /* Beth 2026-08-07 'P is covered here': at line-height 1.06 the pill box was
+     taller than the line box, so a pill on line 2 painted over the descender
+     of line 1 (the p in 11pm). Two changes together fix it: the headline
+     line-height opens to 1.2, and the pill is a fixed 1.12em tall centred on
+     the text rather than filling the full inline-block height. */
+  .aa-hero h1 em,
+  .aa-cta-band h2 em{position:relative; display:inline-block; font-style:normal;
+    color:#16171A; padding:0 18px; margin:0 4px;
+    white-space:nowrap; z-index:0}
+  .aa-hero h1 em::before,
+  .aa-cta-band h2 em::before{content:""; position:absolute; left:0;
+    top:50%; transform:translateY(-50%);
+    width:100%; height:1.06em;
+    background:#D4AF37; border-radius:50px; z-index:-1;
+    box-shadow:0 4px 18px rgba(212,175,55,.30)}
+  /* fill-mode BOTH, not forwards: the second pill has a delay, and with
+     `forwards` it sat at its base full width for those 400ms and then snapped
+     back to zero to sweep. `both` applies the 0% frame during the delay too.
+     Caught by sampling computed width mid-animation, not by eye. */
+  .aa-hero h1 em.animate::before,
+  .aa-cta-band h2 em.animate::before{
+    animation:aaHighlight .95s cubic-bezier(.33,1,.68,1) both}
+  .aa-hero h1 em.animate,
+  .aa-cta-band h2 em.animate{
+    animation:aaHighlightInk .95s cubic-bezier(.33,1,.68,1) both}
+  /* second pill follows the first so they read in sentence order */
+  .aa-hero h1 em.animate.is-2::before,
+  .aa-hero h1 em.animate.is-2,
+  .aa-cta-band h2 em.animate.is-2::before,
+  .aa-cta-band h2 em.animate.is-2{animation-delay:.40s}
+  @keyframes aaHighlight{from{width:0} to{width:100%}}
+  @keyframes aaHighlightInk{0%{color:#F7F7F5} 55%{color:#F7F7F5} 100%{color:#16171A}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-hero h1 em.animate::before,
+    .aa-hero h1 em.animate{animation:none}
+  }
+  .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.0625rem; color:var(--paper,#F7F7F5); max-width:88ch; line-height:1.65;
+    margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
+  .aa-hero .lede code{background:rgba(28,30,35,.85); border:1px solid var(--border,#2A2C31);
+    padding:2px 8px; border-radius:3px; color:var(--paper,#F7F7F5)}
+  .aa-hero-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; position:relative; z-index:20}
+  .aa-hero-byline{margin-top:28px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  .aa-hero-byline b{color:var(--paper,#F7F7F5); font-weight:600}
+  @media (max-width:640px){
+    .aa-hero{padding:72px 20px 64px; min-height:64vh}
+  }
+
+  /* CANVAS (workflow + log two-column) */
+  .aa-canvas{display:grid; grid-template-columns:1.6fr 1fr; gap:0;
+    margin:20px auto 32px; max-width:1400px; border:1px solid var(--border,#2A2C31);
+    border-radius:6px; overflow:hidden; background:var(--ink-2,#16171A)}
+  @media (max-width:900px){ .aa-canvas{grid-template-columns:1fr} }
+  .aa-canvas-head{grid-column:1/-1; display:flex; align-items:center;
+    padding:10px 18px; border-bottom:1px solid var(--border,#2A2C31);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  .aa-canvas-head .live{color:#3FB984; display:flex; align-items:center; gap:8px}
+  .aa-canvas-head .live::before{content:""; width:6px; height:6px; border-radius:50%;
+    background:#3FB984; box-shadow:0 0 0 3px rgba(63,185,132,.18); animation:aaPulse 1.6s ease-in-out infinite}
+  @keyframes aaPulse{50%{box-shadow:0 0 0 8px rgba(63,185,132,0)}}
+  .aa-canvas-head .path-pill{color:var(--paper,#F7F7F5); margin-left:16px}
+  .aa-canvas-head .right{margin-left:auto; color:var(--muted-on-dark,#868A90)}
+
+  /* FLOW panel */
+  .aa-flow{position:relative; padding:36px 28px; min-height:380px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(212,175,55,.06), transparent 45%),
+      linear-gradient(180deg, var(--ink-2,#16171A), var(--ink,#0F1115))}
+  .aa-flow svg{width:100%; height:auto; display:block}
+  .aa-node text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:11px; fill:var(--paper,#F7F7F5); letter-spacing:.06em}
+  .aa-node .sub{font-size:9.5px; fill:var(--muted-on-dark,#868A90); letter-spacing:.04em}
+  .aa-node rect{fill:var(--ink-3,#1C1E23); stroke:var(--border,#2A2C31); stroke-width:1}
+  .aa-node.active rect{stroke:var(--gold,#D4AF37); stroke-width:1.6; fill:rgba(212,175,55,.08)}
+  .aa-node.active text{fill:var(--gold,#D4AF37)}
+  .aa-node.done rect{stroke:#3FB984; fill:rgba(63,185,132,.06)}
+  .aa-node.done text{fill:#3FB984}
+  .aa-edge{stroke:var(--border,#2A2C31); stroke-width:1.4; fill:none}
+  .aa-edge.hot{stroke:var(--gold,#D4AF37); stroke-width:1.8; stroke-dasharray:6 6;
+    animation:aaDash 1s linear infinite}
+  @keyframes aaDash{to{stroke-dashoffset:-24}}
+  .aa-marker{fill:var(--border,#2A2C31)}
+  .aa-marker.hot{fill:var(--gold,#D4AF37)}
+
+  /* LOG PANEL */
+  .aa-log{padding:18px; border-left:1px solid var(--border,#2A2C31);
+    background:var(--ink,#0F1115); font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; height:100%; overflow:hidden; position:relative}
+  .aa-log-head{color:var(--muted-on-dark,#868A90); font-size:.6rem; letter-spacing:.2em;
+    text-transform:uppercase; margin-bottom:14px}
+  .aa-log-stream{display:flex; flex-direction:column; gap:6px}
+  .aa-log-row{display:grid; grid-template-columns:auto auto 1fr; gap:12px;
+    color:var(--paper,#F7F7F5); animation:aaSlideIn .32s ease-out}
+  .aa-log-row .t{color:var(--muted-on-dark,#868A90)}
+  .aa-log-row .k{color:var(--gold,#D4AF37); font-weight:600; letter-spacing:.06em}
+  .aa-log-row .m{color:var(--paper,#F7F7F5)}
+  .aa-log-row .m .good{color:#3FB984}
+  .aa-log-row .m .warn{color:#E39B4A}
+  @keyframes aaSlideIn{from{opacity:0; transform:translateY(4px)} to{opacity:1}}
+  .aa-log::after{content:""; position:absolute; left:0; right:0; bottom:0; height:60px;
+    background:linear-gradient(to bottom, transparent, var(--ink,#0F1115)); pointer-events:none}
+
+  /* KPI STRIP */
+  .aa-kpi-wrap{max-width:1400px; margin:0 auto}
+  .aa-kpi-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border:1px solid var(--border,#2A2C31); border-top:none;
+    border-radius:0 0 6px 6px; overflow:hidden}
+  @media (max-width:820px){ .aa-kpi-strip{grid-template-columns:repeat(2,1fr)} }
+  .aa-kpi{padding:22px 24px; border-right:1px solid var(--border,#2A2C31); background:var(--ink-2,#16171A)}
+  .aa-kpi:nth-child(4n){border-right:none}
+  @media (max-width:820px){ .aa-kpi:nth-child(2n){border-right:none} }
+  .aa-kpi .l{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:8px}
+  .aa-kpi .v{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.5rem; color:var(--paper,#F7F7F5); font-weight:600; letter-spacing:.06em}
+  .aa-kpi .d{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; color:var(--muted-on-dark,#868A90); margin-top:6px}
+  .aa-kpi-foot{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; color:var(--muted-on-dark,#868A90); padding:14px 4px 0; text-align:left}
+
+  /* CONTENT SECTIONS shared */
+  .aa-sec{padding:48px 32px; max-width:1400px; margin:0 auto}
+  .aa-sec .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:12px}
+  .aa-sec h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.1; margin:0 0 24px;
+    max-width:none; color:var(--paper,#F7F7F5)}
+  .aa-sec .intro{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1.0625rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:none; margin:0 0 20px}
+  .aa-sec .intro + .intro{margin-top:0}
+  /* H2 italic emphasis - copies the homepage pattern exactly (.sec-head h2 em
+     at index.html lines 451+455): italic + gold, gold-deep on paper bands. */
+  .aa-sec h2 em{font-style:italic; color:var(--accent-on-dark,#D4AF37)}
+  .aa-sec.band-light h2 em{color:var(--accent-on-light,#6E561A)}
+  .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.9375rem; margin-bottom:32px}
+
+  /* TWO-COLUMN SECTION HEAD — Beth 2026-08-07 flagged empty right side beside
+     H2s. Splits eyebrow+H2 (left) from intro paragraphs (right) at >=960px.
+     Below that, everything stacks. */
+  /* Beth 2026-08-07: the right-hand intro columns were X'd out of sections 03
+     and 05, so the two-column head is gone. Heads now use the same flat
+     eyebrow + h2 pattern as section 04, which cannot leave a void beside the
+     heading. .aa-h2-oneline keeps a short head on a single line. */
+  .aa-h2-oneline{white-space:nowrap}
+  @media (max-width:640px){ .aa-h2-oneline{white-space:normal} }
+  /* Beth 2026-08-07 'space is there': a short heading left a void to its right,
+     which she treats as a defect. A hairline runs from the end of the words to
+     the right margin so the width reads as intentional composition rather than
+     leftover space. Decorative only, so it carries aria-hidden semantics by
+     being a pseudo element. */
+  /* FOUNDER MODAL — ported verbatim in behaviour from the homepage, with the
+     literal token values the AA page uses so it does not depend on tokens.css
+     variables the homepage happens to define. */
+  body.modal-open{overflow:hidden}
+  .modal{position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center}
+  .modal[hidden]{display:none}
+  .modal-backdrop{position:absolute; inset:0; background:rgba(4,5,7,.75);
+    backdrop-filter:blur(10px); animation:aaFadeIn .3s cubic-bezier(.16,1,.3,1)}
+  .modal-panel{position:relative; background:#1C1D21; border:1px solid #2A2C31;
+    color:#F7F7F5; width:min(600px, calc(100vw - 32px));
+    max-height:calc(100dvh - 64px); overflow:hidden; display:flex; flex-direction:column;
+    animation:aaPanelIn .5s cubic-bezier(.16,1,.3,1);
+    box-shadow:0 40px 80px rgba(0,0,0,.45); border-radius:8px}
+  @keyframes aaFadeIn{from{opacity:0}}
+  @keyframes aaPanelIn{from{opacity:0; transform:translateY(30px) scale(.98)}}
+  .modal-close{position:absolute; top:14px; right:16px; background:rgba(15,17,21,.7);
+    border:0; padding:8px 14px; color:#F7F7F5;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.2rem; cursor:pointer; line-height:1; z-index:5; border-radius:4px;
+    transition:color .28s cubic-bezier(.16,1,.3,1), background .28s cubic-bezier(.16,1,.3,1)}
+  .modal-close:hover{color:#D4AF37; background:rgba(15,17,21,.9)}
+  .modal-close:focus-visible{outline:2px solid #E3C24E; outline-offset:2px}
+  .modal-hero{position:relative; aspect-ratio:16/10; overflow:hidden; flex:none;
+    animation:aaPhotoRise .6s cubic-bezier(.16,1,.3,1) both}
+  @keyframes aaPhotoRise{from{opacity:0; transform:translateY(80px) scale(.9)}}
+  .modal-hero img{width:100%; height:100%; object-fit:cover; object-position:center 25%;
+    filter:grayscale(.1) brightness(.95) contrast(1.05)}
+  .modal-hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(28,29,33,.95) 100%)}
+  .modal-body{padding:28px; overflow-y:auto}
+  .modal-body h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:500; font-size:1.85rem; margin:0 0 6px; color:#F7F7F5}
+  .modal-body .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:20px}
+  .modal-body .modal-bio{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; color:var(--muted-on-dark,#868A90); line-height:1.65;
+    margin:0 0 20px; max-width:52ch}
+  .modal-flag{display:inline-block; margin-bottom:12px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.5625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:#D4AF37; padding:3px 7px; border:1px dashed rgba(168,132,42,.7)}
+  /* the card is a hover affordance; the BUTTON is the semantic control.
+     Beth 2026-08-07 "dont like the animation here", so the hover lift is gone.
+     The cards stay clickable and the modal is untouched. */
+  .aa-founder-card{position:relative; cursor:pointer}
+  .aa-founder-card:focus-within{outline:2px solid #E3C24E; outline-offset:6px}
+  .aa-founder-more{display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    background:none; border:0; padding:0; cursor:pointer;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:#6E561A; opacity:.85;
+    transition:color .25s cubic-bezier(.16,1,.3,1), gap .25s cubic-bezier(.16,1,.3,1), opacity .25s}
+  .aa-sec:not(.band-light) .aa-founder-more{color:#D4AF37}
+  .aa-founder-card:hover .aa-founder-more{opacity:1; gap:10px}
+  .aa-founder-more:hover{opacity:1; gap:12px}
+  .aa-founder-more:focus-visible{outline:2px solid #E3C24E; outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    .modal-backdrop,.modal-panel,.modal-hero{animation:none}
+    .aa-founder-card{transition:none}
+    .aa-founder-card:hover{transform:none}
+  }
+
+  /* Section-level CTA pair, same .btn + .hero-tel as the homepage and the hero.
+     LIGHT-BAND VARIANT IS MANDATORY: the locked button rule says the gold FILL
+     never changes surface to surface, but bright gold TEXT on paper is 1.96:1
+     and unreadable, so the outlined phone button takes dark ink text and the
+     darker gold border that carries the 3:1 boundary. */
+  .aa-sec-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:36px}
+  .aa-sec.band-light .aa-sec-cta .hero-tel{color:#16171A; border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel .tag{color:#5E6066}
+  .aa-sec.band-light .aa-sec-cta .hero-tel b{color:#6E561A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover{background:#D4AF37; color:#16171A;
+    border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover .tag{color:#16171A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover b{color:#16171A}
+
+  .aa-h2-rule{display:flex; align-items:center; gap:22px}
+  .aa-h2-rule::after{content:""; flex:1 1 auto; height:1px; min-width:40px;
+    background:linear-gradient(90deg, rgba(212,175,55,.55), rgba(212,175,55,0))}
+  .aa-sec.band-light .aa-h2-rule::after{
+    background:linear-gradient(90deg, rgba(110,86,26,.55), rgba(110,86,26,0))}
+  @media (max-width:640px){ .aa-h2-rule{display:block} .aa-h2-rule::after{display:none} }
+
+  /* SIX OTHER SERVICE CARDS — Beth 2026-08-07: 'we need to redesign this and
+     include them here.' Six gold-bordered cards on the light band showing
+     the other Magister channels. Each links to homepage services section. */
+  /* SERVICE ROWS — Beth 2026-08-07: "we need to copy this" (the homepage's
+     alternating service list) "just remove the ai automation from the list
+     because that is the page we are creating". Ported from index.html .svc,
+     scoped with an .aa- prefix, six rows renumbered 01 to 06, on the light
+     band so the ghost button and name take the dark/deep-gold variants. */
+  .aa-svc-list{list-style:none; margin:40px 0 0; padding:0}
+  .aa-svc{border-top:1px solid #DFDFDA}
+  .aa-svc:last-child{border-bottom:1px solid #DFDFDA}
+  .aa-svc-link{display:grid; grid-template-columns:1fr; gap:20px; padding:24px 0;
+    position:relative; align-items:center; color:#16171A}
+  .aa-svc-visual{position:relative; aspect-ratio:16/10; overflow:hidden; background:#EDEDEA}
+  .aa-svc-visual img{width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) brightness(.5) contrast(1.12); transform:scale(1.04);
+    transition:filter .6s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-visual img,
+  .aa-svc-link:focus-within .aa-svc-visual img{filter:grayscale(.1) brightness(.65) contrast(1.05);
+    transform:scale(1)}
+  /* the dark foot the homepage puts under every service image */
+  .aa-svc-visual::after{content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 40%, rgba(15,17,21,.55) 100%)}
+  .aa-svc-idx{position:absolute; top:12px; left:12px; z-index:2;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; padding:5px 10px;
+    color:#6E561A; background:#EEEEEB; border:1px solid rgba(212,175,55,.35)}
+  .aa-svc-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-weight:600;
+    font-size:clamp(1.75rem,4vw,2.8rem); letter-spacing:-.02em; line-height:1.02;
+    display:block; position:relative; padding-bottom:12px;
+    color:#16171A; text-decoration:none;
+    transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-name::after{content:""; position:absolute; left:0; bottom:0;
+    height:1px; width:80px; background:#6E561A; transform:scaleX(0); transform-origin:left;
+    transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-name,
+  .aa-svc-link:focus-within .aa-svc-name{color:#6E561A}
+  .aa-svc-link:hover .aa-svc-name::after,
+  .aa-svc-link:focus-within .aa-svc-name::after{transform:scaleX(1)}
+  .aa-svc-name:focus-visible{outline:2px solid #6E561A; outline-offset:3px}
+  .aa-svc-outcome{display:block; margin-top:16px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1rem; line-height:1.6; color:#5E6066; max-width:44ch}
+  .aa-svc-actions{margin-top:20px}
+  .aa-svc-arrow{position:absolute; top:24px; right:0;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.35rem; color:#5E6066;
+    transition:transform .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-arrow,
+  .aa-svc-link:focus-within .aa-svc-arrow{color:#D4AF37; transform:translateX(6px)}
+  @media (min-width:900px){
+    .aa-svc-link{grid-template-columns:.9fr 1.1fr 44px; gap:48px; padding:24px 0 24px 16px;
+      align-items:center}
+    /* alternate the image side, exactly as the homepage does */
+    .aa-svc:nth-child(even) .aa-svc-visual{order:2}
+    .aa-svc:nth-child(even) .aa-svc-body{order:1; padding-right:24px}
+    .aa-svc:nth-child(even) .aa-svc-arrow{order:3}
+    .aa-svc-arrow{position:relative; top:auto; right:auto; text-align:right; align-self:center}
+  }
+  /* ghost button variant, absent from this page until now */
+  .btn-ghost{background:transparent; color:#16171A; border-color:#D4AF37;
+    box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1)}
+  .btn-ghost:hover{background:#D4AF37; color:#16171A; border-color:#A8842A;
+    box-shadow:0 10px 22px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
+  @media (prefers-reduced-motion:reduce){
+    .aa-svc-visual img,.aa-svc-name,.aa-svc-name::after,.aa-svc-arrow{transition:none}
+    .aa-svc-link:hover .aa-svc-visual img{transform:none}
+  }
+
+  .aa-verticals{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.98rem; line-height:1.6; color:#45474C; margin:0}
+  .aa-verticals a{color:#16171A; text-decoration:underline; text-decoration-color:#D4AF37;
+    text-underline-offset:3px; text-decoration-thickness:1.5px;
+    transition:color .2s cubic-bezier(.16,1,.3,1)}
+  .aa-verticals a:hover{color:#6E561A}
+
+  /* FOUNDERS — copied from homepage index.html per Beth 2026-08-07 ('copy
+     from the homepage as in copy'). 3-column at >=900px, grayscale headshots
+     with warm-up on hover, mono role caption, no modal (AA page has no
+     founder-modal wiring yet). Classes .aa- prefixed to avoid collision. */
+  .aa-founders{display:grid; gap:32px; margin-top:16px;
+    grid-template-columns:1fr}
+  @media (min-width:900px){ .aa-founders{grid-template-columns:repeat(3,1fr); gap:32px} }
+  /* Beth 2026-08-07 "dont like the animation here". Removed the card lift and
+     the slow photo zoom/desaturate. NOTE there were TWO .aa-founder-card
+     blocks in this file and the later one won on source order, so deleting
+     only the first one changed nothing. The photo now holds one fixed state.
+     The gold border on hover stays because it is a colour cue, not motion. */
+  .aa-founder-card{display:block; position:relative}
+  .aa-founder-img{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;
+    border:1px solid #E5E4DF; margin-bottom:20px; background:#000;
+    transition:border-color .25s ease}
+  .aa-founder-img img{width:100%; height:100%; object-fit:cover;
+    object-position:center 20%;
+    filter:grayscale(1) brightness(.9) contrast(1.05);
+    transition:filter .6s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-card:hover .aa-founder-img img{filter:grayscale(0) brightness(1) contrast(1)}
+  .aa-founder-img::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(15,17,21,.20) 100%);
+    pointer-events:none}
+  .aa-founder-card:hover .aa-founder-img{border-color:#D4AF37}
+  .aa-founder-card h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.35rem; font-weight:500; margin:0; color:#16171A}
+  .aa-founder-card .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; text-transform:uppercase;
+    color:#5E6066; margin-top:10px}
+
+  /* SECTION 06 — 'Why this is built differently.' Two-column redesign per
+     Beth 2026-08-07: 'u did not redesign.' Image on the left in a framed
+     card, H2 + body paragraphs + pull-quote stacked on the right. Below
+     960px stacks image on top of body. */
+  .aa-why-sec .eyebrow{margin-bottom:24px}
+  .aa-why-grid{display:grid; gap:48px; align-items:start}
+  .aa-why-visual{border-radius:8px; overflow:hidden;
+    border:1px solid var(--border,#2A2C31); background:#000;
+    box-shadow:0 24px 60px rgba(0,0,0,.55)}
+  .aa-why-visual img{display:block; width:100%; height:auto;
+    filter:saturate(.9) brightness(.95)}
+  .aa-why-body h2{margin-top:0; margin-bottom:28px;
+    font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.08;
+    letter-spacing:-.01em; max-width:none}
+  .aa-why-body p{font-size:1.02rem; line-height:1.75; color:var(--paper,#F7F7F5);
+    margin:0 0 24px}
+  .aa-why-body p.small{color:var(--muted-on-dark,#868A90); font-size:.9375rem;
+    line-height:1.7}
+  .aa-why-body .quote{margin-top:40px; padding:26px 28px;
+    border-left:2px solid var(--gold,#D4AF37);
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-size:1.15rem; line-height:1.55;
+    color:var(--paper,#F7F7F5)}
+  .aa-why-body .quote cite{display:block; margin-top:16px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-style:normal; font-size:.72rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  @media (min-width:960px){
+    /* Right column much wider — Beth 2026-08-07 flagged the text was
+       'crumpled together' inside the tight right column. Also 0.85fr
+       left made the image dominate. New ratio gives the copy room to
+       breathe, image reads as supporting visual. */
+    .aa-why-grid{grid-template-columns:.55fr 1.45fr; gap:56px; align-items:center}
+  }
+
+  /* LIGHT BAND — Beth 2026-08-07: 'the automation page is too dark it should
+     have white same as the homepage.'
+     v2 approach: the section itself goes full viewport width and paints its
+     own paper background, and internal padding pushes content back into a
+     1400px-max content area. Simpler and bulletproof than the earlier ::before
+     pseudo which failed to paint (body overflow-x:hidden was masking it and
+     the isolation stacking context was fighting the parent's background).
+     Buttons stay literal bright gold per Beth's 2026-08-05 rule. */
+  .aa-sec.band-light{max-width:none; margin:0;
+    padding:64px max(32px, calc((100vw - 1336px) / 2));
+    background:#F7F7F5; color:#16171A}
+  .aa-sec.band-light .eyebrow{color:#6E561A}
+  .aa-sec.band-light h2{color:#16171A}
+  .aa-sec.band-light .intro{color:#16171A}
+  .aa-sec.band-light .intro.small{color:#45474C}
+  .aa-sec.band-light .aa-lands .item .idx{color:#6E561A}
+  .aa-sec.band-light .aa-lands .item h3{color:#16171A}
+  .aa-sec.band-light .aa-lands .item p{color:#45474C}
+  .aa-sec.band-light .aa-price{background:#FFFFFF; border-color:#E5E4DF}
+  .aa-sec.band-light .aa-price .tier{color:#6E561A}
+  .aa-sec.band-light .aa-price h3{color:#16171A}
+  .aa-sec.band-light .aa-price h3 .u{color:#5E6066}
+  .aa-sec.band-light .aa-price .summary{color:#45474C}
+  .aa-sec.band-light .aa-price li{color:#16171A}
+  .aa-sec.band-light .aa-price li::before{color:#6E561A}
+  .aa-sec.band-light .aa-price .note{color:#45474C; border-top-color:#E5E4DF}
+  .aa-sec.band-light .aa-faq{border-top-color:#E5E4DF}
+  .aa-sec.band-light .aa-faq details{border-bottom-color:#E5E4DF}
+  .aa-sec.band-light .aa-faq summary{color:#16171A}
+  .aa-sec.band-light .aa-faq summary::after{color:#6E561A}
+  .aa-sec.band-light .aa-faq .answer{color:#45474C}
+
+  /* Intro band that introduces the workflow canvas. Beth 2026-08-07 flagged
+     the empty white space on the sides — text needs to fill the horizontal
+     space, same complaint she raised on the hero H1. So: no char cap on H2,
+     bigger H2 font-size (matches hero scale), lede widened to 82ch. */
+  .aa-intro-band{text-align:center; padding-top:80px; padding-bottom:56px}
+  .aa-intro-band .eyebrow{display:inline-flex; gap:10px; align-items:center;
+    justify-content:center; margin-bottom:20px}
+  .aa-intro-band h2{margin:0 auto 22px; max-width:none;
+    font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.06; letter-spacing:-.015em}
+  .aa-intro-band .intro{margin:0 auto; max-width:82ch; font-size:1.0625rem}
+
+  /* Three-item lands grid */
+  .aa-lands{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
+  @media (max-width:820px){ .aa-lands{grid-template-columns:1fr} }
+  .aa-lands .item .idx{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; letter-spacing:.2em; color:var(--gold,#D4AF37);
+    border-bottom:1px solid var(--border,#2A2C31); padding-bottom:10px;
+    display:block; margin-bottom:14px}
+  .aa-lands .item h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:600;
+    font-size:1.15rem; line-height:1.2; margin:0 0 10px; color:var(--paper,#F7F7F5)}
+  .aa-lands .item p{font-size:.95rem; line-height:1.55; color:var(--muted-on-dark,#868A90); margin:0;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+
+  /* Spec table (Inside the build) */
+  /* SECTION 04 PIPELINE ANIMATION — Beth 2026-08-07 approved the recommendation
+     to animate the five step rows rather than the headline. A gold pulse walks
+     TRIGGER -> QUALIFY -> DECIDE -> ACT -> LOG on a loop, a rail draws down the
+     left edge as it goes, and the rows cascade in the first time the table is
+     seen. The loop runs ONLY while the table is on screen, so it never becomes
+     perpetual mid-page motion. Reuses the canvas's gold-pulse vocabulary above
+     rather than inventing a second unrelated effect. */
+  .aa-spec-table{border:1px solid var(--border,#2A2C31); border-radius:6px;
+    overflow:hidden; position:relative}
+  .aa-spec-table::before{content:""; position:absolute; left:0; top:0; width:4px;
+    height:var(--rail,0%); background:linear-gradient(180deg,
+      rgba(212,175,55,.9), rgba(212,175,55,.25));
+    transition:height .55s cubic-bezier(.16,1,.3,1); z-index:2; pointer-events:none}
+  .aa-spec-row .k{transition:color .35s ease, text-shadow .35s ease}
+  .aa-spec-row{position:relative}
+  /* Beth: "WHAT ANIMATION DID U ADD DIDNT SEE ANY". It was running, but a
+     5.5% tint and a 2px rail is invisible. Turned up so the walking step
+     actually reads: a real tint, a gold bar on the active row, and the whole
+     row nudges right as the pulse lands on it. */
+  .aa-spec-row.is-step{background:rgba(212,175,55,.13); transform:translateX(6px)}
+  .aa-spec-row{transition:background .45s ease, transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-spec-row::after{content:""; position:absolute; left:0; top:0; bottom:0; width:0;
+    background:#D4AF37; transition:width .35s cubic-bezier(.16,1,.3,1)}
+  .aa-spec-row.is-step::after{width:4px}
+  .aa-spec-row.is-step .v{color:#FFFFFF}
+  .aa-spec-row.is-step .k{color:#EBCE72; text-shadow:0 0 16px rgba(212,175,55,.5)}
+  .aa-spec-table.is-in .aa-spec-row{animation:aaRowIn .5s cubic-bezier(.16,1,.3,1) both;
+    animation-delay:calc(var(--i,0) * 85ms)}
+  @keyframes aaRowIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-spec-table::before{display:none}
+    .aa-spec-table.is-in .aa-spec-row{animation:none}
+    .aa-spec-row.is-step{background:none; transform:none}
+    .aa-spec-row.is-step::after{width:0}
+    .aa-spec-row.is-step .k{color:var(--gold,#D4AF37); text-shadow:none}
+  }
+  .aa-spec-row{display:grid; grid-template-columns:120px 1fr 100px; gap:24px;
+    padding:20px 24px; border-bottom:1px solid var(--border,#2A2C31);
+    align-items:baseline; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.85rem}
+  .aa-spec-row:last-child{border-bottom:none}
+  .aa-spec-row .k{color:var(--gold,#D4AF37); font-weight:600; letter-spacing:.06em}
+  .aa-spec-row .v{color:var(--paper,#F7F7F5); font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-spec-row .v .sub{color:var(--muted-on-dark,#868A90); display:block; font-size:.82rem; margin-top:2px}
+  .aa-spec-row .m{color:var(--muted-on-dark,#868A90); font-size:.75rem; text-align:right}
+  @media (max-width:640px){ .aa-spec-row{grid-template-columns:1fr; gap:8px} .aa-spec-row .m{text-align:left} }
+
+  /* PRICING */
+  .aa-prices{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+  @media (max-width:820px){ .aa-prices{grid-template-columns:1fr} }
+  .aa-price{padding:32px; border:1px solid var(--border,#2A2C31); border-radius:6px;
+    background:var(--ink-2,#16171A); display:flex; flex-direction:column}
+  .aa-price .tier{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); margin-bottom:8px}
+  .aa-price h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:2rem; line-height:1.05; margin:0 0 6px; color:var(--paper,#F7F7F5)}
+  .aa-price h3 .u{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7em; color:var(--muted-on-dark,#868A90); font-weight:400; margin-left:4px}
+  .aa-price .summary{font-size:.95rem; color:var(--muted-on-dark,#868A90);
+    margin:0 0 20px; line-height:1.5; font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-price ul{list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:10px}
+  .aa-price li{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.82rem; color:var(--paper,#F7F7F5); padding-left:18px; position:relative; line-height:1.5}
+  .aa-price li::before{content:"+"; position:absolute; left:0; color:var(--gold,#D4AF37); font-weight:600}
+  .aa-price .note{margin-top:auto; padding-top:16px; border-top:1px solid var(--border,#2A2C31);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; color:var(--muted-on-dark,#868A90)}
+
+  /* WHY-STACK */
+  .aa-stack{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:start}
+  @media (max-width:900px){ .aa-stack{grid-template-columns:1fr} }
+  .aa-stack p{font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5); margin:0 0 18px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-stack p.small{color:var(--muted-on-dark,#868A90); font-size:.88rem}
+  .aa-stack .quote{padding:22px; border-left:2px solid var(--gold,#D4AF37);
+    background:var(--ink-2,#16171A); border-radius:0 4px 4px 0;
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic; font-weight:500;
+    font-size:1.0625rem; color:var(--paper,#F7F7F5); line-height:1.45}
+  .aa-stack .quote cite{display:block; margin-top:14px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-style:normal; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90)}
+
+  /* FAQ — Beth 2026-08-07: "the FAQ from the ai automation page should follow
+     the format of the homepage". Ported from index.html .faq: the smooth
+     height expand via .answer-wrap, and the plus built from two crossing bars
+     where the vertical one rotates away to leave a minus. Typography matches
+     the homepage's clamp. Colours are the dark-band equivalents because Beth
+     moved this section to dark earlier today. */
+  .aa-faq{border-top:1px solid var(--border,#2A2C31); margin-top:40px}
+  .aa-faq details{border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-faq summary{cursor:pointer; list-style:none; padding:26px 56px 26px 0;
+    position:relative; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:600;
+    color:var(--paper,#F7F7F5); transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::-webkit-details-marker{display:none}
+  .aa-faq summary::after,.aa-faq summary::before{content:""; position:absolute; right:6px; top:50%;
+    background:var(--gold,#D4AF37); transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::after{width:15px; height:1px; transform:translateY(-50%)}
+  .aa-faq summary::before{width:1px; height:15px; right:13px; transform:translateY(-50%)}
+  .aa-faq details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
+  .aa-faq summary:hover{color:var(--gold,#D4AF37)}
+  .aa-faq summary:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:2px}
+  .answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
+  html:not(.js) .answer-wrap{height:auto}
+  .aa-faq .answer{padding:0 56px 26px 0; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
+  @media (prefers-reduced-motion:reduce){
+    .answer-wrap{transition:none}
+    .aa-faq summary::after,.aa-faq summary::before{transition:none}
+  }
+  /* light-band variant kept in case the section flips back */
+  .aa-sec.band-light .aa-faq summary{color:#16171A}
+  .aa-sec.band-light .aa-faq summary:hover{color:#6E561A}
+  .aa-sec.band-light .aa-faq summary::after,
+  .aa-sec.band-light .aa-faq summary::before{background:#6E561A}
+
+  /* CTA BAND */
+  .aa-cta-band{position:relative; padding:112px 32px; text-align:center; overflow:hidden;
+    isolation:isolate;
+    border-top:1px solid var(--border,#2A2C31);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(212,175,55,.10), transparent 55%),
+      var(--ink,#0F1115)}
+  .aa-cta-band .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:16px}
+  /* Full-bleed background image + dark gradient overlay so the closing CTA
+     bookends the hero visually. Beth 2026-08-07: "add image background add
+     buttons." */
+  .aa-cta-bg{position:absolute; inset:0; z-index:0}
+  .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(.62) brightness(.5) contrast(1.05)}
+  .aa-cta-bg::after{content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.25) 0%, rgba(15,17,21,.75) 78%),
+      linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.45) 40%, rgba(15,17,21,.90) 100%)}
+  .aa-cta-wrap{position:relative; z-index:1; max-width:1240px; margin:0 auto}
+  .aa-cta-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:8px; position:relative; z-index:2}
+  .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.9rem, 5vw, 3.4rem); line-height:1.42; margin:0 auto 26px;
+    max-width:none; color:var(--paper,#F7F7F5); letter-spacing:-.015em;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
+  .aa-cta-band .tel{display:inline-flex; align-items:center; gap:14px;
+    padding:18px 28px; background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-weight:600;
+    font-size:.9rem; letter-spacing:.14em; text-transform:uppercase;
+    border-radius:6px; border:2px solid var(--gold-dark,#A8842A);
+    box-shadow:0 2px 0 rgba(0,0,0,.12); text-decoration:none}
+  .aa-cta-band .tel .num{font-size:1rem}
+  .aa-cta-band .note-lede{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1.0625rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:78ch; margin:0 auto 36px;
+    text-shadow:0 1px 12px rgba(15,17,21,.55)}
+  .aa-cta-band .note{margin-top:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90)}
+
+  /* ==========================================================================
+     GARAGE HERO ANIMATION - page-specific hero background for the garage
+     services case study. Top-down blueprint of a garage bay: outer walls,
+     roll-up door segments, side shelving, back workbench, a car silhouette,
+     three labelled bays. Every element is a path or text with a staggered
+     stroke-dashoffset (or opacity) animation, so the whole plan draws
+     itself over ~5 seconds and holds. Sits inside .aa-hero-bg beneath the
+     same dark overlay used on the AA page, so text contrast never suffers.
+     ========================================================================== */
+  .garage-plan{position:absolute; inset:0; z-index:1; width:100%; height:100%;
+    display:block; overflow:hidden}
+  .garage-plan .gp-line{
+    stroke-dasharray:2400; stroke-dashoffset:2400;
+    animation:garagePlanDraw 12s cubic-bezier(.4,0,.2,1) infinite;
+    animation-delay:var(--gd, 0s); will-change:stroke-dashoffset, opacity}
+  @keyframes garagePlanDraw{
+    0%{stroke-dashoffset:2400; opacity:.85}
+    38%,88%{stroke-dashoffset:0; opacity:1}
+    100%{stroke-dashoffset:0; opacity:.3}
+  }
+  .garage-plan .gp-label{
+    opacity:0; animation:garagePlanFade 12s ease-in-out infinite;
+    animation-delay:var(--gd, 0s)}
+  @keyframes garagePlanFade{
+    0%,32%{opacity:0}
+    46%,88%{opacity:1}
+    100%{opacity:.35}
+  }
+  .garage-orb{position:absolute; z-index:2; border-radius:50%;
+    filter:blur(80px); pointer-events:none; opacity:.55}
+  .garage-orb.g1{width:520px; height:520px; left:-80px; top:-80px;
+    background:radial-gradient(circle, rgba(212,175,55,0.36), transparent 65%)}
+  .garage-orb.g2{width:720px; height:720px; right:-160px; bottom:-160px;
+    background:radial-gradient(circle, rgba(212,175,55,0.14), transparent 70%)}
+  @media (prefers-reduced-motion:reduce){
+    .garage-plan .gp-line{animation:none; stroke-dashoffset:0; opacity:.6}
+    .garage-plan .gp-label{animation:none; opacity:.6}
+  }
+
+  /* ==========================================================================
+     CASE STUDY - page-specific components. All prefixed .cs- so they cannot
+     collide with anything on index.html or ai-automation.html.
+     ========================================================================== */
+
+  /* Section banner images (garage stock, face-free per site rule). The
+     filter unifies stock imagery with the ink+gold palette so the photo does
+     not sit outside the design system. Aspect kept wide (24:7) so the banner
+     never dominates the section header below it. */
+  .cs-banner{position:relative; margin:0 0 var(--sp-6,32px);
+    aspect-ratio:24/7; overflow:hidden; border-radius:6px;
+    background:var(--ink-2,#1C1D21)}
+  .cs-banner img{display:block; width:100%; height:100%; object-fit:cover;
+    filter:grayscale(.55) brightness(.88) contrast(1.06)}
+  .aa-sec.band-light .cs-banner{background:#EEEDE8}
+  .aa-sec.band-light .cs-banner img{filter:grayscale(.35) brightness(.94) contrast(1.04)}
+  /* Gold hairline at the base of the banner ties it to the palette. */
+  .cs-banner::after{content:""; position:absolute; left:0; right:0; bottom:0;
+    height:3px; background:linear-gradient(90deg, var(--gold,#D4AF37), transparent 70%)}
+  .aa-sec.band-light .cs-banner::after{background:linear-gradient(90deg, var(--gold-deep,#6E561A), transparent 70%)}
+
+  /* SPLIT LAYOUT - image left, content right. Used on section 02 The
+     situation. 50/50 columns at wide viewports, stacks with image on top
+     under 900px. Portrait image aspect keeps the garage subject visible
+     rather than being cropped down to a floor sliver. */
+  .cs-split{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:stretch}
+  @media (max-width:900px){ .cs-split{grid-template-columns:1fr; gap:28px} }
+  /* No fixed aspect ratio: the image stretches to fill the grid cell so the
+     column matches the content column's height. min-height is a floor so a
+     very short content block does not collapse the image entirely; on mobile
+     the image reclaims its natural portrait aspect. */
+  .cs-split-img{margin:0; overflow:hidden; border-radius:6px;
+    position:relative; background:#EEEDE8; min-height:480px}
+  @media (max-width:900px){ .cs-split-img{aspect-ratio:4/5; min-height:0} }
+  .aa-sec:not(.band-light) .cs-split-img{background:var(--ink-2,#1C1D21)}
+  .cs-split-img img{width:100%; height:100%; object-fit:cover;
+    filter:grayscale(.35) brightness(.94) contrast(1.04)}
+  .aa-sec:not(.band-light) .cs-split-img img{filter:grayscale(.55) brightness(.85) contrast(1.06)}
+  .cs-split-img::after{content:""; position:absolute; left:0; right:0; bottom:0;
+    height:3px; background:linear-gradient(90deg, var(--gold-deep,#6E561A), transparent 70%)}
+  .aa-sec:not(.band-light) .cs-split-img::after{background:linear-gradient(90deg, var(--gold,#D4AF37), transparent 70%)}
+  .cs-split-body{padding-top:8px}
+  .cs-split-body .intro.small{margin-bottom:20px}
+
+  /* Numbered client questions - the two-item list at the heart of section 02.
+     Big mono number in gold, italic serif question. Row rule between so the
+     list reads as a ledger rather than a flowing paragraph. */
+  .cs-questions{list-style:none; padding:0; margin:24px 0}
+  .cs-questions li{display:flex; align-items:baseline; gap:20px;
+    padding:18px 0; border-bottom:1px solid #E5E4DF}
+  .aa-sec:not(.band-light) .cs-questions li{border-bottom-color:var(--border,#2A2C31)}
+  .cs-questions li:last-child{border-bottom:0}
+  .cs-q-num{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-weight:700; font-size:1.5rem; color:var(--gold-deep,#6E561A);
+    letter-spacing:.02em; min-width:52px; flex:0 0 auto; line-height:1}
+  .aa-sec:not(.band-light) .cs-q-num{color:var(--gold,#D4AF37)}
+  .cs-q-text{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-weight:500; font-size:1.35rem;
+    color:var(--ink,#16171A); line-height:1.3}
+  .aa-sec:not(.band-light) .cs-q-text{color:var(--paper,#F7F7F5)}
+
+  /* Inline "lift" for emphasised phrases in prose (gold, no pill treatment). */
+  .cs-lift{font-style:italic; color:var(--gold,#D4AF37); font-weight:600}
+  .aa-sec.band-light .cs-lift{color:var(--gold-deep,#6E561A)}
+
+  /* Small mono row indices (01, 02, ...) that carry the ledger feel across
+     lists, chain rows and metro cards. */
+  .cs-idx{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; color:var(--muted-on-dark,#868A90);
+    margin-right:14px; font-weight:600}
+  .aa-sec.band-light .cs-idx{color:var(--muted-2,#5E6066)}
+
+  /* Illustrative flag - matches the mono, muted tone of the KPI foot. */
+  .cs-illus{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-top:28px}
+  .aa-sec.band-light .cs-illus{color:var(--muted-2,#5E6066)}
+
+  /* 03 DIAGNOSIS - two column compare. */
+  .cs-diag{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:28px}
+  @media (max-width:900px){ .cs-diag{grid-template-columns:1fr} }
+  .cs-diag-col{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:24px 24px 20px}
+  .aa-sec.band-light .cs-diag-col{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-diag-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:16px;
+    padding-bottom:10px; border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-diag-head{color:#5E6066; border-bottom-color:#E5E4DF}
+  .cs-diag-col-found .cs-diag-head{color:var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-diag-col-found .cs-diag-head{color:var(--gold-deep,#6E561A)}
+  .cs-diag-list{list-style:none; padding:0; margin:0}
+  .cs-diag-list li{padding:12px 0; border-bottom:1px solid var(--border,#2A2C31);
+    display:flex; align-items:baseline; font-size:.9375rem; line-height:1.55;
+    color:var(--paper,#F7F7F5)}
+  .cs-diag-list li:last-child{border-bottom:0}
+  .aa-sec.band-light .cs-diag-list li{color:var(--ink,#16171A); border-bottom-color:#E5E4DF}
+  .cs-diag-list li .cs-idx{flex:0 0 auto}
+
+  /* 04 GOOGLE ADS CHAIN - 5-column table row. */
+  .cs-chain{margin-top:28px; border-top:2px solid var(--gold,#D4AF37);
+    border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-chain{border-top-color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-chain-row{display:grid; grid-template-columns:52px 200px 1fr 200px 100px;
+    gap:20px; align-items:baseline; padding:16px 4px;
+    border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-chain-row{border-bottom-color:#E5E4DF}
+  .cs-chain-row:last-child{border-bottom:0}
+  @media (max-width:900px){ .cs-chain-row{grid-template-columns:40px 1fr 1fr;
+    gap:12px; padding:14px 4px}
+    .cs-chain-row .grp, .cs-chain-row .from-to{display:none} }
+  .cs-chain-head{padding:14px 4px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); font-weight:600}
+  .aa-sec.band-light .cs-chain-head{color:#5E6066}
+  @media (max-width:900px){ .cs-chain-head span:nth-child(2), .cs-chain-head span:nth-child(4){display:none} }
+  .cs-chain-row .grp{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90)}
+  .aa-sec.band-light .cs-chain-row .grp{color:#5E6066}
+  .cs-chain-row .metric{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.15rem; font-weight:500; color:var(--paper,#F7F7F5); letter-spacing:-.01em}
+  .aa-sec.band-light .cs-chain-row .metric{color:var(--ink,#16171A)}
+  .cs-chain-row .from-to{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.875rem; color:var(--muted-on-dark,#868A90)}
+  .aa-sec.band-light .cs-chain-row .from-to{color:var(--muted,#45474C)}
+  .cs-chain-row .delta{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-weight:700; font-size:1.05rem; text-align:right}
+  .cs-chain-row .delta.up{color:#3FB984}
+  .cs-chain-row .delta.dn{color:#E86A5A}
+  .aa-sec.band-light .cs-chain-row .delta.up{color:#0F6E3C}
+  .aa-sec.band-light .cs-chain-row .delta.dn{color:#B01B1B}
+  .cs-chain-emph{background:rgba(212,175,55,.06)}
+  .aa-sec.band-light .cs-chain-emph{background:rgba(110,86,26,.06)}
+
+  /* 05 MARKETS - 4-card grid. */
+  .cs-metros{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:28px}
+  .cs-metros.cs-metros-5{grid-template-columns:repeat(5,1fr); gap:12px}
+  @media (max-width:1280px){ .cs-metros.cs-metros-5{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:1100px){ .cs-metros{grid-template-columns:repeat(2,1fr)}
+    .cs-metros.cs-metros-5{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .cs-metros{grid-template-columns:1fr}
+    .cs-metros.cs-metros-5{grid-template-columns:1fr} }
+  .cs-metro{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:20px}
+  .aa-sec.band-light .cs-metro{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-metro-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:600; font-size:1.15rem; color:var(--gold,#D4AF37); margin-bottom:14px;
+    padding-bottom:10px; border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-metro-name{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-metro-row{display:flex; justify-content:space-between; align-items:baseline;
+    padding:8px 0; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.875rem}
+  .cs-metro-row .k{color:var(--muted-on-dark,#868A90)}
+  .aa-sec.band-light .cs-metro-row .k{color:var(--muted,#45474C)}
+  .cs-metro-row .v{font-weight:700; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-metro-row .v{color:var(--ink,#16171A)}
+  .cs-metro-row .v.up{color:#3FB984}
+  .cs-metro-row .v.dn{color:#E86A5A}
+  .aa-sec.band-light .cs-metro-row .v.up{color:#0F6E3C}
+  .aa-sec.band-light .cs-metro-row .v.dn{color:#B01B1B}
+
+  /* KPI STRIP override - 3 tiles instead of 4 across, so each tile gets more
+     room and Dimi's longer labels do not get cramped. */
+  .aa-kpi-strip.cs-kpi-3{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:820px){ .aa-kpi-strip.cs-kpi-3{grid-template-columns:1fr} }
+  .aa-kpi-strip.cs-kpi-3 .aa-kpi:nth-child(3n){border-right:none}
+  .aa-kpi-strip.cs-kpi-3 .aa-kpi:nth-child(4n){border-right:1px solid var(--border,#2A2C31)}
+
+  /* 03 DIAGNOSIS THREE-CARD - stacked cards, one per sub-section. Dark by
+     default, invert to paper on light bands. */
+  .cs-diag3{display:grid; grid-template-columns:1fr; gap:20px; margin-top:28px}
+  .cs-diag3-card{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:24px 28px}
+  .aa-sec.band-light .cs-diag3-card{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-diag3-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); margin-bottom:14px; padding-bottom:12px;
+    border-bottom:1px solid var(--border,#2A2C31); display:flex; align-items:baseline; gap:0}
+  .aa-sec.band-light .cs-diag3-head{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-diag3-card p{margin:0; font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-diag3-card p{color:var(--ink,#16171A)}
+
+  /* 04 CONTROLLED-FIRST-STEP GRID - 5 tiles: 3 across on desktop, wrap on
+     narrower viewports. Last tile ("Did not do") gets a muted accent so it
+     reads as the deliberate negation. */
+  .cs-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+  @media (max-width:1000px){ .cs-steps{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:600px){ .cs-steps{grid-template-columns:1fr} }
+  .cs-step{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
+    border-radius:6px; padding:22px 24px}
+  .aa-sec.band-light .cs-step{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-step-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); margin-bottom:12px; padding-bottom:10px;
+    border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-step-head{color:var(--gold-deep,#6E561A); border-bottom-color:#E5E4DF}
+  .cs-step p{margin:0; font-size:.9375rem; line-height:1.55; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-step p{color:var(--ink,#16171A)}
+  .cs-step-neg{border-color:rgba(232,106,90,0.25); background:rgba(232,106,90,0.03)}
+  .aa-sec.band-light .cs-step-neg{border-color:rgba(176,27,27,0.20); background:rgba(176,27,27,0.02)}
+  .cs-step-neg .cs-step-head{color:#E86A5A}
+  .aa-sec.band-light .cs-step-neg .cs-step-head{color:#B01B1B}
+
+  /* Chain row 07 (Cost) + row 11 (Conversion value) carry a small caption
+     inside the delta cell. Stack vertically. */
+  .cs-chain-row .delta em{font-style:normal; display:block}
+  .cs-chain-row .delta small{display:block; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6rem; letter-spacing:.06em; color:var(--muted-on-dark,#868A90);
+    margin-top:2px; text-transform:none; font-weight:400}
+  .aa-sec.band-light .cs-chain-row .delta small{color:var(--muted-2,#5E6066)}
+
+    /* 06 OUTLINE - the "sections still to build" teaser. */
+  .cs-outline{list-style:none; padding:0; margin:28px 0 0;
+    border-top:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-outline{border-top-color:#E5E4DF}
+  .cs-outline li{padding:14px 4px; border-bottom:1px solid var(--border,#2A2C31);
+    display:flex; align-items:baseline; font-size:.9375rem; line-height:1.5;
+    color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-outline li{color:var(--ink,#16171A); border-bottom-color:#E5E4DF}
+  .cs-outline li:last-child{border-bottom:0}
+  .cs-outline li .cs-idx{flex:0 0 auto}
+</style>
+</head>
+<body>
+
+<div class="aa-sysbar">
+  <span class="dot"></span>
+  <span>system</span>
+  <span class="path">magisterdigital.ai <span class="sep">/</span> <span class="accent">ai-automation</span></span>
+  <span class="right">
+    <span>build 2026.08.06</span>
+    <span>&middot; region: sd-01</span>
+    <span>&middot; latency 24ms</span>
+  </span>
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html" aria-label="Magister Digital home">
+      <img src="../img/magister-logo.png" alt="Magister Digital" class="brand-logo" width="240" height="48">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="../index.html#services">Services</a>
+      <a href="../ai-automation.html">AI Automation</a>
+      <a href="../index.html#case-studies" class="active" aria-current="page">Case Studies</a>
+      <a href="../index.html#founders">Founders</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <a class="header-phone" href="tel:+16193300953">(619) 330-0953</a>
+    <a class="btn btn-sm" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+  </div>
+</header>
+
+<main>
+
+<section class="aa-hero" data-mark="01">
+  <!-- AR/VR motion graphic. Beth 2026-08-07 asked for the SVGator article's
+       "AR/VR Motion Graphics" category in the header and the previous hero
+       image removed. That article links to a designer's Dribbble rather than
+       offering an asset, so this is built from scratch: a receding spatial
+       tracking grid, UI planes anchored in depth, and a feature-point cloud,
+       all projected in perspective and parallaxed off the pointer. -->
+  <div class="aa-hero-bg" aria-hidden="true">
+    <!-- GARAGE FLOOR PLAN: page-specific hero animation. A top-down blueprint
+         of a garage bay draws itself in thin gold strokes across the dark
+         ink: outer walls, roll-up door segments, side shelving units, back
+         workbench, a car silhouette in the middle, and three bay labels.
+         Each element carries a staggered stroke-dashoffset animation so the
+         whole plan renders as a technical drawing being drafted. Reduced
+         motion holds the finished plan without the draw effect. -->
+    <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(212,175,55,0.055)" stroke-width="1"/>
+        </pattern>
+      </defs>
+
+      <!-- floor lattice everywhere -->
+      <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
+
+      <!-- blueprint linework, all children share the .gp-line class + draw
+           animation with staggered delays. -->
+      <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 01 · outer walls (draws first) -->
+        <path class="gp-line" style="--gd:0s" d="M200 140 L1400 140 L1400 780 L200 780 Z"/>
+        <!-- 02 · roll-up door segments along the bottom wall -->
+        <path class="gp-line" style="--gd:0.9s" d="M280 780 L280 800 M380 780 L380 800 M480 780 L480 800 M580 780 L580 800 M680 780 L680 800 M780 780 L780 800 M880 780 L880 800 M980 780 L980 800 M1080 780 L1080 800 M1180 780 L1180 800 M1280 780 L1280 800"/>
+        <!-- 03 · workbench along the back wall -->
+        <path class="gp-line" style="--gd:1.5s" d="M420 140 L420 200 L1180 200 L1180 140"/>
+        <path class="gp-line" style="--gd:1.5s" d="M480 200 L480 220 M560 200 L560 220 M640 200 L640 220 M720 200 L720 220 M800 200 L800 220 M880 200 L880 220 M960 200 L960 220 M1040 200 L1040 220 M1120 200 L1120 220"/>
+        <!-- 04 · left shelving unit -->
+        <path class="gp-line" style="--gd:2s" d="M200 260 L320 260 L320 720 L200 720"/>
+        <path class="gp-line" style="--gd:2.2s" d="M200 360 L320 360 M200 460 L320 460 M200 560 L320 560 M200 660 L320 660"/>
+        <!-- 05 · right shelving unit -->
+        <path class="gp-line" style="--gd:2s" d="M1400 260 L1280 260 L1280 720 L1400 720"/>
+        <path class="gp-line" style="--gd:2.2s" d="M1280 360 L1400 360 M1280 460 L1400 460 M1280 560 L1400 560 M1280 660 L1400 660"/>
+        <!-- 06 · car silhouette parked in the middle bay (simplified top-down) -->
+        <path class="gp-line" style="--gd:2.8s" d="M720 380 L680 400 L680 460 L720 480 L880 480 L920 460 L920 400 L880 380 Z"/>
+        <path class="gp-line" style="--gd:2.9s" d="M700 400 L700 460 M900 400 L900 460 M750 400 L750 480 M850 400 L850 480"/>
+        <path class="gp-line" style="--gd:2.9s" d="M700 420 L680 420 M900 420 L920 420 M700 440 L680 440 M900 440 L920 440"/>
+        <!-- 07 · bay dividers (dashed lines dividing the floor into 3 bays) -->
+        <path class="gp-line" style="--gd:3.4s; stroke-dasharray:6 8; opacity:0.55" d="M600 220 L600 720 M1000 220 L1000 720"/>
+      </g>
+
+      <!-- Bay labels fade in after the plan is drawn. -->
+      <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
+        <text class="gp-label" style="--gd:3.9s" x="450" y="708">BAY 01</text>
+        <text class="gp-label" style="--gd:4.1s" x="750" y="708">BAY 02</text>
+        <text class="gp-label" style="--gd:4.3s" x="1060" y="708">BAY 03</text>
+        <text class="gp-label" style="--gd:4.5s" x="500" y="180" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">WORKBENCH</text>
+        <text class="gp-label" style="--gd:4.5s" x="220" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; L</text>
+        <text class="gp-label" style="--gd:4.5s" x="1290" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; R</text>
+      </g>
+    </svg>
+
+    <span class="garage-orb g1"></span>
+    <span class="garage-orb g2"></span>
+  </div>
+  <div class="aa-hero-content">
+    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Competitive research <span class="sep">/</span> Five U.S. markets</div>
+    <h1>42 companies, ~300 ads, five markets that <em>do not resemble each other</em></h1>
+    <p class="lede">
+      Before we launch a single campaign, we map the market. <code>42 companies audited</code>
+      and about 300 ads read individually across five U.S. markets in the public Meta Ads
+      Library, and the finding that mattered most is that the five markets do not resemble
+      each other.
+    </p>
+    <div class="aa-hero-cta">
+      <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+    </div>
+  </div>
+</section>
+
+<!-- 01b - Hero KPI strip. Three figures Dimi leads with; captions
+     copied verbatim from garage-services-case-study.netlify.app. -->
+<section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline research figures">
+  <div class="aa-kpi-strip cs-kpi-3">
+    <div class="aa-kpi">
+      <div class="l">Companies audited, ads read before any spend</div>
+      <div class="v">42 / ~300</div>
+      <div class="d">Five markets, every advertiser in the public Meta Ads Library, each ad transcribed by hand</div>
+    </div>
+    <div class="aa-kpi">
+      <div class="l">Distinct competitive auctions</div>
+      <div class="v">5</div>
+      <div class="d">Dallas, Atlanta, Las Vegas, Orlando, Southern California, none of them alike</div>
+    </div>
+    <div class="aa-kpi">
+      <div class="l">Blended cost per lead across our launched campaigns</div>
+      <div class="v">$29.07</div>
+      <div class="d">245 leads across 8 campaigns in 4 markets &middot; July 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 - The situation (light band, split layout: image left, findings right).
+     Copy taken from Dimi's Netlify mockup verbatim, compressed into three
+     structural findings so the split layout stays readable. -->
+<section class="aa-sec band-light" data-mark="02">
+  <div class="cs-split">
+    <figure class="cs-split-img">
+      <img src="https://images.pexels.com/photos/17181949/pexels-photo-17181949.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=1100&amp;fit=crop" alt="Interior of a spacious garage with organised wall storage, shelves, and hanging tools" loading="lazy" width="900" height="1100">
+    </figure>
+    <div class="cs-split-body">
+      <div class="eyebrow">02 &middot; The position operators are in</div>
+      <h2>Most competitors, <em>not running ads at all</em></h2>
+      <p class="intro small">If you sell garage floors, storage, or cabinets, most of your local competitors are not advertising on Meta at all. Of the 42 companies we audited across five markets, <b>26 ran no Meta ads</b>.</p>
+      <p class="intro small">The ones who do advertise tend to run the same national template, a pain hook, a dollars-off offer, and a lifetime warranty, into a local auction that does not resemble the one two states over. That is the position most operators are in when they decide whether Meta is worth it: guessing at who they are bidding against, and worried the answer from an agency will be a generic package built on national best practices.</p>
+      <p class="intro small">The owners we built this for had usually been sold copy before, three headlines, a stock photo of a clean garage, a lead form, and a cost-per-lead report, and wanted to know what actually runs in their market before spending into it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
+     copy compressed but true to the mockup. -->
+<section class="aa-sec" data-mark="03">
+  <figure class="cs-banner">
+    <img src="https://images.pexels.com/photos/7484795/pexels-photo-7484795.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall of neatly organised hand tools hanging in place" loading="lazy" width="1600" height="460">
+  </figure>
+  <div class="eyebrow">03 &middot; The method</div>
+  <h2>Five steps, <em>before anyone writes copy</em></h2>
+  <p class="intro small">We map the market before we write the copy. This is the part most agencies skip, because it is slow and produces nothing billable on day one.</p>
+  <div class="cs-steps">
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">01</span>Find every advertiser</div>
+      <p>Not the obvious ones. Franchise location pages, local independents, and national e-commerce brands each behave differently, so each is pulled separately. In Southern California that meant checking 22 companies across five counties to establish that only three were running ads.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">02</span>Read the winners without spend data</div>
+      <p>The US Ads Library hides impressions and spend for commercial advertisers, so we use the two signals it does expose: how long an ad has run continuously, and how many near-identical variants are live. Both cost the advertiser money, so both signal confidence.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">03</span>Transcribe the copy verbatim</div>
+      <p>Offers, price framing, warranty language, install-speed claims, and proof stacks are recorded as written, not paraphrased. About 300 ads went through this. It is the slow part, and it is the part that produces everything useful.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">04</span>Treat each market as its own problem</div>
+      <p>The single largest finding in the study is that the five markets barely resemble each other. A strategy built for one of them can be actively wrong in another.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">05</span>Separate evidence from belief</div>
+      <p>Longevity proves commitment, not profit. A heavily duplicated ad proves confidence, not lead quality. Those boundaries get flagged, not dressed up as fact.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 04 - The controlled first step (light band, 5 tiles).
+     Dimi's five named steps + the "did not do" tile at the end. -->
+<section class="aa-sec band-light" data-mark="04">
+  <div class="eyebrow">04 &middot; The five markets</div>
+  <h2>Five markets, <em>five different auctions</em></h2>
+  <p class="intro small">Nothing about winning in one market transfers cleanly to the next. Advertising counts are companies actually running ads against the number audited. Competitive intensity is a read of how contested the auction is, not a published figure.</p>
+  <div class="cs-metros cs-metros-5">
+    <div class="cs-metro">
+      <div class="cs-metro-name">Dallas &ndash; Fort Worth</div>
+      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>6</b> of 8</span></div>
+      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Price war, price-matching</span></div>
+      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">9 / 10</em></span></div>
+      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Nobody differentiates on risk reversal</span></div>
+    </div>
+    <div class="cs-metro">
+      <div class="cs-metro-name">Atlanta</div>
+      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>4</b> of 6</span></div>
+      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Dollar-off urgency plus proof</span></div>
+      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">6 / 10</em></span></div>
+      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Local independents absent entirely</span></div>
+    </div>
+    <div class="cs-metro">
+      <div class="cs-metro-name">Las Vegas</div>
+      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>1</b> of 4</span></div>
+      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Reputation, no discounting</span></div>
+      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">3 / 10</em></span></div>
+      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">Zero storage advertisers exist</span></div>
+    </div>
+    <div class="cs-metro">
+      <div class="cs-metro-name">Orlando</div>
+      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>3</b> of 6</span></div>
+      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">The emotional makeover</span></div>
+      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="dn">6 / 10</em></span></div>
+      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">No price-anchored storage offer</span></div>
+    </div>
+    <div class="cs-metro">
+      <div class="cs-metro-name">Southern California</div>
+      <div class="cs-metro-row"><span class="k">Advertising</span><span class="v"><b>3</b> of 22</span></div>
+      <div class="cs-metro-row"><span class="k">Dominant angle</span><span class="v">Technology plus rotating scarcity</span></div>
+      <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">4 / 10</em></span></div>
+      <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">19 established operators run nothing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 - Google Ads chain (dark band). Full 11-metric chain, Dimi's verified
+     numbers, last 90 days vs prior 90 across all four markets. -->
+<section class="aa-sec" data-mark="05">
+  <div class="eyebrow">05 &middot; Ads we ran &middot; July 2026</div>
+  <h2>Eight campaigns, <em>forty-five days of learning</em></h2>
+  <p class="intro">Real campaigns we created in early July 2026 across four of these markets. Every figure is pulled from the ad account, nothing is modelled. A lead is a completed Meta lead-form submission recorded in the account, not a qualified appointment.</p>
+  <div class="cs-chain">
+    <div class="cs-chain-row cs-chain-head" aria-hidden="true">
+      <span>#</span><span>Market</span><span>Campaign</span><span>Spend &rarr; Leads</span><span>CPL</span>
+    </div>
+    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Dallas</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,105 &rarr; 40 leads</span><span class="delta up">$27.63</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Dallas</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$596 &rarr; 17 leads</span><span class="delta">$35.07</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">Atlanta</span><span class="metric">Garage floors &amp; cabinets, Jul 4</span><span class="from-to">$1,365 &rarr; 39 leads</span><span class="delta">$35.00</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">04</span><span class="grp">Atlanta</span><span class="metric">Overhead racks, Jul 4</span><span class="from-to">$652 &rarr; 24 leads</span><span class="delta up">$27.18</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">05</span><span class="grp">Las Vegas</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,099 &rarr; 29 leads</span><span class="delta"><em>$37.89</em><small>Highest in set</small></span></div>
+    <div class="cs-chain-row"><span class="cs-idx">06</span><span class="grp">Las Vegas</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$588 &rarr; 17 leads</span><span class="delta">$34.58</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">07</span><span class="grp">Orlando</span><span class="metric">Garage floors, Jul 6</span><span class="from-to">$1,121 &rarr; 41 leads</span><span class="delta up">$27.35</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">08</span><span class="grp">Orlando</span><span class="metric">Overhead racks, Jul 6</span><span class="from-to">$595 &rarr; 38 leads</span><span class="delta up"><em>$15.66</em><small>Lowest in set</small></span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">&Sigma;</span><span class="grp">All markets</span><span class="metric">Eight campaigns, total</span><span class="from-to">$7,122 &rarr; 245 leads</span><span class="delta up">$29.07</span></div>
+  </div>
+  <p class="intro small">Blended cost per lead across the eight campaigns is $29.07. Orlando racks delivered the cheapest leads in the set at $15.66; Las Vegas floors the most expensive at $37.89, still inside the range operators told us they could work with. Media cost is shown, agency fee and production are not itemised here, so this is cost-per-lead, not full customer-acquisition cost.</p>
+</section>
+
+<!-- 06 - Same story, market by market (light band). Verified numbers from
+     Dimi's mockup for each of four anonymised metros. -->
+<section class="aa-sec band-light" data-mark="06">
+  <div class="eyebrow">06 &middot; What survives</div>
+  <h2>Six ingredients, <em>in every long-running ad</em></h2>
+  <p class="intro">Strip every long-running ad in the study down to its parts and the same six show up. This is not an invented template; it is what is left when the winners are reduced to their shared components.</p>
+  <div class="cs-steps">
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">01</span>A hook that names the pain</div>
+      <p>The opening line describes the garage the homeowner is embarrassed by: clutter, cracks, stains, a car stuck in the driveway.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">02</span>A hard number</div>
+      <p>A price, a range, or a dollars-off figure. Every ad in the study still running past six months contained one.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">03</span>Speed of transformation</div>
+      <p>&ldquo;1 day&rdquo; or &ldquo;2 days&rdquo; appears in nearly every long-running flooring ad read.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">04</span>Warranty as risk reversal</div>
+      <p>Lifetime coverage is effectively table stakes among franchise advertisers. Independents that omit it compete without a net.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">05</span>Quantified proof</div>
+      <p>Counts, not adjectives: reviews, floors installed, garages transformed, years in business, local awards.</p>
+    </article>
+    <article class="cs-step">
+      <div class="cs-step-head"><span class="cs-idx">06</span>An identity marker</div>
+      <p>Who the owner is. It closes the trust gap created by letting a stranger install something permanent in your home.</p>
+    </article>
+  </div>
+  <p class="intro small">Across all five markets, <b>every ad still running after six months named a price, a count, a warranty term, or a timeframe.</b> Not one long-running winner relied on adjectives alone.</p>
+</section>
+
+<!-- 07 - The rest of the story (dark band, teaser). Section list mirrors
+     Dimi's page order for the ten sections still to build here. -->
+<section class="aa-sec" data-mark="07">
+  <figure class="cs-banner">
+    <img src="https://images.pexels.com/photos/30361320/pexels-photo-30361320.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Workshop wall filled with various tools hanging for easy access" loading="lazy" width="1600" height="460">
+  </figure>
+  <div class="eyebrow">07 &middot; What this shows and what it does not</div>
+  <h2>What this proves, <em>and what it does not</em></h2>
+  <p class="intro">Four boundaries stated plainly, so nothing on this page is read as more than it is.</p>
+  <ul class="cs-outline">
+    <li><span class="cs-idx">01</span>Competitor &ldquo;winners&rdquo; are inferred, not measured. The US Meta Ads Library publishes impressions and spend only for political advertising, so we read commitment and confidence from continuous run-time and variant count. Neither proves a competitor&#39;s profitability or lead quality.</li>
+    <li><span class="cs-idx">02</span>The snapshot is dated and moves. Ad counts are approximate, listings change daily, and all quoted copy was current during the research window of July 23 to August 9, 2026.</li>
+    <li><span class="cs-idx">03</span>Our own numbers stop at the lead. The eight campaigns show lead volume and cost per lead over a partial delivery window as captured in the account. They do not establish booked jobs, close rate, or revenue.</li>
+    <li><span class="cs-idx">04</span>The accounts belong to the client. Campaigns, creative, and data sit on ad accounts the client owns and can take with them. Results are specific to this client&#39;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes.</li>
+  </ul>
+</section>
+
+<section class="aa-cta-band" data-mark="08" id="call">
+  <div class="aa-cta-bg" aria-hidden="true">
+    <img src="../img/ai-automation-hero.jpg" alt="" width="1400" height="933" loading="lazy">
+  </div>
+  <div class="aa-cta-wrap">
+    <div class="eyebrow">08 &middot; Next step</div>
+    <h2>Bring <em>your market</em> and we will map <em>the auction</em></h2>
+    <p class="note-lede">The first question is not which headline. It is which auction you are actually in, and whether your leads turn into booked jobs. A Magister audit maps your competitive field, your channel concentration, and the gap between a lead and a sale, before you increase spend.</p>
+    <div class="aa-cta-cta">
+      <a class="btn" href="tel:+16193300953"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+    </div>
+    <p class="note">45 minutes. No deck. No pitch. References available under NDA on qualified sales calls.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- FOUNDER MODAL — ported from the homepage per Beth 2026-08-07 ('you didnt
+     copy the homepage. these profiles are clickable with bio'). Same markup,
+     same behaviour: focus moves to the close button, siblings go inert, Esc
+     closes, focus returns to the trigger, and the photo-rise entrance is
+     restarted on every open so it fires for the 2nd and 3rd founder too. -->
+<div class="modal" id="founder-modal" role="dialog" aria-modal="true" aria-labelledby="founder-modal-title" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" type="button" aria-label="Close" data-modal-close>&times;</button>
+    <div class="modal-hero">
+      <img data-modal-photo src="" alt="">
+    </div>
+    <div class="modal-body">
+      <span class="modal-flag">Bio pending sign-off</span>
+      <h2 id="founder-modal-title" data-modal-title>Founder</h2>
+      <div class="role" data-modal-role>Role</div>
+      <p class="modal-bio" data-modal-bio></p>
+      <a class="btn btn-ghost" data-modal-link href="#"><span class="t">Full profile</span><span class="ar" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+
+<footer class="aa-footer">
+  <div><b>Magister Digital</b> &middot; San Diego HQ &middot; 1135 Garnet Ave #13</div>
+  <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
+</footer>
+
+<script data-v="31">
+/* Highlight pills. Measured off skylead.io: ::before width 0 -> 100%,
+   .95s cubic-bezier(.33,1,.68,1), forwards. The hero pair fires on load; the
+   section 08 pair waits until the band is actually on screen so the effect is
+   not spent above the fold. Under reduced motion nothing is added and the CSS
+   base state already shows the finished pill. */
+(function(){
+  const rmq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function arm(scope){
+    const pills = scope.querySelectorAll('em');
+    pills.forEach((el,i) => { if (i === 1) el.classList.add('is-2'); });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pills.forEach(el => el.classList.add('animate'));
+    }));
+  }
+  function init(){
+    if (rmq.matches) return;                       // base CSS = finished pill
+    const hero = document.querySelector('.aa-hero h1');
+    if (hero) arm(hero);
+    const cta = document.querySelector('.aa-cta-band h2');
+    if (!cta) return;
+    if (!('IntersectionObserver' in window)) { arm(cta); return; }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting){ arm(cta); obs.disconnect(); } });
+    }, { threshold: .35 });
+    io.observe(cta);
+  }
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+/* AI NEURAL MESH — the backdrop the glass panel floats over. Nodes drift,
+   edges appear between neighbours and fade with distance, and a signal
+   occasionally runs an edge. Canvas because it is thousands of thin strokes a
+   frame, which DOM would choke on. It carries no text, so a sub-1 DPR is fine.
+   Stops off screen and on tab hide; reduced motion paints one static frame. */
+(function(){
+  const cv = document.querySelector('[data-arvr-net]');
+  if (!cv || !cv.getContext) return;
+  const ctx = cv.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const GOLD = '212,175,55';
+  let W=0, H=0, dpr=1, nodes=[], pulses=[], raf=0, live=false;
+
+  function size(){
+    const r = cv.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const n = W < 700 ? 46 : 104;
+    nodes = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*0.22, vy: (Math.random()-.5)*0.22,
+      r: 1.3 + Math.random()*2.1
+    }));
+    pulses = [];
+  }
+
+  const LINK2 = 215*215;
+  function step(){
+    ctx.clearRect(0,0,W,H);
+    for (const p of nodes){
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -30) p.x = W+30; if (p.x > W+30) p.x = -30;
+      if (p.y < -30) p.y = H+30; if (p.y > H+30) p.y = -30;
+    }
+    // edges
+    ctx.lineWidth = 1;
+    for (let i=0;i<nodes.length;i++){
+      for (let j=i+1;j<nodes.length;j++){
+        const dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
+        const d2 = dx*dx+dy*dy;
+        if (d2 > LINK2) continue;
+        const a = (1 - d2/LINK2) * 0.52;
+        ctx.strokeStyle = `rgba(${GOLD},${a})`;
+        ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
+      }
+    }
+    // nodes
+    for (const p of nodes){
+      ctx.fillStyle = `rgba(${GOLD},0.92)`;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+    }
+    // signals travelling an edge, the "inference" cue
+    if (pulses.length < 8 && Math.random() < 0.06 && nodes.length > 2){
+      const a = nodes[(Math.random()*nodes.length)|0];
+      const b = nodes[(Math.random()*nodes.length)|0];
+      if (a !== b) pulses.push({a,b,t:0});
+    }
+    for (let i=pulses.length-1;i>=0;i--){
+      const s = pulses[i];
+      s.t += 0.012;
+      if (s.t >= 1){ pulses.splice(i,1); continue; }
+      const x = s.a.x + (s.b.x-s.a.x)*s.t, y = s.a.y + (s.b.y-s.a.y)*s.t;
+      const fade = Math.sin(s.t*Math.PI);
+      ctx.fillStyle = `rgba(235,206,114,${0.9*fade})`;
+      ctx.beginPath(); ctx.arc(x,y,2.4,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle = `rgba(${GOLD},${0.34*fade})`;
+      ctx.beginPath(); ctx.moveTo(s.a.x,s.a.y); ctx.lineTo(s.b.x,s.b.y); ctx.stroke();
+    }
+  }
+  function loop(){ step(); raf = requestAnimationFrame(loop); }
+  function start(){ if (!live && !reduced){ live = true; raf = requestAnimationFrame(loop); } }
+  function stop(){ if (live){ live = false; cancelAnimationFrame(raf); } }
+
+  if ('ResizeObserver' in window){
+    let q=false;
+    new ResizeObserver(()=>{ if(q) return; q=true;
+      requestAnimationFrame(()=>{ q=false; size(); step(); }); }).observe(cv);
+  }
+  document.addEventListener('visibilitychange', ()=>{ document.hidden ? stop() : start(); });
+  size(); step();
+  if (reduced) return;
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()),
+      {threshold:0}).observe(cv);
+  } else start();
+})();
+
+/* FAQ disclosure height, ported from the homepage's motion.js. Race-guarded so
+   a fast double-click cannot leave a panel stuck at a fixed height. Marks the
+   document as js-enabled so the no-JS fallback (answers open) is correct. */
+document.documentElement.classList.add('js');
+(function(){
+  document.querySelectorAll('.aa-faq details').forEach(function(d){
+    var body = d.querySelector('.answer-wrap');
+    if (!body) return;
+    if (d.open) body.style.height = 'auto';
+    var animating = false;
+
+    /* Settle once, whether transitionend fires or not. Without the fallback a
+       missed event latches `animating` and the panel can never be reopened.
+       That is not hypothetical: closing from height:auto does not interpolate,
+       so no transition starts and no transitionend is ever dispatched. */
+    function settle(fn){
+      var done = false;
+      function finish(){
+        if (done) return;
+        done = true;
+        body.removeEventListener('transitionend', onEnd);
+        clearTimeout(timer);
+        fn();
+        animating = false;
+      }
+      function onEnd(e){ if (e.target === body && e.propertyName === 'height') finish(); }
+      body.addEventListener('transitionend', onEnd);
+      var timer = setTimeout(finish, 700);   // transition is .5s
+      return finish;
+    }
+
+    d.querySelector('summary').addEventListener('click', function(e){
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+      if (d.open){
+        // pin the current height in px FIRST and force a reflow, so the
+        // browser has a concrete value to animate away from
+        body.style.height = body.scrollHeight + 'px';
+        void body.offsetHeight;
+        requestAnimationFrame(function(){ body.style.height = '0px'; });
+        settle(function(){ d.open = false; body.style.height = ''; });
+      } else {
+        d.open = true;
+        var h = body.scrollHeight;
+        body.style.height = '0px';
+        void body.offsetHeight;
+        requestAnimationFrame(function(){ body.style.height = h + 'px'; });
+        settle(function(){ body.style.height = 'auto'; });
+      }
+    });
+  });
+})();
+
+/* FOUNDER MODAL. Behaviour ported from the homepage's motion.js, which this
+   page does not load. Same contract: focus to the close button on open,
+   siblings inert while open, Esc closes, focus tab-trapped inside the panel,
+   focus returns to the triggering button on close, and the entrance animation
+   is restarted every open so it fires for the 2nd and 3rd founder too. */
+(function(){
+  const modal = document.getElementById('founder-modal');
+  if (!modal) return;
+
+  const titleEl = modal.querySelector('[data-modal-title]');
+  const roleEl  = modal.querySelector('[data-modal-role]');
+  const photoEl = modal.querySelector('[data-modal-photo]');
+  const bioEl   = modal.querySelector('[data-modal-bio]');
+  const linkEl  = modal.querySelector('[data-modal-link]');
+  const heroEl  = modal.querySelector('.modal-hero');
+  const panelEl = modal.querySelector('.modal-panel');
+
+  /* Bios are the homepage's, unchanged. They are deliberately flagged
+     "pending sign-off" because no founder credential in the audit is
+     verified. Do not write invented biography here. */
+  const FOUNDERS = {
+    brian: {
+      name: 'Brian Hong', role: 'Co-founder & CEO',
+      photo: 'img/brian-hong.jpg',
+      alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
+      bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
+      link: '/brian-hong/'
+    },
+    michael: {
+      name: 'Michael Merlino', role: 'Co-founder, Strategy & AI systems',
+      photo: 'img/michael-merlino.jpg',
+      alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
+      bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
+      link: '/michael-merlino/'
+    },
+    dimitry: {
+      name: 'Dimitry Morgan', role: 'Co-founder, Head of paid media',
+      photo: 'img/dimitry-morgan.png',
+      alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
+      bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
+      link: '/dimitry-morgan/'
+    }
+  };
+
+  let trigger = null;
+
+  function siblings(){
+    return [
+      document.querySelector('.aa-sysbar'),
+      document.querySelector('.aa-hdr'),
+      document.querySelector('header'),
+      document.querySelector('main'),
+      document.querySelector('.aa-footer')
+    ].filter(Boolean).filter(el => !el.contains(modal));
+  }
+  function focusables(){
+    return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  }
+  function restart(el){
+    if (!el) return;
+    el.style.animation = 'none';
+    void el.offsetWidth;          // reflow so it registers as a fresh animation
+    el.style.animation = '';
+  }
+  function open(key, from){
+    const d = FOUNDERS[key];
+    if (!d) return;
+    trigger = from;
+    titleEl.textContent = d.name;
+    roleEl.textContent  = d.role;
+    photoEl.setAttribute('src', d.photo);
+    photoEl.setAttribute('alt', d.alt);
+    bioEl.textContent = d.bio;
+    linkEl.setAttribute('href', d.link);
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    siblings().forEach(el => el.setAttribute('inert',''));
+    restart(heroEl); restart(panelEl);
+    document.addEventListener('keydown', onKey);
+    const close = modal.querySelector('.modal-close');
+    if (close) close.focus();
+  }
+  function close(){
+    if (modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    siblings().forEach(el => el.removeAttribute('inert'));
+    document.removeEventListener('keydown', onKey);
+    if (trigger && trigger.focus) trigger.focus();
+    trigger = null;
+  }
+  function onKey(e){
+    if (e.key === 'Escape'){ e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables();
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      open(btn.getAttribute('data-modal'), btn);
+    });
+  });
+  // clicking anywhere on the card opens it too, but the button stays the
+  // semantic control for keyboard and screen readers
+  document.querySelectorAll('[data-card-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const btn = card.querySelector('[data-modal]');
+      open(card.getAttribute('data-card-modal'), btn || card);
+    });
+  });
+  modal.querySelectorAll('[data-modal-close]').forEach(el =>
+    el.addEventListener('click', close));
+})();
+
+/* Section 04 spec-table pipeline. Walks the five steps on a loop while the
+   table is on screen and stops the timer the moment it leaves, so it is not
+   perpetual motion mid-page. Base state (no JS, reduced motion) is the plain
+   static table, which is already correct. */
+(function(){
+  const table = document.querySelector('.aa-spec-table');
+  if (!table) return;
+  const rows = [...table.querySelectorAll('.aa-spec-row')];
+  if (!rows.length) return;
+  rows.forEach((r,i) => r.style.setProperty('--i', i));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  let timer = null, step = -1;
+  function tick(){
+    if (step >= 0) rows[step].classList.remove('is-step');
+    step = (step + 1) % rows.length;
+    rows[step].classList.add('is-step');
+    table.style.setProperty('--rail', (((step + 1) / rows.length) * 100) + '%');
+  }
+  function start(){
+    if (timer) return;
+    tick();
+    timer = setInterval(tick, 1100);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ table.classList.add('is-in'); start(); }
+      else stop();
+    });
+  }, { threshold: .25 });
+  io.observe(table);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
+})();
+(function(){
+  const templates = [
+    ['TRIGGER',  '<span class="good">webhook.hvac_inquiry</span> queued'],
+    ['QUALIFY',  'window: 24hr, zip: 92109 &rarr; <span class="good">qualified</span>'],
+    ['DECIDE',   'match: emergency_replace &rarr; <span class="good">book</span>'],
+    ['ACTION',   'calendly.event_created &rarr; Aug 07 14:30'],
+    ['LOG',      'row_written.audit_005421']
+  ];
+  const templatesHandoff = [
+    ['TRIGGER',  '<span class="good">webhook.legal_inquiry</span> queued'],
+    ['QUALIFY',  'window: 7d, matter: consult &rarr; <span class="warn">edge case</span>'],
+    ['DECIDE',   'confidence 0.71 &rarr; <span class="warn">handoff</span>'],
+    ['ACTION',   'slack.oncall_paged &rarr; @dimitry'],
+    ['LOG',      'row_written.audit_005422']
+  ];
+
+  let step = 0, cycle = 0;
+  const nodes = () => document.querySelectorAll('[data-node]');
+  const edges = () => document.querySelectorAll('[data-edge]');
+  const logStream = document.getElementById('aaLogStream');
+  const stepEl = document.querySelector('[data-step-idx]');
+  const cycleEl = document.querySelector('[data-cycle]');
+
+  function reset(){
+    nodes().forEach(n => n.classList.remove('active','done'));
+    edges().forEach(e => {
+      e.classList.remove('hot');
+      if (e.hasAttribute('marker-end')) e.setAttribute('marker-end','url(#aaArr)');
+    });
+  }
+
+  function highlight(nodeKey, edgeKey){
+    document.querySelectorAll('[data-node="'+nodeKey+'"]').forEach(n => n.classList.add('active'));
+    if (edgeKey){
+      document.querySelectorAll('[data-edge="'+edgeKey+'"]').forEach(e => {
+        e.classList.add('hot');
+        if (e.hasAttribute('marker-end')) e.setAttribute('marker-end','url(#aaArrHot)');
+      });
+    }
+  }
+
+  function markDone(nodeKey){
+    document.querySelectorAll('[data-node="'+nodeKey+'"]').forEach(n => {
+      n.classList.remove('active');
+      n.classList.add('done');
+    });
+  }
+
+  function appendLog(row){
+    if (!logStream) return;
+    const secs = String(Math.floor((cycle*11 + step*2) % 60)).padStart(2,'0');
+    const line = document.createElement('div');
+    line.className = 'aa-log-row';
+    line.innerHTML =
+      '<span class="t">00:00:'+secs+'</span>' +
+      '<span class="k">'+row[0]+'</span>' +
+      '<span class="m">'+row[1]+'</span>';
+    logStream.prepend(line);
+    while (logStream.children.length > 8) logStream.removeChild(logStream.lastChild);
+  }
+
+  function tick(){
+    const branchHandoff = cycle % 2 === 1;
+    const seq = branchHandoff ? templatesHandoff : templates;
+
+    switch(step){
+      case 0: reset(); highlight('trigger'); break;
+      case 1: markDone('trigger'); highlight('qualify','trigger'); break;
+      case 2: markDone('qualify'); highlight('decide','qualify'); break;
+      case 3:
+        markDone('decide');
+        if (branchHandoff) highlight('handoff','decide-hand');
+        else highlight('route','decide-book');
+        break;
+      case 4:
+        markDone(branchHandoff ? 'handoff' : 'route');
+        highlight('log', branchHandoff ? 'log-in-b' : 'log-in-a');
+        break;
+    }
+
+    if (seq[step]) appendLog(seq[step]);
+
+    step++;
+    if (step > 4){ step = 0; cycle++; }
+    if (stepEl) stepEl.textContent = step + 1;
+    if (cycleEl) cycleEl.textContent = String(cycle+1).padStart(3,'0');
+  }
+
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!rm){
+    tick();
+    setInterval(tick, 1800);
+  } else {
+    ['trigger','qualify','decide','route','log'].forEach(k => markDone(k));
+    appendLog(['LOG','automation paused, respecting your motion preferences']);
+  }
+})();
+</script>
+
+<script data-v="1">
+/* GARAGE HERO GRID: generate a 16x9 lattice inside .garage-grid. Each tile
+   receives an animation-delay proportional to (col + row) so the wave sweeps
+   diagonally from top-left to bottom-right. Under reduced motion the CSS
+   suppresses the keyframes and the grid becomes a static muted lattice. */
+(function(){
+  const grid = document.querySelector('[data-garage-grid]');
+  if (!grid) return;
+  const COLS = 16, ROWS = 9, TOTAL = COLS * ROWS;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < TOTAL; i++){
+    const tile = document.createElement('div');
+    tile.className = 'garage-tile';
+    const col = i % COLS, row = Math.floor(i / COLS);
+    // 0.08s per diagonal step; wrap the wave every ~12 diagonals so the last
+    // cells reset before the first fires again on the 7.5s loop.
+    const delay = ((col + row) % 14) * 0.08;
+    tile.style.setProperty('--d', delay.toFixed(2) + 's');
+    frag.appendChild(tile);
+  }
+  grid.appendChild(frag);
+})();
+</script>
+
+</body>
+</html>
