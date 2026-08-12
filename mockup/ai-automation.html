@@ -1668,5 +1668,20 @@ document.documentElement.classList.add('js');
 })();
 </script>
 
+<script>
+  /* Header sticky-backdrop. Matches homepage motion.js:746. Toggles
+     .is-stuck on .site-header when scrolled past 24px so the transparent
+     header picks up its blurred dark backdrop and stays readable over
+     the dark content sections below the hero. Without this the header
+     is still sticky-positioned but visually invisible on scroll. */
+  (function(){
+    var h = document.querySelector('.site-header');
+    if (!h) return;
+    function update(){ h.classList.toggle('is-stuck', (window.scrollY || 0) > 24); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+
 </body>
 </html>

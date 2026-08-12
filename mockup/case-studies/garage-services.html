@@ -1869,5 +1869,16 @@ document.documentElement.classList.add('js');
 })();
 </script>
 
+<script>
+  /* Header sticky-backdrop. Matches homepage motion.js:746. */
+  (function(){
+    var h = document.querySelector('.site-header');
+    if (!h) return;
+    function update(){ h.classList.toggle('is-stuck', (window.scrollY || 0) > 24); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+
 </body>
 </html>
