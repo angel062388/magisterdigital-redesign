@@ -1268,6 +1268,13 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .vert-link:hover{color:var(--gold-light); text-decoration-color:var(--gold-light); gap:10px}
 .vert-link:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
 
+/* "Coming soon" pill inline with a section eyebrow. Smaller than the flap
+   text, gold border, no fill. */
+.coming-soon{display:inline-block; margin-left:10px;
+  padding:2px 8px; font-size:.5625rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); border:1px solid rgba(212,175,55,.6); border-radius:3px;
+  vertical-align:middle}
+
 /* CASE STUDIES NAV DROPDOWN: reveals a menu of individual case-study
    pages on hover or keyboard focus of the "Case Studies" nav link.
    Positioned absolute so it does not disturb the main nav's flex row. */
@@ -2073,8 +2080,8 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
   <section class="sec band-deep" id="videos" data-reveal data-mark="09">
     <div class="wrap">
       <header class="sec-head">
-        <span class="meta" data-flap="09 / VIDEOS">09 / VIDEOS</span>
-        <h2>Short breakdowns from the <em>operators actually running it</em></h2>
+        <span class="meta" data-flap="09 / VIDEOS">09 / VIDEOS <span class="coming-soon">Coming soon</span></span>
+        <h2>Breakdowns from the <em>operators running it</em></h2>
         <div class="rule gold"></div>
       </header>
 
