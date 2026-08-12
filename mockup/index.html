@@ -815,9 +815,12 @@ html:not(.js) .pillar-media{max-height:380px}
 
 /* CASE STUDIES: designed placeholder cards, non-link */
 .cs-grid{display:grid; gap:var(--sp-5); margin-top:var(--sp-6)}
-.cs-card{display:block; color:inherit;
+.cs-card{display:flex; flex-direction:column; height:100%; color:inherit;
   border:1px solid var(--rule); background:var(--bg-raised); overflow:hidden; position:relative}
-.cs-cta{display:inline-flex; align-items:center; gap:6px; margin-top:var(--sp-4);
+/* .cs-cta lives at the bottom of the card so the three CTAs line up
+   across the row no matter how much the headline or tag rows vary. */
+.cs-cta{display:inline-flex; align-items:center; gap:6px; margin-top:auto; align-self:flex-start;
+  padding-top:var(--sp-4);
   font-family:var(--font-mono); font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
   color:var(--gold); text-decoration:underline; text-underline-offset:4px;
   text-decoration-color:rgba(212,175,55,.6);
@@ -837,7 +840,7 @@ html:not(.js) .pillar-media{max-height:380px}
      of the ramp. --gold-dark measured 3.09:1 here at 9px, under the 4.5 floor. */
   padding:3px 8px; color:#E3C24E; background:rgba(15,17,21,.78);
   border:1px dashed rgba(212,175,55,.7)}
-.cs-body{padding:var(--sp-5) var(--sp-5) var(--sp-6)}
+.cs-body{padding:var(--sp-5) var(--sp-5) var(--sp-6); flex:1; display:flex; flex-direction:column}
 .cs-kicker{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
   color:var(--gold); margin-bottom:var(--sp-3); display:block}
 .cs-headline{font-family:var(--font-display); font-size:clamp(1.15rem,2.2vw,1.45rem); font-weight:600;
