@@ -1081,6 +1081,25 @@
   .cs-outline li:last-child{border-bottom:0}
   .cs-outline li .cs-idx{flex:0 0 auto}
 
+  /* CTA BUTTON PAIR: centered flex row of Book-a-call + tel:. */
+  .cs-cta-pair{display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+    gap:18px; margin-top:36px}
+  @media (max-width:520px){
+    .cs-cta-pair{gap:12px; margin-top:24px}
+    .cs-cta-pair .btn,.cs-cta-pair .hero-tel{width:100%; max-width:320px; justify-content:center}
+  }
+  /* LIGHT-BAND OVERRIDES mirroring homepage index.html:257-267. */
+  .aa-sec.band-light .cs-cta-pair .btn{background:#D4AF37; border-color:#A8842A; color:#16171A;
+    box-shadow:0 6px 18px rgba(212,175,55,.30), inset 0 -2px 0 rgba(0,0,0,.16)}
+  .aa-sec.band-light .cs-cta-pair .btn:hover{background:#E3C24E; border-color:#A8842A; color:#16171A;
+    box-shadow:0 12px 28px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.18)}
+  .aa-sec.band-light .cs-cta-pair .hero-tel{color:#16171A; border-color:#D4AF37}
+  .aa-sec.band-light .cs-cta-pair .hero-tel .tag{color:#5E6066}
+  .aa-sec.band-light .cs-cta-pair .hero-tel b{color:#6E561A}
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover{background:#D4AF37; color:#16171A; border-color:#A8842A}
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover .tag,
+  .aa-sec.band-light .cs-cta-pair .hero-tel:hover b{color:#16171A}
+
   /* CASE STUDIES NAV DROPDOWN */
   .site-nav-drop{position:relative}
   .site-nav-drop > a{display:inline-flex; align-items:center; gap:6px}
@@ -1278,6 +1297,10 @@
           <span class="cs-q-text">Needed narrow proof before signing: that someone could get qualified inquiries moving and prove the source of each one, without another long ramp</span>
         </li>
       </ol>
+      <div class="cs-cta-pair">
+        <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+        <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+      </div>
     </div>
   </div>
 </section>
@@ -1351,6 +1374,10 @@
       <div class="cs-step-head"><span class="cs-idx">03</span>Stood up independent call and form tracking</div>
       <p>CallRail captured every call and form with its source, so leads were counted and attributed outside Meta's blind reporting. In nine days that surfaced 91 source-tagged first contacts, 14 of which the client's admissions team scored as qualified.</p>
     </article>
+  </div>
+  <div class="cs-cta-pair">
+    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
   </div>
 </section>
 
