@@ -1321,6 +1321,24 @@ html.no-io .answer-wrap,html.reduced-motion .answer-wrap{transition:none}
 .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
   color:var(--gold); background:rgba(212,175,55,.06); outline:none}
 .site-nav-menu a.active{color:var(--gold)}
+
+/* MOBILE POLISH (<=640px). WCAG AA tap-target minimums (44x44) and body
+   text bumped to 14px+ so nothing shipped at 11-13px on phone. Kickers,
+   labels and mono meta-text keep their small size deliberately (they
+   are letter-spaced/uppercase and not primary reading text). */
+@media (max-width:640px){
+  /* Tap targets: WCAG 2.5.5 minimum */
+  .btn-sm{min-height:44px; padding-top:12px; padding-bottom:12px}
+  .svc-name{padding-top:6px}
+
+  /* Body text legibility (was 11-13px on these) */
+  .header-phone{font-size:.875rem}
+  .panel .body ul{font-size:.875rem}
+  .sb-delta{font-size:.875rem}
+  .sb-delta .sb-arrow{font-size:.75rem}
+  .footbar{font-size:.8125rem}
+  .footbar a{display:inline-block; padding:10px 0}
+}
 </style>
 </head>
 <body>
