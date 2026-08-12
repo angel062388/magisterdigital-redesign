@@ -19,17 +19,6 @@
   ::selection{background:rgba(212,175,55,.30)}
   a{color:inherit; text-decoration:none}
 
-  /* SYSTEM BAR */
-  .aa-sysbar{display:flex; align-items:center; gap:16px; padding:14px 32px;
-    border-bottom:1px solid var(--border,#2A2C31); font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.72rem; color:var(--muted-on-dark,#868A90); letter-spacing:.04em}
-  .aa-sysbar .dot{width:8px; height:8px; border-radius:50%; background:#3FB984;
-    box-shadow:0 0 0 4px rgba(63,185,132,.14)}
-  .aa-sysbar .path{color:var(--paper,#F7F7F5)}
-  .aa-sysbar .path .accent{color:var(--gold,#D4AF37)}
-  .aa-sysbar .sep{opacity:.35}
-  .aa-sysbar .right{margin-left:auto; display:flex; gap:16px}
-
   /* SITE HEADER */
   .aa-hdr{display:flex; align-items:center; justify-content:space-between;
     padding:18px 32px; border-bottom:1px solid var(--border,#2A2C31)}
@@ -47,8 +36,6 @@
   @media (max-width:820px){
     .aa-hdr{gap:12px; padding:14px 20px}
     .aa-nav{display:none}
-    .aa-sysbar{padding:12px 20px; gap:10px}
-    .aa-sysbar .right{display:none}
   }
 
   /* FOOTER (minimal, matches homepage tone) */
@@ -838,17 +825,6 @@
 </head>
 <body>
 
-<div class="aa-sysbar">
-  <span class="dot"></span>
-  <span>system</span>
-  <span class="path">magisterdigital.ai <span class="sep">/</span> <span class="accent">ai-automation</span></span>
-  <span class="right">
-    <span>build 2026.08.06</span>
-    <span>&middot; region: sd-01</span>
-    <span>&middot; latency 24ms</span>
-  </span>
-</div>
-
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html" aria-label="Magister Digital home">
@@ -1059,7 +1035,6 @@
     </div>
   </div>
 </section>
-
 
 <section class="aa-sec band-light" data-mark="05">
   <div class="eyebrow">05 &middot; Why this is built differently</div>
