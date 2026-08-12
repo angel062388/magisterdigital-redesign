@@ -1090,13 +1090,17 @@
     font-size:1.15rem; font-weight:600; line-height:1.25;
     color:var(--paper,#F7F7F5)}
   .aa-sec.band-light .cs-cta-line{color:var(--paper,#F7F7F5)}
-  /* Button pair inside a CTA card: primary .btn + secondary tel: pill,
-     wrap when the card gets narrow. */
-  .cs-cta-buttons{display:flex; flex-wrap:wrap; align-items:center; gap:12px;
+  /* Button pair inside a CTA card: uses .btn-sm proportions on both the
+     primary and the tel: pill so they match. Homepage .btn is 16/30
+     padding; that overflows the ~380px CTA card. .btn-sm is 13/24 at
+     .6875rem and the .hero-tel gets the same padding + font so the pair
+     reads as one unit at the same visual weight. Wraps to two rows when
+     the card narrows below fit. */
+  .cs-cta-buttons{display:flex; flex-wrap:wrap; align-items:center; gap:10px;
     margin-top:auto; width:100%}
   .cs-cta-buttons .btn,.cs-cta-buttons .hero-tel{flex:0 0 auto}
-  .cs-cta-buttons .hero-tel{font-size:.75rem; padding:8px 12px}
-  .cs-cta-buttons .hero-tel b{font-size:.875rem}
+  .cs-cta-buttons .hero-tel{padding:13px 20px; font-size:.6875rem}
+  .cs-cta-buttons .hero-tel b{font-size:.75rem}
 
   /* CTA BUTTON PAIR: centered flex row of Book-a-call + tel:. Sits under
      prose sections and tables. Mobile stacks to 100% width. */
@@ -1306,7 +1310,7 @@
       <span class="cs-cta-kicker">Next step</span>
       <div class="cs-cta-line">Bring us your market, we will run the same five steps on it.</div>
       <div class="cs-cta-buttons">
-        <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+        <a class="btn btn-sm" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
         <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
       </div>
     </article>
@@ -1359,7 +1363,7 @@
       <span class="cs-cta-kicker">Your market next</span>
       <div class="cs-cta-line">Not on this list? We will map the auction you are actually in, before you spend.</div>
       <div class="cs-cta-buttons">
-        <a class="btn" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+        <a class="btn btn-sm" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
         <a class="hero-tel" href="tel:+16193300953"><span class="tag">or</span> <b>(619) 330-0953</b></a>
       </div>
     </div>
