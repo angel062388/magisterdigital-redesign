@@ -1063,6 +1063,41 @@
   .cs-step-neg .cs-step-head{color:#E86A5A}
   .aa-sec.band-light .cs-step-neg .cs-step-head{color:#B01B1B}
 
+  /* CTA CARD VARIANT: fills the empty 6th slot in 5-item grids so the last
+     row of a 3-col layout is not half empty. Gold accent border + centered
+     content + button, works inside .cs-steps and .cs-metros grids. Beth's
+     rule: "fix empty space by FILLING the row, never centering or
+     collapsing." */
+  .cs-step.cs-step-cta,
+  .cs-metro.cs-metro-cta{
+    background:linear-gradient(135deg,rgba(212,175,55,0.08) 0%,rgba(212,175,55,0.02) 100%);
+    border-color:rgba(212,175,55,0.35);
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    gap:14px; padding:26px}
+  .aa-sec.band-light .cs-step.cs-step-cta,
+  .aa-sec.band-light .cs-metro.cs-metro-cta{
+    background:linear-gradient(135deg,#FFF5D6 0%,#FFFDF3 100%);
+    border-color:#D4AF37}
+  .cs-cta-kicker{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-cta-kicker{color:var(--gold-deep,#6E561A)}
+  .cs-cta-line{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.15rem; font-weight:600; line-height:1.25;
+    color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-cta-line{color:var(--ink,#16171A)}
+  .cs-step.cs-step-cta .btn,
+  .cs-metro.cs-metro-cta .btn{margin-top:auto; width:auto}
+
+  /* CTA BUTTON PAIR: centered flex row of Book-a-call + tel:. Sits under
+     prose sections and tables. Mobile stacks to 100% width. */
+  .cs-cta-pair{display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+    gap:18px; margin-top:36px}
+  @media (max-width:520px){
+    .cs-cta-pair{gap:12px; margin-top:24px}
+    .cs-cta-pair .btn,.cs-cta-pair .hero-tel{width:100%; max-width:320px; justify-content:center}
+  }
+
   /* Chain row 07 (Cost) + row 11 (Conversion value) carry a small caption
      inside the delta cell. Stack vertically. */
   .cs-chain-row .delta em{font-style:normal; display:block}
@@ -1225,6 +1260,10 @@
   <p class="intro small">If you sell garage floors, storage, or cabinets, most of your local competitors are not advertising on Meta at all. Of the 42 companies we audited across five markets, <b>26 ran no Meta ads</b>.</p>
   <p class="intro small">The ones who do advertise tend to run the same national template, a pain hook, a dollars-off offer, and a lifetime warranty, into a local auction that does not resemble the one two states over. That is the position most operators are in when they decide whether Meta is worth it: guessing at who they are bidding against, and worried the answer from an agency will be a generic package built on national best practices.</p>
   <p class="intro small">The owners we built this for had usually been sold copy before, three headlines, a stock photo of a clean garage, a lead form, and a cost-per-lead report, and wanted to know what actually runs in their market before spending into it.</p>
+  <div class="cs-cta-pair">
+    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
 </section>
 
 <!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
@@ -1253,6 +1292,11 @@
     <article class="cs-step">
       <div class="cs-step-head"><span class="cs-idx">05</span>Separate evidence from belief</div>
       <p>Longevity proves commitment, not profit. A heavily duplicated ad proves confidence, not lead quality. Those boundaries get flagged, not dressed up as fact.</p>
+    </article>
+    <article class="cs-step cs-step-cta">
+      <span class="cs-cta-kicker">Next step</span>
+      <div class="cs-cta-line">Bring us your market, we will run the same five steps on it.</div>
+      <a class="btn" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
     </article>
   </div>
 </section>
@@ -1299,6 +1343,11 @@
       <div class="cs-metro-row"><span class="k">Intensity</span><span class="v"><em class="up">4 / 10</em></span></div>
       <div class="cs-metro-row"><span class="k">Open lane</span><span class="v">19 established operators run nothing</span></div>
     </div>
+    <div class="cs-metro cs-metro-cta">
+      <span class="cs-cta-kicker">Your market next</span>
+      <div class="cs-cta-line">Not on this list? We will map the auction you are actually in, before you spend.</div>
+      <a class="btn" href="#call"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -1323,6 +1372,10 @@
     <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">&Sigma;</span><span class="grp">All markets</span><span class="metric">Eight campaigns, total</span><span class="from-to">$7,122 &rarr; 245 leads</span><span class="delta up">$29.07</span></div>
   </div>
   <p class="intro small">Blended cost per lead across the eight campaigns is $29.07. Orlando racks delivered the cheapest leads in the set at $15.66; Las Vegas floors the most expensive at $37.89, still inside the range operators told us they could work with. Media cost is shown, agency fee and production are not itemised here, so this is cost-per-lead, not full customer-acquisition cost.</p>
+  <div class="cs-cta-pair">
+    <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
 </section>
 
 <!-- 06 - Same story, market by market (light band). Verified numbers from
