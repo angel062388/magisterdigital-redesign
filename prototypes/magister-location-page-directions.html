@@ -223,6 +223,34 @@
   .v1-close h2{margin:14px auto 24px;max-width:22ch}
   .v1-close .actions{display:inline-flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
 
+  /* V1 FAQ (light band, mirrors homepage /faq) */
+  .v1-faq{background:var(--paper);color:var(--ink)}
+  .v1-faq .kicker{color:var(--muted-2)}
+  .v1-faq .kicker em{color:var(--gold-deep)}
+  .v1-faq h2{max-width:26ch;color:var(--ink)}
+  .v1-faq h2 em{color:var(--gold-deep)}
+  .v1-faq .rule-light{height:1px;background:linear-gradient(90deg,var(--gold-deep) 0,var(--gold-deep) 88px,var(--rule-light) 88px,var(--rule-light) 100%);margin:20px 0 32px}
+  .v1-faq-list{margin-top:32px}
+  .v1-faq-item{border-top:1px solid var(--rule-light)}
+  .v1-faq-item:last-of-type{border-bottom:1px solid var(--rule-light)}
+  .v1-faq-item summary{list-style:none;cursor:pointer;padding:24px 44px 24px 0;font-family:var(--font-display);font-size:clamp(1.05rem,2vw,1.4rem);font-weight:600;color:var(--ink);position:relative;line-height:1.35}
+  .v1-faq-item summary::-webkit-details-marker{display:none}
+  .v1-faq-item summary::after{content:'+';position:absolute;right:8px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-size:26px;color:var(--gold-deep);font-weight:400;transition:transform 260ms var(--ease)}
+  .v1-faq-item[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+  .v1-faq-item .answer{padding:0 44px 28px 0;color:var(--muted);font-size:15px;line-height:1.65;max-width:78ch}
+
+  /* V1 CTA banner (mirrors homepage section.cta — Pexels bg + dark/gold overlay + centered content) */
+  .v1-cta-banner{position:relative;overflow:hidden;padding:96px 0;text-align:center;background:var(--ink-deep);isolation:isolate}
+  .v1-cta-banner::before{content:'';position:absolute;inset:0;background-image:url('https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600');background-size:cover;background-position:center;filter:grayscale(1) brightness(.32) contrast(1.05);z-index:-2}
+  .v1-cta-banner::after{content:'';position:absolute;inset:0;background:radial-gradient(1200px 600px at 50% 40%,rgba(212,175,55,.18) 0%,transparent 55%),linear-gradient(180deg,rgba(15,17,21,.55) 0%,rgba(15,17,21,.85) 100%);z-index:-1}
+  .v1-cta-banner .kicker{margin-bottom:16px;color:var(--gold)}
+  .v1-cta-banner .kicker em{color:var(--gold);font-style:normal}
+  .v1-cta-banner h2{margin:0 auto 20px;max-width:22ch;color:#fff;font-size:clamp(1.9rem,4vw,3rem);line-height:1.1}
+  .v1-cta-banner h2 em{color:var(--gold);font-style:italic}
+  .v1-cta-banner p{max-width:52ch;margin:0 auto 32px;color:var(--paper);font-size:1.05rem;line-height:1.55;opacity:.88}
+  .v1-cta-banner .actions{display:inline-flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .v1-cta-banner .meta-line{margin-top:24px;font-family:var(--font-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-on-dark)}
+
   /* ==================================================================== */
   /* VARIANT 2 — MARKET BRIEF                                             */
   /* Axis: no imagery. Reads like a Bloomberg city profile. Long          */
@@ -443,12 +471,6 @@ function variant1(){
               <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
               <a class="hero-tel" href="${C.telHref}"><span class="tag">or call</span> <b>${C.phone}</b></a>
             </div>
-            <div class="v1-trust">
-              <div class="tcell"><div class="tkey">Founder-run since</div><div class="tval">2008</div></div>
-              <div class="tcell"><div class="tkey">Retainer band</div><div class="tval">$20k / $60k mo</div></div>
-              <div class="tcell"><div class="tkey">Initial term</div><div class="tval">90 days</div></div>
-              <div class="tcell"><div class="tkey">Office</div><div class="tval">Pacific Beach</div></div>
-            </div>
           </div>
 
           <div class="cartogram" aria-label="Stylized map of the San Diego metro with vertical zones and our office pin">
@@ -656,32 +678,36 @@ function variant1(){
       </div>
     </section>
 
-    <!-- 05 OFFICE (dark) -->
-    <section class="band">
+    <!-- 05 FAQ (light band, verbatim from homepage) -->
+    <section class="v1-faq band light">
       <div class="wrap">
-        <div class="v1-office">
-          <div>
-            <div class="kicker"><em>05 /</em> &nbsp; Office</div>
-            <div class="addr" style="margin-top:12px">${C.address} &middot; ${C.cityState}</div>
-            <div class="meta">${C.neighborhood} &middot; Founder available for a walk-in &middot; ${C.price} &middot; ${C.term}</div>
-          </div>
-          <div class="actions">
-            <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-            <a class="hero-tel" href="${C.telHref}"><span class="tag">or call</span> <b>${C.phone}</b></a>
-          </div>
+        <header class="sec-head">
+          <div class="kicker"><em>05 /</em> &nbsp; Questions</div>
+          <h2 style="margin-top:14px">The things ${C.city} operators ask <em>before booking</em></h2>
+          <div class="rule-light" aria-hidden="true"></div>
+        </header>
+        <div class="v1-faq-list">
+          <details class="v1-faq-item"><summary>What does this cost?</summary><div class="answer">Engagements are scoped on the call against your close rate and average ticket, rather than from a rate card. Our current ${C.city} retainer band is ${C.price}, ${C.term}, but if the numbers do not support the spend we will say so on that call rather than three months in.</div></details>
+          <details class="v1-faq-item"><summary>Do you guarantee a cost per lead?</summary><div class="answer">No, and be careful with anyone who does before seeing your intake. A guaranteed cost per lead is easy to hit by buying cheaper, lower-intent volume, which is exactly the outcome you are trying to avoid.</div></details>
+          <details class="v1-faq-item"><summary>How long before anything moves in San Diego?</summary><div class="answer">Paid channels can move inside the first month. Organic and local visibility here are slower and depend on where you start, because Torrey Pines and downtown are among the most competitive corridors in the state. We set that expectation on the call from your baseline, not an industry average.</div></details>
+          <details class="v1-faq-item"><summary>Do we have to switch our CRM or website?</summary><div class="answer">Usually not. We instrument what you have first. If something genuinely blocks measurement we will show you what it is costing before recommending a change.</div></details>
+          <details class="v1-faq-item"><summary>Who actually does the work?</summary><div class="answer">The founders and the in-house team, all working out of ${C.address} in ${C.neighborhood}. Strategy is not handed to a junior after the sale, and there is no account manager relaying messages.</div></details>
+          <details class="v1-faq-item"><summary>What if we are outside your three verticals?</summary><div class="answer">We refer you to someone who works in your category. Learning an unfamiliar industry on a client's budget wastes a year for both sides.</div></details>
         </div>
       </div>
     </section>
 
-    <!-- 06 CLOSING CTA (dark) -->
-    <section class="v1-close">
+    <!-- 06 CTA BANNER (Pexels bg + dark/gold overlay, mirrors homepage section.cta) -->
+    <section class="v1-cta-banner">
       <div class="wrap">
-        <div class="kicker"><em>06 /</em> &nbsp; Next step</div>
-        <h2>Bring us your ${C.city} account, <em>we will find the leaks</em></h2>
+        <span class="kicker"><em>Book a call</em></span>
+        <h2>Bring your ${C.city} numbers. We will tell you <em>what they say.</em></h2>
+        <p>Forty-five minutes with a founder, at ${C.address} in ${C.neighborhood} or over Zoom, and you keep the findings whether or not you hire us.</p>
         <div class="actions">
           <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
           <a class="hero-tel" href="${C.telHref}"><span class="tag">or call</span> <b>${C.phone}</b></a>
         </div>
+        <div class="meta-line">Retainer ${C.price} &middot; ${C.term} &middot; ${C.address}, ${C.cityState}</div>
       </div>
     </section>
   </div>
