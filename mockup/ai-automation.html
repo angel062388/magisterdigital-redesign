@@ -46,6 +46,38 @@
   .aa-footer .r{text-align:right}
   .aa-footer b{color:var(--paper,#F7F7F5); font-weight:600}
 
+  /* SITE FOOTER — ported verbatim from index.html, so this page's footer
+     matches the homepage instead of the old one-line .aa-footer. */
+  .site-footer{background:var(--ink-deep); padding:var(--sp-8) 0 var(--sp-6)}
+  .site-footer .wrap{max-width:1400px; margin:0 auto; padding:0 32px}
+  .footgrid{display:grid; gap:var(--sp-7)}
+  .footcol h4{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent-on-dark); margin-bottom:var(--sp-4)}
+  .footcol ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+  .footcol a{font-size:.875rem; color:var(--text-muted-dark); text-decoration:none; position:relative}
+  .footcol a:hover{color:var(--paper)}
+  .footcol a:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+  .footcol address{font-style:normal; font-size:.875rem; color:var(--text-muted-dark); line-height:1.8}
+  .footcol .mono{font-family:var(--font-mono); color:var(--gold); text-decoration:underline;
+    text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.6)}
+  .footcol .mono:hover{color:var(--gold-light); text-decoration-color:var(--gold-light)}
+  .foot-brand{margin-bottom:var(--sp-4); display:inline-block}
+  .foot-brand img{height:38px; width:auto}
+  .footbar{margin-top:var(--sp-8); padding-top:var(--sp-5); border-top:1px solid var(--rule);
+    display:grid; gap:var(--sp-4); font-size:.6875rem; color:var(--muted-on-dark);
+    font-family:var(--font-mono); letter-spacing:.06em}
+  .footbar nav{display:flex; flex-wrap:wrap; gap:var(--sp-5)}
+  .footbar a{color:var(--muted-on-dark); text-decoration:none}
+  .footbar a:hover{color:var(--border)}
+  @media (min-width:900px){
+    .footgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}
+    .footbar{grid-template-columns:1fr auto; align-items:center}
+  }
+  @media (max-width:640px){
+    .footbar{font-size:.8125rem}
+    .footbar a{display:inline-flex; align-items:center; min-height:44px; padding:10px 0}
+  }
+
   /* ==========================================================================
      HOMEPAGE-LIFTED PRIMITIVES — unscoped on purpose, they must behave here
      exactly as they do on index.html. Beth 2026-08-07: "navigation should
@@ -1248,9 +1280,52 @@
   </div>
 </div>
 
-<footer class="aa-footer">
-  <div><b>Magister Digital</b> &middot; San Diego HQ &middot; 1135 Garnet Ave #13</div>
-  <div class="r">&copy; 2026 Magister Digital &middot; Built by operators.</div>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footgrid">
+      <div class="footcol">
+        <a class="foot-brand" href="index.html" aria-label="Magister Digital home">
+          <img src="img/magister-logo.png" alt="Magister Digital">
+        </a>
+        <p style="font-size:.875rem; color:var(--text-muted-dark); max-width:32ch">
+          Marketing run by operators for home services, medical and legal businesses across the United States.
+        </p>
+      </div>
+      <div class="footcol">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="seo-services.html">SEO</a></li><li><a href="https://magisterdigital.ai/google-ads/">Google Ads</a></li>
+          <li><a href="https://magisterdigital.ai/meta-ads/">Meta Ads</a></li><li><a href="ai-automation.html">AI automation</a></li>
+          <li><a href="/crm/">Custom CRM</a></li><li><a href="https://magisterdigital.ai/full-stack-marketing/">Full-Stack Marketing</a></li>
+          <li><a href="/web-design/">Web design</a></li>
+        </ul>
+      </div>
+      <div class="footcol">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#verticals">Industries</a></li><li><a href="index.html#case-studies">Case studies</a></li>
+          <li><a href="index.html#videos">Videos</a></li><li><a href="index.html#founders">About</a></li>
+          <li><a href="index.html#reviews">Reviews</a></li><li><a href="index.html#locations">Locations</a></li>
+          <li><a href="index.html#faq">FAQ</a></li><li><a href="index.html#call">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footcol">
+        <h4>San Diego</h4>
+        <address>
+          1135 Garnet Ave #13<br>
+          San Diego, CA 92109<br>
+          <a class="mono" href="tel:+16193300953">(619) 330-0953</a><br>
+          <span class="mono" style="color:var(--muted-on-dark); text-decoration:none">Mon to Fri, 8am to 6pm PT</span>
+        </address>
+      </div>
+    </div>
+    <div class="footbar">
+      <p>&copy; 2026 Magister Digital</p>
+      <nav aria-label="Legal">
+        <a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/accessibility/">Accessibility</a>
+      </nav>
+    </div>
+  </div>
 </footer>
 
 <script data-v="31">
