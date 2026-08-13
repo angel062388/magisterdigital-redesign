@@ -110,16 +110,51 @@
   .v1-trust .tval{font-family:var(--font-display);font-style:italic;font-size:1.15rem;color:var(--gold);margin-top:6px;line-height:1.1}
   @media (max-width:600px){.v1-trust{grid-template-columns:repeat(2,1fr);gap:16px 0}}
 
-  /* Cartogram SVG */
+  /* Cartogram SVG — full animation set: load-in stagger + continuous radar sweep */
   .cartogram{position:relative;aspect-ratio:5/4;border:1px solid var(--rule);border-radius:12px;background:linear-gradient(180deg,#101216,#0d0f13);overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
   .cartogram svg{width:100%;height:100%;display:block}
-  .cartogram .legend{position:absolute;left:14px;bottom:14px;display:flex;gap:14px;font-family:var(--font-mono);font-size:11px;color:var(--muted-on-dark);letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.42);backdrop-filter:blur(6px);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.06)}
+  .cartogram .legend{position:absolute;left:14px;bottom:14px;display:flex;gap:14px;font-family:var(--font-mono);font-size:11px;color:var(--muted-on-dark);letter-spacing:.06em;text-transform:uppercase;background:rgba(0,0,0,.42);backdrop-filter:blur(6px);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.06);opacity:0;animation:cartoFadeUp .5s cubic-bezier(.4,0,.2,1) 2.2s forwards}
   .cartogram .legend span{display:inline-flex;align-items:center;gap:6px}
   .cartogram .legend i{width:8px;height:8px;border-radius:2px;display:inline-block}
-  .cartogram .pin{position:absolute;left:22%;top:32%;transform:translate(-50%,-100%);text-align:center}
-  .cartogram .pin .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.18),0 0 24px 4px rgba(212,175,55,.35);margin:0 auto 6px;animation:pinPulse 2.4s ease-in-out infinite}
+  .cartogram .pin{position:absolute;left:22%;top:32%;transform:translate(-50%,-100%);text-align:center;opacity:0;animation:pinDrop .6s cubic-bezier(.34,1.56,.64,1) 1.6s forwards}
+  .cartogram .pin .dot{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.18),0 0 24px 4px rgba(212,175,55,.35);margin:0 auto 6px;animation:pinPulse 2.4s ease-in-out 2s infinite}
   .cartogram .pin .lbl{font-family:var(--font-mono);font-size:11px;color:#fff;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.6);padding:4px 8px;border-radius:4px;white-space:nowrap;border:1px solid rgba(212,175,55,.35)}
+  /* Radar sweep ring behind the pin — pure SVG animation */
+  .cartogram .radar{opacity:0;animation:radarFadeIn .4s cubic-bezier(.4,0,.2,1) 1.8s forwards}
+  .cartogram .radar circle{fill:none;stroke:var(--gold);stroke-width:1.2;transform-origin:center;transform-box:fill-box;animation:radarPulse 3.2s cubic-bezier(.4,0,.2,1) infinite}
+  .cartogram .radar circle:nth-child(2){animation-delay:1.1s}
+  .cartogram .radar circle:nth-child(3){animation-delay:2.2s}
+  /* SVG zone polygons: draw-in + subtle breathing */
+  .cartogram .zone{opacity:0;transform-origin:center;transform-box:fill-box;animation:zoneIn .8s cubic-bezier(.4,0,.2,1) forwards}
+  .cartogram .zone.home{animation-delay:.15s}
+  .cartogram .zone.med{animation-delay:.45s}
+  .cartogram .zone.leg{animation-delay:.75s}
+  /* Text labels fade in staggered */
+  .cartogram .lbl-txt{opacity:0;animation:cartoFadeLeft .5s cubic-bezier(.4,0,.2,1) forwards}
+  .cartogram .lbl-txt.home{animation-delay:.55s}
+  .cartogram .lbl-txt.med{animation-delay:.85s}
+  .cartogram .lbl-txt.leg{animation-delay:1.15s}
+  /* I-5 dashed spine: fade in + subtle dash-flow */
+  .cartogram .spine{opacity:0;animation:cartoFadeIn .8s cubic-bezier(.4,0,.2,1) 1.2s forwards, dashFlow 12s linear 1.2s infinite}
+  .cartogram .spine-lbl{opacity:0;animation:cartoFadeIn .4s cubic-bezier(.4,0,.2,1) 1.6s forwards}
+
   @keyframes pinPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+  @keyframes pinDrop{0%{opacity:0;transform:translate(-50%,-140%) scale(.6)}70%{opacity:1;transform:translate(-50%,-92%) scale(1.05)}100%{opacity:1;transform:translate(-50%,-100%) scale(1)}}
+  @keyframes zoneIn{0%{opacity:0;transform:scale(.94)}100%{opacity:1;transform:scale(1)}}
+  @keyframes cartoFadeLeft{0%{opacity:0;transform:translateX(-8px)}100%{opacity:1;transform:translateX(0)}}
+  @keyframes cartoFadeIn{0%{opacity:0}100%{opacity:1}}
+  @keyframes cartoFadeUp{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes dashFlow{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-100}}
+  @keyframes radarFadeIn{to{opacity:1}}
+  @keyframes radarPulse{
+    0%{r:6;opacity:.55;stroke-width:1.5}
+    100%{r:52;opacity:0;stroke-width:.4}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .cartogram .zone,.cartogram .lbl-txt,.cartogram .spine,.cartogram .spine-lbl,.cartogram .pin,.cartogram .legend{opacity:1;animation:none;transform:none}
+    .cartogram .pin{transform:translate(-50%,-100%)}
+    .cartogram .radar,.cartogram .pin .dot{animation:none}
+  }
 
   .v1-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:48px}
   .v1-stats .cell{padding:28px 24px;border-right:1px solid var(--rule)}
@@ -488,21 +523,26 @@ function variant1(){
               <!-- coastline suggestion (left) -->
               <path d="M0,0 C40,60 30,150 60,220 C80,270 40,320 0,360 L0,400 L0,0 Z" fill="#0a0c10"/>
               <!-- Zone: Home services (north county + inland) -->
-              <path d="M120,40 L440,20 L470,150 L280,180 L180,140 Z" fill="rgba(78,178,141,.10)" stroke="rgba(78,178,141,.5)" stroke-width="1"/>
-              <text x="330" y="80" fill="rgba(123,224,176,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">HOME SERVICES</text>
-              <text x="330" y="96" fill="rgba(123,224,176,.5)" font-family="JetBrains Mono, monospace" font-size="9">North County &middot; Poway &middot; La Mesa</text>
+              <path class="zone home" d="M120,40 L440,20 L470,150 L280,180 L180,140 Z" fill="rgba(78,178,141,.10)" stroke="rgba(78,178,141,.5)" stroke-width="1"/>
+              <text class="lbl-txt home" x="330" y="80" fill="rgba(123,224,176,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">HOME SERVICES</text>
+              <text class="lbl-txt home" x="330" y="96" fill="rgba(123,224,176,.5)" font-family="JetBrains Mono, monospace" font-size="9">North County &middot; Poway &middot; La Mesa</text>
               <!-- Zone: Medical (Torrey Pines / La Jolla) -->
-              <path d="M60,140 L200,150 L240,220 L120,240 Z" fill="rgba(87,138,220,.10)" stroke="rgba(87,138,220,.5)" stroke-width="1"/>
-              <text x="90" y="180" fill="rgba(143,176,234,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">MEDICAL &middot; DENTAL</text>
-              <text x="90" y="196" fill="rgba(143,176,234,.5)" font-family="JetBrains Mono, monospace" font-size="9">Torrey Pines &middot; UCSD &middot; La Jolla</text>
+              <path class="zone med" d="M60,140 L200,150 L240,220 L120,240 Z" fill="rgba(87,138,220,.10)" stroke="rgba(87,138,220,.5)" stroke-width="1"/>
+              <text class="lbl-txt med" x="90" y="180" fill="rgba(143,176,234,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">MEDICAL &middot; DENTAL</text>
+              <text class="lbl-txt med" x="90" y="196" fill="rgba(143,176,234,.5)" font-family="JetBrains Mono, monospace" font-size="9">Torrey Pines &middot; UCSD &middot; La Jolla</text>
               <!-- Zone: Legal (downtown / south) -->
-              <path d="M180,240 L340,220 L400,330 L220,360 Z" fill="rgba(212,175,55,.10)" stroke="rgba(212,175,55,.5)" stroke-width="1"/>
-              <text x="240" y="290" fill="rgba(227,194,78,.9)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">LEGAL</text>
-              <text x="240" y="306" fill="rgba(227,194,78,.55)" font-family="JetBrains Mono, monospace" font-size="9">Downtown &middot; Chula Vista</text>
+              <path class="zone leg" d="M180,240 L340,220 L400,330 L220,360 Z" fill="rgba(212,175,55,.10)" stroke="rgba(212,175,55,.5)" stroke-width="1"/>
+              <text class="lbl-txt leg" x="240" y="290" fill="rgba(227,194,78,.9)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">LEGAL</text>
+              <text class="lbl-txt leg" x="240" y="306" fill="rgba(227,194,78,.55)" font-family="JetBrains Mono, monospace" font-size="9">Downtown &middot; Chula Vista</text>
               <!-- I-5 spine -->
-              <path d="M110,20 C130,120 150,220 170,380" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5" stroke-dasharray="4 6"/>
-              <text x="176" y="380" fill="rgba(255,255,255,.4)" font-family="JetBrains Mono, monospace" font-size="9">I-5</text>
-              <!-- Pin -->
+              <path class="spine" d="M110,20 C130,120 150,220 170,380" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5" stroke-dasharray="4 6"/>
+              <text class="spine-lbl" x="176" y="380" fill="rgba(255,255,255,.4)" font-family="JetBrains Mono, monospace" font-size="9">I-5</text>
+              <!-- Radar sweep ring from the pin (SVG coords: office pin at 22%,32% = 110,128) -->
+              <g class="radar">
+                <circle cx="110" cy="128"/>
+                <circle cx="110" cy="128"/>
+                <circle cx="110" cy="128"/>
+              </g>
             </svg>
             <div class="pin"><div class="dot"></div><div class="lbl">Our Office &middot; Pacific Beach</div></div>
             <div class="legend">
