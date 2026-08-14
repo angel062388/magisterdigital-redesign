@@ -132,13 +132,17 @@
   .cartogram{position:relative; aspect-ratio:5/4; border:1px solid var(--rule,#2A2C31); border-radius:12px;
     background:linear-gradient(180deg,#101216,#0d0f13); overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.35)}
   .cartogram svg{width:100%; height:100%; display:block}
-  .cartogram .legend{position:absolute; left:14px; bottom:14px; display:flex; gap:14px;
+  .cartogram .map-foot{position:absolute; left:14px; right:14px; bottom:14px;
+    display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+    opacity:0; animation:cartoFadeUp .5s cubic-bezier(.4,0,.2,1) 2.2s forwards}
+  .cartogram .legend{display:flex; gap:14px;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:11px; color:var(--muted-on-dark,#868A90);
     letter-spacing:.06em; text-transform:uppercase; background:rgba(0,0,0,.42); backdrop-filter:blur(6px);
-    padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.06);
-    opacity:0; animation:cartoFadeUp .5s cubic-bezier(.4,0,.2,1) 2.2s forwards}
+    padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.06)}
   .cartogram .legend span{display:inline-flex; align-items:center; gap:6px}
   .cartogram .legend i{width:8px; height:8px; border-radius:2px; display:inline-block}
+  .cartogram .map-caption{margin:0 0 0 4px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
   .cartogram .pin{position:absolute; left:22%; top:32%; transform:translate(-50%,-100%); text-align:center;
     opacity:0; animation:pinDrop .6s cubic-bezier(.34,1.56,.64,1) 1.6s forwards}
   .cartogram .pin .dot{width:14px; height:14px; border-radius:50%; background:var(--gold,#D4AF37);
@@ -395,21 +399,23 @@
           </defs>
           <rect width="500" height="400" fill="url(#ocean)"/>
           <rect width="500" height="400" fill="url(#grid)"/>
-          <path class="zone home" d="M100,30 L430,50 L440,180 L260,200 L150,150 Z" fill="rgba(78,178,141,.10)" stroke="rgba(78,178,141,.5)" stroke-width="1"/>
-          <text class="lbl-txt home" x="300" y="90" fill="rgba(123,224,176,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">HOME SERVICES</text>
-          <text class="lbl-txt home" x="300" y="106" fill="rgba(123,224,176,.5)" font-family="JetBrains Mono, monospace" font-size="9">Queens &middot; Brooklyn &middot; Staten Island</text>
-          <path class="zone med" d="M60,160 L210,170 L230,250 L110,270 Z" fill="rgba(87,138,220,.10)" stroke="rgba(87,138,220,.5)" stroke-width="1"/>
-          <text class="lbl-txt med" x="80" y="200" fill="rgba(143,176,234,.85)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">MEDICAL &middot; DENTAL</text>
-          <text class="lbl-txt med" x="80" y="216" fill="rgba(143,176,234,.5)" font-family="JetBrains Mono, monospace" font-size="9">Upper East Side &middot; Midtown</text>
-          <path class="zone leg" d="M190,260 L350,240 L410,340 L240,370 Z" fill="rgba(212,175,55,.10)" stroke="rgba(212,175,55,.5)" stroke-width="1"/>
-          <text class="lbl-txt leg" x="250" y="300" fill="rgba(227,194,78,.9)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">LEGAL</text>
-          <text class="lbl-txt leg" x="250" y="316" fill="rgba(227,194,78,.55)" font-family="JetBrains Mono, monospace" font-size="9">Financial District &middot; Midtown East</text>
+          <path class="zone home" d="M36,24 L464,24 L470,152 L30,152 Z" fill="rgba(94,196,168,.13)" stroke="rgba(94,196,168,.55)" stroke-width="1"/>
+          <text class="lbl-txt home" x="250" y="78" text-anchor="middle" fill="rgba(140,230,196,.9)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">HOME SERVICES</text>
+          <text class="lbl-txt home" x="250" y="94" text-anchor="middle" fill="rgba(140,230,196,.55)" font-family="JetBrains Mono, monospace" font-size="9">Queens &middot; Brooklyn &middot; Staten Island</text>
+          <path class="zone med" d="M24,172 L232,172 L226,372 L18,372 Z" fill="rgba(120,150,230,.13)" stroke="rgba(120,150,230,.55)" stroke-width="1"/>
+          <text class="lbl-txt med" x="126" y="222" text-anchor="middle" fill="rgba(165,190,240,.9)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">MEDICAL</text>
+          <text class="lbl-txt med" x="126" y="238" text-anchor="middle" fill="rgba(165,190,240,.55)" font-family="JetBrains Mono, monospace" font-size="9">Upper East Side &middot; Midtown</text>
+          <path class="zone leg" d="M250,172 L476,172 L482,372 L256,372 Z" fill="rgba(212,175,55,.13)" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
+          <text class="lbl-txt leg" x="366" y="222" text-anchor="middle" fill="rgba(227,194,78,.95)" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2">LEGAL</text>
+          <text class="lbl-txt leg" x="366" y="238" text-anchor="middle" fill="rgba(227,194,78,.6)" font-family="JetBrains Mono, monospace" font-size="9">Financial District &middot; Midtown East</text>
         </svg>
-        <div class="pin no-office"><div class="lbl">No local office &middot; full 5-borough coverage</div></div>
-        <div class="legend">
-          <span><i style="background:#7BE0B0"></i>Home services</span>
-          <span><i style="background:#8FB0EA"></i>Medical / dental</span>
-          <span><i style="background:#E3C24E"></i>Legal</span>
+        <div class="map-foot">
+          <div class="legend">
+            <span><i style="background:#8CE6C4"></i>Home services</span>
+            <span><i style="background:#A5BEF0"></i>Medical / dental</span>
+            <span><i style="background:#E3C24E"></i>Legal</span>
+          </div>
+          <p class="map-caption">No local office &middot; full 5-borough coverage</p>
         </div>
       </div>
     </div>
