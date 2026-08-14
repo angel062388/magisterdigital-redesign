@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Case Study: addiction-treatment provider, 14 qualified leads in 9 days | Magister Digital</title>
+<title>114 first-time treatment inquiries in 14 days: a paid-social launch for a national addiction-treatment provider | Magister Digital</title>
+<meta name="description" content="A national addiction-treatment provider opened a paid social channel it never had. In the first 14 days, 114 people reached out for the first time at $24.19 per inquiry, and the client's own admissions team verified 27 as qualified. Full funnel, cost basis and limitations on the page.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"114 first-time treatment inquiries in the first 14 days of a paid-social launch for a national addiction-treatment provider","datePublished":"2026-08-13","dateModified":"2026-08-13","author":{"@type":"Organization","name":"Magister Digital AI","url":"https://magisterdigital.ai"},"publisher":{"@type":"Organization","name":"Magister Digital AI","url":"https://magisterdigital.ai"},"about":"Addiction treatment marketing results, National (United States)","articleSection":"Client results"}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -622,17 +626,17 @@
     font-size:.72rem; color:var(--muted-on-dark,#868A90)}
 
   /* ==========================================================================
-     GARAGE HERO ANIMATION - page-specific hero background for the garage
-     services case study. Top-down blueprint of a garage bay: outer walls,
+     ATTRIBUTION HERO ANIMATION - page-specific hero background for this
+     case study. Top-down blueprint of a garage bay: outer walls,
      roll-up door segments, side shelving, back workbench, a car silhouette,
      three labelled bays. Every element is a path or text with a staggered
      stroke-dashoffset (or opacity) animation, so the whole plan draws
      itself over ~5 seconds and holds. Sits inside .aa-hero-bg beneath the
      same dark overlay used on the AA page, so text contrast never suffers.
      ========================================================================== */
-  .garage-plan{position:absolute; inset:0; z-index:1; width:100%; height:100%;
+  .attrib-plan{position:absolute; inset:0; z-index:1; width:100%; height:100%;
     display:block; overflow:hidden}
-  .garage-plan .gp-line{
+  .attrib-plan .gp-line{
     stroke-dasharray:2400; stroke-dashoffset:2400;
     animation:garagePlanDraw 12s cubic-bezier(.4,0,.2,1) infinite;
     animation-delay:var(--gd, 0s); will-change:stroke-dashoffset, opacity}
@@ -641,7 +645,7 @@
     38%,88%{stroke-dashoffset:0; opacity:1}
     100%{stroke-dashoffset:0; opacity:.3}
   }
-  .garage-plan .gp-label{
+  .attrib-plan .gp-label{
     opacity:0; animation:garagePlanFade 12s ease-in-out infinite;
     animation-delay:var(--gd, 0s)}
   @keyframes garagePlanFade{
@@ -656,8 +660,8 @@
   .garage-orb.g2{width:720px; height:720px; right:-160px; bottom:-160px;
     background:radial-gradient(circle, rgba(212,175,55,0.14), transparent 70%)}
   @media (prefers-reduced-motion:reduce){
-    .garage-plan .gp-line{animation:none; stroke-dashoffset:0; opacity:.6}
-    .garage-plan .gp-label{animation:none; opacity:.6}
+    .attrib-plan .gp-line{animation:none; stroke-dashoffset:0; opacity:.6}
+    .attrib-plan .gp-label{animation:none; opacity:.6}
   }
 
   /* ==========================================================================
@@ -941,6 +945,235 @@
   .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
+
+  /* ==========================================================================
+     PROOF-FILE COMPONENTS - ported 2026-08-14 from the garage case study so
+     Dimi's updated rehab build renders in this page's own ink+gold system.
+     ========================================================================== */
+/* ==========================================================================
+     PROOF-FILE COMPONENTS — added 2026-08-14 to carry Dimi's full content
+     (netlify build) inside this page's existing ink+gold system. Everything
+     below is .cs- prefixed and reuses the same tokens, radii, borders and
+     band-light inversions as the components above, so nothing new invents a
+     second visual language.
+     ========================================================================== */
+
+  /* HERO — Dimi leads on the money line, which is a long sentence rather than
+     the short 4-word headline this hero was built for. A long-headline
+     modifier drops the clamp so the sentence sets at a readable size instead
+     of filling the viewport, and the standing stat sits above it. */
+  .aa-hero h1.cs-h1-long{font-size:clamp(1.45rem, 3.1vw, 2.6rem); line-height:1.34;
+    max-width:26ch; margin-left:auto; margin-right:auto}
+  @media (max-width:640px){
+ .aa-hero h1.cs-h1-long{max-width:none}
+  }
+  .cs-hero-stat{display:block; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-weight:600; font-size:clamp(3.1rem, 9vw, 5.6rem); line-height:1;
+    letter-spacing:-.02em; color:var(--gold,#D4AF37); margin-bottom:10px;
+    text-shadow:0 4px 28px rgba(15,17,21,.7)}
+  .cs-hero-stat-sub{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.75rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin:0 0 26px}
+  .cs-hero-stat-sub b{color:var(--paper,#F7F7F5); font-weight:600}
+
+  /* LEDGER — the "money, stated plainly" rows. Label left, figure right,
+     hairline between, total row emphasised. Mono throughout so the figures
+     column-align without a table. */
+  .cs-ledger{margin-top:28px; border-top:2px solid var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-ledger{border-top-color:var(--gold-deep,#6E561A)}
+  .cs-ledger-row{display:flex; align-items:baseline; justify-content:space-between;
+    gap:24px; padding:16px 4px; border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-ledger-row{border-bottom-color:#E5E4DF}
+  .cs-ledger-row .k{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.5; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-ledger-row .k{color:var(--ink,#16171A)}
+  .cs-ledger-row .v{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.05rem; font-weight:600; color:var(--paper,#F7F7F5); white-space:nowrap;
+    text-align:right; flex:0 0 auto}
+  .aa-sec.band-light .cs-ledger-row .v{color:var(--ink,#16171A)}
+  .cs-ledger-row .v.muted{color:var(--muted-on-dark,#868A90); font-weight:400; font-size:.875rem}
+  .aa-sec.band-light .cs-ledger-row .v.muted{color:#5E6066}
+  .cs-ledger-row.is-total{background:rgba(212,175,55,.06); border-bottom:0;
+    padding-top:20px; padding-bottom:20px}
+  .aa-sec.band-light .cs-ledger-row.is-total{background:rgba(110,86,26,.06)}
+  .cs-ledger-row.is-total .k{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.15rem}
+  .cs-ledger-row.is-total .v{font-size:1.6rem; color:var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-ledger-row.is-total .v{color:var(--gold-deep,#6E561A)}
+
+  /* NOTE BLOCK — definitions, methodology caveats, source lines. Gold left
+     rule, muted mono-ish body, used wherever Dimi states a boundary. */
+  .cs-note{margin-top:24px; padding:18px 22px; border-left:2px solid var(--gold,#D4AF37);
+    background:rgba(212,175,55,.04); border-radius:0 4px 4px 0;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.65; color:var(--muted-on-dark,#B0B3B8)}
+  .aa-sec.band-light .cs-note{border-left-color:var(--gold-deep,#6E561A);
+    background:rgba(110,86,26,.04); color:#45474C}
+  .cs-note b{color:var(--paper,#F7F7F5); font-weight:600}
+  .aa-sec.band-light .cs-note b{color:var(--ink,#16171A)}
+  .cs-note p{margin:0 0 12px}
+  .cs-note p:last-child{margin-bottom:0}
+
+  /* CHART — cost per lead by campaign. Bars under the blended average take
+     full gold; bars over it drop to a muted platinum so the read is instant.
+     viewBox scales the whole thing, so no fixed pixel sizing is needed. */
+  .cs-chart-wrap{margin-top:28px; border:1px solid var(--border,#2A2C31);
+    border-radius:6px; background:var(--ink-2,#1C1D21); padding:24px 20px 18px}
+  .aa-sec.band-light .cs-chart-wrap{background:#FFFFFF; border-color:#E5E4DF}
+  .cs-chart{display:block; width:100%; height:auto; overflow:visible}
+  .cs-chart-cap{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; line-height:1.6; letter-spacing:.04em;
+    color:var(--muted-on-dark,#868A90); margin:16px 0 0}
+  .aa-sec.band-light .cs-chart-cap{color:#5E6066}
+  .cs-chart-legend{display:flex; flex-wrap:wrap; gap:18px; margin-top:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90)}
+  .cs-chart-legend span{display:inline-flex; align-items:center; gap:8px}
+  .cs-chart-legend i{width:14px; height:10px; border-radius:2px; display:inline-block}
+  .cs-chart-legend i.under{background:#D4AF37}
+  .cs-chart-legend i.over{background:#5E6066}
+  .cs-chart-legend i.avg{height:0; border-top:2px dashed #B0B3B8; border-radius:0}
+
+  /* COLLAPSIBLE PROOF PANELS — Dimi's five "open to read the evidence"
+     sections. Native <details> so they work with JS off and are keyboard
+     operable for free. The summary is a full-width bar: index chip, title,
+     one-line description, and a chevron that rotates on open. */
+  .cs-panels{margin-top:32px; display:grid; gap:16px}
+  /* Beth 2026-08-14: 'border make it bold.' A 1px #E5E4DF hairline on the
+     #F7F7F5 paper band was near invisible, so the panels read as floating
+     text rather than as clickable cards. Border goes to 2px in gold-deep on
+     paper and gold on ink, strengthens on hover, and goes solid gold once
+     open so the open card is unmistakable in a stack of five. */
+  .cs-panel{border:2px solid rgba(212,175,55,.45); border-radius:6px;
+    background:var(--ink-2,#1C1D21); overflow:hidden;
+    transition:border-color .25s cubic-bezier(.16,1,.3,1), box-shadow .25s cubic-bezier(.16,1,.3,1)}
+  .aa-sec.band-light .cs-panel{background:#FFFFFF; border-color:rgba(110,86,26,.55)}
+  .cs-panel:hover{border-color:rgba(212,175,55,.75)}
+  .aa-sec.band-light .cs-panel:hover{border-color:rgba(110,86,26,.85)}
+  .cs-panel[open]{border-color:var(--gold,#D4AF37);
+    box-shadow:0 6px 24px rgba(0,0,0,.28)}
+  .aa-sec.band-light .cs-panel[open]{border-color:var(--gold-deep,#6E561A);
+    box-shadow:0 6px 22px rgba(110,86,26,.14)}
+  .cs-panel-sum{display:grid; grid-template-columns:auto 1fr auto; gap:18px;
+    align-items:center; padding:22px 24px; cursor:pointer; list-style:none;
+    transition:background .25s cubic-bezier(.16,1,.3,1)}
+  .cs-panel-sum::-webkit-details-marker{display:none}
+  .cs-panel-sum:hover{background:rgba(212,175,55,.05)}
+  .aa-sec.band-light .cs-panel-sum:hover{background:rgba(110,86,26,.04)}
+  .cs-panel-sum:focus-visible{outline:2px solid var(--gold,#D4AF37); outline-offset:-3px}
+  .cs-panel-num{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; font-weight:700; letter-spacing:.16em;
+    color:var(--gold,#D4AF37); border:1px solid rgba(212,175,55,.4);
+    border-radius:4px; padding:8px 10px; flex:0 0 auto}
+  .aa-sec.band-light .cs-panel-num{color:var(--gold-deep,#6E561A); border-color:rgba(168,132,42,.4)}
+  .cs-panel-title{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:600; font-size:1.2rem; line-height:1.25; color:var(--paper,#F7F7F5);
+    display:block; margin-bottom:6px}
+  .aa-sec.band-light .cs-panel-title{color:var(--ink,#16171A)}
+  .cs-panel-desc{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.875rem; line-height:1.5; color:var(--muted-on-dark,#868A90);
+    display:block; margin:0}
+  .aa-sec.band-light .cs-panel-desc{color:#5E6066}
+  .cs-panel-toggle{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); display:inline-flex; align-items:center; gap:9px;
+    white-space:nowrap; flex:0 0 auto}
+  .aa-sec.band-light .cs-panel-toggle{color:var(--gold-deep,#6E561A)}
+  .cs-panel-toggle::after{content:"\25BE"; font-size:1em; display:inline-block;
+    transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .cs-panel[open] .cs-panel-toggle::after{transform:rotate(-180deg)}
+  .cs-panel[open] .cs-panel-toggle .lbl-open{display:none}
+  .cs-panel .cs-panel-toggle .lbl-close{display:none}
+  .cs-panel[open] .cs-panel-toggle .lbl-close{display:inline}
+  .cs-panel-body{padding:4px 24px 30px; border-top:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-panel-body{border-top-color:#E5E4DF}
+  .cs-panel-body > .eyebrow{margin-top:26px; margin-bottom:10px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-panel-body > .eyebrow{color:var(--gold-deep,#6E561A)}
+  .cs-panel-body h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:500; font-size:clamp(1.5rem,2.9vw,2.15rem); line-height:1.14;
+    margin:0 0 18px; color:var(--paper,#F7F7F5)}
+  .aa-sec.band-light .cs-panel-body h3{color:var(--ink,#16171A)}
+  .cs-panel-body h3 em{font-style:italic; color:var(--gold,#D4AF37)}
+  .aa-sec.band-light .cs-panel-body h3 em{color:var(--gold-deep,#6E561A)}
+  .cs-panel-body p.intro{font-size:1rem}
+  @media (max-width:720px){
+
+    /* title wraps to 2-3 lines on a phone, so the index chip top-aligns with
+       the first line instead of floating in the middle of the block. */
+    .cs-panel-sum{grid-template-columns:auto 1fr; gap:14px; padding:18px 18px;
+      align-items:start}
+    .cs-panel-toggle{grid-column:1 / -1; justify-content:flex-start}
+    .cs-panel-body{padding:4px 18px 26px}
+  }
+
+  /* DATA TABLE — the nine-column campaign ledger. Scrolls inside its own
+     container on narrow viewports so the page body never scrolls sideways. */
+  .cs-table-scroll{margin-top:24px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+    border:1px solid var(--border,#2A2C31); border-radius:6px}
+  .aa-sec.band-light .cs-table-scroll{border-color:#E5E4DF}
+  .cs-table{width:100%; min-width:840px; border-collapse:collapse;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.8125rem}
+  .cs-table th{text-align:right; padding:14px 14px; font-size:.625rem;
+    letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+    color:var(--muted-on-dark,#868A90); border-bottom:2px solid var(--gold,#D4AF37);
+    white-space:nowrap}
+  .aa-sec.band-light .cs-table th{color:#5E6066; border-bottom-color:var(--gold-deep,#6E561A)}
+  .cs-table th:nth-child(1),.cs-table th:nth-child(2){text-align:left}
+  .cs-table td{padding:14px 14px; text-align:right; white-space:nowrap;
+    color:var(--paper,#F7F7F5); border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-table td{color:var(--ink,#16171A); border-bottom-color:#E5E4DF}
+  .cs-table td:nth-child(1),.cs-table td:nth-child(2){text-align:left}
+  .cs-table td:nth-child(1){color:var(--gold,#D4AF37); font-weight:600}
+  .aa-sec.band-light .cs-table td:nth-child(1){color:var(--gold-deep,#6E561A)}
+  .cs-table td:nth-child(2){font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .cs-table tbody tr:hover{background:rgba(212,175,55,.04)}
+  .aa-sec.band-light .cs-table tbody tr:hover{background:rgba(110,86,26,.03)}
+  .cs-table .cpl{font-weight:700}
+  .cs-table .cpl.under{color:#D4AF37}
+  .aa-sec.band-light .cs-table .cpl.under{color:#6E561A}
+  .cs-table tr.is-best td{background:rgba(212,175,55,.08)}
+  .aa-sec.band-light .cs-table tr.is-best td{background:rgba(110,86,26,.07)}
+  .cs-table tfoot td{border-bottom:0; border-top:2px solid var(--gold,#D4AF37);
+    font-weight:700; background:rgba(212,175,55,.06)}
+  .aa-sec.band-light .cs-table tfoot td{border-top-color:var(--gold-deep,#6E561A);
+    background:rgba(110,86,26,.06)}
+  .cs-table .flag{display:block; font-size:.5625rem; letter-spacing:.1em;
+    text-transform:uppercase; font-weight:400; color:var(--muted-on-dark,#868A90);
+    margin-top:3px}
+  .aa-sec.band-light .cs-table .flag{color:#5E6066}
+  .cs-table-hint{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin:10px 0 0}
+  .aa-sec.band-light .cs-table-hint{color:#5E6066}
+  .cs-list-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.18em; text-transform:uppercase; font-weight:700;
+    color:var(--muted-on-dark,#868A90); margin:0 0 12px; padding-bottom:9px;
+    border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-sec.band-light .cs-list-head{color:#5E6066; border-bottom-color:#E5E4DF}
+
+  /* Three trust cards under the boundaries list. */
+  .cs-trust{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:28px}
+  @media (max-width:900px){
+ .cs-trust{grid-template-columns:1fr}
+  }
+
+  /* Legal footnote block under the closing CTA. */
+  .cs-legal{max-width:1400px; margin:0 auto; padding:36px 32px 0;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.8125rem; line-height:1.7; color:var(--muted-on-dark,#868A90)}
+  .cs-legal p{margin:0 0 12px}
+  .cs-legal p:last-child{margin-bottom:0}
+  /* This page's hero eyebrow carries four segments (category, geography,
+     provider type, window) against one or two on the sibling case studies,
+     so the inline-flex row overruns a phone by ~11px and clips. Let it wrap. */
+  @media (max-width:640px){
+    .aa-hero .eyebrow{flex-wrap:wrap; justify-content:center; row-gap:4px}
+  }
 </style>
 </head>
 <body>
@@ -986,48 +1219,54 @@
          Each element carries a staggered stroke-dashoffset animation so the
          whole plan renders as a technical drawing being drafted. Reduced
          motion holds the finished plan without the draw effect. -->
-    <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <svg class="attrib-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
-        <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <pattern id="attribGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
           <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(212,175,55,0.055)" stroke-width="1"/>
         </pattern>
       </defs>
+      <rect width="1600" height="900" fill="url(#attribGrid)"/>
 
-      <!-- floor lattice everywhere -->
-      <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
-
-      <!-- blueprint linework, all children share the .gp-line class + draw
-           animation with staggered delays. -->
+      <!-- The attribution pipeline this case study is about, drawn as a
+           technical schematic in the same thin gold stroke and staggered
+           draw as the other case study heroes: two ad sources feed a
+           tracking layer, which feeds first-time inquiries, which the
+           client's admissions team scores, with the admissions stage left
+           deliberately dashed because it is pending. Routed low and wide so
+           the headline sits on clean ground. -->
       <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 01 · outer walls (draws first) -->
-        <path class="gp-line" style="--gd:0s" d="M200 140 L1400 140 L1400 780 L200 780 Z"/>
-        <!-- 02 · roll-up door segments along the bottom wall -->
-        <path class="gp-line" style="--gd:0.9s" d="M280 780 L280 800 M380 780 L380 800 M480 780 L480 800 M580 780 L580 800 M680 780 L680 800 M780 780 L780 800 M880 780 L880 800 M980 780 L980 800 M1080 780 L1080 800 M1180 780 L1180 800 M1280 780 L1280 800"/>
-        <!-- 03 · workbench along the back wall -->
-        <path class="gp-line" style="--gd:1.5s" d="M420 140 L420 200 L1180 200 L1180 140"/>
-        <path class="gp-line" style="--gd:1.5s" d="M480 200 L480 220 M560 200 L560 220 M640 200 L640 220 M720 200 L720 220 M800 200 L800 220 M880 200 L880 220 M960 200 L960 220 M1040 200 L1040 220 M1120 200 L1120 220"/>
-        <!-- 04 · left shelving unit -->
-        <path class="gp-line" style="--gd:2s" d="M200 260 L320 260 L320 720 L200 720"/>
-        <path class="gp-line" style="--gd:2.2s" d="M200 360 L320 360 M200 460 L320 460 M200 560 L320 560 M200 660 L320 660"/>
-        <!-- 05 · right shelving unit -->
-        <path class="gp-line" style="--gd:2s" d="M1400 260 L1280 260 L1280 720 L1400 720"/>
-        <path class="gp-line" style="--gd:2.2s" d="M1280 360 L1400 360 M1280 460 L1400 460 M1280 560 L1400 560 M1280 660 L1400 660"/>
-        <!-- 06 · car silhouette parked in the middle bay (simplified top-down) -->
-        <path class="gp-line" style="--gd:2.8s" d="M720 380 L680 400 L680 460 L720 480 L880 480 L920 460 L920 400 L880 380 Z"/>
-        <path class="gp-line" style="--gd:2.9s" d="M700 400 L700 460 M900 400 L900 460 M750 400 L750 480 M850 400 L850 480"/>
-        <path class="gp-line" style="--gd:2.9s" d="M700 420 L680 420 M900 420 L920 420 M700 440 L680 440 M900 440 L920 440"/>
-        <!-- 07 · bay dividers (dashed lines dividing the floor into 3 bays) -->
-        <path class="gp-line" style="--gd:3.4s; stroke-dasharray:6 8; opacity:0.55" d="M600 220 L600 720 M1000 220 L1000 720"/>
+        <!-- 01 · two source nodes, upper left -->
+        <path class="gp-line" style="--gd:0s" d="M120 150 L360 150 L360 250 L120 250 Z"/>
+        <path class="gp-line" style="--gd:0.3s" d="M120 300 L360 300 L360 400 L120 400 Z"/>
+        <!-- 02 · both feed one tracking layer -->
+        <path class="gp-line" style="--gd:0.9s" d="M360 200 L460 200 L460 640 M360 350 L460 350"/>
+        <!-- 03 · the rail across the base -->
+        <path class="gp-line" style="--gd:1.3s" d="M180 700 L1420 700"/>
+        <!-- 04 · tracking layer node -->
+        <path class="gp-line" style="--gd:1.6s" d="M380 640 L620 640 L620 760 L380 760 Z"/>
+        <path class="gp-line" style="--gd:1.8s" d="M420 700 L580 700 M420 670 L580 670 M420 730 L580 730"/>
+        <!-- 05 · first-time inquiries node -->
+        <path class="gp-line" style="--gd:2.2s" d="M700 640 L940 640 L940 760 L700 760 Z"/>
+        <path class="gp-line" style="--gd:2.4s" d="M620 700 L700 700"/>
+        <!-- 06 · qualified node, tighter box to read as a narrowing funnel -->
+        <path class="gp-line" style="--gd:2.8s" d="M1020 660 L1220 660 L1220 740 L1020 740 Z"/>
+        <path class="gp-line" style="--gd:3s" d="M940 700 L1020 700"/>
+        <!-- 07 · admissions stage, dashed because it is pending -->
+        <path class="gp-line" style="--gd:3.4s; stroke-dasharray:6 8; opacity:0.5" d="M1300 670 L1440 670 L1440 730 L1300 730 Z M1220 700 L1300 700"/>
+        <!-- 08 · corner brackets, upper right, to balance the frame -->
+        <path class="gp-line" style="--gd:3.8s; opacity:0.4" d="M1480 140 L1480 260 M1420 140 L1480 140"/>
       </g>
 
-      <!-- Bay labels fade in after the plan is drawn. -->
       <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
-        <text class="gp-label" style="--gd:3.9s" x="450" y="708">BAY 01</text>
-        <text class="gp-label" style="--gd:4.1s" x="750" y="708">BAY 02</text>
-        <text class="gp-label" style="--gd:4.3s" x="1060" y="708">BAY 03</text>
-        <text class="gp-label" style="--gd:4.5s" x="500" y="180" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">WORKBENCH</text>
-        <text class="gp-label" style="--gd:4.5s" x="220" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; L</text>
-        <text class="gp-label" style="--gd:4.5s" x="1290" y="248" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">SHELVING &middot; R</text>
+        <text class="gp-label" style="--gd:4s" x="150" y="207" font-size="13" letter-spacing="4" fill="rgba(212,175,55,0.45)">FACEBOOK ADS</text>
+        <text class="gp-label" style="--gd:4.1s" x="150" y="357" font-size="13" letter-spacing="4" fill="rgba(212,175,55,0.45)">INSTAGRAM ADS</text>
+        <text class="gp-label" style="--gd:4.2s" x="404" y="812" font-size="13" letter-spacing="4">CALL + FORM TRACKING</text>
+        <text class="gp-label" style="--gd:4.4s" x="724" y="812" font-size="13" letter-spacing="4">FIRST-TIME INQUIRIES</text>
+        <text class="gp-label" style="--gd:4.6s" x="1044" y="812" font-size="13" letter-spacing="4">QUALIFIED</text>
+        <!-- right-anchored to the node's own right edge: at 1440-wide the
+             visible viewBox band stops around x=1508, so a left-anchored
+             label here loses its last few characters. -->
+        <text class="gp-label" style="--gd:4.8s" x="1440" y="812" font-size="13" letter-spacing="4" text-anchor="end" fill="rgba(212,175,55,0.38)">ADMISSIONS &#183; PENDING</text>
       </g>
     </svg>
 
@@ -1035,69 +1274,83 @@
     <span class="garage-orb g2"></span>
   </div>
   <div class="aa-hero-content">
-    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Addiction treatment <span class="sep">/</span> Meta lead attribution</div>
-    <h1>Fourteen qualified leads in <em>nine days</em>, proven with source tracking the <em>client owns</em></h1>
+    <div class="eyebrow"><span class="num">01</span> &middot; Addiction treatment <span class="sep">/</span> National (US) <span class="sep">/</span> Multi-facility provider <span class="sep">/</span> First 14 days</div>
+    <span class="cs-hero-stat">114</span>
+    <p class="cs-hero-stat-sub">First-time treatment inquiries &middot; first 14 days of a new channel</p>
+    <h1 class="cs-h1-long">A national addiction-treatment provider opened a paid social channel it never had, and in the first 14 days <em>114 people</em> reached out for the first time</h1>
     <p class="lede">
-      A national LegitScript-certified addiction-treatment provider on its fourth agency,
-      spending on Meta with an empty results column, needed one thing before signing:
-      <code>proof</code> that qualified inquiries could move and that each source could be
-      verified without another long ramp.
+      <code>$2,757.73 in ad spend</code> (media only) &rarr; 114 first-time inquiries at <code>$24.19 per inquiry</code>.
+      The client&rsquo;s own admissions team verified 27 of them as qualified.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
+    <p class="aa-hero-byline"><b>Jul 30 &ndash; Aug 12, 2026</b> &middot; channel launch, no paid social program existed before this window</p>
   </div>
 </section>
 
-<!-- 01b - Hero KPI strip. Three figures Dimi leads with; captions
-     copied verbatim from garage-services-case-study.netlify.app. -->
-<section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline results">
+<!-- 01b - Hero KPI strip. Dimi's three standing figures, captions verbatim
+     from his netlify build. -->
+<section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline campaign figures">
   <div class="aa-kpi-strip cs-kpi-3">
     <div class="aa-kpi">
-      <div class="l">Client-verified qualified leads in 9 days</div>
-      <div class="v">14</div>
-      <div class="d">Client's admissions team scored each inbound as qualified in CallRail &middot; Aug 1&ndash;9, 2026</div>
+      <div class="l">People who asked about treatment for the first time, in 14 days</div>
+      <div class="v">114</div>
+      <div class="d">From a channel that did not exist on Jul 29</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Media cost per qualified lead</div>
-      <div class="v">$127.55</div>
-      <div class="d">$1,785.65 Meta spend &divide; 14 qualified &middot; media only, not full CAC</div>
+      <div class="l">Verified as qualified by the client&rsquo;s own admissions team</div>
+      <div class="v">27</div>
+      <div class="d">Their judgment, not ours</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">First-contact leads captured with a verified source</div>
-      <div class="v">91</div>
-      <div class="d">27 calls + 64 forms via CallRail, where the prior setup attributed none</div>
+      <div class="l">Ad cost per first-time inquiry</div>
+      <div class="v">$24.19</div>
+      <div class="d">$102.14 per verified qualified inquiry &middot; media only, fee not included</div>
     </div>
   </div>
 </section>
 
-<!-- 02 - The situation (light band, split layout: image left, findings right).
-     Copy taken from Dimi's Netlify mockup verbatim, compressed into three
-     structural findings so the split layout stays readable. -->
+<!-- 02 - The first 14 days (light band). Dimi's two-bar chart rebuilt in this
+     page's palette. Admissions deliberately not charted. -->
 <section class="aa-sec band-light" data-mark="02">
+  <div class="eyebrow">02 &middot; The first 14 days</div>
+  <h2>114 first-time inquiries, <em>27 verified qualified</em></h2>
+  <p class="intro">First 14 days: 114 first-time inquiries, 27 verified qualified by the client&rsquo;s admissions team. A third stage, admissions, is pending and deliberately not charted.</p>
+  <div class="cs-chart-wrap">
+    <svg class="cs-chart" viewBox="0 0 1200 400" role="img" aria-labelledby="rhTitle rhDesc" focusable="false">
+      <title id="rhTitle">First-time inquiries against verified qualified inquiries, first 14 days</title>
+      <desc id="rhDesc">In the first 14 days, 114 first-time treatment inquiries were recorded, and 27 were verified as qualified by the client's admissions team. Admissions are pending and not charted.</desc>
+      <line x1="60" y1="320" x2="1140" y2="320" stroke="#DAD9D3" stroke-width="1.5"/>
+      <rect x="200" y="60" width="200" height="260" rx="3" fill="#6E561A"/>
+      <text x="300" y="46" fill="#16171A" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="30" font-weight="700" text-anchor="middle">114</text>
+      <text x="300" y="350" fill="#45474C" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="600" text-anchor="middle">First-time inquiries</text>
+      <text x="300" y="372" fill="#5E6066" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" text-anchor="middle">Calls + form submissions</text>
+      <rect x="800" y="258" width="200" height="62" rx="3" fill="#D4AF37"/>
+      <text x="900" y="244" fill="#16171A" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="30" font-weight="700" text-anchor="middle">27</text>
+      <text x="900" y="350" fill="#45474C" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="15" font-weight="600" text-anchor="middle">Verified qualified</text>
+      <text x="900" y="372" fill="#5E6066" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="12" text-anchor="middle">Scored by client&rsquo;s admissions team</text>
+    </svg>
+    <p class="cs-chart-cap">Source: CallRail first-time conversations, source-filtered to Facebook Ads and Instagram Ads. Forms: Jul 30 &ndash; Aug 12, 2026 (14 days). Calls: Aug 1 &ndash; 12, 2026 (12 days; tracking numbers went live Aug 1). Qualification: thumbs-scored in CallRail by the client&rsquo;s admissions staff. A third stage, admissions, is pending and deliberately not charted.</p>
+  </div>
+  <div class="cs-note">
+    <p><b>Not claimed on this page:</b> admissions, collected revenue, and any return multiple. Those figures are pending the client&rsquo;s records.</p>
+    <p>When an agency shows you a return number without them, ask where it came from.</p>
+  </div>
+</section>
+
+<!-- 03 - What was broken (dark band, split layout). -->
+<section class="aa-sec" data-mark="03">
   <div class="cs-split">
     <figure class="cs-split-img">
-      <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=700&amp;fit=crop" alt="Close-up of code and workflow patterns on a technical surface" loading="lazy" width="900" height="700">
+      <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&amp;h=700&amp;fit=crop" alt="Close-up of a data-dense circuit board with soldered components" loading="lazy" width="900" height="700">
     </figure>
     <div class="cs-split-body">
-      <div class="eyebrow">02 &middot; The situation</div>
-      <h2>Fourth agency in, <em>and still no verified source</em></h2>
-      <p class="intro small">A LegitScript-certified addiction-treatment provider advertising on Meta across multiple states. Admissions in this category move on the phone and on the form, and a call that is not answered or a lead that cannot be traced is revenue that quietly leaves.</p>
-      <ol class="cs-questions">
-        <li>
-          <span class="cs-q-num">01</span>
-          <span class="cs-q-text">Spending on Facebook and Instagram, seeing impressions and spend in Ads Manager, and looking at an empty results column, unable to tell a qualified inquiry from a wasted click</span>
-        </li>
-        <li>
-          <span class="cs-q-num">02</span>
-          <span class="cs-q-text">On its fourth agency and still could not get quality leads at a workable cost, or verify where the leads came from, with three prior teams pointing at the same media buy</span>
-        </li>
-        <li>
-          <span class="cs-q-num">03</span>
-          <span class="cs-q-text">Needed narrow proof before signing: that someone could get qualified inquiries moving and prove the source of each one, without another long ramp</span>
-        </li>
-      </ol>
+      <div class="eyebrow">03 &middot; What was broken</div>
+      <h2>Money out, <em>verdict unknowable</em></h2>
+      <p class="intro small">Three agencies had run this account before. After each one, the provider could not answer the only question that matters: which admissions, if any, came from the marketing.</p>
+      <p class="intro small">The ads may have worked or may not have. Nobody could tell, because inquiries were never tracked to their source, never scored for quality, and never followed to an admission. That is the most expensive kind of spend: money out, verdict unknowable.</p>
       <div class="cs-cta-pair">
         <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
         <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -1106,75 +1359,62 @@
   </div>
 </section>
 
-<!-- 03 - The diagnosis (dark). Three named sub-sections in Dimi's order,
-     copy compressed but true to the mockup. -->
-<section class="aa-sec" data-mark="03">
-  <figure class="cs-banner">
-    <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Close-up of a data-dense circuit board with soldered components" loading="lazy" width="1600" height="460">
-  </figure>
-  <div class="eyebrow">03 &middot; The diagnosis</div>
-  <h2>Not a media problem, <em>a measurement problem</em></h2>
-  <div class="cs-diag3">
-    <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">01</span>What they thought the problem was</div>
-      <p>Cheaper leads and sharper targeting. The assumption after three prior agencies was that the media buy was the thing to fix. Everyone before us pointed at Meta bidding, audience selection, or creative refresh, and the client had been buying into that cycle for long enough that another agency in the same posture would have looked like more of the same.</p>
-    </article>
-    <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">02</span>The constraint we found</div>
-      <p>Measurement, not volume or price. Meta could not attribute conversions: one form campaign had spent $1,107.80 across 15,033 impressions with an empty results column, so the optimizer was learning from nothing. The setup also leaned on Facebook lead forms, which in a certification-gated health category tend to return lower-intent, harder-to-verify contacts. Fixing the buy without fixing the wiring would have produced more of the same unaccountable spend.</p>
-    </article>
-  </div>
-</section>
-
-<!-- 04 - The controlled first step (light band, 5 tiles).
-     Dimi's five named steps + the "did not do" tile at the end. -->
+<!-- 04 - What was actually wrong (light band). -->
 <section class="aa-sec band-light" data-mark="04">
-  <div class="eyebrow">04 &middot; The controlled first step</div>
-  <h2>Foundation first, <em>before a dollar of scale</em></h2>
-  <p class="intro small">Readiness was foundation, not scale. Fix measurement and lead quality on a small, contained budget before adding spend. The stop condition was written before the start.</p>
-  <div class="cs-steps cs-steps-5">
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">01</span>Readiness</div>
-      <p>Foundation, or crawl phase. Fix measurement and lead quality first, on a contained budget, before any conversation about scaling spend.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">02</span>Initial scope</div>
-      <p>Rebuild source tracking, move conversions off Facebook lead forms and onto the client's own website, run a limited Meta budget against a corrected ICP.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">03</span>Success threshold</div>
-      <p>Source-tagged, client-verifiable qualified leads flowing inside the first two weeks at a workable cost. Anything softer than "verifiable" did not count.</p>
-    </article>
-    <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">04</span>Review + stop condition</div>
-      <p>End of week one (this report), then week two. If qualified inquiries did not appear or could not be tied to a source, pause and re-scope before adding a dollar of budget.</p>
-    </article>
-    <article class="cs-step cs-step-neg">
-      <div class="cs-step-head"><span class="cs-idx">05</span>Did not do</div>
-      <p>Did not scale spend, did not add channels, did not touch the client's admissions process. This window is about proving the wiring, not about volume or revenue attribution.</p>
-    </article>
-  </div>
+  <div class="eyebrow">04 &middot; What was actually wrong</div>
+  <h2>Not a demand problem, <em>a measurement problem</em></h2>
+  <p class="intro">The assumed problem was demand, not enough people reaching out. The real constraint was measurement. Demand was there; the evidence for that is on this page.</p>
+  <p class="intro">What was missing was a system where every inquiry carries its source, gets a quality verdict from the people who actually talk to families, and can be followed to an admission. Without that system, no budget decision on this account could ever be defended.</p>
 </section>
 
-<!-- 05 - Google Ads chain (dark band). Full 11-metric chain, Dimi's verified
-     numbers, last 90 days vs prior 90 across all four markets. -->
+<!-- 05 - What we did (dark band, three cards). -->
 <section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; What moved the result</div>
-  <h2>Three moves, <em>from unverified to attributed</em></h2>
-  <p class="intro">The changes that made the 14-in-9 possible. Each one addresses a specific reason the prior setup could not produce verifiable qualified leads.</p>
+  <figure class="cs-banner">
+    <img src="https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Close-up of code and workflow patterns on a technical surface" loading="lazy" width="1600" height="460">
+  </figure>
+  <div class="eyebrow">05 &middot; What we did</div>
+  <h2>Measurement first, <em>then one controlled channel</em></h2>
   <div class="cs-steps">
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">01</span>Corrected the ICP and built to it</div>
-      <p>Rebuilt targeting around the actual buyer for this service rather than a broad audience, so the inquiries arriving were closer to fit. This addressed lead quality, not just lead count.</p>
+      <div class="cs-step-head"><span class="cs-idx">01</span>Built the measurement before the launch</div>
+      <p>Call tracking and form tracking were installed first, filtered to first-time contacts only, so repeat calls could not inflate the numbers. Every figure on this page comes from that system, not from a platform dashboard.</p>
     </article>
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">02</span>Moved conversions off Facebook lead forms</div>
-      <p>Onto the website. In a certification-gated health category, lead forms tend to produce lower-intent, harder-to-verify contacts. Routing to the site raised intent and let real tracking fire on the client's own property.</p>
+      <div class="cs-step-head"><span class="cs-idx">02</span>Put the quality verdict in the client&rsquo;s hands</div>
+      <p>The admissions team scores every inquiry directly in the call platform. &ldquo;Qualified&rdquo; means their staff judged the person a fit for treatment, a definition we cannot grade our own homework against.</p>
     </article>
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">03</span>Stood up independent call and form tracking</div>
-      <p>CallRail captured every call and form with its source, so leads were counted and attributed outside Meta's blind reporting. In nine days that surfaced 91 source-tagged first contacts, 14 of which the client's admissions team scored as qualified.</p>
+      <div class="cs-step-head"><span class="cs-idx">03</span>Launched one channel, controlled, at a fixed daily budget</div>
+      <p>A single Meta program at a set daily spend, so the first two weeks would produce a clean read instead of a tangle of channels nobody can untangle later.</p>
     </article>
+  </div>
+</section>
+
+<!-- 06 - What the client changed + what went sideways (light band). -->
+<section class="aa-sec band-light" data-mark="06">
+  <div class="eyebrow">06 &middot; What the client changed</div>
+  <h2>The lead flow is ours, <em>the answer rate is theirs</em></h2>
+  <p class="intro">The provider&rsquo;s intake team answered 29 of the 31 first-time calls in the window, around-the-clock staffing that most businesses cannot match, and its admissions staff scored inquiries in the tracking platform instead of on scratch paper.</p>
+  <p class="intro">The lead flow is ours; the answer rate and the qualification discipline are theirs.</p>
+  <div class="cs-note">
+    <p><b>What went sideways.</b> The default call-tracking event we first sent to Meta scored 3.4 out of 10 on match quality, too weak to train the system on. We scrapped it and built a custom conversion event around the admissions team&rsquo;s own scoring, which reached 7.5 out of 10. Target is 9.5.</p>
+    <p>The first version of the tracking was not good enough, and saying so is cheaper than pretending otherwise.</p>
+  </div>
+</section>
+
+<!-- 07 - What it cost (dark band, ledger). -->
+<section class="aa-sec" data-mark="07">
+  <div class="eyebrow">07 &middot; What it cost</div>
+  <h2>Every figure here is <em>media only</em></h2>
+  <div class="cs-ledger">
+    <div class="cs-ledger-row"><span class="k">Media spend (Meta, Jul 30 &ndash; Aug 12)</span><span class="v">$2,757.73</span></div>
+    <div class="cs-ledger-row"><span class="k">Agency fee</span><span class="v muted">not included in these figures</span></div>
+    <div class="cs-ledger-row"><span class="k">Media cost per first-time inquiry</span><span class="v">$24.19</span></div>
+    <div class="cs-ledger-row is-total"><span class="k">Media cost per verified qualified inquiry</span><span class="v">$102.14</span></div>
+  </div>
+  <div class="cs-note">
+    <p>Every cost figure on this page is media-only. What a qualified inquiry is worth in collected revenue is the client&rsquo;s number, and it is not on this page because it has not been verified yet.</p>
+    <p><b>The full-cost math gets published the day the admissions data closes, not before.</b></p>
   </div>
   <div class="cs-cta-pair">
     <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -1182,53 +1422,139 @@
   </div>
 </section>
 
-<!-- 06 - Same story, market by market (light band). Verified numbers from
-     Dimi's mockup for each of four anonymised metros. -->
-<section class="aa-sec band-light" data-mark="06">
-  <div class="eyebrow">06 &middot; What the client changed</div>
-  <h2>The client's calls, <em>load-bearing on the numbers</em></h2>
-  <p class="intro small">Two decisions on the client's side are what makes this a real report rather than our estimate.</p>
-  <p class="intro small"><b>The admissions team scored each inbound lead as qualified or not.</b> That is what makes the 14 a verified number rather than something we inferred from platform signals. Every "qualified" on this page reflects a human decision inside CallRail, made by the people who take the calls.</p>
-  <p class="intro small"><b>The provider accepted moving off Facebook lead forms to the website.</b> That change trades some raw volume for higher intent, and in a category where a low-quality lead consumes admissions time without producing an admit, that trade is the right shape. Both calls are the client's, and both are load-bearing for the numbers below.</p>
-</section>
-
-<!-- 07 - The rest of the story (dark band, teaser). Section list mirrors
-     Dimi's page order for the ten sections still to build here. -->
-<section class="aa-sec" data-mark="07">
+<!-- 08 - THE FULL NUMBERS (light band). Dimi's single collapsible proof
+     section, carrying his eight sub-sections in his order. -->
+<section class="aa-sec band-light" data-mark="08">
   <figure class="cs-banner">
     <img src="https://images.pexels.com/photos/6693654/pexels-photo-6693654.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600&amp;h=460&amp;fit=crop" alt="Wide banner of paper documents with printed numbers and analytics" loading="lazy" width="1600" height="460">
   </figure>
-  <div class="eyebrow">07 &middot; The result</div>
-  <h2>Fourteen qualified, <em>at $127 media per lead</em></h2>
-  <p class="intro">Week one, Aug 1&ndash;9, 2026. Source capture via CallRail (calls + forms). Cost per qualified lead is media only, not full CAC.</p>
-  <div class="cs-chain">
-    <div class="cs-chain-row cs-chain-head" aria-hidden="true">
-      <span>#</span><span>Group</span><span>Metric</span><span>Before &rarr; After</span><span>Change</span>
-    </div>
-    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp">Revenue loop</span><span class="metric">Acquired customers (admissions)</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Attribution build in progress</small></span></div>
-    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp">Revenue loop</span><span class="metric">Revenue</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Waits on admits + LTV</small></span></div>
-    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp">Revenue loop</span><span class="metric">Cost per acquired customer (CAC)</span><span class="from-to">n/a &rarr; pending</span><span class="delta"><em>Loop open</em><small>Full cost + admits pending</small></span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">04</span><span class="grp">The conversion</span><span class="metric">Client-verified qualified leads</span><span class="from-to">None tracked &rarr; 14</span><span class="delta up">+14</span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">05</span><span class="grp">The conversion</span><span class="metric">First-contact leads (calls + forms)</span><span class="from-to">None attributed &rarr; 91</span><span class="delta up">+91</span></div>
+  <div class="eyebrow">08 &middot; The proof file</div>
+  <h2>Everything behind <em>the numbers above</em></h2>
+  <p class="intro">The funnel, the cost basis, how an inquiry was counted, what the attribution cannot see, and what this does not prove. All of it below, unedited.</p>
+
+  <div class="cs-panels">
+    <details class="cs-panel">
+      <summary class="cs-panel-sum">
+        <span class="cs-panel-num">01</span>
+        <span>
+          <span class="cs-panel-title">See the full numbers</span>
+          <span class="cs-panel-desc">Funnel, cost basis, methodology, benchmarks, limitations.</span>
+        </span>
+        <span class="cs-panel-toggle"><span class="lbl-open">Open</span><span class="lbl-close">Close</span></span>
+      </summary>
+      <div class="cs-panel-body">
+
+        <div class="eyebrow">The funnel</div>
+        <h3>The funnel, <em>first 14 days</em></h3>
+        <div class="cs-table-scroll">
+          <table class="cs-table">
+            <thead>
+              <tr><th scope="col">Stage</th><th scope="col">Count</th><th scope="col">Media cost per</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>First-time form submissions (Jul 30 &ndash; Aug 12)</td><td>83</td><td>&mdash;</td></tr>
+              <tr><td>First-time phone calls (Aug 1 &ndash; 12)</td><td>31</td><td>&mdash;</td></tr>
+              <tr><td>First-time calls answered</td><td>29 of 31</td><td>&mdash;</td></tr>
+              <tr><td>All first-time inquiries</td><td>114</td><td class="cpl under">$24.19</td></tr>
+              <tr class="is-best"><td>Verified qualified (client admissions scoring)</td><td>27</td><td class="cpl under">$102.14</td></tr>
+              <tr><td>Admissions attributed to this channel</td><td>Pending</td><td>Pending</td></tr>
+              <tr><td>Collected revenue from these admissions</td><td>Pending</td><td>Pending</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cs-table-hint">Pending rows are shown, not hidden &middot; the table scrolls sideways on a narrow screen</p>
+        <div class="cs-note">
+          <p>No before column appears because no comparable before period exists: this channel launched Jul 30, 2026. Zero is the honest baseline, and a zero bar is not charted. Pending rows are shown, not hidden; they are the difference between this page and a claim.</p>
+        </div>
+
+        <div class="eyebrow">Methodology</div>
+        <h3>How an inquiry <em>was counted</em></h3>
+        <p class="intro small">An inquiry is a first-time conversation in CallRail, a phone call from a number never seen before on this account, or a form submission from a new contact, attributed by CallRail to Facebook Ads or Instagram Ads. Repeat contacts are excluded by the first-time filter.</p>
+        <p class="intro small">&ldquo;Qualified&rdquo; means the client&rsquo;s admissions staff, who speak with every caller, marked the inquiry as a treatment fit using the thumbs scoring inside CallRail. Magister does not score its own leads. Qualification tagging was still being applied across the window; 27 is the count verified at publication and may rise as scoring completes, in which case this page will be updated with the new date.</p>
+
+        <div class="eyebrow">Attribution</div>
+        <h3>Attribution and <em>what it cannot see</em></h3>
+        <p class="intro small">Attribution is CallRail source tracking: dynamic numbers and form capture tied to ad-click sessions, filtered to Meta sources. It cannot see a person who saw an ad, told a family member, and had that family member call the facility&rsquo;s main line directly. It cannot yet see which inquiries became admissions, because the provider&rsquo;s admissions records are not yet mapped to inquiry source.</p>
+        <div class="cs-note">
+          <p><b>Both gaps run in one direction: they undercount, not overcount, what the channel produced.</b></p>
+        </div>
+
+        <div class="eyebrow">Cost basis</div>
+        <h3>Cost basis</h3>
+        <p class="intro small">Media spend of $2,757.73 is the Meta spend for the reported window. Cost per inquiry ($2,757.73 &divide; 114 = $24.19) and cost per verified qualified inquiry ($2,757.73 &divide; 27 = $102.14) are media-only figures. They exclude the agency fee, software, and internal labor, and they are labeled media-only everywhere they appear. No return multiple is stated anywhere on this page because no revenue figure has been verified.</p>
+
+        <div class="eyebrow">Benchmarks, quarantined</div>
+        <h3>What an inquiry is worth: <em>benchmarks, quarantined</em></h3>
+        <div class="cs-note">
+          <p><b>External context only.</b> None of the figures below are this client&rsquo;s results, and they are deliberately kept out of every headline, chart, and cost figure above.</p>
+        </div>
+        <p class="intro small">A 2026 secret-shopper study of more than 1,000 US facilities (startyourrecovery.org, published 2026) puts average pricing near $1,078 per detox day and $916 per residential day, implying roughly $34,000 in gross billings for detox plus 30 days residential, and a commercially insured admission at roughly $20,000 to $60,000 in potential episode revenue. Billed is not collected, and collected is not profit.</p>
+        <p class="intro small">A defensible way to value a qualified inquiry is: admission rate &times; expected collected revenue &times; contribution margin. At illustrative benchmark assumptions of 10% &times; $25,000 &times; 25%, one qualified inquiry is worth about $625 in expected contribution. Plug in your own facility&rsquo;s numbers, yours are the only ones that matter. This client&rsquo;s actual admission rate, collected revenue, and margin were not available at publication, which is exactly why no return claim appears above.</p>
+
+        <div class="eyebrow">Outside factors</div>
+        <h3>Outside factors <em>in the window</em></h3>
+        <p class="intro small">None observed. No pricing change, no new facility opening, and no other paid channel launched during the window. The provider&rsquo;s existing organic and referral inquiry flow continued in parallel and is excluded from every count on this page by the source filter.</p>
+
+        <div class="eyebrow">Exhibit A</div>
+        <h3>Exhibit A</h3>
+        <p class="intro small">Meta Ads Manager campaign table for the reported window, showing the active conversion campaign, its daily budget, amount spent, and results against the custom qualified-inquiry event. Published version carries redaction bars over the ad account ID and the two campaign-name brand tokens; spend, budget, and result columns remain visible.</p>
+        <!-- EXHIBIT A IMAGE SLOT. Dimi's source file describes this exhibit
+             but does not contain the screenshot; he notes it is supplied as a
+             separate image file with redaction bars applied before
+             publication. Drop the file into ../img/ and swap this note for the
+             figure below, which already carries his approved alt text:
+             <figure class="cs-banner"><img src="../img/rehab-exhibit-a.png"
+               alt="Meta Ads Manager table showing the active campaign at a $333
+               daily budget with $1,320.26 spent and 13 custom qualified-inquiry
+               conversions at $101.56 each; account and campaign names redacted."
+               width="1600" height="460" loading="lazy"></figure>          -->
+        <div class="cs-note">
+          <p><b>Figures visible in the exhibit:</b> a $333 daily budget, $1,320.26 spent, and 13 custom qualified-inquiry conversions at $101.56 each. The account ID and the two campaign-name brand tokens are redacted; spend, budget, and result columns remain visible.</p>
+        </div>
+
+        <div class="eyebrow">Limitations</div>
+        <h3>What this <em>does not prove</em></h3>
+        <p class="intro small">This page proves demand and lead quality on a new channel in its first 14 days. It does not prove admissions, revenue, or return on investment, those stages are pending and marked as such. It is a launch read, not a mature program: 14 days is long enough to prove the channel produces qualified inquiries at a known media cost, and not long enough to prove anything else.</p>
+        <p class="intro small">Transfer depends on facts most providers do not share with this client: national multi-facility capacity, LegitScript-certified advertising access, and intake staffing that answers 29 of 31 calls at all hours. A single-facility program without those conditions should expect different numbers.</p>
+        <div class="cs-trust">
+          <article class="cs-step">
+            <div class="cs-step-head"><span class="cs-idx">01</span>Results are client-specific</div>
+            <p>Results are specific to this client&rsquo;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes.</p>
+          </article>
+          <article class="cs-step">
+            <div class="cs-step-head"><span class="cs-idx">02</span>Not medical advice</div>
+            <p>Individual results vary. This is general information, not medical advice.</p>
+          </article>
+          <article class="cs-step">
+            <div class="cs-step-head"><span class="cs-idx">03</span>Benchmarks are external</div>
+            <p>Industry pricing figures cited above are external benchmark data with a named source and date. They are not this client&rsquo;s results and are not used in any figure on this page.</p>
+          </article>
+        </div>
+      </div>
+    </details>
   </div>
-  <p class="intro small">CallRail call list and form-submission export, Aug 1&ndash;9, 2026 (9 days). Media spend $1,785.65 (Meta), client-confirmed. Cost per qualified lead is media spend &divide; 14 = $127.55 and is media only, not full CAC, because agency fee, software, and internal labor for the window are not itemized here. Qualified lead is defined as an inbound lead the client's admissions team scored "Qualified Lead" in CallRail. 18 of the 64 forms have been scored so far (14 qualified, 4 not a lead); 46 are not yet scored.</p>
 </section>
 
-<section class="aa-cta-band" data-mark="08" id="call">
+<section class="aa-cta-band" data-mark="09" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="../img/ai-automation-hero.jpg" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">08 &middot; Next step</div>
-    <h2>Bring us your ad account and <em>we will find the leaks</em></h2>
-    <p class="note-lede">Same method: read the raw account before touching a lever, verify what the platform actually attributes, stand up source-tagged tracking outside the platform, and prove qualified leads on a contained budget before scaling. If we cannot find the money in your account, we say so on the call.</p>
+    <div class="eyebrow">09 &middot; Next step</div>
+    <h2>If your reporting stops at <em>&ldquo;leads&rdquo;</em> you cannot tell whether <em>your marketing works</em></h2>
+    <p class="note-lede">This provider spent three agencies&rsquo; worth of budget before anyone could trace an inquiry to its source. The fix was not more ads, it was a measurement system built before the first dollar of the relaunch. If you cannot map source to inquiry to admission in your own account today, that is the first thing to repair, and it is what we audit first.</p>
     <div class="aa-cta-cta">
-      <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="btn" href="tel:+16193300953"><span class="t">Get your audit</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
     <p class="note">45 minutes. No deck. No pitch. If we cannot find the money in your account, we say so on the call.</p>
   </div>
 </section>
+
+<div class="cs-legal">
+  <p>Results are specific to this client&rsquo;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes. Individual results vary. This is general information, not medical advice.</p>
+  <p>Industry pricing figures cited on this page are external benchmark data with a named source and date. They are not this client&rsquo;s results and are not used in any figure on this page. Admissions, collected revenue, and any return multiple are not claimed; those figures are pending the client&rsquo;s records.</p>
+</div>
 
 </main>
 
