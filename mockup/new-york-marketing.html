@@ -135,7 +135,7 @@
   .cartogram .map-foot{position:absolute; left:14px; right:14px; bottom:14px;
     display:flex; flex-direction:column; align-items:center; gap:8px;
     opacity:0; animation:cartoFadeUp .5s cubic-bezier(.4,0,.2,1) 2.2s forwards}
-  .cartogram .legend{display:flex; gap:14px;
+  .cartogram .legend{display:flex; gap:14px; white-space:nowrap; flex-wrap:nowrap;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:11px; color:var(--muted-on-dark,#868A90);
     letter-spacing:.06em; text-transform:uppercase; background:rgba(0,0,0,.42); backdrop-filter:blur(6px);
     padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.06)}
@@ -411,7 +411,11 @@
           <text class="lbl-txt leg" x="250" y="278" fill="rgba(227,194,78,.55)" font-family="JetBrains Mono, monospace" font-size="9">Financial District &middot; Midtown East</text>
         </svg>
         <div class="map-foot">
-          <div class="no-office-box">No local office &middot; full 5-borough coverage</div>
+          <div class="legend">
+            <span><i style="background:#EDC48A"></i>Home services</span>
+            <span><i style="background:#C4B2FA"></i>Medical / dental</span>
+            <span><i style="background:#E3C24E"></i>Legal</span>
+          </div>
         </div>
       </div>
     </div>
@@ -445,7 +449,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">SEO</span>
           <span class="v1-svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -454,7 +458,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">Google Ads</span>
           <span class="v1-svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -463,7 +467,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">Meta Ads</span>
           <span class="v1-svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -472,7 +476,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">AI Automation</span>
           <span class="v1-svc-outcome">Missed-call recovery, intake scoring and after-hours triage that get more leads booked without more staff.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -481,7 +485,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">CRM</span>
           <span class="v1-svc-outcome">The pipes between ad clicks, booked jobs and revenue, so the reporting line ends at the CRM.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -490,7 +494,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">Full-Stack Marketing</span>
           <span class="v1-svc-outcome">One team on the entire funnel when it needs to move together, not one channel at a time.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
@@ -499,7 +503,7 @@
         <div class="v1-svc-body">
           <span class="v1-svc-name">Web Design</span>
           <span class="v1-svc-outcome">Sites built for conversion and speed, tracked from first visit to signed retainer.</span>
-          <div class="v1-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+          <div class="v1-svc-actions"><span class="btn btn-ghost btn-sm">Book a call</span></div>
         </div>
         <span class="v1-svc-arrow" aria-hidden="true">&rarr;</span>
       </a></li>
