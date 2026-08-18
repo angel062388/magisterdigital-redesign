@@ -281,18 +281,47 @@
   .ga-frow .lbl{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.875rem; color:var(--muted-on-dark,#868A90)}
   .ga-frow .bar-area{display:flex; align-items:center; gap:18px; min-width:0}
-  .ga-frow .bar{height:40px; width:0; border-radius:8px; flex:0 0 auto;
-    transition:width .9s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0) * 140ms)}
+  .ga-frow .bar{height:40px; width:0; border-radius:8px; flex:0 0 auto; position:relative;
+    transition:width 1s cubic-bezier(.22,1.35,.4,1); transition-delay:calc(var(--i,0) * 150ms)}
   .ga-funnel.is-in .ga-frow .bar{width:var(--w)}
   .ga-frow .cap{font-family:var(--font-sans,'Inter',system-ui,sans-serif); font-size:.95rem;
-    color:var(--paper,#F7F7F5); opacity:0;
-    transition:opacity .45s ease; transition-delay:calc(var(--i,0) * 140ms + .55s)}
-  .ga-funnel.is-in .ga-frow .cap{opacity:1}
+    color:var(--paper,#F7F7F5); opacity:0; transform:translateX(-10px);
+    transition:opacity .45s ease, transform .5s cubic-bezier(.16,1,.3,1);
+    transition-delay:calc(var(--i,0) * 150ms + .6s)}
+  .ga-funnel.is-in .ga-frow .cap{opacity:1; transform:translateX(0)}
   .ga-frow .cap.leak{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.85rem; font-weight:600; color:var(--gold,#D4AF37)}
   .ga-frow .cap b{font-weight:600}
   .ga-frow .bar.closed{background:var(--gold-light,#E3C24E);
     box-shadow:0 0 18px rgba(212,175,55,.5), 0 0 6px rgba(227,194,78,.6)}
+
+  /* LIVING FUNNEL — after the entrance, a highlight walks the five stages in
+     a loop while the card is on screen: the header word lights up, its row
+     lifts and brightens, a shine sweeps across the bar, the Leads bar drips
+     gold droplets (the leak, made literal), and the Closed bar pulses its
+     glow. Loop stops off-screen and under reduced motion. */
+  .ga-funnel-head .stage{transition:color .3s ease, text-shadow .3s ease}
+  .ga-funnel-head .stage.is-on{color:var(--gold-light,#E3C24E);
+    text-shadow:0 0 14px rgba(227,194,78,.55)}
+  .ga-frow{transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  .ga-frow.is-step{transform:translateX(6px)}
+  .ga-frow.is-step .lbl{color:var(--paper,#F7F7F5)}
+  .ga-frow .lbl{transition:color .3s ease}
+  .ga-frow .bar .shine{position:absolute; inset:0; border-radius:inherit; overflow:hidden;
+    pointer-events:none}
+  .ga-frow.is-step .bar .shine::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
+    transform:translateX(-100%); animation:gaShine .9s ease forwards}
+  @keyframes gaShine{to{transform:translateX(100%)}}
+  .ga-frow .bar .drop{position:absolute; right:-3px; bottom:6px; width:6px; height:6px;
+    border-radius:50%; background:var(--gold-light,#E3C24E); opacity:0; pointer-events:none}
+  .ga-frow.is-step .bar .drop{animation:gaDrip 1s ease-in forwards}
+  .ga-frow .bar .drop:nth-child(3){animation-delay:.2s}
+  .ga-frow .bar .drop:nth-child(4){animation-delay:.45s}
+  @keyframes gaDrip{0%{opacity:0; transform:translate(0,0)} 18%{opacity:1}
+    100%{opacity:0; transform:translate(12px,30px)}}
+  .ga-frow.is-step .bar.closed{animation:gaClosedPulse 1s ease}
+  @keyframes gaClosedPulse{50%{box-shadow:0 0 34px rgba(227,194,78,.85), 0 0 12px rgba(227,194,78,.9)}}
   @media (max-width:640px){
     .ga-frow{grid-template-columns:76px 1fr; gap:12px}
     .ga-frow .bar-area{gap:10px}
@@ -303,6 +332,9 @@
   @media (prefers-reduced-motion:reduce){
     .ga-frow .bar{transition:none; width:var(--w)}
     .ga-frow .cap{transition:none; opacity:1}
+    .ga-frow.is-step{transform:none}
+    .ga-frow.is-step .bar .shine::after,.ga-frow.is-step .bar .drop,
+    .ga-frow.is-step .bar.closed{animation:none}
   }
 
   /* SPEC TABLE — ported verbatim from ai-automation.html's section 04 pipeline,
@@ -661,33 +693,33 @@
 
 <div class="ga-funnel-wrap">
   <div class="ga-funnel" aria-label="The funnel from ad spend to closed jobs: spend, click, lead, booked, closed">
-    <div class="ga-funnel-head">SPEND <span class="sep">&rarr;</span> CLICK <span class="sep">&rarr;</span> LEAD <span class="sep">&rarr;</span> BOOKED <span class="sep">&rarr;</span> CLOSED</div>
+    <div class="ga-funnel-head"><span class="stage" data-stage="0">SPEND</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="1">CLICK</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="2">LEAD</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="3">BOOKED</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="4">CLOSED</span></div>
     <div class="ga-frow" style="--i:0; --w:52%">
       <span class="lbl">Ad spend</span>
-      <div class="bar-area"><div class="bar" style="background:#D9B441"></div><span class="cap">Every dollar tracked</span></div>
+      <div class="bar-area"><div class="bar" style="background:#D9B441"><span class="shine"></span></div><span class="cap">Every dollar tracked</span></div>
     </div>
     <div class="ga-frow" style="--i:1; --w:43%">
       <span class="lbl">Clicks</span>
-      <div class="bar-area"><div class="bar" style="background:#C6A53C"></div><span class="cap">Tagged by campaign</span></div>
+      <div class="bar-area"><div class="bar" style="background:#C6A53C"><span class="shine"></span></div><span class="cap">Tagged by campaign</span></div>
     </div>
     <div class="ga-frow" style="--i:2; --w:31%">
       <span class="lbl">Leads</span>
-      <div class="bar-area"><div class="bar" style="background:#A98E33"></div><span class="cap leak">&larr; the usual leak</span></div>
+      <div class="bar-area"><div class="bar" style="background:#A98E33"><span class="shine"></span><span class="drop"></span><span class="drop"></span><span class="drop"></span></div><span class="cap leak">&larr; the usual leak</span></div>
     </div>
     <div class="ga-frow" style="--i:3; --w:19%">
       <span class="lbl">Booked</span>
-      <div class="bar-area"><div class="bar" style="background:#8A752B"></div><span class="cap">Synced to CRM</span></div>
+      <div class="bar-area"><div class="bar" style="background:#8A752B"><span class="shine"></span></div><span class="cap">Synced to CRM</span></div>
     </div>
     <div class="ga-frow" style="--i:4; --w:9%">
       <span class="lbl">Closed</span>
-      <div class="bar-area"><div class="bar closed" style="min-width:44px"></div><span class="cap"><b>Cost per booked job</b></span></div>
+      <div class="bar-area"><div class="bar closed" style="min-width:44px"><span class="shine"></span></div><span class="cap"><b>Cost per booked job</b></span></div>
     </div>
   </div>
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
   <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2 class="aa-h2-rule">A working Google Ads read, not a click report</h2>
+  <h2 class="aa-h2-rule">A weekly brief you can hand your CFO</h2>
   <p class="intro">A 45-minute working session where we pull up your Google Ads account, your GA4, and your CRM side by side. You see where budget goes to queries that never close, and what a properly structured Performance Max asset group looks like. Whether or not you ever hire us.</p>
   <p class="intro">If the math at the end of the first 30 days says we are not moving the calendar, we say so before Month 2 invoices.</p>
   <div class="aa-sec-cta">
@@ -716,7 +748,7 @@
 
 <section class="aa-sec" data-mark="04">
   <div class="eyebrow">04 &middot; What we would run first</div>
-  <h2>Attribution goes in before a single campaign is rebuilt</h2>
+  <h2>The funnel we wire from spend to cost per booked job</h2>
   <p class="intro">Most accounts we audit have 30 to 60 percent of budget going to queries that never book jobs. So the first three weeks follow a fixed order: read everything, wire the attribution, then rebuild on data instead of hunches.</p>
   <p class="intro small">Week 1 is the audit, Week 2 is the GA4 to CRM bridge, Week 3 ships the restructure, and every Monday after that is a brief signed by a founder.</p>
   <div class="aa-spec-table">
@@ -1207,21 +1239,46 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* SPEND-TO-CLOSED FUNNEL — bars sweep in to their --w width once the card
-   scrolls into view. Fires once, then disconnects. */
+/* SPEND-TO-CLOSED FUNNEL — entrance sweep plus a walking highlight loop.
+   Bars sweep in once on scroll into view; then a highlight walks the five
+   stages while the card stays on screen: header word and row light up
+   together, a shine sweeps the active bar, the Leads bar drips gold, and
+   Closed pulses its glow. Stops off-screen, on tab hide, and under reduced
+   motion (which gets the finished static funnel). */
 (function(){
-  const funnels = document.querySelectorAll('.ga-funnel');
-  if (!funnels.length) return;
-  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    funnels.forEach(f => f.classList.add('is-in'));
+  const funnel = document.querySelector('.ga-funnel');
+  if (!funnel) return;
+  const rows = [...funnel.querySelectorAll('.ga-frow')];
+  const stages = [...funnel.querySelectorAll('.ga-funnel-head .stage')];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+    funnel.classList.add('is-in');
     return;
   }
-  const io = new IntersectionObserver((entries, obs) => {
+  let timer = null, step = -1, entered = false;
+  function tick(){
+    if (step >= 0){ rows[step].classList.remove('is-step'); if (stages[step]) stages[step].classList.remove('is-on'); }
+    step = (step + 1) % rows.length;
+    rows[step].classList.add('is-step');
+    if (stages[step]) stages[step].classList.add('is-on');
+  }
+  function start(){
+    if (timer) return;
+    timer = setInterval(tick, 1200);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add('is-in'); obs.unobserve(e.target); }
+      if (e.isIntersecting){
+        if (!entered){ entered = true; funnel.classList.add('is-in'); }
+        start();
+      } else stop();
     });
   }, { threshold: .35 });
-  funnels.forEach(f => io.observe(f));
+  io.observe(funnel);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
 })();
 </script>
 
