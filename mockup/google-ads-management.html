@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>SEO Services: Magister Digital</title>
+<title>Google Ads Management: Magister Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -263,38 +263,46 @@
   .aa-sec.band-light .aa-lands .item h3{color:#16171A}
   .aa-sec.band-light .aa-lands .item p{color:#45474C}
 
-  /* GROWTH CHARTS — three illustrative bar graphs (Keyword Rankings, Clicks &
-     Impressions, Traffic). Explicitly illustrative, not a client claim — see
-     the caption. Bars animate from 0 to value on scroll-into-view, staggered
-     left to right, gold gradient fill matching the button glow. */
-  .aa-chart-wrap{max-width:1400px; margin:0 auto; padding:16px 32px 56px}
-  .aa-chart-caption{text-align:center; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.6875rem; letter-spacing:.1em; color:var(--muted-on-dark,#868A90); margin:0 0 40px}
-  .aa-chart-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
-  @media (max-width:900px){ .aa-chart-grid{grid-template-columns:1fr} }
-  .aa-chart{border:1px solid var(--border,#2A2C31); border-radius:8px; padding:28px 22px 20px;
-    background:var(--ink-2,#16171A)}
-  .aa-chart h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:600;
-    font-size:1.1rem; margin:0 0 4px; color:var(--paper,#F7F7F5); text-align:center}
-  .aa-chart .unit{display:block; text-align:center; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold,#D4AF37); margin-bottom:22px}
-  .aa-chart-bars{display:flex; align-items:flex-end; justify-content:space-between; gap:6px}
-  .aa-bar{display:flex; flex-direction:column; align-items:center; flex:1; min-width:0}
-  .aa-bar-val{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.7rem; color:var(--gold-light,#E3C24E); margin-bottom:6px; opacity:0;
-    transition:opacity .3s ease; white-space:nowrap}
-  .aa-chart.is-in .aa-bar-val{opacity:1; transition-delay:calc(var(--i,0) * 100ms + .55s)}
-  .aa-bar-track{width:100%; height:140px; display:flex; align-items:flex-end; justify-content:center}
-  .aa-bar-fill{width:70%; height:0; border-radius:3px 3px 0 0;
-    background:linear-gradient(180deg, var(--gold-light,#E3C24E), var(--gold,#D4AF37));
-    box-shadow:0 0 16px rgba(212,175,55,.45), 0 0 5px rgba(227,194,78,.6);
-    transition:height .85s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0) * 100ms)}
-  .aa-chart.is-in .aa-bar-fill{height:var(--v)}
-  .aa-bar-label{margin-top:10px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.625rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
+  /* SPEND-TO-CLOSED FUNNEL — recreated from the live Google Ads page's funnel
+     widget. Five horizontal bars narrowing from SPEND to CLOSED, each with a
+     caption. Bars sweep in from zero width, staggered top to bottom, when the
+     card scrolls into view; captions fade in behind their bar. The CLOSED bar
+     is bright gold with a glow because cost per booked job is the metric the
+     whole page argues for. Qualitative widths only, no invented figures. */
+  .ga-funnel-wrap{max-width:1400px; margin:0 auto; padding:16px 32px 56px}
+  .ga-funnel{border:1px solid var(--border,#2A2C31); border-radius:8px;
+    background:var(--ink-2,#16171A); padding:30px 28px 22px}
+  .ga-funnel-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.8rem; font-weight:600; letter-spacing:.14em; color:var(--gold,#D4AF37);
+    margin:0 0 28px}
+  .ga-funnel-head .sep{color:var(--muted-on-dark,#868A90); padding:0 8px; font-weight:400}
+  .ga-frow{display:grid; grid-template-columns:110px 1fr; gap:20px; align-items:center;
+    padding:11px 0}
+  .ga-frow .lbl{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.875rem; color:var(--muted-on-dark,#868A90)}
+  .ga-frow .bar-area{display:flex; align-items:center; gap:18px; min-width:0}
+  .ga-frow .bar{height:40px; width:0; border-radius:8px; flex:0 0 auto;
+    transition:width .9s cubic-bezier(.16,1,.3,1); transition-delay:calc(var(--i,0) * 140ms)}
+  .ga-funnel.is-in .ga-frow .bar{width:var(--w)}
+  .ga-frow .cap{font-family:var(--font-sans,'Inter',system-ui,sans-serif); font-size:.95rem;
+    color:var(--paper,#F7F7F5); opacity:0;
+    transition:opacity .45s ease; transition-delay:calc(var(--i,0) * 140ms + .55s)}
+  .ga-funnel.is-in .ga-frow .cap{opacity:1}
+  .ga-frow .cap.leak{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.85rem; font-weight:600; color:var(--gold,#D4AF37)}
+  .ga-frow .cap b{font-weight:600}
+  .ga-frow .bar.closed{background:var(--gold-light,#E3C24E);
+    box-shadow:0 0 18px rgba(212,175,55,.5), 0 0 6px rgba(227,194,78,.6)}
+  @media (max-width:640px){
+    .ga-frow{grid-template-columns:76px 1fr; gap:12px}
+    .ga-frow .bar-area{gap:10px}
+    .ga-frow .bar{height:30px}
+    .ga-frow .cap{font-size:.8rem}
+    .ga-funnel-head{font-size:.65rem}
+  }
   @media (prefers-reduced-motion:reduce){
-    .aa-bar-fill{transition:none; height:var(--v)}
-    .aa-bar-val{opacity:1; transition:none}
+    .ga-frow .bar{transition:none; width:var(--w)}
+    .ga-frow .cap{transition:none; opacity:1}
   }
 
   /* SPEC TABLE — ported verbatim from ai-automation.html's section 04 pipeline,
@@ -600,7 +608,8 @@
         <a href="index.html#services">Services</a>
         <div class="site-nav-menu" role="menu">
           <a href="ai-automation.html" role="menuitem">AI Automation</a>
-          <a href="seo-services.html" role="menuitem" class="active" aria-current="page">SEO Services</a>
+          <a href="seo-services.html" role="menuitem">SEO Services</a>
+          <a href="google-ads-management.html" role="menuitem" class="active" aria-current="page">Google Ads Management</a>
         </div>
       </div>
       <a href="index.html#verticals">Industries</a>
@@ -625,16 +634,16 @@
 
 <section class="aa-hero" data-mark="01">
   <div class="aa-cta-bg" aria-hidden="true">
-    <img src="img/svc-seo.jpg" alt="" width="1400" height="933" loading="eager">
+    <img src="img/svc-google-ads.jpg" alt="" width="1400" height="933" loading="eager">
   </div>
   <div class="aa-hero-content">
-    <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> SEO Services</div>
-    <h1>Rankings are <em>the report</em>. Booked appointments are <em>the receipt</em>.</h1>
+    <div class="eyebrow"><span class="num">01</span> &middot; Service <span class="sep">/</span> Google Ads Management</div>
+    <h1>Know <em>which campaign</em> filled your calendar last week, <em>down to the closed job</em></h1>
     <p class="lede">
-      For home service, medical, and legal operators between $5M and $200M done paying for
-      rankings that never reach the calendar. One team owns technical SEO, content, schema,
-      and AI-citation work, reports it on one dashboard, and ties every result to a booked
-      appointment, not a keyword position.
+      For home service, medical, and legal operators between $5M and $200M spending real money
+      on Google Ads with no idea which dollar became a booked job. Every Google Ads dollar
+      tagged to closed-won inside your CRM, not ours, audited weekly, and reported in a Monday
+      brief signed by a founder.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -645,107 +654,91 @@
 
 <section class="aa-sec band-light aa-intro-band">
   <div class="eyebrow">02 &middot; Before you call</div>
-  <h2>You have been sold rankings that improved while the calendar stayed empty.</h2>
-  <p class="intro">We would rather name the burn than pretend you are not carrying it. You have spent on SEO for quarters. Some months the organic line on your calendar fills and some months it does not, and not one report on your desk tells you which page, which query, or which dollar of that spend became a customer.</p>
-  <p class="intro">It sounds like you do not need another ranking report. You need to know which organic page pays your team, and a name attached to fixing the ones that do not.</p>
+  <h2>How much of last month's Google Ads spend can you trace to a signed job?</h2>
+  <p class="intro">You have likely been burned by an agency that reported impressions, clicks, and a rising quality score while the calendar stayed empty. The breakage is usually structural: Performance Max running on default assets with no product feed, conversion tracking pointed at the wrong events, leads you already paid for getting bought twice through broken attribution.</p>
+  <p class="intro">It sounds like you do not need another click report. You need to know which campaign pays your team, and a name attached to fixing the ones that do not.</p>
 </section>
 
-<div class="aa-chart-wrap">
-  <p class="aa-chart-caption">Illustrative example &middot; real numbers land after your audit call, sourced from Search Console and your CRM.</p>
-  <div class="aa-chart-grid">
-    <div class="aa-chart">
-      <h3>Keyword Rankings</h3>
-      <span class="unit">Top-10 keywords</span>
-      <div class="aa-chart-bars">
-        <div class="aa-bar" style="--v:26%; --i:0"><span class="aa-bar-val">12</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M1</span></div>
-        <div class="aa-bar" style="--v:38%; --i:1"><span class="aa-bar-val">18</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M2</span></div>
-        <div class="aa-bar" style="--v:51%; --i:2"><span class="aa-bar-val">24</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M3</span></div>
-        <div class="aa-bar" style="--v:66%; --i:3"><span class="aa-bar-val">31</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M4</span></div>
-        <div class="aa-bar" style="--v:81%; --i:4"><span class="aa-bar-val">38</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M5</span></div>
-        <div class="aa-bar" style="--v:100%; --i:5"><span class="aa-bar-val">47</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M6</span></div>
-      </div>
+<div class="ga-funnel-wrap">
+  <div class="ga-funnel" aria-label="The funnel from ad spend to closed jobs: spend, click, lead, booked, closed">
+    <div class="ga-funnel-head">SPEND <span class="sep">&rarr;</span> CLICK <span class="sep">&rarr;</span> LEAD <span class="sep">&rarr;</span> BOOKED <span class="sep">&rarr;</span> CLOSED</div>
+    <div class="ga-frow" style="--i:0; --w:52%">
+      <span class="lbl">Ad spend</span>
+      <div class="bar-area"><div class="bar" style="background:#D9B441"></div><span class="cap">Every dollar tracked</span></div>
     </div>
-    <div class="aa-chart">
-      <h3>Clicks &amp; Impressions</h3>
-      <span class="unit">Organic clicks</span>
-      <div class="aa-chart-bars">
-        <div class="aa-bar" style="--v:25%; --i:0"><span class="aa-bar-val">1.2K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M1</span></div>
-        <div class="aa-bar" style="--v:38%; --i:1"><span class="aa-bar-val">1.8K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M2</span></div>
-        <div class="aa-bar" style="--v:50%; --i:2"><span class="aa-bar-val">2.4K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M3</span></div>
-        <div class="aa-bar" style="--v:65%; --i:3"><span class="aa-bar-val">3.1K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M4</span></div>
-        <div class="aa-bar" style="--v:81%; --i:4"><span class="aa-bar-val">3.9K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M5</span></div>
-        <div class="aa-bar" style="--v:100%; --i:5"><span class="aa-bar-val">4.8K</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M6</span></div>
-      </div>
+    <div class="ga-frow" style="--i:1; --w:43%">
+      <span class="lbl">Clicks</span>
+      <div class="bar-area"><div class="bar" style="background:#C6A53C"></div><span class="cap">Tagged by campaign</span></div>
     </div>
-    <div class="aa-chart">
-      <h3>Traffic</h3>
-      <span class="unit">Organic sessions</span>
-      <div class="aa-chart-bars">
-        <div class="aa-bar" style="--v:24%; --i:0"><span class="aa-bar-val">800</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M1</span></div>
-        <div class="aa-bar" style="--v:32%; --i:1"><span class="aa-bar-val">1,100</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M2</span></div>
-        <div class="aa-bar" style="--v:44%; --i:2"><span class="aa-bar-val">1,500</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M3</span></div>
-        <div class="aa-bar" style="--v:59%; --i:3"><span class="aa-bar-val">2,000</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M4</span></div>
-        <div class="aa-bar" style="--v:76%; --i:4"><span class="aa-bar-val">2,600</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M5</span></div>
-        <div class="aa-bar" style="--v:100%; --i:5"><span class="aa-bar-val">3,400</span><div class="aa-bar-track"><div class="aa-bar-fill"></div></div><span class="aa-bar-label">M6</span></div>
-      </div>
+    <div class="ga-frow" style="--i:2; --w:31%">
+      <span class="lbl">Leads</span>
+      <div class="bar-area"><div class="bar" style="background:#A98E33"></div><span class="cap leak">&larr; the usual leak</span></div>
+    </div>
+    <div class="ga-frow" style="--i:3; --w:19%">
+      <span class="lbl">Booked</span>
+      <div class="bar-area"><div class="bar" style="background:#8A752B"></div><span class="cap">Synced to CRM</span></div>
+    </div>
+    <div class="ga-frow" style="--i:4; --w:9%">
+      <span class="lbl">Closed</span>
+      <div class="bar-area"><div class="bar closed" style="min-width:44px"></div><span class="cap"><b>Cost per booked job</b></span></div>
     </div>
   </div>
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
   <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2 class="aa-h2-rule">A working SEO read, not a keyword report</h2>
-  <p class="intro">A 45-minute working call with the SEO team, then a written brief inside seven days: where your organic pipeline gaps are, where AI search is citing a competitor in your place, and what we would run first. Whether or not you ever hire us.</p>
-  <p class="intro">We will not sign an SEO engagement we do not believe we can win for your market and budget. If the math does not work, we tell you on the call and you keep your money.</p>
+  <h2 class="aa-h2-rule">A working Google Ads read, not a click report</h2>
+  <p class="intro">A 45-minute working session where we pull up your Google Ads account, your GA4, and your CRM side by side. You see where budget goes to queries that never close, and what a properly structured Performance Max asset group looks like. Whether or not you ever hire us.</p>
+  <p class="intro">If the math at the end of the first 30 days says we are not moving the calendar, we say so before Month 2 invoices.</p>
   <div class="aa-sec-cta">
     <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
     <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
   </div>
-  <p class="intro small" style="margin-top:20px; text-align:center">Single-channel SEO engagements start at $20K per month. Scoped to your market.</p>
+  <p class="intro small" style="margin-top:20px; text-align:center">Single-channel Google Ads engagements start at $20K per month. Scoped to your market.</p>
   <div class="aa-lands" style="margin-top:48px">
     <div class="item">
       <span class="idx">01</span>
-      <h3>A citation and visibility read</h3>
-      <p>SEO Neo shows which queries already cite you across Google AI Overviews, ChatGPT, Perplexity, and Claude, and which ones cite a competitor instead. We name the gap and what it is costing in booked work.</p>
+      <h3>A cost per closed deal view</h3>
+      <p>Spend, clicks, leads, booked appointments, and closed revenue by campaign, reconciled inside your own CRM and updated every Monday. The headline number is cost per closed deal, not cost per lead.</p>
     </div>
     <div class="item">
       <span class="idx">02</span>
-      <h3>A technical and content gap list</h3>
-      <p>The crawl, schema, and content issues blocking organic from producing bookings, ranked by revenue impact. Plus which pages already pass the six-dimension framework and which need a rebuild.</p>
+      <h3>A GA4 to CRM attribution bridge</h3>
+      <p>Enhanced conversions, offline conversion import for phone closes, and call tracking mapped to campaign and keyword. HubSpot, Go High Level, ServiceTitan, Salesforce, and Jobber all integrate, each in its own way.</p>
     </div>
     <div class="item">
       <span class="idx">03</span>
-      <h3>What we would run first, in writing</h3>
-      <p>A working brief with the 90-day plan: what is attainable in 90 days, what requires twelve months of compounding work, a named owner per workstream. Not a one-page proposal you take to three other agencies to grind on price.</p>
+      <h3>A Performance Max rebuild</h3>
+      <p>Proper feeds, tightened asset groups, audience signals from your first-party CRM data, brand exclusions, and weekly audits. We do not hand Performance Max the keys and call it strategy.</p>
     </div>
   </div>
 </section>
 
 <section class="aa-sec" data-mark="04">
   <div class="eyebrow">04 &middot; What we would run first</div>
-  <h2>The first move is a citation and visibility read, not a keyword list</h2>
-  <p class="intro">Before a single page ships, we map where your brand already shows up in Google Search and AI answers, and where a competitor is being cited in your place.</p>
-  <p class="intro small">An AI-citation and SERP-visibility read: which queries surface the brand across Google AI Overviews, ChatGPT, Perplexity, and Claude, mapped to the organic pages that produce booked appointments.</p>
+  <h2>Attribution goes in before a single campaign is rebuilt</h2>
+  <p class="intro">Most accounts we audit have 30 to 60 percent of budget going to queries that never book jobs. So the first three weeks follow a fixed order: read everything, wire the attribution, then rebuild on data instead of hunches.</p>
+  <p class="intro small">Week 1 is the audit, Week 2 is the GA4 to CRM bridge, Week 3 ships the restructure, and every Monday after that is a brief signed by a founder.</p>
   <div class="aa-spec-table">
     <div class="aa-spec-row">
-      <div class="k">READ</div>
-      <div class="v">Citation and visibility read<div class="sub">SEO Neo, our in-house tool built through Stealth Code, monitors which passages in your category earn AI Overview and ChatGPT citations and which get bypassed.</div></div>
-      <div class="m">before it ships</div>
+      <div class="k">AUDIT</div>
+      <div class="v">Read the whole account<div class="sub">Every active campaign, ad group, keyword, bidding strategy, conversion action, and negative keyword list.</div></div>
+      <div class="m">week 1</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">REPAIR</div>
-      <div class="v">Technical and crawl repair<div class="sub">Full site crawl, Core Web Vitals remediation, canonical architecture, and server-rendered HTML that AI crawlers can actually read.</div></div>
-      <div class="m">hours, not weeks</div>
+      <div class="k">ATTRIBUTE</div>
+      <div class="v">Wire spend to your pipeline<div class="sub">GA4 connected to your CRM: enhanced conversions, offline conversion import for phone closes, call tracking by campaign and keyword.</div></div>
+      <div class="m">week 2</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">SHIP</div>
-      <div class="v">Content through the six-dimension framework<div class="sub">Information Gain, Experience signals, Entity density, Schema stack, 2026 vocabulary standards, and Editorial signals, before anything ships.</div></div>
-      <div class="m">six dimensions</div>
+      <div class="k">RESTRUCTURE</div>
+      <div class="v">Rebuild on attribution data<div class="sub">Tighten Performance Max asset groups, pull broad match where it bleeds, restructure the campaign architecture.</div></div>
+      <div class="m">live by week 3</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">REPORT</div>
-      <div class="v">Pipeline reporting, weekly<div class="sub">Organic sessions by page, call volume, form submissions, and pipeline value tied to your CRM. Keyword positions are a footnote.</div></div>
-      <div class="m">weekly &middot; your CRM</div>
+      <div class="k">BRIEF</div>
+      <div class="v">A Monday brief signed by a founder<div class="sub">Spend, leads, booked appointments, closed revenue, and cost per closed deal by campaign, every week.</div></div>
+      <div class="m">every Monday</div>
     </div>
   </div>
 </section>
@@ -753,18 +746,18 @@
 <section class="aa-sec band-light" data-mark="04">
   <div class="eyebrow">05 &middot; Why this is built differently</div>
   <h2 class="aa-h2-oneline">One team runs the whole stack</h2>
-  <p class="intro">Most agencies sell you SEO in isolation. We run it next to the rest of your stack, Google Ads, Meta Ads, AI automation, CRM, and web, under one team and one dashboard, so there is no vendor finger-pointing when the number moves.</p>
+  <p class="intro">Most agencies sell you Google Ads in isolation. We run it inside one stack, next to SEO, Meta Ads, AI automation, CRM, and web, under one team and one dashboard, so there is no vendor finger-pointing when the number moves.</p>
 
   <ul class="aa-svc-list" role="list" aria-label="The other five channels we operate">
     <li class="aa-svc">
       <div class="aa-svc-link">
         <div class="aa-svc-visual">
-          <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
           <span class="aa-svc-idx">01</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="index.html#services">Google Ads</a>
-          <span class="aa-svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
+          <a class="aa-svc-name" href="seo-services.html">SEO</a>
+          <span class="aa-svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
         </div>
         <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
@@ -855,28 +848,28 @@
   <h2>The questions a careful buyer is already holding</h2>
   <div class="aa-faq">
     <details>
-      <summary>How long before organic produces bookings?</summary>
-      <div class="answer-wrap"><div class="answer">Technical fixes and schema can move the needle in 30 to 60 days for operators with existing traffic. New content in competitive markets compounds over 90 to 180 days. We will not tell you organic replaces paid in the first quarter. You get the 90-day plan in writing, signed by a founder, before we start.</div></div>
+      <summary>What does Google Ads management cost?</summary>
+      <div class="answer-wrap"><div class="answer">Single-channel Google Ads engagements start at $20K per month. Full-stack engagements including SEO, AI automation, and CRM start at $60K per month. We scope from there based on market intensity, campaign volume, and how much of the attribution architecture we build from scratch.</div></div>
     </details>
     <details>
-      <summary>What does an SEO engagement cost?</summary>
-      <div class="answer-wrap"><div class="answer">Single-channel SEO engagements start at $20K per month. Full-stack engagements, where SEO runs next to paid media, AI automation, CRM, and web, start at $60K per month. We scope from there based on market intensity. The real question is whether the work returns more than it costs, and we answer that on the call.</div></div>
+      <summary>Do you manage Performance Max?</summary>
+      <div class="answer-wrap"><div class="answer">Yes, with proper feeds, asset groups, audience signals from your first-party CRM data, and brand exclusions. We do not hand Performance Max the keys and call it strategy.</div></div>
     </details>
     <details>
-      <summary>What tools do you actually use?</summary>
-      <div class="answer-wrap"><div class="answer">SEO Neo and Omega Indexer are built in-house through Stealth Code. SEO Neo handles AI citation monitoring, Omega Indexer handles indexing acceleration. We also run standard industry tools: Screaming Frog, Ahrefs, Search Console, and GA4. We do not rely on any one vendor's metric as the primary signal.</div></div>
+      <summary>How do you connect Google Ads to our CRM?</summary>
+      <div class="answer-wrap"><div class="answer">We build the GA4 to CRM import in Week 2. HubSpot, Go High Level, ServiceTitan, Salesforce, and Jobber all integrate differently. Once live, leads from every campaign carry a source tag through your pipeline to closed-won.</div></div>
     </details>
     <details>
-      <summary>How do you handle AI search and citations?</summary>
-      <div class="answer-wrap"><div class="answer">Citability requires what ranks in traditional search: self-contained passages, named entities with schema backing, and content that survives extraction. We write to the passage-extraction standard from draft one. SEO Neo monitors which structures get cited in Google AI Overviews, ChatGPT, Perplexity, and Claude, and feeds that into every brief.</div></div>
+      <summary>Do you run Demand Gen and YouTube?</summary>
+      <div class="answer-wrap"><div class="answer">Both are part of the stack where the sales cycle runs longer than two weeks or consumer awareness is the bottleneck. We scope those channels into your 90-day plan after Month 1 attribution is clean, not before.</div></div>
     </details>
     <details>
-      <summary>Do you handle local SEO and Google Business Profile?</summary>
-      <div class="answer-wrap"><div class="answer">Yes. Google Business Profile optimization, citation building, local schema, and service-area page architecture are part of every engagement for local operators. Through CTR Geeks, Magister Digital trained more than 1,300 local SEO practitioners on this exact system. Local is its own acquisition channel with its own pipeline attribution, not a checkbox.</div></div>
+      <summary>Who actually runs the account?</summary>
+      <div class="answer-wrap"><div class="answer">Dimitry Morgan, Head of Paid Media at Magister Digital, operating with ties to Denver Digital Agency and Green Hat Local SEO. The same operator who builds your account reads your brief every Monday. No account coordinators, no junior managers running your spend, no handoff after the contract is signed.</div></div>
     </details>
     <details>
-      <summary>What happens when Google updates its algorithm?</summary>
-      <div class="answer-wrap"><div class="answer">Sites built on genuine expertise, real entity footprints, and self-contained content tend to hold or improve through updates. Thin keyword-density sites drop. Magister Digital has run through every major update since 2008, with Infintech Designs as a standing proof. The six-dimension framework targets the intent behind updates, not the surface signal of any one cycle.</div></div>
+      <summary>Why switch from our current agency?</summary>
+      <div class="answer-wrap"><div class="answer">Run this test: open your current report and find cost per closed deal, not cost per lead. If that number is not there, or your agency cannot pull it from your CRM, the attribution is broken. We fix it in Week 2.</div></div>
     </details>
   </div>
 </section>
@@ -918,8 +911,8 @@
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">08 &middot; Next step</div>
-    <h2>The person who <em>audits your rankings</em> is the person who <em>runs the fix</em></h2>
-    <p class="note-lede">You're right to be skeptical of another agency promising position one. So we won't. Bring your rankings, your GSC data, and your content footprint to a 45-minute working session. We show you exactly where the pipeline gaps are and what we'd run first. If SEO isn't the highest-return move right now, we'll say so. No deck. No pitch. No keyword report.</p>
+    <h2>The operator who <em>builds your account</em> is the operator who <em>reads your Monday brief</em></h2>
+    <p class="note-lede">Is now a bad time to find out which of your campaigns is actually paying you? We pull up your Google Ads account, your GA4, and your CRM side by side. You see where budget goes to queries that never close, and what a properly structured Performance Max asset group looks like. No deck. No pitch. No click report.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -961,7 +954,7 @@
       <div class="footcol">
         <h4>Services</h4>
         <ul>
-          <li><a href="seo-services.html">SEO</a></li><li><a href="https://magisterdigital.ai/google-ads/">Google Ads</a></li>
+          <li><a href="seo-services.html">SEO</a></li><li><a href="google-ads-management.html">Google Ads</a></li>
           <li><a href="https://magisterdigital.ai/meta-ads/">Meta Ads</a></li><li><a href="ai-automation.html">AI automation</a></li>
           <li><a href="/crm/">Custom CRM</a></li><li><a href="https://magisterdigital.ai/full-stack-marketing/">Full-Stack Marketing</a></li>
           <li><a href="/web-design/">Web design</a></li>
@@ -1214,13 +1207,13 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* GROWTH CHARTS — bars fill from 0 to their --v value once each chart card
-   scrolls into view. Fires once per card, then disconnects. */
+/* SPEND-TO-CLOSED FUNNEL — bars sweep in to their --w width once the card
+   scrolls into view. Fires once, then disconnects. */
 (function(){
-  const charts = document.querySelectorAll('.aa-chart');
-  if (!charts.length) return;
+  const funnels = document.querySelectorAll('.ga-funnel');
+  if (!funnels.length) return;
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    charts.forEach(c => c.classList.add('is-in'));
+    funnels.forEach(f => f.classList.add('is-in'));
     return;
   }
   const io = new IntersectionObserver((entries, obs) => {
@@ -1228,7 +1221,7 @@ document.documentElement.classList.add('js');
       if (e.isIntersecting){ e.target.classList.add('is-in'); obs.unobserve(e.target); }
     });
   }, { threshold: .35 });
-  charts.forEach(c => io.observe(c));
+  funnels.forEach(f => io.observe(f));
 })();
 </script>
 
