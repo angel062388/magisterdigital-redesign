@@ -271,7 +271,32 @@
      whole page argues for. Qualitative widths only, no invented figures. */
   .ga-funnel-wrap{max-width:1400px; margin:0 auto; padding:16px 32px 56px}
   .ga-funnel{border:1px solid var(--border,#2A2C31); border-radius:8px;
-    background:var(--ink-2,#16171A); padding:30px 28px 22px}
+    background:var(--ink-2,#16171A); overflow:hidden;
+    display:grid; grid-template-columns:1.55fr 1fr}
+  .ga-fmain{padding:30px 28px 22px; min-width:0}
+  /* MONDAY BRIEF TICKER — fills the right side of the canvas, mirroring the
+     AI Automation page's diagram + audit-log pairing. Lines prepend in sync
+     with the walking stage highlight. Figures stay dashes: this page ships
+     without invented numbers. */
+  .ga-brief{border-left:1px solid var(--border,#2A2C31); background:var(--ink,#0F1115);
+    padding:22px 20px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; position:relative; overflow:hidden; min-height:100%}
+  .ga-brief-head{color:var(--muted-on-dark,#868A90); font-size:.6rem; letter-spacing:.2em;
+    text-transform:uppercase; margin-bottom:14px}
+  .ga-brief-stream{display:flex; flex-direction:column; gap:7px}
+  .ga-brief-row{display:grid; grid-template-columns:auto auto 1fr; gap:12px;
+    color:var(--paper,#F7F7F5); animation:gaBriefIn .32s ease-out}
+  .ga-brief-row .t{color:var(--muted-on-dark,#868A90)}
+  .ga-brief-row .k{color:var(--gold,#D4AF37); font-weight:600; letter-spacing:.06em}
+  .ga-brief-row .m{color:var(--paper,#F7F7F5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .ga-brief-row .m .ok{color:#3FB984}
+  @keyframes gaBriefIn{from{opacity:0; transform:translateY(4px)} to{opacity:1}}
+  .ga-brief::after{content:""; position:absolute; left:0; right:0; bottom:0; height:56px;
+    background:linear-gradient(to bottom, transparent, var(--ink,#0F1115)); pointer-events:none}
+  @media (max-width:900px){
+    .ga-funnel{grid-template-columns:1fr}
+    .ga-brief{border-left:none; border-top:1px solid var(--border,#2A2C31); min-height:0; max-height:190px}
+  }
   .ga-funnel-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.8rem; font-weight:600; letter-spacing:.14em; color:var(--gold,#D4AF37);
     margin:0 0 28px}
@@ -693,6 +718,7 @@
 
 <div class="ga-funnel-wrap">
   <div class="ga-funnel" aria-label="The funnel from ad spend to closed jobs: spend, click, lead, booked, closed">
+  <div class="ga-fmain">
     <div class="ga-funnel-head"><span class="stage" data-stage="0">SPEND</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="1">CLICK</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="2">LEAD</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="3">BOOKED</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="4">CLOSED</span></div>
     <div class="ga-frow" style="--i:0; --w:52%">
       <span class="lbl">Ad spend</span>
@@ -715,6 +741,14 @@
       <div class="bar-area"><div class="bar closed" style="min-width:44px"><span class="shine"></span></div><span class="cap"><b>Cost per booked job</b></span></div>
     </div>
   </div>
+  <aside class="ga-brief" aria-label="Monday brief ticker, figures land after your audit">
+    <div class="ga-brief-head">MONDAY BRIEF &middot; spend_to_closed &middot; rolling</div>
+    <div class="ga-brief-stream" id="gaBriefStream">
+      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SPEND</span><span class="m">by campaign &middot; $ &mdash;&mdash; sourced after audit</span></div>
+      <div class="ga-brief-row"><span class="t">00:00:01</span><span class="k">LEAD</span><span class="m">source tag &rarr; <span class="ok">your crm</span></span></div>
+      <div class="ga-brief-row"><span class="t">00:00:00</span><span class="k">BRIEF</span><span class="m">signed &middot; d.morgan &middot; monday</span></div>
+    </div>
+  </aside>
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
@@ -1254,12 +1288,35 @@ document.documentElement.classList.add('js');
     funnel.classList.add('is-in');
     return;
   }
-  let timer = null, step = -1, entered = false;
+  let timer = null, step = -1, entered = false, cycle = 0, clock = 3;
+  const stream = document.getElementById('gaBriefStream');
+  /* Two line variants per stage so the ticker reads alive, not looped.
+     Dollar figures stay dashes: sourced after the audit, never invented. */
+  const LINES = [
+    [['SPEND','by campaign &middot; $ &mdash;&mdash; sourced after audit'], ['SPEND','pmax feeds &middot; <span class="ok">audited</span>']],
+    [['CLICK','tagged &middot; campaign / keyword'], ['CLICK','broad match &middot; pulled where it bleeds']],
+    [['LEAD','source tag &rarr; <span class="ok">your crm</span>'], ['LEAD','offline import &middot; phone closes']],
+    [['BOOKED','synced &middot; <span class="ok">calendar</span>'], ['BOOKED','call tracking &middot; by keyword']],
+    [['CLOSED','cost / closed deal &middot; $ &mdash;&mdash;'], ['CLOSED','brief signed &middot; d.morgan &middot; monday']]
+  ];
+  function briefLine(i){
+    if (!stream) return;
+    const v = LINES[i][cycle % 2];
+    clock += 1 + (i % 3);
+    const secs = String(clock % 60).padStart(2,'0');
+    const row = document.createElement('div');
+    row.className = 'ga-brief-row';
+    row.innerHTML = '<span class="t">00:00:' + secs + '</span><span class="k">' + v[0] + '</span><span class="m">' + v[1] + '</span>';
+    stream.prepend(row);
+    while (stream.children.length > 9) stream.removeChild(stream.lastChild);
+  }
   function tick(){
     if (step >= 0){ rows[step].classList.remove('is-step'); if (stages[step]) stages[step].classList.remove('is-on'); }
     step = (step + 1) % rows.length;
+    if (step === 0) cycle++;
     rows[step].classList.add('is-step');
     if (stages[step]) stages[step].classList.add('is-on');
+    briefLine(step);
   }
   function start(){
     if (timer) return;
