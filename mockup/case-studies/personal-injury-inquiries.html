@@ -932,6 +932,48 @@
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
 
+  /* TRANSFORMATION CHART — the source's signature before/after visual.
+     Before is an empty dashed frame (described, not numbered). After is a
+     stacked bar that grows in three staggered segments when scrolled into
+     view: unpaid local (gold, the asset), Google Ads (dark gold, the
+     bridge), other tracked (muted). Heights proportional to 771/588/124. */
+  .pi-transform{display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:860px;
+    margin:40px auto 0; align-items:end}
+  @media (max-width:700px){ .pi-transform{grid-template-columns:1fr; gap:32px} }
+  .pi-col{text-align:center}
+  .pi-bar-area{height:320px; display:flex; flex-direction:column; justify-content:flex-end;
+    align-items:center}
+  .pi-zero{width:150px; height:300px; border:1.5px dashed rgba(212,175,55,.35); border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic;
+    font-size:2.6rem; color:var(--muted-on-dark,#868A90)}
+  .pi-stack{width:150px; display:flex; flex-direction:column-reverse; border-radius:8px 8px 4px 4px;
+    overflow:hidden}
+  .pi-seg{width:100%; height:0; transition:height 1s cubic-bezier(.22,1.2,.4,1);
+    position:relative}
+  .pi-seg.unpaid{background:var(--gold,#D4AF37);
+    box-shadow:0 0 18px rgba(212,175,55,.35)}
+  .pi-seg.ads{background:#8A752B; transition-delay:.35s}
+  .pi-seg.other{background:#3A3D44; transition-delay:.65s}
+  .pi-transform.is-in .pi-seg.unpaid{height:156px}
+  .pi-transform.is-in .pi-seg.ads{height:119px}
+  .pi-transform.is-in .pi-seg.other{height:25px}
+  .pi-col .num{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic;
+    font-size:2rem; color:var(--paper,#F7F7F5); margin-top:16px}
+  .pi-col .cap{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-on-dark,#868A90);
+    margin-top:8px; line-height:1.7}
+  .pi-legend{display:flex; flex-wrap:wrap; gap:18px; justify-content:center; margin-top:32px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.72rem;
+    color:var(--muted-on-dark,#868A90)}
+  .pi-legend span{display:inline-flex; align-items:center; gap:8px; white-space:nowrap}
+  .pi-legend i{width:10px; height:10px; border-radius:2px; display:inline-block}
+  .pi-legend b{color:var(--paper,#F7F7F5); font-weight:600}
+  @media (prefers-reduced-motion:reduce){
+    .pi-seg{transition:none}
+    .pi-seg.unpaid{height:156px} .pi-seg.ads{height:119px} .pi-seg.other{height:25px}
+  }
+
   /* SITE FOOTER — standardized, identical to the service pages, paths ../ */
   .site-footer{background:var(--ink-deep,#0F1115); padding:64px 0 32px}
   .site-footer .wrap{max-width:1400px; margin:0 auto; padding:0 32px}
@@ -1104,16 +1146,62 @@
   </div>
 </section>
 
-<!-- 02 - The situation (light band, split layout: image left, findings right).
+<!-- 02 - The transformation (dark). The source's signature before/after
+     visual: zero described-not-numbered, then a stacked bar growing in three
+     segments, plus the source's three takeaways as cards. -->
+<section class="aa-sec" data-mark="02">
+  <div class="eyebrow">02 &middot; The transformation</div>
+  <h2>Before is described, <em>after is counted</em></h2>
+  <p class="intro">Tracked inbound inquiries, before versus the first 6.5 months, first-touch attribution. Before is described, not numbered: no tracking existed, and the firm&#39;s digital inquiry volume was effectively zero. The after column is every tracked first-touch inquiry in the window. Gold is the part the firm keeps regardless of ad budget.</p>
+  <div class="pi-transform" id="piTransform">
+    <div class="pi-col">
+      <div class="pi-bar-area"><div class="pi-zero">0</div></div>
+      <div class="num">Before</div>
+      <div class="cap">Referral-only &middot; no tracking, no ads,<br>no local search presence</div>
+    </div>
+    <div class="pi-col">
+      <div class="pi-bar-area">
+        <div class="pi-stack">
+          <div class="pi-seg unpaid"></div>
+          <div class="pi-seg ads"></div>
+          <div class="pi-seg other"></div>
+        </div>
+      </div>
+      <div class="num">1,483</div>
+      <div class="cap">After 6.5 months &middot; Jan 1&ndash;Jul 16, 2026</div>
+    </div>
+  </div>
+  <div class="pi-legend">
+    <span><i style="background:#D4AF37"></i><b>771</b> &middot; unpaid local search &middot; $0 media &middot; the asset</span>
+    <span><i style="background:#8A752B"></i><b>588</b> &middot; Google Ads &middot; $51.4K media &middot; the bridge</span>
+    <span><i style="background:#3A3D44"></i><b>124</b> &middot; other tracked</span>
+  </div>
+  <div class="cs-diag3" style="margin-top:56px">
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">01</span>The biggest channel costs nothing to run</div>
+      <p>Unpaid local search produced 771 inquiries, more than paid ads, and it compounds instead of stopping when spend stops. It is the asset the firm now owns.</p>
+    </article>
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">02</span>Paid search is the bridge, not the destination</div>
+      <p>509 Google Ads conversions at a blended ~$101 in media cost each kept inquiries flowing while the slower local-search asset was built.</p>
+    </article>
+    <article class="cs-diag3-card">
+      <div class="cs-diag3-head"><span class="cs-idx">03</span>Six months is early</div>
+      <p>Search visibility is an ongoing build, not a two-month sprint. This is the curve at its steepest early point, with signed-case measurement disclosed as the next step, not assumed.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 03 - The situation (light band, split layout: image left, findings right).
      Copy taken from Dimi's Netlify mockup verbatim, compressed into three
      structural findings so the split layout stays readable. -->
-<section class="aa-sec band-light" data-mark="02">
+<section class="aa-sec band-light" data-mark="03">
   <div class="cs-split">
     <figure class="cs-split-img">
       <img src="https://unsplash.com/photos/IHQHXj3jv6E/download?w=900" alt="Antique law library shelves lined with worn leather volumes beside a wooden ladder" loading="lazy" width="900" height="1100">
     </figure>
     <div class="cs-split-body">
-      <div class="eyebrow">02 &middot; The situation</div>
+      <div class="eyebrow">03 &middot; The situation</div>
       <h2>Built the hard way, <em>and invisible online</em></h2>
       <p class="intro small">A firm built over years through reputation and word of mouth. Its principal had done the difficult work of becoming a name people pass along. The trouble was everything that name could not reach.</p>
       <ol class="cs-questions">
@@ -1144,7 +1232,7 @@
   <figure class="cs-banner">
     <img src="https://unsplash.com/photos/lCkHnqTnjXw/download?w=1600" alt="Classical courthouse colonnade in dramatic raking light" loading="lazy" width="1600" height="460">
   </figure>
-  <div class="eyebrow">03 &middot; The diagnosis</div>
+  <div class="eyebrow">04 &middot; The diagnosis</div>
   <h2>Two problems, <em>one behind the other</em></h2>
   <div class="cs-diag3">
     <article class="cs-diag3-card">
@@ -1165,7 +1253,7 @@
 <!-- 04 - The build (light band, 5 tiles).
      The source's build order + the "did not do" tile at the end. -->
 <section class="aa-sec band-light" data-mark="04">
-  <div class="eyebrow">04 &middot; The build</div>
+  <div class="eyebrow">05 &middot; The build</div>
   <h2>The channel and the measurement, <em>built together</em></h2>
   <p class="intro small">What we built, in order. Each move was made so the next one had something honest to stand on, and every dollar stayed attributable to a specific intent.</p>
   <div class="cs-steps">
@@ -1195,7 +1283,7 @@
 <!-- 05 - The channel-from-zero chain (dark band). 11 rows, source-verified
      numbers, Jan 1 to Jul 16 2026, with three Loop open rows at the end. -->
 <section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; The numbers, honestly stated</div>
+  <div class="eyebrow">06 &middot; The numbers, honestly stated</div>
   <h2>The channel from zero, <em>two loops left open</em></h2>
   <p class="intro">The engagement the way an auditor reads it: every figure from a standing start of none, Jan 1 to Jul 16, 2026. The baseline is the firm&#39;s pre-engagement state, referral-only with no tracking, so it is described rather than numbered.</p>
   <div class="cs-chain">
@@ -1224,7 +1312,7 @@
 <!-- 06 - Same story, market by market (light band). Verified numbers from
      the source: two markets with opposite economics, plus local ranks. -->
 <section class="aa-sec band-light" data-mark="06">
-  <div class="eyebrow">06 &middot; Two markets, two different economics</div>
+  <div class="eyebrow">07 &middot; Two markets, two different economics</div>
   <h2>One auction crowded, <em>one nearly empty</em></h2>
   <p class="intro">Paid cost per conversion is far higher in the smaller-population satellite market, $291 against $54, and that is expected. It is exactly why the unpaid local-search engine, not paid spend, carries that market.</p>
   <div class="cs-metros" style="grid-template-columns:repeat(2,1fr)">
@@ -1278,7 +1366,7 @@
   <figure class="cs-banner">
     <img src="https://unsplash.com/photos/OMYLBc9lnKQ/download?w=1600" alt="Antique law reports, Chancery Division volumes from the 1890s, lined up on a shelf" loading="lazy" width="1600" height="460">
   </figure>
-  <div class="eyebrow">07 &middot; The next figures, already named</div>
+  <div class="eyebrow">08 &middot; The next figures, already named</div>
   <h2>What ships next, <em>and what is stated plainly</em></h2>
   <p class="intro">The firm owns the other half of the system: a monthly lead-quality feedback pass on which contacts became qualified matters, and a standing content session feeding its bilingual pages. Those two inputs are what will let a future version of this page report signed cases, not just inquiries.</p>
   <ul class="cs-outline">
@@ -1296,6 +1384,7 @@
     <li><span class="cs-idx">05</span>The result reflects a bilingual practice with a strong existing referral reputation, an unusually thin auction in its satellite market, and six months of SEO still maturing. A firm without those conditions should expect a different curve</li>
   </ul>
   <p class="intro small" style="margin-top:24px">Results are specific to this client&#39;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes. Prior results do not guarantee a similar outcome. This is general information about a marketing engagement, not legal advice. Law-firm advertising rules vary by state; a firm should confirm its own bar&#39;s rules before publishing or advertising.</p>
+  <p class="intro small" style="margin-top:12px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.72rem">Client proof page &middot; Tier 2B, anonymized &middot; two U.S. metros &middot; Jan 1&ndash;Jul 16, 2026, 197 days &middot; first-touch lead attribution plus Google Ads conversion tracking &middot; media $51.4K, full cost withheld &middot; updated 2026-08-10</p>
 </section>
 
 <section class="aa-cta-band" data-mark="08" id="call">
@@ -1303,7 +1392,7 @@
     <img src="https://unsplash.com/photos/-iWupXHt9No/download?w=1600" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">08 &middot; If this sounds like your firm</div>
+    <div class="eyebrow">09 &middot; If this sounds like your firm</div>
     <h2>It is <em>never too late</em> to show up online, and <em>zero is a fine place to start</em></h2>
     <p class="note-lede">The firm in this story started at zero. You do not need to know what any of this means; that is our job. We look at what happens when someone searches for a lawyer like you today, show you exactly where you stand, and build from there: ads bring in calls right away while we do the slower work of making Google recognize your firm. Reputation built your practice. This makes sure the internet knows about it.</p>
     <div class="aa-cta-cta">
@@ -1402,6 +1491,25 @@
   else init();
 })();
 
+</script>
+
+<script>
+  /* Transformation chart: the stacked bar grows once, on scroll into view.
+     Reduced motion and no-IO browsers get the finished bar from CSS. */
+  (function(){
+    var el = document.getElementById('piTransform');
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+      el.classList.add('is-in');
+      return;
+    }
+    var io = new IntersectionObserver(function(entries, obs){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ el.classList.add('is-in'); obs.disconnect(); }
+      });
+    }, { threshold: .4 });
+    io.observe(el);
+  })();
 </script>
 
 <script>
