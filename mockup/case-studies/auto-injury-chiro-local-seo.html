@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Case Study: waterproofing contractor, northern New Jersey | Magister Digital</title>
+<title>Case Study: auto-injury chiropractic, Western U.S. metro | Magister Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -932,47 +932,72 @@
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
 
-  /* IN/OUT FLOW — the source's signature visual: $41,102 in ad spend on the
-     left, $287,532 in booked work on the right at true 6.99x the height, a
-     drawn arc between them carrying the 99 quote requests, and the 6.9x
-     figure in the middle. Bars grow from the baseline on scroll, the arc
-     draws, then the values fade in. Reduced motion shows the finished
-     figure with no motion. */
-  .wp-flow{max-width:860px; margin:40px auto 0}
-  .wp-chart{width:100%; height:auto; display:block}
-  .wp-base{stroke:rgba(247,247,245,.22); stroke-width:1}
-  .wp-bar{transform:scaleY(0); transform-origin:bottom; transform-box:fill-box}
-  .wp-bar-spend{fill:#8A752B}
-  .wp-bar-return{fill:var(--gold,#D4AF37);
-    filter:drop-shadow(0 0 14px rgba(212,175,55,.4))}
-  .wp-flow.is-in .wp-bar-spend{transition:transform .8s cubic-bezier(.4,0,.2,1) .1s; transform:scaleY(1)}
-  .wp-flow.is-in .wp-bar-return{transition:transform 1.1s cubic-bezier(.22,1.18,.4,1) 1.5s; transform:scaleY(1)}
-  .wp-arc{fill:none; stroke:rgba(212,175,55,.65); stroke-width:2;
-    stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1}
-  .wp-flow.is-in .wp-arc{transition:stroke-dashoffset 1.1s cubic-bezier(.45,.05,.35,1) .7s; stroke-dashoffset:0}
-  .wp-arrow{fill:none; stroke:rgba(212,175,55,.65); stroke-width:2;
-    stroke-linecap:round; stroke-linejoin:round; opacity:0}
-  .wp-flow.is-in .wp-arrow{transition:opacity .3s ease 1.7s; opacity:1}
-  .wp-mult{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic;
-    font-size:48px; fill:var(--gold,#D4AF37); text-anchor:middle; opacity:0}
-  .wp-flow.is-in .wp-mult{transition:opacity .6s ease 1.3s; opacity:1}
-  .wp-req{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:12px; letter-spacing:.16em; fill:var(--muted-on-dark,#868A90); text-anchor:middle; opacity:0}
-  .wp-flow.is-in .wp-req{transition:opacity .6s ease 1.6s; opacity:1}
-  .wp-val{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic;
-    font-size:26px; fill:var(--paper,#F7F7F5); text-anchor:middle; opacity:0}
-  .wp-val-return{fill:var(--gold-light,#E3C24E); font-size:30px}
-  .wp-flow.is-in .wp-val{transition:opacity .7s ease 2.2s; opacity:1}
-  .wp-cap{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:11px; letter-spacing:.14em; fill:var(--muted-on-dark,#868A90); text-anchor:middle}
+  /* PAIRED INDEXED BARS — the source's signature visual (chart pattern A):
+     two metric groups, each shown as a grey February bar indexed to 100%
+     and a gold July bar at its true relative height (220% and 147%). A
+     dashed line marks the shared 100% baseline. Bars grow on scroll. */
+  .ac-pair{max-width:860px; margin:40px auto 0}
+  .ac-chart{width:100%; height:auto; display:block}
+  .ac-base{stroke:rgba(247,247,245,.22); stroke-width:1}
+  .ac-idx{stroke:rgba(212,175,55,.4); stroke-width:1; stroke-dasharray:5 7}
+  .ac-bar{transform:scaleY(0); transform-origin:bottom; transform-box:fill-box}
+  .ac-feb-bar{fill:#3A3D44}
+  .ac-jul-bar{fill:var(--gold,#D4AF37); filter:drop-shadow(0 0 12px rgba(212,175,55,.35))}
+  .ac-pair.is-in .ac-bar{transform:scaleY(1)}
+  .ac-pair.is-in .ac-b1{transition:transform .7s cubic-bezier(.4,0,.2,1) .1s}
+  .ac-pair.is-in .ac-b2{transition:transform .7s cubic-bezier(.4,0,.2,1) .25s}
+  .ac-pair.is-in .ac-g1{transition:transform 1s cubic-bezier(.22,1.18,.4,1) .7s}
+  .ac-pair.is-in .ac-g2{transition:transform 1s cubic-bezier(.22,1.18,.4,1) .9s}
+  .ac-val{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic;
+    font-size:34px; fill:var(--gold-light,#E3C24E); text-anchor:middle; opacity:0}
+  .ac-pair.is-in .ac-val{transition:opacity .7s ease 1.7s; opacity:1}
+  .ac-feb{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:12px; letter-spacing:.16em; fill:var(--muted-on-dark,#868A90); text-anchor:middle}
+  .ac-cap{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:11.5px; letter-spacing:.12em; fill:var(--muted-on-dark,#868A90); text-anchor:middle}
+  .ac-axis{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:11px; letter-spacing:.1em; fill:rgba(212,175,55,.55)}
+  @media (prefers-reduced-motion:reduce){
+    .ac-bar{transform:scaleY(1)}
+    .ac-val{opacity:1}
+  }
+
+  /* DUAL-LINE EXHIBIT — the source's second chart: CallRail first-time
+     patient calls and Google Business Profile call taps, Jan* to Jul 2026,
+     measured independently. Sits on the light band; lines draw on scroll. */
+  .ac-dual{max-width:900px; margin:40px auto 0}
+  .ac-dgrid{stroke:#E5E4DF; stroke-width:1}
+  .ac-dlabel{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:12px; fill:var(--muted-2,#5E6066)}
+  .ac-dline{fill:none; stroke-linejoin:round; stroke-linecap:round;
+    stroke-dasharray:1; stroke-dashoffset:1}
+  .ac-dline-cr{stroke:#8A752B; stroke-width:3}
+  .ac-dline-gbp{stroke:#B9BCC1; stroke-width:2.5}
+  .ac-dual.is-in .ac-dline{transition:stroke-dashoffset 1.8s cubic-bezier(.45,.05,.35,1) .2s; stroke-dashoffset:0}
+  .ac-ddot{opacity:0}
+  .ac-dual.is-in .ac-ddot{transition:opacity .5s ease 1.9s; opacity:1}
+  .ac-dleg{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:12px; fill:var(--ink,#16171A)}
+  @media (prefers-reduced-motion:reduce){
+    .ac-dline{stroke-dashoffset:0}
+    .ac-ddot{opacity:1}
+  }
+
+  /* OWNER QUOTE — anecdotal by design; the source is explicit that this
+     quote is the only place patient outcomes appear. */
+  .ac-quote{max-width:760px; margin:48px auto 0; padding:8px 0 8px 28px;
+    border-left:3px solid var(--gold,#D4AF37)}
+  .ac-quote p{margin:0; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-size:1.35rem; line-height:1.6; color:var(--paper,#F7F7F5)}
+  .ac-quote cite{display:block; margin-top:14px; font-style:normal;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90)}
+
   .gl-src{max-width:860px; margin:26px auto 0;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.72rem; line-height:1.8; letter-spacing:.04em; color:var(--muted-on-dark,#868A90)}
-  @media (prefers-reduced-motion:reduce){
-    .wp-bar{transform:scaleY(1)}
-    .wp-arc{stroke-dashoffset:0}
-    .wp-arrow,.wp-mult,.wp-req,.wp-val{opacity:1}
-  }
+  .aa-sec.band-light .gl-src{color:var(--muted-2,#5E6066)}
 
   /* Month-by-month + source chains: page tweaks on the template chain.
      The lead count rides in the always-visible delta column, gold. */
@@ -1045,8 +1070,8 @@
           <a href="addiction-treatment-leads.html" role="menuitem">Addiction treatment &middot; Meta attribution</a>
           <a href="personal-injury-inquiries.html" role="menuitem">Personal injury &middot; channel from zero</a>
           <a href="gutter-local-seo.html" role="menuitem">Gutter services &middot; local SEO</a>
-          <a href="waterproofing-google-ads.html" class="active" role="menuitem">Waterproofing &middot; Google Ads</a>
-          <a href="auto-injury-chiro-local-seo.html" role="menuitem">Auto-injury chiropractic &middot; local SEO</a>
+          <a href="waterproofing-google-ads.html" role="menuitem">Waterproofing &middot; Google Ads</a>
+          <a href="auto-injury-chiro-local-seo.html" class="active" role="menuitem">Auto-injury chiropractic &middot; local SEO</a>
         </div>
       </div>
       <a href="../index.html#videos">Videos</a>
@@ -1062,13 +1087,13 @@
 
 <section class="aa-hero" data-mark="01">
   <div class="aa-hero-bg" aria-hidden="true">
-    <!-- FOUNDATION SECTION: page-specific hero animation. A cross-section
-         drafts itself in thin gold strokes: the grade line with soil hatching,
-         a house above it, and the work below it - foundation walls, slab,
-         footings, a French drain with its discharge line, groundwater seep
-         dashes outside the wall, and rain overhead. Reuses the template's
-         staggered stroke-dashoffset draw classes; reduced motion holds the
-         finished drawing without the draw effect. -->
+    <!-- METRO MAP: page-specific hero animation. A stylized street map
+         drafts itself in thin gold strokes: avenues, cross streets, one
+         diagonal boulevard, then three map pins for the three clinics, each
+         with radiating signal rings, because three clinics means three
+         separate local map races. Reuses the template's staggered
+         stroke-dashoffset draw classes; reduced motion holds the finished
+         drawing without the draw effect. -->
     <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
         <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -1080,38 +1105,33 @@
       <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
 
       <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 01 · grade line (draw first) -->
-        <path class="gp-line" style="--gd:0s" d="M300 620 L1300 620"/>
-        <!-- 02 · soil hatching either side of the house -->
-        <path class="gp-line" style="--gd:0.5s; opacity:0.5" d="M340 620 L316 646 M390 620 L366 646 M440 620 L416 646 M490 620 L466 646 M540 620 L516 646"/>
-        <path class="gp-line" style="--gd:0.7s; opacity:0.5" d="M1110 620 L1086 646 M1160 620 L1136 646 M1210 620 L1186 646 M1260 620 L1236 646"/>
-        <!-- 03 · house above grade: walls, gable, window, door -->
-        <path class="gp-line" style="--gd:1s" d="M600 620 L600 400 M1060 620 L1060 400"/>
-        <path class="gp-line" style="--gd:1.4s" d="M580 400 L830 290 L1080 400"/>
-        <path class="gp-line" style="--gd:1.7s; opacity:0.8" d="M650 470 L740 470 L740 545 L650 545 Z M695 470 L695 545 M790 620 L790 520 L850 520 L850 620"/>
-        <!-- 04 · foundation below grade: walls down, slab, footings -->
-        <path class="gp-line" style="--gd:2.1s" d="M600 620 L600 780 M1060 620 L1060 780"/>
-        <path class="gp-line" style="--gd:2.4s" d="M600 780 L1060 780"/>
-        <path class="gp-line" style="--gd:2.6s; opacity:0.8" d="M580 780 L580 806 L644 806 L644 780 M1016 780 L1016 806 L1080 806 L1080 780"/>
-        <!-- 05 · the French drain: pipe circle + gravel dots at the footing -->
-        <path class="gp-line" style="--gd:2.9s" d="M548 788 a14 14 0 1 0 0.1 0"/>
-        <path class="gp-line" style="--gd:3.1s; opacity:0.6" d="M528 772 a5 5 0 1 0 0.1 0 M568 770 a5 5 0 1 0 0.1 0 M520 800 a5 5 0 1 0 0.1 0"/>
-        <!-- 06 · discharge line carrying water away from the house -->
-        <path class="gp-line" style="--gd:3.3s" d="M534 802 L400 802 M414 792 L400 802 L414 812"/>
-        <!-- 07 · groundwater seep dashes outside the wall -->
-        <path class="gp-line" style="--gd:3.6s; opacity:0.5" d="M544 656 L562 676 M532 700 L550 720 M542 742 L558 760"/>
-        <!-- 08 · rain overhead -->
-        <path class="gp-line" style="--gd:3.9s; opacity:0.55" d="M660 160 L660 205 M790 120 L790 165 M920 160 L920 205 M1050 130 L1050 175"/>
+        <!-- 01 · avenues, west to east (draw first) -->
+        <path class="gp-line" style="--gd:0s" d="M280 300 L1320 300 M280 470 L1320 470 M280 640 L1320 640"/>
+        <!-- 02 · cross streets, north to south -->
+        <path class="gp-line" style="--gd:0.6s" d="M480 180 L480 760 M800 180 L800 760 M1120 180 L1120 760"/>
+        <!-- 03 · one diagonal boulevard for character -->
+        <path class="gp-line" style="--gd:1.1s; opacity:0.6" d="M330 750 L1270 210"/>
+        <!-- 04 · clinic pins: stem up from the intersection, head circle -->
+        <path class="gp-line" style="--gd:1.6s" d="M480 470 L480 424 M480 424 a22 22 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:1.9s" d="M800 300 L800 254 M800 254 a22 22 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:2.2s" d="M1120 640 L1120 594 M1120 594 a22 22 0 1 0 0.1 0"/>
+        <!-- 05 · signal rings radiating from each pin head -->
+        <path class="gp-line" style="--gd:2.6s; opacity:0.35" d="M480 402 a44 44 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:2.8s; opacity:0.2" d="M480 380 a66 66 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:3s; opacity:0.35" d="M800 232 a44 44 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:3.2s; opacity:0.2" d="M800 210 a66 66 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:3.4s; opacity:0.35" d="M1120 572 a44 44 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:3.6s; opacity:0.2" d="M1120 550 a66 66 0 1 0 0.1 0"/>
       </g>
 
-      <!-- Plaque labels fade in after the section is drawn. -->
+      <!-- Plaque labels fade in after the map is drawn. -->
       <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
-        <text class="gp-label" style="--gd:4.3s" x="430" y="866">WATERPROOFING &middot; NORTHERN NEW JERSEY</text>
-        <text class="gp-label" style="--gd:4.5s" x="1010" y="866">OWNER-OPERATED</text>
-        <text class="gp-label" style="--gd:4.7s" x="1240" y="608" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">GRADE</text>
-        <text class="gp-label" style="--gd:4.9s" x="740" y="712" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">AVERAGE JOB &middot; $8,500</text>
-        <text class="gp-label" style="--gd:5.1s" x="286" y="770" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">FRENCH DRAIN</text>
-        <text class="gp-label" style="--gd:5.3s" x="620" y="70" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">GOOGLE ADS &middot; JAN&ndash;JUL 2026</text>
+        <text class="gp-label" style="--gd:4s" x="430" y="850">AUTO-INJURY CHIROPRACTIC &middot; WESTERN U.S. METRO</text>
+        <text class="gp-label" style="--gd:4.2s" x="1120" y="850">3 LOCATIONS</text>
+        <text class="gp-label" style="--gd:4.4s" x="422" y="530" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">CLINIC 01</text>
+        <text class="gp-label" style="--gd:4.6s" x="742" y="360" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">CLINIC 02</text>
+        <text class="gp-label" style="--gd:4.8s" x="1062" y="700" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">CLINIC 03</text>
+        <text class="gp-label" style="--gd:5s" x="600" y="70" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">THREE MAP RACES &middot; FEB VS JUL 2026</text>
       </g>
     </svg>
 
@@ -1119,13 +1139,14 @@
     <span class="garage-orb g2"></span>
   </div>
   <div class="aa-hero-content">
-    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Waterproofing <span class="sep">/</span> Northern New Jersey</div>
-    <h1>A NJ waterproofing contractor put <em>$41,102</em> into Google Ads and got back <em>$287,532</em> in booked work</h1>
+    <div class="eyebrow"><span class="num">01</span> &middot; Case study <span class="sep">/</span> Auto-injury chiropractic <span class="sep">/</span> Western U.S. metro</div>
+    <h1><em>47% more</em> first-time patient calls for an auto-injury practice, <em>without a big ad budget</em></h1>
     <p class="lede">
-      An owner-operated waterproofing contractor in northern New Jersey, January to
-      July 2026. <code>$41,102</code> in ad spend became 99 tracked quote requests and
-      $287,532 in client-reported booked work, a 6.9x media-only return. By August his
-      schedule was full three months out and he asked us to slow the ads down.
+      An auto-injury chiropractic group with three locations in a major Western U.S.
+      metro, February against July 2026, equal one-month windows. A lead here means a
+      first-time patient phone call: those grew <code>47%</code> in five months, calls
+      coming straight from the practice&#39;s Google map listings grew 120%, and no big
+      ad budget sat behind any of it.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -1134,55 +1155,53 @@
   </div>
 </section>
 
-<!-- 01b - Hero KPI strip. Four figures the source leads with; captions
-     copied verbatim from waterproofing-google-ads.netlify.app. -->
+<!-- 01b - Hero KPI strip. Three figures the source leads with; captions
+     copied verbatim from auto-injury-chiro-local-seo.netlify.app. -->
 <section class="aa-kpi-wrap" data-mark="01b" aria-label="Headline results">
-  <div class="aa-kpi-strip">
+  <div class="aa-kpi-strip cs-kpi-3">
     <div class="aa-kpi">
-      <div class="l">Return on ad spend, media-only</div>
-      <div class="v">6.9x</div>
-      <div class="d">Every $1 of ad spend came back as $6.99 in booked waterproofing work</div>
+      <div class="l">More patient calls straight from the Google Maps listings</div>
+      <div class="v">+120%</div>
+      <div class="d">Feb 2026 baseline vs Jul 2026 &middot; equal one-month windows</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">Calls and quote requests from the ads</div>
-      <div class="v">99</div>
-      <div class="d">Seven months, Jan 1&ndash;Jul 31, 2026 &middot; Google Ads conversion tracking</div>
+      <div class="l">More first-time patient calls overall</div>
+      <div class="v">+47%</div>
+      <div class="d">Repeat callers excluded &middot; CallRail first-time conversations, spam removed</div>
     </div>
     <div class="aa-kpi">
-      <div class="l">What each quote request cost</div>
-      <div class="v">$415</div>
-      <div class="d">$41,102 in ad spend &divide; 99 requests, across the seven months</div>
-    </div>
-    <div class="aa-kpi">
-      <div class="l">How far out his schedule filled</div>
-      <div class="v">3 months</div>
-      <div class="d">By August he asked us to slow the ads down</div>
+      <div class="l">More call taps in Google&#39;s own listing reports</div>
+      <div class="v">+136%</div>
+      <div class="d">January vs July, the window in Google&#39;s reporting, stated as such</div>
     </div>
   </div>
 </section>
 
-<!-- 02 - Money in, money out (dark). The source's signature visual: ad
-     spend and booked revenue as two bars at true 6.99x scale, the 99 quote
-     requests riding the arc between them. Draws on scroll. -->
+<!-- 02 - The before and after (dark). The source's signature visual
+     (pattern A): paired bars indexed to the February baseline, grey for
+     February at 100%, gold for July at its true relative height. -->
 <section class="aa-sec" data-mark="02">
-  <div class="eyebrow">02 &middot; Money in, money out</div>
-  <h2>Every $1 in, <em>$6.99 back</em></h2>
-  <p class="intro">The whole engagement in one figure: ad spend on the left, booked work on the right, drawn to scale. The right bar is 6.99 times the height of the left one, and the 99 quote requests are the bridge between them.</p>
-  <div class="wp-flow" id="wpFlow">
-    <svg class="wp-chart" viewBox="0 0 640 340" role="img" aria-label="Flow figure: $41,102 in ad spend returned $287,532 in client-reported booked revenue through 99 quote requests, a 6.9 times media-only return.">
-      <line class="wp-base" x1="40" y1="300" x2="600" y2="300"/>
-      <rect class="wp-bar wp-bar-spend" x="70" y="264" width="90" height="36"/>
-      <rect class="wp-bar wp-bar-return" x="480" y="48" width="90" height="252"/>
-      <path class="wp-arc" d="M115 258 Q290 70 470 70" pathLength="1"/>
-      <path class="wp-arrow" d="M460 58 L474 70 L460 82"/>
-      <text class="wp-mult" x="290" y="165">6.9x</text>
-      <text class="wp-req" x="290" y="196">99 QUOTE REQUESTS</text>
-      <text class="wp-val" x="115" y="244">$41,102</text>
-      <text class="wp-val wp-val-return" x="525" y="36">$287,532</text>
-      <text class="wp-cap" x="115" y="324">AD SPEND &middot; MEDIA ONLY</text>
-      <text class="wp-cap" x="525" y="324">CAME BACK &middot; BOOKED</text>
+  <div class="eyebrow">02 &middot; The before and after</div>
+  <h2>By July, <em>more than double</em> the calls from the map</h2>
+  <p class="intro">Both bars in each pair start at the same place: February 2026, indexed to 100%. The gold bar is July. Calls from the Google Maps listings more than doubled; first-time patient calls overall grew 47%.</p>
+  <div class="ac-pair" id="acPair">
+    <svg class="ac-chart" viewBox="0 0 640 360" role="img" aria-label="Paired bar chart indexed to February 2026 as 100%. Calls from Google Maps: February 100%, July 220%. All first-time patient calls: February 100%, July 147%.">
+      <line class="ac-base" x1="40" y1="300" x2="600" y2="300"/>
+      <line class="ac-idx" x1="40" y1="200" x2="600" y2="200"/>
+      <text class="ac-axis" x="598" y="190" text-anchor="end">FEB 2026 = 100%</text>
+      <rect class="ac-bar ac-feb-bar ac-b1" x="100" y="200" width="70" height="100"/>
+      <rect class="ac-bar ac-jul-bar ac-g1" x="180" y="80" width="70" height="220"/>
+      <rect class="ac-bar ac-feb-bar ac-b2" x="390" y="200" width="70" height="100"/>
+      <rect class="ac-bar ac-jul-bar ac-g2" x="470" y="153" width="70" height="147"/>
+      <text class="ac-feb" x="135" y="188">FEB</text>
+      <text class="ac-feb" x="425" y="188">FEB</text>
+      <text class="ac-val" x="215" y="62">+120%</text>
+      <text class="ac-val" x="505" y="135">+47%</text>
+      <text class="ac-cap" x="175" y="330">CALLS FROM GOOGLE MAPS</text>
+      <text class="ac-cap" x="465" y="330">ALL FIRST-TIME PATIENT CALLS</text>
+      <text class="ac-cap" x="320" y="354" style="opacity:.7">FEB 2026 BASELINE VS JUL 2026 &middot; EQUAL ONE-MONTH WINDOWS</text>
     </svg>
-    <p class="gl-src">Source: Google Ads, Jan 1 to Jul 31, 2026, for spend and the 99 call and form conversions. Booked revenue of $287,532 is the client-reported total from jobs originating in those requests over the same window. Agency fee not included; this is a media-only figure.</p>
+    <p class="gl-src">Bars show each metric relative to its February 2026 baseline (grey = February, gold = July). Source: CallRail call tracking, first-time conversations only, repeat callers and identified spam removed, corroborated by Google&#39;s own Business Profile reporting. Underlying counts, methodology, and limitations are in the full numbers below.</p>
   </div>
 </section>
 
@@ -1192,24 +1211,24 @@
 <section class="aa-sec band-light" data-mark="03">
   <div class="cs-split">
     <figure class="cs-split-img">
-      <img src="https://unsplash.com/photos/gqc3HW9Lexc/download?w=900" alt="Rain drops beading on a window pane with an ivy-covered house behind" loading="lazy" width="900" height="1100">
+      <img src="https://unsplash.com/photos/2d3cHa8RMSY/download?w=900" alt="Empty clinic waiting room with three red chairs beside a sunlit window" loading="lazy" width="900" height="1100">
     </figure>
     <div class="cs-split-body">
       <div class="eyebrow">03 &middot; The situation</div>
-      <h2>Money out every day, <em>almost nothing back</em></h2>
-      <p class="intro small">The ads were live when the year started, and the spend was real. What came back was not.</p>
+      <h2>Nothing broken, <em>except the growth plan</em></h2>
+      <p class="intro small">Three clinics, a real reputation, and no appetite for the standard answer.</p>
       <ol class="cs-questions">
         <li>
           <span class="cs-q-num">01</span>
-          <span class="cs-q-text">The first two months of the year returned almost nothing: six quote requests in January, six in February, at $494 and then $833 apiece</span>
+          <span class="cs-q-text">Nothing about the practice itself was broken. The doctor built it the slow way: years of work, three locations, a reputation earned one patient at a time</span>
         </li>
         <li>
           <span class="cs-q-num">02</span>
-          <span class="cs-q-text">At those numbers, a contractor whose average job is $8,500 is paying real money to stand still</span>
+          <span class="cs-q-text">The problem was growth. The standard agency answer is a bigger ad budget, and there was no appetite for one</span>
         </li>
         <li>
           <span class="cs-q-num">03</span>
-          <span class="cs-q-text">The clicks were there. The people clicking were not asking for quotes</span>
+          <span class="cs-q-text">The question was whether a call-driven injury practice could grow on visibility it owns, without renting every new patient from a pay-per-click auction</span>
         </li>
       </ol>
       <div class="cs-cta-pair">
@@ -1224,22 +1243,22 @@
      What-was-actually-wrong sections, kept in its own order. -->
 <section class="aa-sec" data-mark="03">
   <figure class="cs-banner">
-    <img src="https://unsplash.com/photos/wBMof4BVMWA/download?w=1600" alt="Rain water sheeting off a wet tiled roof edge onto a white wall" loading="lazy" width="1600" height="460">
+    <img src="https://unsplash.com/photos/nakAbPDV_cU/download?w=1600" alt="Night aerial view of a city intersection with car light trails" loading="lazy" width="1600" height="460">
   </figure>
   <div class="eyebrow">04 &middot; The diagnosis</div>
-  <h2>The clicks were fine, <em>the landing was not</em></h2>
+  <h2>The map and the phone, <em>not the website</em></h2>
   <div class="cs-diag3">
     <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">01</span>Not the budget, not the market</div>
-      <p>The problem was not the budget and it was not the market. Money was going out every day and clicks were landing; the account was buying attention and then wasting it.</p>
+      <div class="cs-diag3-head"><span class="cs-idx">01</span>How injury patients actually search</div>
+      <p>Injury patients do not research chiropractors the way marketers assume. In the hours after a crash they search on a phone, look at the map results, and call whoever looks credible and close.</p>
     </article>
     <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">02</span>Where the clicks were landing</div>
-      <p>Clicks were landing on general website pages instead of pages built for the one thing the searcher wanted priced. When someone searches &ldquo;basement waterproofing near me&rdquo; and lands on a homepage, they leave.</p>
+      <div class="cs-diag3-head"><span class="cs-idx">02</span>The website is a bystander</div>
+      <p>Over this same window, visits to the site fell about a third while calls from the map listings more than doubled. The behavior is the diagnosis: patients call from the listing without ever opening the site.</p>
     </article>
     <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">03</span>The fix that followed</div>
-      <p>The fix was where the click landed, not how much the click cost. Same searchers, same budget mechanics, different destination: a page about exactly the job they wanted priced.</p>
+      <div class="cs-diag3-head"><span class="cs-idx">03</span>So the work went where the patients are</div>
+      <p>The layer that produces patients is the map pack and the phone, so that is where the work went.</p>
     </article>
   </div>
 </section>
@@ -1248,48 +1267,52 @@
      The source's build order + the "did not do" tile at the end. -->
 <section class="aa-sec band-light" data-mark="04">
   <div class="eyebrow">05 &middot; The build</div>
-  <h2>A page for every service, <em>a source on every call</em></h2>
-  <p class="intro small">What we did, in the order it mattered, plus the one thing only the client could do. Every move pointed at the same target: land the click on the job the searcher wanted priced, then count what happened next.</p>
+  <h2>Three listings, <em>three separate map races</em></h2>
+  <p class="intro small">What we did, in the order it mattered. The success measure was set up front, and it was not a marketing stat: more patients on the schedule. The first formal review of that measure is this page, dated August 17, 2026.</p>
   <div class="cs-steps">
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">01</span>Built a dedicated page per service</div>
-      <p>Basement waterproofing, French drains, crawlspace encapsulation, and window wells each got their own page, so every click landed on exactly what the searcher asked for.</p>
+      <div class="cs-step-head"><span class="cs-idx">01</span>Rebuilt the local identity around the search</div>
+      <p>The practice now operates on an exact-match local domain built around &ldquo;car crash doctor,&rdquo; a term patients type in the hours after an accident. That term and its &ldquo;near me&rdquo; variant now hold the top map spot in two of the four tracked areas. Part of that position is the domain itself, and we say so, because that was the point of the rebrand.</p>
     </article>
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">02</span>Put call tracking on every lead</div>
-      <p>Each call and form now carries its source, so budget decisions run on quote requests, not clicks.</p>
+      <div class="cs-step-head"><span class="cs-idx">02</span>Worked each listing as its own market</div>
+      <p>Three clinics means three separate local map races, not one. Each profile was built out and maintained on its own, and the practice&#39;s brand name now holds the top spot in three of the four tracked areas, with &ldquo;car accident chiropractor near me,&rdquo; searched 4,400 times a month in this metro, on page one in two of them.</p>
     </article>
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">03</span>Steered budget to the big jobs</div>
-      <p>Spend concentrated on basement waterproofing and drainage, the jobs that carry the $8,500 average, instead of spreading evenly across everything.</p>
+      <div class="cs-step-head"><span class="cs-idx">03</span>Cleaned the data before claiming anything</div>
+      <p>The call figures count first-time callers only, exclude repeat callers, and exclude a robocall burst we identified and removed. No growth number on this page rests on one system: our call tracking and Google&#39;s own listing reports show the same curve independently.</p>
     </article>
     <article class="cs-step">
-      <div class="cs-step-head"><span class="cs-idx">04</span>What the client changed</div>
-      <p>The owner runs his own estimates and answered the phone. Every request that came in got a fast response, and that follow-up speed is a real part of why requests became booked jobs.</p>
+      <div class="cs-step-head"><span class="cs-idx">04</span>The measure that matters, set up front</div>
+      <p>Not a marketing stat: more patients on the schedule. That stage of the funnel stays with the practice, which is why the patient and revenue rows below are marked pending rather than estimated.</p>
     </article>
     <article class="cs-step cs-step-neg">
       <div class="cs-step-head"><span class="cs-idx">05</span>Did not do</div>
-      <p>Did not screen requests for spam or duplicates in these figures. Did not include the agency fee, so 6.9x is a media-only return. Did not project revenue from averages: $287,532 is the client&#39;s own booked-job records, confirmed in writing before publication.</p>
+      <p>Did not buy the growth: no big ad budget sits behind these figures. Did not estimate what the practice keeps internal: patient and revenue rows stay pending. Did not let the owner&#39;s words become a metric: his report of more patients appears only as his own quote.</p>
     </article>
   </div>
 </section>
 
-<!-- 06 - Two matched windows (dark band). The source's every-figure table:
-     first window vs second window, both inside the engagement. Figures ride
-     the metric column note so the mobile collapse keeps them. -->
+<!-- 06 - Every figure, before and after (dark band). The source's table:
+     three measured rows, three pending rows that stay pending rather than
+     estimated. Figures ride the metric column note so the mobile collapse
+     keeps them. -->
 <section class="aa-sec" data-mark="05">
   <div class="eyebrow">06 &middot; The full numbers</div>
-  <h2>Two matched windows, <em>inside the same engagement</em></h2>
-  <p class="intro">Every figure, first window and second window: Jan 1 to Apr 15 (105 days) against Apr 16 to Jul 31 (107 days). Both windows were managed by Magister, so this table shows progress within the engagement, not a before-Magister baseline.</p>
+  <h2>Every figure, <em>and every pending</em></h2>
+  <p class="intro">Before: February 1 to 28, 2026. After: July 1 to 31, 2026. Equal one-month windows. Three rows are measured; three stay pending, because the practice does not share internal patient or revenue figures with us, and pending beats estimated.</p>
   <div class="cs-chain">
     <div class="cs-chain-row cs-chain-head" aria-hidden="true">
-      <span>#</span><span></span><span>Metric &middot; Jan 1&ndash;Apr 15 &rarr; Apr 16&ndash;Jul 31</span><span></span><span>Change</span>
+      <span>#</span><span></span><span>Metric &middot; before &rarr; after</span><span></span><span>Change</span>
     </div>
-    <div class="cs-chain-row"><span class="cs-idx">01</span><span class="grp"></span><span class="metric">Ad spend<span class="gl-mnote">$18,274 &rarr; $22,828</span></span><span class="from-to"></span><span class="delta">+24.9%</span></div>
-    <div class="cs-chain-row"><span class="cs-idx">02</span><span class="grp"></span><span class="metric">Calls + form requests<span class="gl-mnote">43 &rarr; 56 &middot; Google Ads conversions</span></span><span class="from-to"></span><span class="delta up">+30.2%</span></div>
-    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">03</span><span class="grp"></span><span class="metric">Cost per request<span class="gl-mnote">$425 &rarr; $408</span></span><span class="from-to"></span><span class="delta up">-4.0%</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">01</span><span class="grp"></span><span class="metric">First-time patient phone calls<span class="gl-mnote">19 &rarr; 28</span></span><span class="from-to"></span><span class="delta up">+9 (+47%)</span></div>
+    <div class="cs-chain-row cs-chain-emph"><span class="cs-idx">02</span><span class="grp"></span><span class="metric">First-time calls from Google map listings<span class="gl-mnote">10 &rarr; 22</span></span><span class="from-to"></span><span class="delta up">+12 (+120%)</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">03</span><span class="grp"></span><span class="metric">Call taps in Google Business Profile reporting<span class="gl-mnote">14 &rarr; 33 &middot; Jan vs Jul, Google&#39;s own window</span></span><span class="from-to"></span><span class="delta up">+19 (+136%)</span></div>
+    <div class="cs-chain-row"><span class="cs-idx">04</span><span class="grp"></span><span class="metric">New auto-injury patients<span class="gl-mnote">kept internal by the practice</span></span><span class="from-to"></span><span class="delta"><em>Pending</em><small>Reported anecdotally only</small></span></div>
+    <div class="cs-chain-row"><span class="cs-idx">05</span><span class="grp"></span><span class="metric">Revenue, collected<span class="gl-mnote">kept internal by the practice</span></span><span class="from-to"></span><span class="delta"><em>Pending</em><small>Not shared, not estimated</small></span></div>
+    <div class="cs-chain-row"><span class="cs-idx">06</span><span class="grp"></span><span class="metric">Cost per new patient, full cost<span class="gl-mnote">needs both rows above</span></span><span class="from-to"></span><span class="delta"><em>Pending</em><small>Stated when cost basis publishes</small></span></div>
   </div>
-  <p class="intro small">The windows differ by two days because the split falls mid-April; no adjustment was applied. Google Ads reports fractional conversion credit; window counts of 43 and 56 reflect platform-reported totals of 43.01 and 55.98. The $287,532 in booked revenue is a full-period figure; the client&#39;s records do not split it by window, so no per-window revenue is shown.</p>
+  <p class="intro small">The Google Business Profile row uses January vs July, the window in Google&#39;s own reporting, and is stated as such. A conservative two-month check runs the same direction: 25 first-time calls in January&ndash;February vs 39 in June&ndash;July, +56%. The owner reports the pending outcomes anecdotally, in his quote further down, so those rows stay pending rather than estimated.</p>
   <div class="cs-cta-pair">
     <a class="btn" href="#call"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
     <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -1300,30 +1323,49 @@
      your-own-math paragraph, and the external pricing context with its
      published sources named and firewalled from the client's figures. -->
 <section class="aa-sec band-light" data-mark="06">
-  <div class="eyebrow">07 &middot; What it was worth</div>
-  <h2>Money in, money out, <em>and who says so</em></h2>
-  <p class="intro">Every $1 of ad spend came back as $6.99 in booked waterproofing work. Where each figure comes from is spelled out here, including the one number on this page that comes from the client rather than a platform.</p>
-  <div class="cs-metros" style="grid-template-columns:repeat(2,1fr)">
-    <div class="cs-metro">
-      <div class="cs-metro-name">Ad spend in, Jan&ndash;Jul 2026</div>
-      <div class="cs-metro-row"><span class="k">Google Ads media spend</span><span class="v"><b>$41,102</b></span></div>
-      <div class="cs-metro-row"><span class="k">Agency fee</span><span class="v">Not included</span></div>
-      <div class="cs-metro-row"><span class="k">Software and production</span><span class="v">Not included</span></div>
-      <div class="cs-metro-row"><span class="k">So the 6.9x is</span><span class="v"><b>Media-only</b></span></div>
-    </div>
-    <div class="cs-metro">
-      <div class="cs-metro-name">Booked work back</div>
-      <div class="cs-metro-row"><span class="k">Booked revenue returned</span><span class="v"><b>$287,532</b></span></div>
-      <div class="cs-metro-row"><span class="k">Return, $287,532 &divide; $41,102</span><span class="v"><b>6.9x</b></span></div>
-      <div class="cs-metro-row"><span class="k">Cost per request, $41,102 &divide; 99</span><span class="v"><b>$415</b></span></div>
-      <div class="cs-metro-row"><span class="k">Booked means</span><span class="v">Signed, not necessarily collected</span></div>
-    </div>
-  </div>
-  <div class="cs-diag3" style="margin-top:32px">
-    <article class="cs-diag3-card">
-      <div class="cs-diag3-head"><span class="cs-idx">&#8226;</span>Where the revenue figure comes from</div>
-      <p>The $287,532 is the client&#39;s reported total of booked jobs originating from these ad-generated requests, Jan 1 to Jul 31, 2026. Booked means signed work, not necessarily collected payment. It is the client&#39;s own figure from his job records, not a platform estimate and not a projection from averages. Written confirmation of this figure is on file with the agency before publication.</p>
-    </article>
+  <div class="eyebrow">07 &middot; The exhibit</div>
+  <h2>Two independent systems, <em>same curve</em></h2>
+  <p class="intro">No growth number on this page rests on one system. Our call tracking and Google&#39;s own listing reports, measured independently, both show call activity rising over the window.</p>
+  <div class="ac-dual" id="acDual">
+    <svg viewBox="0 0 720 320" role="img" aria-label="Line chart, January through July 2026. CallRail first-time patient calls: 6, 19, 21, 28, 19, 11, 28. Google Business Profile call taps: 14, 7, 17, 9, 11, 20, 33. Both series trend upward over the window." style="width:100%; height:auto; display:block">
+      <g class="ac-dgrid">
+        <line x1="46" y1="274" x2="704" y2="274"/>
+        <line x1="46" y1="205.1" x2="704" y2="205.1"/>
+        <line x1="46" y1="136.2" x2="704" y2="136.2"/>
+        <line x1="46" y1="67.3" x2="704" y2="67.3"/>
+      </g>
+      <g class="ac-dlabel">
+        <text x="38" y="278" text-anchor="end">0</text>
+        <text x="38" y="209" text-anchor="end">10</text>
+        <text x="38" y="140" text-anchor="end">20</text>
+        <text x="38" y="71" text-anchor="end">30</text>
+        <text x="46" y="296" text-anchor="middle">Jan*</text>
+        <text x="155.7" y="296" text-anchor="middle">Feb</text>
+        <text x="265.3" y="296" text-anchor="middle">Mar</text>
+        <text x="375" y="296" text-anchor="middle">Apr</text>
+        <text x="484.7" y="296" text-anchor="middle">May</text>
+        <text x="594.3" y="296" text-anchor="middle">Jun</text>
+        <text x="704" y="296" text-anchor="middle">Jul</text>
+        <text x="46" y="314" text-anchor="start">*Jan partial: tracking live Jan 14. May spam-filtered.</text>
+      </g>
+      <polyline class="ac-dline ac-dline-gbp" pathLength="1"
+        points="46,177.6 155.7,225.8 265.3,156.9 375,212 484.7,198.2 594.3,136.2 704,46.7"/>
+      <polyline class="ac-dline ac-dline-cr" pathLength="1"
+        points="46,232.7 155.7,143.1 265.3,129.3 375,81.1 484.7,143.1 594.3,198.2 704,81.1"/>
+      <g class="ac-ddot" fill="#8A752B">
+        <circle cx="46" cy="232.7" r="4"/><circle cx="155.7" cy="143.1" r="4"/><circle cx="265.3" cy="129.3" r="4"/><circle cx="375" cy="81.1" r="4"/><circle cx="484.7" cy="143.1" r="4"/><circle cx="594.3" cy="198.2" r="4"/><circle cx="704" cy="81.1" r="4"/>
+      </g>
+      <g class="ac-ddot" fill="#B9BCC1">
+        <circle cx="46" cy="177.6" r="3.5"/><circle cx="155.7" cy="225.8" r="3.5"/><circle cx="265.3" cy="156.9" r="3.5"/><circle cx="375" cy="212" r="3.5"/><circle cx="484.7" cy="198.2" r="3.5"/><circle cx="594.3" cy="136.2" r="3.5"/><circle cx="704" cy="46.7" r="3.5"/>
+      </g>
+      <g class="ac-dleg">
+        <rect x="60" y="34" width="12" height="4" fill="#8A752B"/>
+        <text x="78" y="40">CallRail first-time patient calls</text>
+        <rect x="330" y="34" width="12" height="4" fill="#B9BCC1"/>
+        <text x="348" y="40">Google Business Profile call taps</text>
+      </g>
+    </svg>
+    <p class="gl-src">CallRail call tracking and Google Business Profile reporting, measured independently, both show call activity rising over the window. Practice name, tracking numbers, and caller IDs are withheld; a sanitized CallRail screenshot is held on file for qualified conversations.</p>
   </div>
 </section>
 
@@ -1332,38 +1374,37 @@
      what-this-does-not-prove paragraph, kept verbatim. -->
 <section class="aa-sec" data-mark="07">
   <figure class="cs-banner">
-    <img src="https://unsplash.com/photos/bcginn8NY3Y/download?w=1600" alt="Water cascading off an overflowing roof eave in dark teal light" loading="lazy" width="1600" height="460">
+    <img src="https://unsplash.com/photos/52gEprMkp7M/download?w=1600" alt="Aerial night view of a city street grid glowing gold" loading="lazy" width="1600" height="460">
   </figure>
   <div class="eyebrow">08 &middot; What went sideways</div>
-  <h2>Two months missed, <em>then a full calendar</em></h2>
-  <p class="intro">Every case study has a sideways column. This one starts with a failing account and ends with a capacity problem.</p>
-  <ul class="cs-outline">
-    <li><span class="cs-idx">01</span>January and February missed. Twelve quote requests across two months at up to $833 each is a failing account, and we ran it during the rebuild rather than pausing. From March 1 onward the account produced 87 requests in five months at $329 each</li>
-    <li><span class="cs-idx">02</span>By August the owner&#39;s schedule was full three months out and he asked us to reduce spend. A capacity problem, which is the kind of problem this work is supposed to create</li>
-  </ul>
+  <h2>Traffic fell, <em>and that is the mechanism</em></h2>
+  <p class="intro">Website traffic fell while the phone got busier: site visits dropped about a third over the window, and broad city-wide search rankings declined too. We report that instead of hiding it, because it is the mechanism at work. Injury patients call from the map listing without ever visiting the site. If we had graded this engagement on traffic, it would look like a failure. Graded on patient calls, it is the opposite.</p>
+  <blockquote class="ac-quote">
+    <p>&ldquo;I&#39;m getting more phone calls and more patients. I&#39;m busier now than I was this time last year.&rdquo;</p>
+    <cite>Practice owner, auto-injury chiropractic group &middot; shared verbally &middot; anecdotal, never a metric on this page</cite>
+  </blockquote>
   <h2 style="margin-top:64px; font-size:clamp(1.3rem,2.6vw,1.9rem)">How the counting worked, <em>and what it cannot see</em></h2>
   <ul class="cs-outline">
-    <li><span class="cs-idx">01</span>A request is a Google Ads conversion: a tracked phone call or a completed quote form attributed by Google to an ad click. It is a person asking for a quote, not a booked job. Requests are not screened for spam or duplicates in these figures</li>
-    <li><span class="cs-idx">02</span>Figures credit only leads Google ties to an ad interaction, which understates the ads&#39; full effect: call-tracking data for the same account attributed additional leads to ad traffic that Google&#39;s own column does not count, and ads also influence people who later find the business through maps or search without clicking. None of that spillover is included here</li>
-    <li><span class="cs-idx">03</span>The account&#39;s conversion-action definitions are pending a final verification pass</li>
-    <li><span class="cs-idx">04</span>Cost basis: $41,102 is Google Ads media spend only, as reported by the platform. It does not include the agency fee, software, or production, so the 6.9x figure is a media-only return, not a return on total investment. The return is $287,532 divided by $41,102; cost per quote request is $41,102 divided by 99, or $415</li>
-    <li><span class="cs-idx">05</span>Outside factors: waterproofing demand in the Northeast is seasonal and rises with spring rain; part of the second window&#39;s volume rides that season. Landing-page work and budget concentration happened in the same period, so the split between seasonal lift and account changes cannot be isolated from this data alone</li>
-    <li><span class="cs-idx">06</span>Exhibit: a redacted Google Ads screenshot covering the full Jan&ndash;Jul window, client name and account ID barred, metrics visible, is pending and will be attached before publication</li>
+    <li><span class="cs-idx">01</span>A first-time patient call is a conversation from a caller number not previously seen in the tracking history. Repeat callers are excluded</li>
+    <li><span class="cs-idx">02</span>A 42-call robocall burst in May 2026 was identified by sequential caller numbers, generic caller IDs, and uniform 31&ndash;33 second durations, and removed from all figures; May&#39;s raw total of 61 becomes a clean 19. January is excluded from every claim because tracking went live January 14</li>
+    <li><span class="cs-idx">03</span>Call sourcing comes from CallRail tracking-number attribution, with Google Business Profile reporting as an independent check on the same behavior. What this data cannot see: which callers booked, showed, and became patients. The practice keeps those figures internal, so no number for that stage appears on this page, and none is estimated</li>
+    <li><span class="cs-idx">04</span>Cost basis: full investment for the window, agency fee, media, software, production, and internal labor, is pending. No return-on-investment figure is claimed, because a return cannot be computed honestly without the practice&#39;s revenue figures. The engagement did not lean on a large paid-media budget; the exact media figure will be stated when the cost basis is published</li>
+    <li><span class="cs-idx">05</span>Outside factors: monthly call volume at this scale is volatile, and June dipped before July returned to the high. That is why the two-month check appears above. No algorithm update or competitor event was identified as driving the change, and no unusually large single case sits inside these figures</li>
   </ul>
   <h2 style="margin-top:64px; font-size:clamp(1.3rem,2.6vw,1.9rem)">What this proves, <em>and what it does not</em></h2>
-  <p class="intro">The revenue figure is the client&#39;s own reported total of booked work, not an independently audited number, and booked work is not the same as collected payment. This is one account, in one market, at one budget level, with an owner who answers his own phone. A contractor with slower follow-up, a different market, or a different average ticket should not expect the same arithmetic.</p>
-  <p class="intro small" style="margin-top:24px">Results are specific to this client&#39;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes.</p>
-  <p class="intro small" style="margin-top:12px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.72rem">Client results page &middot; Tier 2B, anonymized &middot; waterproofing, northern New Jersey, owner-operated &middot; Jan 1&ndash;Jul 31, 2026, matched windows Jan 1&ndash;Apr 15 and Apr 16&ndash;Jul 31 &middot; Google Ads conversion tracking, calls and forms &middot; booked revenue client-reported, written confirmation on file &middot; home services, no compliance overlay &middot; updated 2026-08-12</p>
+  <p class="intro">Calls are not patients: the practice does not share patient or revenue figures with us, and the owner&#39;s report of more patients is anecdotal and appears only as his own quote, never as a metric. This page proves demand growth at the phone, not revenue. The top map positions on &ldquo;crash doctor&rdquo; terms are partly driven by the exact-match domain, a tactic that transfers only to a business willing to rebrand around a search phrase. Broad city-wide search rankings and website traffic declined over this window, one of the three locations lags the others on non-brand terms, and monthly volumes at this scale swing enough that single-month comparisons should be read alongside the two-month check. The result depends on a market where injury patients choose from map results; it will not transfer to a business whose buyers research on websites before contacting anyone.</p>
+  <p class="intro small" style="margin-top:24px">Results are specific to this client&#39;s market, service, budget, capacity, and timeframe and are not a guarantee of similar outcomes. Individual results vary. This is general information, not medical advice.</p>
+  <p class="intro small" style="margin-top:12px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.72rem">Client results page &middot; Tier 2B, anonymized &middot; auto-injury chiropractic, major Western U.S. metro, 3 locations &middot; Feb 2026 vs Jul 2026, equal one-month windows &middot; CallRail first-time conversations, spam removed, corroborated by Google Business Profile reporting &middot; patient and revenue figures pending, not estimated &middot; medical compliance overlay &middot; updated 2026-08-17</p>
 </section>
 
 <section class="aa-cta-band" data-mark="08" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
-    <img src="https://unsplash.com/photos/rNBaaxyeWWM/download?w=1600" alt="" width="1400" height="933" loading="lazy">
+    <img src="https://unsplash.com/photos/3jrClmKMgt8/download?w=1600" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">09 &middot; If your agency reports clicks</div>
-    <h2>If your reporting stops at <em>clicks</em>, you cannot tell <em>whether your ads work</em></h2>
-    <p class="note-lede">This contractor knows what a quote request costs him and what a job is worth. Most don&#39;t, because their agency reports clicks and calls it a day. We will map your ad spend to quote requests to booked work, and show you the same arithmetic on your own account.</p>
+    <div class="eyebrow">09 &middot; If the only plan is a bigger budget</div>
+    <h2>If the only growth plan your agency offers is <em>a bigger ad budget</em>, you are buying <em>the expensive answer first</em></h2>
+    <p class="note-lede">A call-driven practice can grow on visibility it owns. A Magister audit maps where your patients actually find you, where your reporting stops short of the phone, and the highest-leverage next move, before you spend more.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="tel:+16193300953"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -1463,21 +1504,23 @@
 </script>
 
 <script>
-  /* Flow figure: bars and arc draw once, on scroll into view. Reduced motion
-     and no-IO browsers get the finished figure from CSS. */
+  /* Charts: bars and lines draw once, on scroll into view. Reduced motion
+     and no-IO browsers get the finished figures from CSS. */
   (function(){
-    var el = document.getElementById('wpFlow');
-    if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
-      el.classList.add('is-in');
-      return;
-    }
-    var io = new IntersectionObserver(function(entries, obs){
-      entries.forEach(function(e){
-        if (e.isIntersecting){ el.classList.add('is-in'); obs.disconnect(); }
-      });
-    }, { threshold: .4 });
-    io.observe(el);
+    ['acPair','acDual'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+        el.classList.add('is-in');
+        return;
+      }
+      var io = new IntersectionObserver(function(entries, obs){
+        entries.forEach(function(e){
+          if (e.isIntersecting){ el.classList.add('is-in'); obs.disconnect(); }
+        });
+      }, { threshold: .4 });
+      io.observe(el);
+    });
   })();
 </script>
 
