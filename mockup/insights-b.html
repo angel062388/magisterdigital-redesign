@@ -1053,10 +1053,13 @@
     background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31); border-radius:10px;
     overflow:hidden}
   @media (max-width:900px){ .bf-featured{grid-template-columns:1fr} }
-  .bf-featured-motif{background:var(--ink-deep,#0F1115); border-right:1px solid var(--border,#2A2C31);
-    display:flex; align-items:center; justify-content:center; padding:36px; min-height:260px}
-  @media (max-width:900px){ .bf-featured-motif{border-right:0; border-bottom:1px solid var(--border,#2A2C31)} }
-  .bf-featured-motif svg{width:100%; max-width:440px; height:auto}
+  .bf-featured-img{position:relative; min-height:320px; border-right:1px solid var(--border,#2A2C31);
+    overflow:hidden; background:var(--ink-deep,#0F1115)}
+  @media (max-width:900px){ .bf-featured-img{border-right:0; min-height:220px;
+    border-bottom:1px solid var(--border,#2A2C31)} }
+  .bf-featured-img img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) contrast(1.05); transition:filter .5s ease, transform .8s ease}
+  .bf-featured:hover .bf-featured-img img{filter:none; transform:scale(1.03)}
   .bf-featured-body{padding:38px 40px}
   .bf-meta{display:flex; flex-wrap:wrap; gap:12px; align-items:center;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
@@ -1084,11 +1087,11 @@
   .bf-grid.is-in .bf-card{opacity:1; transform:none}
   .bf-card:hover{border-color:rgba(110,86,26,.55); box-shadow:0 14px 34px rgba(22,23,26,.10);
     translate:0 -4px}
-  .bf-card-motif{background:#FBFAF7; border-bottom:1px solid #EFEDE7; padding:22px 24px}
-  .bf-card-motif svg{width:100%; height:auto; display:block}
-  .bf-card-motif path{fill:none; stroke:#8A752B; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round;
-    stroke-dasharray:1; stroke-dashoffset:1}
-  .bf-grid.is-in .bf-card-motif path{transition:stroke-dashoffset 1.4s ease calc(var(--d,0s) + .2s); stroke-dashoffset:0}
+  .bf-card-img{display:block; height:180px; overflow:hidden; border-bottom:1px solid #EFEDE7;
+    background:#FBFAF7}
+  .bf-card-img img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(1) contrast(1.05); transition:filter .45s ease, transform .7s ease}
+  .bf-card:hover .bf-card-img img{filter:none; transform:scale(1.04)}
   .bf-card-body{padding:20px 24px 26px; display:flex; flex-direction:column; gap:10px; flex:1}
   .bf-card .bf-meta{color:var(--muted-2,#5E6066)}
   .bf-card .bf-chip{border-color:rgba(110,86,26,.45); color:var(--gold-deep,#6E561A)}
@@ -1103,19 +1106,9 @@
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-2,#5E6066)}
   .bf-pager a{color:var(--gold-deep,#6E561A)}
-  .bf-wire{fill:none; stroke:rgba(212,175,55,.75); stroke-width:2.5; stroke-linecap:round;
-    stroke-dasharray:1; stroke-dashoffset:1}
-  .bf-featured.is-in .bf-wire{transition:stroke-dashoffset 1.6s ease .3s; stroke-dashoffset:0}
-  .bf-box{fill:none; stroke:rgba(212,175,55,.55); stroke-width:2}
-  .bf-pulse{fill:var(--gold,#D4AF37); opacity:0}
-  .bf-featured.is-in .bf-pulse{opacity:1; animation:bfPulse 2.4s ease-in-out 2s infinite}
-  @keyframes bfPulse{0%{transform:translateX(0)} 50%{transform:translateX(196px)} 100%{transform:translateX(0)}}
-  .bf-mlabel{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:13px; letter-spacing:.14em; fill:rgba(212,175,55,.7)}
   @media (prefers-reduced-motion:reduce){
     .bf-card{opacity:1; transform:none}
-    .bf-card-motif path,.bf-wire{stroke-dashoffset:0}
-    .bf-pulse{animation:none; opacity:1}
+    .bf-featured-img img,.bf-card-img img{transition:none}
   }
   .cta-draw{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
   .cta-draw path{fill:none; stroke:rgba(212,175,55,.16); stroke-width:1.5}
@@ -1175,18 +1168,10 @@
     <p class="lede">Working analysis on how home service, medical, dental, and legal practices turn marketing spend into booked jobs, scheduled consults, and signed cases. Written by the operators who run the engine, not a content desk.</p>
   </div>
   <article class="bf-featured" id="bfFeatured">
-    <div class="bf-featured-motif" aria-hidden="true">
-      <!-- Wiring motif: CallRail box wired to ServiceTitan box, drawn on
-           scroll, with a pulse traveling the wire. -->
-      <svg viewBox="0 0 460 160" focusable="false">
-        <path class="bf-box" d="M28 48 L152 48 L152 116 L28 116 Z"/>
-        <path class="bf-box" d="M308 48 L432 48 L432 116 L308 116 Z"/>
-        <path class="bf-wire" pathLength="1" d="M152 82 C210 82 250 82 308 82"/>
-        <circle class="bf-pulse" cx="156" cy="82" r="5"/>
-        <text class="bf-mlabel" x="52" y="88">CALLS</text>
-        <text class="bf-mlabel" x="330" y="88">BOOKED</text>
-        <text class="bf-mlabel" x="176" y="66" font-size="11">EVERY DOLLAR TRACED</text>
-      </svg>
+    <div class="bf-featured-img" aria-hidden="true">
+      <!-- The post's real featured image from the live site, black and white
+           until the card is hovered. -->
+      <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/md-590016.jpg" alt="" loading="lazy" width="1200" height="800">
     </div>
     <div class="bf-featured-body">
       <div class="bf-meta"><span class="bf-chip">Latest</span><span>August 17, 2026</span><span>Tracking</span></div>
@@ -1203,7 +1188,7 @@
   <div class="bf-grid" id="bfGrid">
 
     <a class="bf-card" style="--d:.05s" href="https://magisterdigital.ai/roofing-lead-cost-google-ads/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M60 25 L260 25 L195 65 L125 65 Z"/><path d="M160 65 L160 96"/><path d="M160 108 a7 7 0 1 0 0.1 0"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/MjLrM8rVMC0/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Google Ads</span><span>May 17, 2026</span></span>
         <h3>How Much Does a Roofing Lead Cost on Google Ads?</h3>
@@ -1213,7 +1198,7 @@
     </a>
 
     <a class="bf-card" style="--d:.1s" href="https://magisterdigital.ai/roofing-company-marketing-budget-per-month/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M60 98 L60 72"/><path d="M110 98 L110 56"/><path d="M160 98 L160 42"/><path d="M210 98 L210 60"/><path d="M260 98 L260 24"/><path d="M40 108 L280 108"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/yqaskj8lQBE/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Budget</span><span>May 17, 2026</span></span>
         <h3>How Much Should a Roofing Company Spend on Marketing per Month?</h3>
@@ -1223,7 +1208,7 @@
     </a>
 
     <a class="bf-card" style="--d:.15s" href="https://magisterdigital.ai/track-marketing-channels-contractor-leads/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M70 28 a9 9 0 1 0 0.1 0"/><path d="M70 82 a9 9 0 1 0 0.1 0"/><path d="M160 55 a9 9 0 1 0 0.1 0"/><path d="M252 55 a11 11 0 1 0 0.1 0"/><path d="M80 40 L152 60 M80 88 L152 68 M172 64 L240 64"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/qwtCeJ5cLYs/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Tracking</span><span>May 17, 2026</span></span>
         <h3>How Do I Track Which Marketing Channel Is Generating My Contractor Leads?</h3>
@@ -1233,7 +1218,7 @@
     </a>
 
     <a class="bf-card" style="--d:.2s" href="https://magisterdigital.ai/when-should-contractor-start-google-ads/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M80 26 L80 94"/><path d="M140 26 L140 94"/><path d="M200 26 L200 94"/><path d="M40 60 L268 60"/><path d="M254 50 L268 60 L254 70"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/VxLhYXuLQN8/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Google Ads</span><span>May 17, 2026</span></span>
         <h3>When Should a Home Services Contractor Start Running Google Ads?</h3>
@@ -1243,7 +1228,7 @@
     </a>
 
     <a class="bf-card" style="--d:.25s" href="https://magisterdigital.ai/garage-door-seo-same-day-leads/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M50 30 L240 30"/><path d="M252 30 a6 6 0 1 0 0.1 0"/><path d="M50 60 L220 60"/><path d="M50 90 L180 90"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/rzs-Qd64vZQ/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">SEO</span><span>May 17, 2026</span></span>
         <h3>Garage Door Contractor SEO: High-Intent Keywords That Book Same-Day Jobs</h3>
@@ -1253,7 +1238,7 @@
     </a>
 
     <a class="bf-card" style="--d:.3s" href="https://magisterdigital.ai/google-business-profile-home-service-contractors/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M160 22 a22 22 0 1 0 0.1 0"/><path d="M160 66 L160 92"/><path d="M118 60 a42 42 0 0 1 12 -26 M202 60 a42 42 0 0 0 -12 -26" style="opacity:.5"/><path d="M96 74 a64 64 0 0 1 16 -44 M224 74 a64 64 0 0 0 -16 -44" style="opacity:.3"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/A_qHnEbfRsw/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Local</span><span>May 17, 2026</span></span>
         <h3>Google Business Profile for Home Service Contractors: The 12-Point Optimization Checklist</h3>
@@ -1263,7 +1248,7 @@
     </a>
 
     <a class="bf-card" style="--d:.35s" href="https://magisterdigital.ai/google-local-service-ads-plumbers/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M160 18 L204 34 L204 66 Q204 94 160 106 Q116 94 116 66 L116 34 Z"/><path d="M140 60 L156 76 L184 44"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/h5If_bg7898/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Google Ads</span><span>May 17, 2026</span></span>
         <h3>Google Local Service Ads for Plumbers: Setup, Budget, and Lead Quality</h3>
@@ -1273,7 +1258,7 @@
     </a>
 
     <a class="bf-card" style="--d:.4s" href="https://magisterdigital.ai/home-services-content-strategy-leads/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M104 18 L204 18 L204 102 L104 102 Z"/><path d="M122 40 L186 40 M122 58 L186 58 M122 76 L162 76"/><path d="M204 60 L282 60"/><path d="M270 52 L282 60 L270 68"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/Bfoo2Ey0WfQ/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Content</span><span>May 17, 2026</span></span>
         <h3>Home Services Content Strategy: How Blog Posts Generate Inbound Calls 18 Months Later</h3>
@@ -1283,7 +1268,7 @@
     </a>
 
     <a class="bf-card" style="--d:.45s" href="https://magisterdigital.ai/home-services-programmatic-display-retargeting/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M56 26 L182 26 L182 86 L56 86 Z"/><path d="M138 42 L264 42 L264 102 L138 102 Z"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/dBI_My696Rk/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Display</span><span>May 17, 2026</span></span>
         <h3>Home Services Programmatic Display: Retargeting Visitors Who Did Not Call</h3>
@@ -1293,7 +1278,7 @@
     </a>
 
     <a class="bf-card" style="--d:.5s" href="https://magisterdigital.ai/hvac-paid-social-ads-slow-season/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M40 66 Q80 22 120 66 T200 66 T280 66"/><path d="M64 96 L64 106 M124 96 L124 106 M184 96 L184 106 M244 96 L244 106"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/994AH40vmVs/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Paid Social</span><span>May 17, 2026</span></span>
         <h3>HVAC Paid Social Ads: Using Facebook and Instagram to Fill the Slow Season</h3>
@@ -1303,7 +1288,7 @@
     </a>
 
     <a class="bf-card" style="--d:.55s" href="https://magisterdigital.ai/landscaping-lead-generation-spring/">
-      <span class="bf-card-motif" aria-hidden="true"><svg viewBox="0 0 320 120"><path d="M160 104 L160 58"/><path d="M160 58 Q128 54 122 26 Q154 32 160 58"/><path d="M160 58 Q192 54 198 26 Q166 32 160 58"/><path d="M120 104 L200 104"/></svg></span>
+      <span class="bf-card-img" aria-hidden="true"><img src="https://unsplash.com/photos/JTRSiSEpE9I/download?w=800" alt="" loading="lazy" width="800" height="533"></span>
       <span class="bf-card-body">
         <span class="bf-meta"><span class="bf-chip">Lead Gen</span><span>May 17, 2026</span></span>
         <h3>Landscaping Lead Generation: How to Fill the Spring Schedule in February</h3>
