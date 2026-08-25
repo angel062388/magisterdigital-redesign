@@ -1091,6 +1091,55 @@
   .vn-card .go .ar{transition:transform .25s ease}
   .vn-card:hover .go .ar{transform:translateX(6px)}
 
+  /* INDUSTRIES PANELS - ported from the homepage verticals section (photo
+     tiles that widen and reveal detail on hover; tap toggles on touch). */
+  .panels{display:flex; flex-direction:column; gap:2px; margin:34px auto 0; max-width:1400px}
+  .panel{position:relative; overflow:hidden; min-height:250px; cursor:pointer; border:0; padding:0;
+    text-align:left; background:var(--ink,#16171A); color:var(--paper,#F7F7F5); display:block; width:100%;
+    transition:flex-grow .7s cubic-bezier(.16,1,.3,1)}
+  .panel img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) brightness(.62) contrast(1.05);
+    transition:filter .8s cubic-bezier(.16,1,.3,1), transform 1.2s cubic-bezier(.16,1,.3,1); transform:scale(1.04)}
+  .panel::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(15,17,21,.10) 0%,rgba(15,17,21,.34) 42%,rgba(15,17,21,.88) 100%)}
+  .panel .pin{position:relative; z-index:2; padding:32px; display:flex; flex-direction:column;
+    justify-content:flex-end; min-height:250px}
+  .panel .kicker{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold,#D4AF37); margin-bottom:12px}
+  .panel h3{margin:0; font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:1.4rem; line-height:1.3; color:var(--paper,#F7F7F5)}
+  .panel .body{max-height:0; opacity:0; overflow:hidden; visibility:hidden;
+    transition:max-height .7s cubic-bezier(.16,1,.3,1), opacity .5s ease, visibility 0s linear .5s}
+  .panel .body p{font-size:.875rem; color:#C0C3C7; margin:12px 0 0}
+  .panel .body ul{margin:16px 0 0; padding-left:1.05rem; font-size:.8125rem; color:#C0C3C7}
+  .panel .body li{margin-bottom:6px}
+  .panel.open .body{max-height:280px; opacity:1; visibility:visible; transition-delay:0s}
+  .panel.open img{filter:grayscale(0) brightness(.72) contrast(1.02); transform:scale(1)}
+  .panel:focus-visible{outline:2px solid var(--gold,#D4AF37); outline-offset:-4px}
+  .vert-link{display:inline-flex; align-items:center; gap:6px; margin-top:16px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--gold,#D4AF37); text-decoration:underline; text-underline-offset:4px;
+    text-decoration-color:rgba(212,175,55,.6);
+    transition:color .28s ease, text-decoration-color .28s ease, gap .28s ease}
+  .vert-link:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E); gap:10px}
+  .vert-link:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+  @media (min-width:900px){
+    .panels{flex-direction:row; min-height:440px}
+    .panel{flex:1; min-height:440px; min-width:0}
+    .panel .pin{min-height:440px}
+    @media (hover: hover){
+      .panels:hover .panel,.panels:focus-within .panel{flex:.35}
+      .panel:hover,.panel:focus-within{flex:2.4}
+      .panel:hover .body,.panel:focus-within .body{max-height:280px; opacity:1; visibility:visible; transition-delay:0s}
+      .panel:hover img,.panel:focus-within img{filter:grayscale(0) brightness(.72) contrast(1.02); transform:scale(1)}
+    }
+    .panel.open{flex:2.4}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .panel,.panel img,.panel .body,.vert-link{transition:none}
+  }
+
   /* CTA band background - the homepage band recipe. */
   .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
     filter:grayscale(1) contrast(1.15) brightness(.35);
@@ -1204,7 +1253,50 @@
 </section>
 
 <section class="aa-sec band-light" data-mark="02">
-  <div class="eyebrow">02 &middot; Start here</div>
+  <div class="eyebrow">02 &middot; Industries</div>
+  <h2>Three verticals, because the compliance and the buying cycle are <em>not interchangeable</em></h2>
+  <div class="panels">
+    <div class="panel" tabindex="0" aria-expanded="false">
+      <img src="https://images.pexels.com/photos/3964736/pexels-photo-3964736.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="" loading="lazy">
+      <div class="pin">
+        <div class="kicker">Home services</div>
+        <h3>HVAC, plumbing, roofing, restoration</h3>
+        <div class="body">
+          <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone is answered.</p>
+          <ul><li>Local Service Ads and the map pack</li><li>Storm and seasonal surge planning</li><li>Call tracking wired into the CRM</li></ul>
+          <a class="vert-link" href="https://magisterdigital.ai/home-services/">See how we work with home services <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="panel" tabindex="0" aria-expanded="false">
+      <img src="https://images.pexels.com/photos/6812463/pexels-photo-6812463.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="Wide view of a clean, modern dental operatory with an overhead lamp arm and instrument tray" loading="lazy">
+      <div class="pin">
+        <div class="kicker">Medical &amp; dental</div>
+        <h3>Practices and multi-location groups</h3>
+        <div class="body">
+          <p>Patient acquisition without putting protected health information into a pixel payload.</p>
+          <ul><li>HIPAA-aware tracking, BAA in place</li><li>Server-side conversion measurement</li><li>Reported as ranges, never single-patient guarantees</li></ul>
+          <a class="vert-link" href="https://magisterdigital.ai/medical-dental/">See how we work with medical &amp; dental <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="panel" tabindex="0" aria-expanded="false">
+      <img src="https://images.pexels.com/photos/37726703/pexels-photo-37726703.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="Dense floor-to-ceiling shelves of hardcover law volumes with a wooden library ladder" loading="lazy">
+      <div class="pin">
+        <div class="kicker">Legal</div>
+        <h3>Plaintiff and consumer-facing firms</h3>
+        <div class="body">
+          <p>Long cycles, expensive clicks, and advertising rules a generalist agency will get you in trouble with.</p>
+          <ul><li>ABA Rule 7.1 compliant messaging</li><li>Signed-case attribution, not form fills</li><li>Intake quality scoring</li></ul>
+          <a class="vert-link" href="https://magisterdigital.ai/legal/">See how we work with legal <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec band-light" data-mark="03" style="padding-top:24px">
+  <div class="eyebrow">03 &middot; Start here</div>
   <h2>Book a <em>30-minute strategy call</em></h2>
   <div class="sw-start">
     <p>Brian or Dimitry on the line. Bring your numbers, your current ad accounts, or your honest read on what is working and what is not. We pull up your GBP and your ad account live on the call. You leave with a punch list, hire us or not.</p>
@@ -1214,8 +1306,8 @@
   </div>
 </section>
 
-<section class="aa-sec" data-mark="03">
-  <div class="eyebrow">03 &middot; Direct channels</div>
+<section class="aa-sec" data-mark="04">
+  <div class="eyebrow">04 &middot; Direct channels</div>
   <h2>Reach the founders <em>directly</em></h2>
   <p class="intro">If the calendar does not fit your week, use any of these. We answer between meetings during business hours and the next morning otherwise.</p>
   <div class="ch-grid">
@@ -1246,16 +1338,16 @@
   </div>
 </section>
 
-<section class="aa-sec band-light" data-mark="04">
-  <div class="eyebrow">04 &middot; Office</div>
+<section class="aa-sec band-light" data-mark="05">
+  <div class="eyebrow">05 &middot; Office</div>
   <h2>Denver, Colorado, <em>working across the United States</em></h2>
   <div class="of-wrap">
     <p>Magister Digital is headquartered in Denver. Brian and Dimitry are both Denver-based. Most engagements run remote on Slack, Zoom, and shared dashboards. For multi-location operators with a Denver presence, we will come to your office.</p>
   </div>
 </section>
 
-<section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; Before you call</div>
+<section class="aa-sec" data-mark="06">
+  <div class="eyebrow">06 &middot; Before you call</div>
   <h2>Three things we will ask you for <em>on the strategy call</em></h2>
   <p class="intro">You do not need a deck. We do need enough context to be useful inside 30 minutes.</p>
   <ul class="cs-outline">
@@ -1267,32 +1359,6 @@
   <div class="cs-cta-pair">
     <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Schedule a private consultation</span><span class="ar">&rarr;</span></a>
     <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
-  </div>
-</section>
-
-<section class="aa-sec band-light" data-mark="06">
-  <div class="eyebrow">06 &middot; By vertical</div>
-  <h2>Routing by <em>what you run</em></h2>
-  <p class="intro">Three verticals. Same operator-credible team. If you want to read the engagement first, the vertical pages have full pricing, the engagement steps, and the questions other owners ask on intake.</p>
-  <div class="vn-grid">
-    <a class="vn-card" href="https://magisterdigital.ai/home-services/">
-      <span class="k">Contractors and trades</span>
-      <h3>Home Services</h3>
-      <p>Roofing, plumbing, HVAC, GC, remodel, restoration, solar. $1M to $25M revenue.</p>
-      <span class="go">Read the engagement <span class="ar">&rarr;</span></span>
-    </a>
-    <a class="vn-card" href="https://magisterdigital.ai/medical-dental/">
-      <span class="k">Med spas and surgical practices</span>
-      <h3>Medical &amp; Aesthetic</h3>
-      <p>HIPAA-aware paid media, AI consult booking, medical director compliance loop.</p>
-      <span class="go">Read the engagement <span class="ar">&rarr;</span></span>
-    </a>
-    <a class="vn-card" href="https://magisterdigital.ai/legal/">
-      <span class="k">Law firms and case practices</span>
-      <h3>Legal</h3>
-      <p>Bar-compliant ad copy, signed-case attribution, intake automation tuned to retainer.</p>
-      <span class="go">Read the engagement <span class="ar">&rarr;</span></span>
-    </a>
   </div>
 </section>
 
@@ -1310,6 +1376,20 @@
     </div>
   </div>
 </section>
+
+<script>
+  /* Industries panels: tap toggles open on touch devices; hover handles
+     desktop via CSS. Clicks on the panel link pass through. */
+  (function(){
+    document.querySelectorAll('.panel').forEach(function(p){
+      p.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var open = p.classList.toggle('open');
+        p.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  })();
+</script>
 
 </main>
 
