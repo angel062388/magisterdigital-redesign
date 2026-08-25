@@ -1102,7 +1102,17 @@
   .art-body strong{font-weight:650}
   .cta-draw{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
   .cta-draw path{fill:none; stroke:rgba(212,175,55,.16); stroke-width:1.5}
-</style>
+
+  /* CTA band background - matched to the homepage band: darkened panning
+     photo under a gold radial glow. */
+  .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(1) contrast(1.15) brightness(.35);
+    animation:ctaPan 26s ease-in-out infinite alternate}
+  @keyframes ctaPan{to{transform:scale(1.08)}}
+  .aa-cta-bg::after{background:
+    radial-gradient(circle at 50% 30%, rgba(212,175,55,.18), transparent 60%),
+    linear-gradient(180deg, rgba(15,17,21,.9) 0%, rgba(15,17,21,.55) 50%, rgba(15,17,21,.95) 100%)}
+  @media (prefers-reduced-motion:reduce){ .aa-cta-bg img{animation:none} }</style>
 </head>
 <body>
 
@@ -1462,12 +1472,7 @@
 
 <section class="aa-cta-band" data-mark="03" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
-    <svg class="cta-draw" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <path d="M-40 420 Q400 300 800 380 T1660 340"/>
-      <path d="M-40 350 Q420 240 820 310 T1660 260"/>
-      <path d="M-40 280 Q440 190 840 240 T1660 190"/>
-      <path d="M-40 210 Q460 140 860 175 T1660 130"/>
-    </svg>
+    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" width="1920" height="1280" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
     <div class="eyebrow">Book a call</div>
