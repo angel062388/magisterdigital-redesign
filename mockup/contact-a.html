@@ -1140,6 +1140,47 @@
     .panel,.panel img,.panel .body,.vert-link{transition:none}
   }
 
+  /* LOCATIONS - ported from the homepage: the static dotted globe with its
+     golden halo, the HQ card, and the metros-served list. */
+  .loc-grid{display:grid; gap:48px; max-width:1400px; margin:34px auto 0}
+  .loc-globe-wrap{position:relative; aspect-ratio:1; max-width:560px; margin:0 auto; width:100%}
+  .loc-globe-wrap::before{content:""; position:absolute; inset:-8%; z-index:0;
+    background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
+    filter:blur(30px); pointer-events:none}
+  .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+  .loc-fallback svg{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
+  .loc-fallback .dot{fill:var(--muted-on-dark,#868A90); opacity:.55}
+  .loc-fallback .pin{fill:var(--gold,#D4AF37)}
+  .loc-fallback .hq{fill:var(--gold-light,#E3C24E)}
+  .loc-list{display:grid; gap:32px; align-content:start}
+  .loc-meta{display:block; margin-bottom:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold,#D4AF37)}
+  .loc-meta.dim{color:var(--muted-on-dark,#868A90)}
+  .loc-hq{border-top:2px solid var(--gold,#D4AF37); padding-top:24px}
+  .loc-hq-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px}
+  .loc-hq-tel{flex:0 0 auto}
+  .loc-addr{font-style:normal; font-size:.9375rem; color:#C0C3C7; line-height:1.75}
+  .loc-addr b{display:block; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.6rem; font-weight:600; color:var(--paper,#F7F7F5); margin-bottom:6px; letter-spacing:-.01em}
+  .loc-metros{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr;
+    gap:0; border-top:1px solid var(--border,#2A2C31)}
+  .loc-metros li{border-bottom:1px solid var(--border,#2A2C31)}
+  .loc-metro{width:100%; display:flex; align-items:center; gap:12px; text-align:left;
+    padding:16px 12px 16px 0; color:#C0C3C7;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+    transition:color .3s ease, padding .3s ease}
+  .loc-metro::before{content:""; width:8px; height:8px; border-radius:50%;
+    background:var(--gold-dark,#A8842A); box-shadow:0 0 10px rgba(212,175,55,.6);
+    transition:background .3s ease, transform .3s ease}
+  .loc-metro:hover{color:var(--paper,#F7F7F5); padding-left:6px}
+  .loc-metro:hover::before{background:var(--gold,#D4AF37); transform:scale(1.35)}
+  @media (min-width:900px){
+    .loc-grid{grid-template-columns:1.1fr .9fr; gap:64px; align-items:center}
+    .loc-globe-wrap{max-width:none; margin:0}
+  }
+
   /* CTA band background - the homepage band recipe. */
   .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
     filter:grayscale(1) contrast(1.15) brightness(.35);
@@ -1307,7 +1348,64 @@
 </section>
 
 <section class="aa-sec" data-mark="04">
-  <div class="eyebrow">04 &middot; Direct channels</div>
+  <div class="eyebrow">04 &middot; Locations</div>
+  <h2>San Diego HQ, servicing <em>ten metros nationwide</em></h2>
+  <div class="loc-grid">
+    <div class="loc-globe-wrap" aria-hidden="true">
+      <div class="loc-fallback">
+        <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <radialGradient id="sphere" cx="35%" cy="35%" r="80%">
+              <stop offset="0%" stop-color="#232529" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#0F1115" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <circle cx="160" cy="160" r="140" fill="url(#sphere)" stroke="#2A2C31" stroke-width="1"/>
+          <g class="dot"><circle cx="80" cy="120" r="1.4"/><circle cx="92" cy="110" r="1.4"/><circle cx="104" cy="118" r="1.4"/><circle cx="116" cy="126" r="1.4"/><circle cx="128" cy="120" r="1.4"/><circle cx="140" cy="128" r="1.4"/><circle cx="94" cy="132" r="1.4"/><circle cx="106" cy="140" r="1.4"/><circle cx="118" cy="148" r="1.4"/><circle cx="130" cy="142" r="1.4"/><circle cx="86" cy="146" r="1.4"/><circle cx="98" cy="156" r="1.4"/><circle cx="110" cy="164" r="1.4"/><circle cx="122" cy="170" r="1.4"/><circle cx="134" cy="164" r="1.4"/><circle cx="146" cy="156" r="1.4"/><circle cx="158" cy="150" r="1.4"/><circle cx="170" cy="158" r="1.4"/><circle cx="182" cy="164" r="1.4"/><circle cx="194" cy="156" r="1.4"/><circle cx="200" cy="140" r="1.4"/><circle cx="212" cy="132" r="1.4"/><circle cx="224" cy="140" r="1.4"/><circle cx="220" cy="120" r="1.4"/><circle cx="208" cy="112" r="1.4"/><circle cx="196" cy="120" r="1.4"/><circle cx="184" cy="126" r="1.4"/><circle cx="172" cy="132" r="1.4"/><circle cx="160" cy="138" r="1.4"/><circle cx="148" cy="140" r="1.4"/><circle cx="150" cy="176" r="1.4"/><circle cx="162" cy="184" r="1.4"/><circle cx="174" cy="190" r="1.4"/><circle cx="186" cy="184" r="1.4"/><circle cx="132" cy="188" r="1.4"/><circle cx="120" cy="196" r="1.4"/><circle cx="108" cy="188" r="1.4"/><circle cx="196" cy="176" r="1.4"/><circle cx="208" cy="184" r="1.4"/><circle cx="220" cy="176" r="1.4"/><circle cx="232" cy="164" r="1.4"/><circle cx="228" cy="152" r="1.4"/><circle cx="216" cy="148" r="1.4"/></g>
+          <g class="hq"><circle cx="112" cy="152" r="4.5"/><circle cx="112" cy="152" r="9" fill="none" stroke="#E3C24E" stroke-width="1" opacity=".6"/></g>
+          <g class="pin">
+            <circle cx="120" cy="150" r="2.5"/><circle cx="118" cy="158" r="2.5"/>
+            <circle cx="146" cy="164" r="2.5"/><circle cx="164" cy="170" r="2.5"/>
+            <circle cx="174" cy="178" r="2.5"/><circle cx="200" cy="162" r="2.5"/>
+            <circle cx="210" cy="154" r="2.5"/><circle cx="218" cy="148" r="2.5"/>
+            <circle cx="230" cy="142" r="2.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="loc-list">
+      <div class="loc-hq">
+        <span class="loc-meta">Headquarters</span>
+        <div class="loc-hq-row">
+          <address class="loc-addr">
+            <b>San Diego</b>
+            1135 Garnet Ave #13<br>
+            San Diego, CA 92109
+          </address>
+          <a class="hero-tel loc-hq-tel" href="tel:+16193300953"><span class="tag">Call</span> <b>(619) 330-0953</b></a>
+        </div>
+      </div>
+      <div>
+        <span class="loc-meta dim">Metros served</span>
+        <ul class="loc-metros" role="list">
+          <li><span class="loc-metro">San Diego</span></li>
+          <li><span class="loc-metro">Los Angeles</span></li>
+          <li><span class="loc-metro">San Jose</span></li>
+          <li><span class="loc-metro">Phoenix</span></li>
+          <li><span class="loc-metro">Dallas</span></li>
+          <li><span class="loc-metro">San Antonio</span></li>
+          <li><span class="loc-metro">Houston</span></li>
+          <li><span class="loc-metro">Chicago</span></li>
+          <li><span class="loc-metro">Philadelphia</span></li>
+          <li><span class="loc-metro">New York</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="05">
+  <div class="eyebrow">05 &middot; Direct channels</div>
   <h2>Reach the founders <em>directly</em></h2>
   <p class="intro">If the calendar does not fit your week, use any of these. We answer between meetings during business hours and the next morning otherwise.</p>
   <div class="ch-grid">
@@ -1338,16 +1436,16 @@
   </div>
 </section>
 
-<section class="aa-sec band-light" data-mark="05">
-  <div class="eyebrow">05 &middot; Office</div>
+<section class="aa-sec band-light" data-mark="06">
+  <div class="eyebrow">06 &middot; Office</div>
   <h2>Denver, Colorado, <em>working across the United States</em></h2>
   <div class="of-wrap">
     <p>Magister Digital is headquartered in Denver. Brian and Dimitry are both Denver-based. Most engagements run remote on Slack, Zoom, and shared dashboards. For multi-location operators with a Denver presence, we will come to your office.</p>
   </div>
 </section>
 
-<section class="aa-sec" data-mark="06">
-  <div class="eyebrow">06 &middot; Before you call</div>
+<section class="aa-sec" data-mark="07">
+  <div class="eyebrow">07 &middot; Before you call</div>
   <h2>Three things we will ask you for <em>on the strategy call</em></h2>
   <p class="intro">You do not need a deck. We do need enough context to be useful inside 30 minutes.</p>
   <ul class="cs-outline">
@@ -1371,8 +1469,7 @@
     <h2>Bring your numbers. We will tell you what they say.</h2>
     <p class="note-lede">Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
     <div class="aa-cta-cta">
-      <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">Call</span> <b>(619) 330-0953</b></a>
     </div>
   </div>
 </section>
