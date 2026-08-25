@@ -1195,6 +1195,35 @@
   .fq .fq-a{padding:0 6px 24px 52px; font-size:.98rem; line-height:1.7; color:var(--muted,#45474C)}
   .cta-draw{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
   .cta-draw path{fill:none; stroke:rgba(212,175,55,.16); stroke-width:1.5}
+
+  /* FAQ - ported verbatim from the service-page template (seo-services.html). */
+  .aa-faq{border-top:1px solid var(--border,#2A2C31); margin-top:40px; max-width:900px; margin-left:auto; margin-right:auto}
+  .aa-faq details{border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-faq summary{cursor:pointer; list-style:none; padding:26px 56px 26px 0;
+    position:relative; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:600;
+    color:var(--paper,#F7F7F5); transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::-webkit-details-marker{display:none}
+  .aa-faq summary::after,.aa-faq summary::before{content:""; position:absolute; right:6px; top:50%;
+    background:var(--gold,#D4AF37); transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::after{width:15px; height:1px; transform:translateY(-50%)}
+  .aa-faq summary::before{width:1px; height:15px; right:13px; transform:translateY(-50%)}
+  .aa-faq details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
+  .aa-faq summary:hover{color:var(--gold,#D4AF37)}
+  .aa-faq summary:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:2px}
+  .answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
+  html:not(.js) .answer-wrap{height:auto}
+  .aa-faq .answer{padding:0 56px 26px 0; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
+  @media (prefers-reduced-motion:reduce){
+    .answer-wrap{transition:none}
+    .aa-faq summary::after,.aa-faq summary::before{transition:none}
+  }
+  .aa-sec.band-light .aa-faq summary{color:#16171A}
+  .aa-sec.band-light .aa-faq summary:hover{color:#6E561A}
+  .aa-sec.band-light .aa-faq summary::after,
+  .aa-sec.band-light .aa-faq summary::before{background:#6E561A}
+  .aa-sec.band-light .aa-faq .answer{color:var(--muted,#45474C)}
 </style>
 </head>
 <body>
@@ -1242,12 +1271,54 @@
 
 <main>
 
-<section class="db-head" data-mark="01">
-  <div class="db-head-in">
-    <div class="eyebrow"><span class="num">01</span> &middot; About Magister Digital <span class="sep">/</span> Operator-run growth</div>
+<section class="aa-hero" data-mark="01">
+  <div class="aa-hero-bg" aria-hidden="true">
+    <!-- LETTERHEAD: About-page hero animation. A weekly brief drafts itself:
+         the sheet, the letterhead rules, the body lines, then three signature
+         scribbles, because three founders sign every weekly brief. -->
+    <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(212,175,55,0.055)" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
+      <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 01 · the sheet -->
+        <path class="gp-line" style="--gd:0s" d="M500 160 L1100 160 L1100 780 L500 780 Z"/>
+        <!-- 02 · letterhead rules -->
+        <path class="gp-line" style="--gd:0.8s" d="M540 250 L1060 250 M540 262 L1060 262"/>
+        <!-- 03 · body lines -->
+        <path class="gp-line" style="--gd:1.3s; opacity:0.6" d="M540 330 L1060 330 M540 380 L1060 380 M540 430 L1060 430 M540 480 L1010 480 M540 530 L1060 530 M540 580 L960 580"/>
+        <!-- 04 · three signature scribbles -->
+        <path class="gp-line" style="--gd:2.2s" d="M545 700 C562 676 578 708 594 686 C604 672 616 700 640 688"/>
+        <path class="gp-line" style="--gd:2.6s" d="M745 700 C762 676 778 708 794 686 C806 670 818 702 840 690"/>
+        <path class="gp-line" style="--gd:3s" d="M945 700 C962 676 978 708 994 686 C1006 672 1018 700 1040 688"/>
+        <!-- 05 · signature base lines -->
+        <path class="gp-line" style="--gd:3.3s; opacity:0.6" d="M540 716 L660 716 M740 716 L860 716 M940 716 L1060 716"/>
+      </g>
+      <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
+        <text class="gp-label" style="--gd:3.8s" x="430" y="856">ABOUT MAGISTER DIGITAL &middot; OPERATOR-RUN GROWTH</text>
+        <text class="gp-label" style="--gd:4s" x="1140" y="856">THREE FOUNDERS</text>
+        <text class="gp-label" style="--gd:4.2s" x="690" y="130" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">THE WEEKLY BRIEF</text>
+        <text class="gp-label" style="--gd:4.4s" x="548" y="746" font-size="11" letter-spacing="3" fill="rgba(212,175,55,0.45)">BRIAN</text>
+        <text class="gp-label" style="--gd:4.5s" x="742" y="746" font-size="11" letter-spacing="3" fill="rgba(212,175,55,0.45)">MICHAEL</text>
+        <text class="gp-label" style="--gd:4.6s" x="944" y="746" font-size="11" letter-spacing="3" fill="rgba(212,175,55,0.45)">DIMITRY</text>
+      </g>
+    </svg>
+    <span class="garage-orb g1"></span>
+    <span class="garage-orb g2"></span>
+  </div>
+  <div class="aa-hero-content">
+    <div class="eyebrow"><span class="num">01</span> &middot; About <span class="sep">/</span> Operator-run growth</div>
     <h1>Three operators built the agency <em>they wished existed</em> when <em>they ran the businesses</em></h1>
-    <p class="lede">For home service, medical, and legal owners who are tired of paying four vendors and still not knowing what a booked appointment costs. Brian Hong, Michael Merlino, and Dimitry Morgan founded Magister Digital because the agency model is broken for service businesses. They fixed the version they used to hire.</p>
-    <div class="db-cta">
+    <p class="lede">
+      For home service, medical, and legal owners who are tired of paying four vendors and
+      still not knowing what a booked appointment costs. Brian Hong, Michael Merlino, and
+      Dimitry Morgan founded Magister Digital because the agency model is broken for service
+      businesses. They fixed the version they used to hire.
+    </p>
+    <div class="aa-hero-cta">
       <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
@@ -1313,35 +1384,8 @@
   </div>
 </section>
 
-<section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; Three founders, named honestly</div>
-  <h2>The operator network <em>that signs your brief</em></h2>
-  <p class="intro">No outsourced strategy. No white-labeled deliverables. If a brief goes out on Magister letterhead, one of these three read it and signed it. Each of them built and ran companies before Magister, and each owns one layer of your account.</p>
-  <article class="db-file">
-    <div class="db-file-head"><span class="k">FILE 01</span><h3>Brian Hong</h3><span class="r">Co-Founder and CEO</span></div>
-    <div class="db-file-body">
-      <p>A working operator, not a career marketer. Brian co-owns TurnkeyRenovators, a multi-seven-figure construction company built on this exact stack, and was a partner in a 13-location med spa chain. He founded Infintech Designs in New Orleans in 2008, then launched Flowbots.ai and BigEasyData.ai, and is a partner in Stealth Code behind SEO Neo and Omega Indexer. Every channel he builds ties back to one number the business actually cares about.</p>
-      <a class="ft-link" href="https://magisterdigital.ai/brian-hong/">Read Brian&#39;s full story <span class="ar">&rarr;</span></a>
-    </div>
-  </article>
-  <article class="db-file">
-    <div class="db-file-head"><span class="k">FILE 02</span><h3>Michael Merlino</h3><span class="r">Co-Founder, Chief Strategist and AI Systems</span></div>
-    <div class="db-file-body">
-      <p>Michael co-founded CTR Geeks and trained over 1,300 local SEO practitioners through it. He is a partner in Stealth Code with Brian, on the production side of SEO Neo and Omega Indexer, and a co-owner of SEO Rockstars with Brian Hong and Gregory Ortiz. At Magister he owns the AI systems and strategy layer, building and operating production AI agents inside service-business stacks, not demos. He is the person your AI stack reports to.</p>
-      <a class="ft-link" href="https://magisterdigital.ai/michael-merlino/">Read Michael&#39;s full story <span class="ar">&rarr;</span></a>
-    </div>
-  </article>
-  <article class="db-file">
-    <div class="db-file-head"><span class="k">FILE 03</span><h3>Dimitry Morgan</h3><span class="r">Co-Founder and Head of Paid Media</span></div>
-    <div class="db-file-body">
-      <p>Dimitry came up as an HVAC technician before running ad accounts. He knows what a dispatched call is worth on a Saturday in July and what idle techs cost on a Wednesday in February. He has run paid-media operations inside home services for 15 years through Denver Digital Agency, and co-founded Green Hat Local SEO in Colorado with Kyle Sabraw. Cost-per-booked-appointment is his number, never cost-per-click.</p>
-      <a class="ft-link" href="https://magisterdigital.ai/dimitry-morgan/">Read Dimitry&#39;s full story <span class="ar">&rarr;</span></a>
-    </div>
-  </article>
-</section>
-
-<section class="aa-sec band-light db-anchor" data-mark="06" id="s-refuse">
-  <div class="eyebrow">06 &middot; Written before we took our first client</div>
+<section class="aa-sec band-light db-anchor" data-mark="05" id="s-refuse">
+  <div class="eyebrow">05 &middot; Written before we took our first client</div>
   <h2>What Magister <em>refuses to do</em></h2>
   <p class="intro">These are load-bearing. They are how the engagement runs from week one. If any of them break, the engagement breaks. Each is owned by a named founder, not a pod.</p>
   <div class="db-pol">
@@ -1372,8 +1416,8 @@
   </div>
 </section>
 
-<section class="aa-sec db-anchor" data-mark="07" id="s-30">
-  <div class="eyebrow">07 &middot; How we run an account</div>
+<section class="aa-sec db-anchor" data-mark="06" id="s-30">
+  <div class="eyebrow">06 &middot; How we run an account</div>
   <h2>The first 30 days, <em>in writing</em></h2>
   <p class="intro">No vague onboarding. Four weeks, four named deliverables, signed by a founder. You read your own numbers on the same BI dashboard our team reads on Monday morning.</p>
   <div class="db-tl">
@@ -1401,8 +1445,8 @@
   <p class="g30">If we miss a milestone in Month 1, you do not pay for Month 2.</p>
 </section>
 
-<section class="aa-sec db-anchor" data-mark="08" id="s-proof" style="padding-top:24px">
-  <div class="eyebrow">08 &middot; The proof behind the stack</div>
+<section class="aa-sec db-anchor" data-mark="07" id="s-proof" style="padding-top:24px">
+  <div class="eyebrow">07 &middot; The proof behind the stack</div>
   <h2>The companies the founders built, <em>named honestly</em></h2>
   <p class="intro">The Magister stack did not appear from nowhere. It is the consolidation of methodologies built and proven across founder-led ventures spanning 50+ years combined SEO and paid media experience.</p>
   <div class="db-ledger">
@@ -1415,8 +1459,8 @@
   </div>
 </section>
 
-<section class="aa-sec band-light db-anchor" data-mark="09" id="s-fit">
-  <div class="eyebrow">09 &middot; Self-select, honestly</div>
+<section class="aa-sec band-light db-anchor" data-mark="08" id="s-fit">
+  <div class="eyebrow">08 &middot; Self-select, honestly</div>
   <h2>Who this is for, <em>named honestly</em></h2>
   <p class="intro">We limit who we work with because operator depth is the asset. The list we turn down is as important as the list we take.</p>
   <div class="ss-grid">
@@ -1442,39 +1486,39 @@
   <p class="ss-refer">Outside the list? We refer you to Infintech Designs ourselves.</p>
 </section>
 
-<section class="aa-sec band-light db-anchor" data-mark="10" id="s-faq" style="padding-top:24px">
-  <div class="eyebrow">10 &middot; What careful buyers ask first about us</div>
+<section class="aa-sec band-light db-anchor" data-mark="09" id="s-faq" style="padding-top:24px">
+  <div class="eyebrow">09 &middot; What careful buyers ask first about us</div>
   <h2>The questions a careful buyer <em>is already holding</em></h2>
   <p class="intro">Answered honestly. If something below disqualifies us, we would rather you know now than three months in.</p>
-  <div class="fq">
-    <details open>
-      <summary><span class="n">Q &middot; 01</span>Will founders actually be on my account, or is this a pod model?<span class="tg">+</span></summary>
-      <div class="fq-a">Three founders sign every weekly brief. Brian, Michael, and Dimitry, the same operators you meet on the consultation. No account directors presenting someone else&#39;s spreadsheet, no pods, no junior strategists running your retainer while the founders pitch the next client.</div>
+  <div class="aa-faq">
+    <details>
+      <summary>Will founders actually be on my account, or is this a pod model?</summary>
+      <div class="answer-wrap"><div class="answer">Three founders sign every weekly brief. Brian, Michael, and Dimitry, the same operators you meet on the consultation. No account directors presenting someone else&#39;s spreadsheet, no pods, no junior strategists running your retainer while the founders pitch the next client.</div></div>
     </details>
     <details>
-      <summary><span class="n">Q &middot; 02</span>What is the difference between Magister and Infintech Designs?<span class="tg">+</span></summary>
-      <div class="fq-a">Infintech is Brian&#39;s broader-vertical SMB marketing agency, founded 2008 in New Orleans. Magister is the vertically-specialized $5M to $200M operator practice across home services, medical, and legal only. Outside those three verticals, or under $5M revenue, Infintech is the right fit and we refer you there ourselves.</div>
+      <summary>What is the difference between Magister and Infintech Designs?</summary>
+      <div class="answer-wrap"><div class="answer">Infintech is Brian&#39;s broader-vertical SMB marketing agency, founded 2008 in New Orleans. Magister is the vertically-specialized $5M to $200M operator practice across home services, medical, and legal only. Outside those three verticals, or under $5M revenue, Infintech is the right fit and we refer you there ourselves.</div></div>
     </details>
     <details>
-      <summary><span class="n">Q &middot; 03</span>What is the relationship between Magister and TurnkeyRenovators?<span class="tg">+</span></summary>
-      <div class="fq-a">Brian Hong co-owns TurnkeyRenovators, a multi-seven-figure construction company. The same SEO, paid media, AI automation, and CRM stack Magister builds was built inside Turnkey first and runs it today. Every methodology is proved against a live operating business before it ships to a client.</div>
+      <summary>What is the relationship between Magister and TurnkeyRenovators?</summary>
+      <div class="answer-wrap"><div class="answer">Brian Hong co-owns TurnkeyRenovators, a multi-seven-figure construction company. The same SEO, paid media, AI automation, and CRM stack Magister builds was built inside Turnkey first and runs it today. Every methodology is proved against a live operating business before it ships to a client.</div></div>
     </details>
     <details>
-      <summary><span class="n">Q &middot; 04</span>Why three verticals only? Why not run anything?<span class="tg">+</span></summary>
-      <div class="fq-a">Operator empathy only holds when the founders have actually been in those rooms. Brian ran a med spa partnership and runs Turnkey. Dimitry came up doing HVAC field work. Michael trained 1,300 practitioners across the same verticals. We say no to brands outside home services, medical, and law to avoid faking credibility we do not have.</div>
+      <summary>Why three verticals only? Why not run anything?</summary>
+      <div class="answer-wrap"><div class="answer">Operator empathy only holds when the founders have actually been in those rooms. Brian ran a med spa partnership and runs Turnkey. Dimitry came up doing HVAC field work. Michael trained 1,300 practitioners across the same verticals. We say no to brands outside home services, medical, and law to avoid faking credibility we do not have.</div></div>
     </details>
     <details>
-      <summary><span class="n">Q &middot; 05</span>Do you work with brands outside the US?<span class="tg">+</span></summary>
-      <div class="fq-a">Not currently. Compliance, attribution, and CRM stacks vary too widely outside the US for our engagement model to scale cleanly. If you are a US-based operator with multi-location presence, we are a fit. If you are international, we say so and recommend a different team.</div>
+      <summary>Do you work with brands outside the US?</summary>
+      <div class="answer-wrap"><div class="answer">Not currently. Compliance, attribution, and CRM stacks vary too widely outside the US for our engagement model to scale cleanly. If you are a US-based operator with multi-location presence, we are a fit. If you are international, we say so and recommend a different team.</div></div>
     </details>
     <details>
-      <summary><span class="n">Q &middot; 06</span>Who owns which part of my account?<span class="tg">+</span></summary>
-      <div class="fq-a">SEO and paid media are owned by Dimitry Morgan. AI automation and CRM are owned by Michael Merlino. Strategy is owned by Brian Hong. Three founders, three layers, one dashboard. The person who signs your Monday brief is the person who built that part of it.</div>
+      <summary>Who owns which part of my account?</summary>
+      <div class="answer-wrap"><div class="answer">SEO and paid media are owned by Dimitry Morgan. AI automation and CRM are owned by Michael Merlino. Strategy is owned by Brian Hong. Three founders, three layers, one dashboard. The person who signs your Monday brief is the person who built that part of it.</div></div>
     </details>
   </div>
 </section>
 
-<section class="aa-cta-band" data-mark="11" id="call">
+<section class="aa-cta-band" data-mark="10" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <svg class="cta-draw" viewBox="0 0 1600 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <path d="M-40 420 Q400 300 800 380 T1660 340"/>
@@ -1484,9 +1528,9 @@
     </svg>
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">Next step</div>
-    <h2>The person who <em>signs your Monday brief</em> is the person who <em>built it</em></h2>
-    <p class="note-lede">A 45-minute working session with a founder. Not a sales rep. We review your channels, your CRM, and your numbers, and you leave with a written read on what is working, what is not, and what we would run first. No deck. No pitch.</p>
+    <div class="eyebrow">Book a call</div>
+    <h2>Bring your numbers. We will tell you what they say.</h2>
+    <p class="note-lede">Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -1515,6 +1559,52 @@
         if (el) io.observe(el);
       });
     }
+  })();
+</script>
+
+<script>
+  /* FAQ disclosure height - ported verbatim from the service-page template. */
+  document.documentElement.classList.add('js');
+  (function(){
+    document.querySelectorAll('.aa-faq details').forEach(function(d){
+      var body = d.querySelector('.answer-wrap');
+      if (!body) return;
+      if (d.open) body.style.height = 'auto';
+      var animating = false;
+      function settle(fn){
+        var done = false;
+        function finish(){
+          if (done) return;
+          done = true;
+          body.removeEventListener('transitionend', onEnd);
+          clearTimeout(timer);
+          fn();
+          animating = false;
+        }
+        function onEnd(e){ if (e.target === body && e.propertyName === 'height') finish(); }
+        body.addEventListener('transitionend', onEnd);
+        var timer = setTimeout(finish, 700);
+        return finish;
+      }
+      d.querySelector('summary').addEventListener('click', function(e){
+        e.preventDefault();
+        if (animating) return;
+        animating = true;
+        if (d.open){
+          body.style.height = body.scrollHeight + 'px';
+          void body.offsetHeight;
+          requestAnimationFrame(function(){ body.style.height = '0px'; });
+          settle(function(){ d.open = false; body.style.height = ''; });
+        } else {
+          d.open = true;
+          var h = body.scrollHeight;
+          body.style.height = '0px';
+          void body.offsetHeight;
+          requestAnimationFrame(function(){ body.style.height = h + 'px'; });
+          settle(function(){ body.style.height = 'auto'; });
+        }
+      });
+    });
   })();
 </script>
 
