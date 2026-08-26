@@ -1044,9 +1044,9 @@
   .fb-split{display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:start;
     max-width:1400px; margin:30px auto 0}
   @media (max-width:1000px){ .fb-split{grid-template-columns:1fr; gap:36px} }
-  .fb-photo{position:relative}
+  .fb-photo{position:relative; max-width:460px}
   .fb-photo::before{content:""; display:block; height:2px; background:var(--gold-deep,#6E561A); margin-bottom:22px}
-  .fb-photo .frame{display:block; aspect-ratio:4/5; overflow:hidden; background:#EDECE7;
+  .fb-photo .frame{display:block; aspect-ratio:1/1; overflow:hidden; background:#EDECE7;
     border:1px solid #E5E4DF}
   .fb-photo img{width:100%; height:100%; object-fit:cover; display:block;
     filter:grayscale(1) contrast(1.03); transition:filter .5s ease, transform .8s ease}
@@ -1119,6 +1119,33 @@
   .fp-team span{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-on-dark,#868A90)}
   @media (prefers-reduced-motion:reduce){ .fb-photo img{transition:none} }
+
+  /* FOUNDERS TRIO - the homepage founders section, showing the other two
+     founders on this page, photos hotlinked from the live theme assets. */
+  .ft-head{max-width:1000px; margin:0 auto 8px; padding-bottom:20px; border-bottom:1px solid rgba(110,86,26,.55);
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.7rem,3.6vw,2.6rem); line-height:1.15; color:var(--ink,#16171A)}
+  .ft-head em{font-style:italic; color:var(--gold-deep,#6E561A)}
+  .ft-grid-2{max-width:1000px; margin:44px auto 0; display:grid; grid-template-columns:1fr 1fr; gap:44px}
+  @media (max-width:800px){ .ft-grid-2{grid-template-columns:1fr; gap:40px} }
+  .ft-card{display:block; text-decoration:none}
+  .ft-grid-2 .ft-card:nth-child(2){margin-top:40px}
+  @media (max-width:800px){ .ft-grid-2 .ft-card:nth-child(2){margin-top:0} }
+  .ft-rule{display:block; height:1px; background:#D8D6D0; margin-bottom:28px}
+  .ft-photo{display:block; aspect-ratio:1/1; overflow:hidden; background:#EDECE7}
+  .ft-photo img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(1) contrast(1.03); transition:filter .45s ease, transform .7s ease}
+  .ft-card:hover .ft-photo img{filter:none; transform:scale(1.03)}
+  .ft-name{display:block; margin-top:18px; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:500; font-size:1.2rem; color:var(--ink,#16171A)}
+  .ft-role{display:block; margin-top:8px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2,#5E6066)}
+  .ft-link{display:inline-flex; align-items:center; gap:8px; margin-top:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-deep,#6E561A)}
+  .ft-link .ar{transition:transform .25s ease}
+  .ft-card:hover .ft-link .ar{transform:translateX(6px)}
+  @media (prefers-reduced-motion:reduce){ .ft-photo img{transition:none} }
 
   /* CTA band background - the homepage band recipe. */
   .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
@@ -1242,7 +1269,7 @@
   <h2>Michael builds the AI that does the work, <em>then proves it inside the CRM</em></h2>
   <div class="fb-split">
     <figure class="fb-photo">
-      <span class="frame"><img src="img/michael-merlino.jpg" alt="Michael Merlino" width="600" height="750"></span>
+      <span class="frame"><img src="https://magisterdigital.ai/wp-content/themes/magister-digital/assets/images/michael-merlino.webp" alt="Michael Merlino" width="1536" height="1024"></span>
       <figcaption>Michael Merlino &middot; co-founder of Magister Digital since 2026<br>Co-founder of CTR Geeks &middot; partner in Stealth Code<br>The methodology he runs on your account was built, shipped, and maintained by the same person operating it</figcaption>
     </figure>
     <div class="fb-chapters">
@@ -1319,14 +1346,29 @@
       </ul>
     </div>
   </div>
-  <div class="fp-team" style="margin-top:40px">
-    <a href="https://magisterdigital.ai/michael-merlino/"><b>Michael Merlino</b><span>Chief Strategist &amp; AI Systems</span></a>
-    <a href="https://magisterdigital.ai/brian-hong/"><b>Brian Hong</b><span>CEO</span></a>
-    <a href="https://magisterdigital.ai/dimitry-morgan/"><b>Dimitry Morgan</b><span>Head of Paid Media</span></a>
+</section>
+
+<section class="aa-sec band-light" data-mark="06">
+  <h2 class="ft-head">Three founders. You will speak to <em>one of them.</em></h2>
+  <div class="ft-grid ft-grid-2">
+    <a class="ft-card" href="https://magisterdigital.ai/brian-hong/">
+      <span class="ft-rule"></span>
+      <span class="ft-photo"><img src="https://magisterdigital.ai/wp-content/themes/magister-digital/assets/images/brian-hong.webp" alt="Brian Hong" loading="lazy" width="1536" height="1024"></span>
+      <span class="ft-name">Brian Hong</span>
+      <span class="ft-role">Co-founder &amp; CEO</span>
+      <span class="ft-link">Read profile <span class="ar">&rarr;</span></span>
+    </a>
+    <a class="ft-card" href="https://magisterdigital.ai/dimitry-morgan/">
+      <span class="ft-rule"></span>
+      <span class="ft-photo"><img src="https://magisterdigital.ai/wp-content/themes/magister-digital/assets/images/dimitry-morgan.webp" alt="Dimitry Morgan" loading="lazy" width="1536" height="1024"></span>
+      <span class="ft-name">Dimitry Morgan</span>
+      <span class="ft-role">Co-founder, Head of Paid Media</span>
+      <span class="ft-link">Read profile <span class="ar">&rarr;</span></span>
+    </a>
   </div>
 </section>
 
-<section class="aa-cta-band" data-mark="06" id="call">
+<section class="aa-cta-band" data-mark="07" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" width="1920" height="1280" loading="lazy">
   </div>
