@@ -1044,7 +1044,8 @@
   .fb-split{display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:start;
     max-width:1400px; margin:30px auto 0}
   @media (max-width:1000px){ .fb-split{grid-template-columns:1fr; gap:36px} }
-  .fb-photo{position:relative; max-width:440px}
+  .fb-photo{position:sticky; top:96px; max-width:440px}
+  @media (max-width:1000px){ .fb-photo{position:static} }
   .fb-photo::before{content:""; display:block; height:2px; background:var(--gold-deep,#6E561A); margin-bottom:22px}
   .fb-photo .frame{display:block; aspect-ratio:3/4; overflow:hidden; background:#EDECE7;
     border:1px solid #E5E4DF}
