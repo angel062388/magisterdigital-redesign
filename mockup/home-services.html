@@ -1347,6 +1347,12 @@
   .mdb-note.nl{color:var(--muted-2,#5E6066)}
   .mdb-fitcol .fitp{margin:0; font-size:.95rem; line-height:1.7; color:var(--ink,#16171A)}
   .mdb-fitcol.neg .fitp{color:var(--ink,#16171A)}
+
+  /* Proof stats: four equal cards in one row, so no orphan card leaves
+     a void. Two-up on tablet, stacked on phones. */
+  .mdb-price.stats4{grid-template-columns:repeat(4,1fr); max-width:1400px}
+  @media (max-width:1100px){ .mdb-price.stats4{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:640px){ .mdb-price.stats4{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -1611,7 +1617,7 @@
   <div class="eyebrow">04 &middot; Proof we own</div>
   <h2>We run this on a company we own <em>before we run it on yours</em></h2>
   <p class="intro">We will not invent a case-study number to close you. Here is the proof we can stand behind, named out loud. The figures below are the ones that are true and locked, not the ones that make a deck look impressive.</p>
-  <div class="mdb-price">
+  <div class="mdb-price stats4">
     <div class="mdb-pr"><span class="k">Trades</span><b>7</b><span class="s">Home services trades run every week: roofing, plumbing, HVAC, GC, remodeling, restoration, solar.</span></div>
     <div class="mdb-pr"><span class="k">Dispatch CRMs</span><b>3</b><span class="s">We build attribution inside natively: ServiceTitan, Housecall Pro, Jobber.</span></div>
     <div class="mdb-pr"><span class="k">Founders</span><b>3</b><span class="s">Sign every weekly brief: Brian Hong, Michael Merlino, Dimitry Morgan.</span></div>
