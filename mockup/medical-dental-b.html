@@ -1042,13 +1042,6 @@
 
   
   /* ===== MEDICAL-DENTAL B - THE COMPLIANCE PERIMETER ===== */
-  .mdb-proof{list-style:none; margin:28px auto 0; padding:0; max-width:880px;
-    display:grid; gap:0; border-top:1px solid var(--border,#2A2C31); text-align:left}
-  .mdb-proof li{display:flex; gap:14px; align-items:baseline; padding:13px 4px;
-    border-bottom:1px solid var(--border,#2A2C31);
-    font-size:.95rem; line-height:1.6; color:#E6E7E9}
-  .mdb-proof li::before{content:"+"; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    color:var(--gold,#D4AF37)}
   .mdb-measure{margin:26px auto 0; max-width:70ch;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; line-height:1.9;
@@ -1084,35 +1077,64 @@
     font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; line-height:2;
     color:var(--muted-on-dark,#868A90)}
 
-  .mdb-feat{max-width:1400px; margin:38px auto 0; background:#FFFFFF;
-    border:1px solid #E5E4DF; border-top:3px solid var(--gold-deep,#6E561A);
-    border-radius:10px; padding:34px 36px; display:flex; flex-direction:column}
-  .mdb-feat .k{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.7rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold-deep,#6E561A)}
-  .mdb-feat h3{margin:14px 0 0; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-weight:500; font-size:clamp(1.3rem,2.6vw,1.7rem); line-height:1.3; color:var(--ink,#16171A)}
-  .mdb-feat p{margin:16px 0 22px; max-width:100ch; font-size:.97rem; line-height:1.7; color:var(--muted,#45474C)}
-  .mdb-feat .std{align-self:flex-start; padding:14px 18px; border-radius:6px; background:rgba(110,86,26,.06);
-    border:1px solid rgba(110,86,26,.32);
-    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.7rem; letter-spacing:.06em; line-height:1.7; color:var(--gold-deep,#6E561A)}
+  /* Hero tightened per user 2026-08-27: shorter headline, proof rows and
+     corner plaques removed, less tail space below the CTAs. */
+  .aa-hero{min-height:auto; padding-bottom:72px}
 
-  .mdb-chgrid{max-width:1400px; margin:24px auto 0; display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
-  @media (max-width:900px){ .mdb-chgrid{grid-template-columns:1fr} }
-  .mdb-ch{display:flex; flex-direction:column; background:#FFFFFF; border:1px solid #E5E4DF;
-    border-radius:10px; padding:28px 30px; text-decoration:none;
-    transition:border-color .25s ease, transform .3s ease}
-  .mdb-ch:hover{border-color:var(--gold-deep,#6E561A); transform:translateY(-3px)}
-  .mdb-ch .kk{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep,#6E561A)}
-  .mdb-ch h3{margin:12px 0 10px; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-    font-weight:500; font-size:1.22rem; line-height:1.32; color:var(--ink,#16171A)}
-  .mdb-ch p{margin:0; font-size:.92rem; line-height:1.64; color:var(--muted,#45474C)}
-  .mdb-more{max-width:1400px; margin:26px auto 0}
-  .mdb-more a{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep,#6E561A);
-    text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(110,86,26,.5)}
-  .mdb-more a:hover{color:var(--gold-dark,#A8842A)}
+  /* SERVICES - the homepage alternating editorial rows (index.html 02),
+     adapted to the light band like the case-study cards were. */
+  .svc-list{list-style:none; margin:34px auto 0; padding:0; max-width:1400px}
+  .svc{border-top:1px solid #E5E4DF; position:relative}
+  .svc:last-child{border-bottom:1px solid #E5E4DF}
+  .svc-link{display:grid; grid-template-columns:1fr; gap:24px; padding:32px 0;
+    text-decoration:none; color:var(--ink,#16171A); align-items:center; position:relative; cursor:pointer}
+  .svc-visual{position:relative; aspect-ratio:16/10; overflow:hidden; background:#EDECE7}
+  .svc-visual img{width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) brightness(.5) contrast(1.12); transform:scale(1.04);
+    transition:filter .6s ease, transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .svc-link:hover .svc-visual img,.svc-link:focus-within .svc-visual img{
+    filter:grayscale(.1) brightness(.65) contrast(1.05); transform:scale(1)}
+  .svc-visual::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(15,17,21,.55) 100%);
+    pointer-events:none}
+  .svc-idx{position:absolute; top:12px; left:12px; z-index:2;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em;
+    padding:5px 10px; background:var(--ink-deep,#0F1115); color:var(--gold,#D4AF37);
+    border:1px solid rgba(212,175,55,.35)}
+  .svc-body{padding-right:16px}
+  .svc-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic; font-weight:600;
+    font-size:clamp(1.75rem,4vw,2.8rem); letter-spacing:-.02em; line-height:1.02;
+    display:block; position:relative; padding-bottom:12px; text-decoration:none; color:inherit;
+    transition:color .3s ease}
+  .svc-name::after{content:""; position:absolute; left:0; bottom:0;
+    height:1px; width:80px; background:var(--gold-deep,#6E561A); transform:scaleX(0); transform-origin:left;
+    transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  .svc-link:hover .svc-name,.svc-link:focus-within .svc-name{color:var(--gold-deep,#6E561A)}
+  .svc-link:hover .svc-name::after,.svc-link:focus-within .svc-name::after{transform:scaleX(1)}
+  .svc-name:focus-visible{outline:2px solid var(--gold-deep,#6E561A); outline-offset:3px}
+  .svc-outcome{display:block; margin-top:16px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1rem; color:var(--muted,#45474C); line-height:1.6; max-width:44ch}
+  .svc-actions{margin-top:24px}
+  .svc-actions .btn-ghost{background:transparent; border:1px solid rgba(110,86,26,.45);
+    color:var(--ink,#16171A); box-shadow:none}
+  .svc-actions .btn-ghost:hover{border-color:var(--gold-deep,#6E561A); background:rgba(110,86,26,.06)}
+  .svc-arrow{position:absolute; top:32px; right:0;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.35rem; color:var(--muted-2,#5E6066);
+    transition:color .28s ease, transform .35s cubic-bezier(.16,1,.3,1)}
+  .svc-link:hover .svc-arrow,.svc-link:focus-within .svc-arrow{color:var(--gold-deep,#6E561A); transform:translateX(6px)}
+  @media (min-width:900px){
+    .svc-link{grid-template-columns:.9fr 1.1fr 44px; gap:48px; padding:24px 0 24px 16px}
+    .svc:nth-child(even) .svc-visual{order:2}
+    .svc:nth-child(even) .svc-body{order:1; padding-left:0; padding-right:24px}
+    .svc:nth-child(even) .svc-arrow{order:3}
+    .svc-arrow{position:relative; top:auto; right:auto; text-align:right; align-self:center}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .svc-visual img,.svc-name,.svc-name::after,.svc-arrow{transition:none}
+  }
 
   .mdb-creds{max-width:1400px; margin:34px auto 0; display:grid; grid-template-columns:repeat(3,1fr); gap:0;
     border-top:1px solid var(--border,#2A2C31); border-bottom:1px solid var(--border,#2A2C31)}
@@ -1352,8 +1374,6 @@
       </g>
       <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
         <text class="gp-label" style="--gd:4.7s" x="220" y="290">THE COMPLIANCE PERIMETER &middot; HIPAA &middot; FTC &middot; STATE BOARD</text>
-        <text class="gp-label" style="--gd:4.9s" x="890" y="868">NO PHI IN PIXEL PAYLOADS &middot; BAA BEFORE LIVE</text>
-        <text class="gp-label" style="--gd:5.1s" x="240" y="868" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">ADS &middot; SEO &middot; AI INTAKE &middot; CRM &middot; CALENDAR</text>
       </g>
     </svg>
     <span class="garage-orb g1"></span>
@@ -1361,18 +1381,13 @@
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Medical &amp; Dental <span class="sep">/</span> The compliance perimeter, run properly</div>
-    <h1>More booked consults and higher patient value for med spas, plastic surgery, and dental groups, <em>measured against your calendar, not impressions</em></h1>
+    <h1>More booked consults and higher patient value, <em>measured on your calendar</em></h1>
     <p class="lede">
       For med spas, plastic surgery, aesthetic dermatology, multi-location dental groups,
       DSOs, MSOs, and oral surgery practices between $500K and $10M in revenue that are done
       paying four vendors with four dashboards. One team runs paid traffic, SEO, AI consult
       booking, CRM, web, and HIPAA-aware analytics, and a founder signs the brief every Monday.
     </p>
-    <ul class="mdb-proof">
-      <li>One team runs SEO, Google Ads, Meta Ads, AI consult booking, CRM, and web as a single engine.</li>
-      <li>HIPAA-aware server-side conversion tracking, with no PHI in pixel payloads.</li>
-      <li>Single-channel engagements from $20K per month, full-stack from $60K per month.</li>
-    </ul>
     <div class="aa-hero-cta">
       <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a practice audit</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
@@ -1428,46 +1443,106 @@
   <p class="intro">Magister Digital is a full-stack marketing agency for medical and dental practices, run by operators who have sat on the practice side of the table. One team owns every channel that books consults, tracks each dollar to a scheduled consult or new patient inside your practice management system, and writes ad copy that clears FTC and state board rules before it runs.</p>
   <p class="intro small">Medical and dental marketing has a compliance perimeter that most agencies navigate by guessing. We work with practices that need a team that already knows the FTC endorsement guides, the HIPAA tracking rules, the state board restrictions on outcome language, and the line between operator-level marketing and clinical claim-making. We report ranges, never single-patient guarantees, because specific outcome numbers are not compliant for medical marketing and we will not pretend otherwise.</p>
 
-  <article class="mdb-feat">
-    <span class="k">01 &middot; Patient acquisition</span>
-    <h3>Qualified consult requests on the booking calendar, not ad impressions in a monthly report</h3>
-    <p>Google Ads and Meta Ads run as one acquisition engine tied to booked consults rather than clicks. We work with practices on HIPAA-aware conversion tracking built on server-side events, so no PHI travels in pixel payloads. Owned by Dimitry Morgan, Head of Paid Media at Magister Digital, with roughly fifteen years of paid-media operations. We do not run generic healthcare ad templates. We write copy that fits your state board rules and your FTC endorsement obligations before the medical director sees it.</p>
-    <span class="std">Outcome: booked consults by channel, traced back to your practice management system, reported weekly.</span>
-  </article>
-
-  <div class="mdb-chgrid">
-    <a class="mdb-ch" href="seo-services.html">
-      <span class="kk">02 &middot; Medical SEO</span>
-      <h3>Local pack and service-page SEO that compounds as your treatment menu grows</h3>
-      <p>Topical maps per service line: injectables, body contouring, restorative dentistry, implants, oral surgery. Technical hygiene, Google Business Profile management, and AI search visibility. Rankings are a side effect. The number we report is booked consults from organic by service type. Built with Stealth Code tools including SEO Neo and Omega Indexer for indexing acceleration.</p>
-    </a>
-    <a class="mdb-ch" href="google-ads-management.html">
-      <span class="kk">03 &middot; Google Ads</span>
-      <h3>Google Ads with HIPAA-aware conversion tracking and compliant ad copy</h3>
-      <p>Bid governance by service line, negative-keyword discipline, server-side conversion API with no PHI in payloads. Ad copy reviewed against your state board rules before it runs. We reconcile spend to booked consults inside your CRM, not inside the Google interface.</p>
-    </a>
-    <a class="mdb-ch" href="meta-ads-management.html">
-      <span class="kk">04 &middot; Meta Ads</span>
-      <h3>Meta and Instagram campaigns tuned to service launches and booking-gap windows</h3>
-      <p>Meta Advantage+, server-side events, weekly creative refresh built around your service calendar. A new injector onboarded, a new treatment line launching, a slow booking week for one provider: we time the campaigns to those moments. No before-and-after language without documented FTC and state board compliance. Audiences built from your first-party CRM, not lookalikes the platform hands you.</p>
-    </a>
-    <a class="mdb-ch" href="ai-automation.html">
-      <span class="kk">05 &middot; AI consult booking</span>
-      <h3>After-hours intake and inquiry follow-up built on Flowbots</h3>
-      <p>HIPAA-aware AI agents built on Flowbots answer consult inquiries, qualify the request, and sync to your practice management system. We work with practices that lose a meaningful share of inbound consult requests to voicemail and same-day silence. Built and operated by Michael Merlino, Chief Strategist and AI Systems, co-founder of CTR Geeks. Zero PHI is stored in the automation layer without appropriate BAA coverage.</p>
-    </a>
-    <a class="mdb-ch" href="crm-development.html">
-      <span class="kk">06 &middot; CRM &amp; weekly BI</span>
-      <h3>One dashboard: ad spend, booked consults, consult-to-treatment rate, cost per booked consult</h3>
-      <p>Your weekly BI report fits on one screen and takes ninety seconds to read. Booked consults by channel. Consult-to-treatment conversion by provider. Average patient value by service line. Cost per booked consult by source. Signed by a founder every Monday. We do not bill for services you are not buying, and we do not keep a channel on life support because it makes the dashboard look fuller.</p>
-    </a>
-    <a class="mdb-ch" href="web-design.html">
-      <span class="kk">07 &middot; Web</span>
-      <h3>Performance-first practice sites wired for booked consults</h3>
-      <p>Server-rendered builds with conversion architecture, schema, and CRM wiring, so the site turns visitors into booked appointments instead of bounces. The site your patients trust before they read a word, and the one your booking system actually talks to.</p>
-    </a>
-  </div>
-  <p class="mdb-more"><a href="full-stack-marketing.html">See the full-stack engagement <span aria-hidden="true">&rsaquo;</span></a></p>
+  <ul class="svc-list" role="list">
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="seo-services.html">
+        <div class="svc-visual">
+          <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
+          <span class="svc-idx">01</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="seo-services.html">SEO</a>
+          <span class="svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="google-ads-management.html">
+        <div class="svc-visual">
+          <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
+          <span class="svc-idx">02</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="google-ads-management.html">Google Ads</a>
+          <span class="svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="meta-ads-management.html">
+        <div class="svc-visual">
+          <img src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
+          <span class="svc-idx">03</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="meta-ads-management.html">Meta Ads</a>
+          <span class="svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="ai-automation.html">
+        <div class="svc-visual">
+          <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
+          <span class="svc-idx">04</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="ai-automation.html">AI Automation</a>
+          <span class="svc-outcome">Missed-call recovery, intake scoring and after-hours triage that get more leads booked without more staff.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="crm-development.html">
+        <div class="svc-visual">
+          <img src="img/crm.jpg" alt="" loading="lazy">
+          <span class="svc-idx">05</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="crm-development.html">Custom CRM Development</a>
+          <span class="svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="full-stack-marketing.html">
+        <div class="svc-visual">
+          <img src="img/full-stack-marketing.jpg" alt="" loading="lazy">
+          <span class="svc-idx">06</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="full-stack-marketing.html">Full-Stack Marketing</a>
+          <span class="svc-outcome">One team across search, paid, automation and the site, so no vendor blame layer eats your budget.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="svc">
+      <div class="svc-link" data-svc-row data-href="web-design.html">
+        <div class="svc-visual">
+          <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="" loading="lazy">
+          <span class="svc-idx">07</span>
+        </div>
+        <div class="svc-body">
+          <a class="svc-name" href="web-design.html">Web Design</a>
+          <span class="svc-outcome">Sites written to convert the traffic we send, instrumented for booked work end to end.</span>
+          <div class="svc-actions"><a class="btn btn-ghost btn-sm" href="#call">Book a call</a></div>
+        </div>
+        <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+  </ul>
 </section>
 
 <section class="aa-sec" data-mark="04">
@@ -1646,6 +1721,18 @@
   </div>
 </section>
 
+<script>
+  /* Service rows: the whole row navigates unless an inner link was clicked. */
+  (function(){
+    document.querySelectorAll('[data-svc-row]').forEach(function(row){
+      row.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var href = row.getAttribute('data-href');
+        if (href) window.location.href = href;
+      });
+    });
+  })();
+</script>
 <script>
   /* Industries panels: tap toggles open on touch devices; hover handles
      desktop via CSS. Clicks on the panel link pass through. */
