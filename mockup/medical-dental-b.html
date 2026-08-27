@@ -1179,12 +1179,26 @@
 
   .mdb-rail{max-width:960px; margin:38px auto 0; position:relative; padding-left:42px}
   .mdb-rail::before{content:""; position:absolute; left:8px; top:6px; bottom:6px; width:2px;
-    background:linear-gradient(180deg, var(--gold,#D4AF37), rgba(212,175,55,.15))}
+    background:linear-gradient(180deg, var(--gold,#D4AF37), rgba(212,175,55,.15));
+    transform:scaleY(0); transform-origin:top;
+    transition:transform 2.2s cubic-bezier(.16,1,.3,1)}
+  .mdb-rail.is-in::before{transform:scaleY(1)}
   .mdb-week{position:relative; padding:0 0 40px}
   .mdb-week:last-child{padding-bottom:0}
   .mdb-week::before{content:""; position:absolute; left:-40px; top:4px; width:14px; height:14px;
     border-radius:50%; background:var(--ink,#16171A); border:2px solid var(--gold,#D4AF37);
-    box-shadow:0 0 12px rgba(212,175,55,.5)}
+    box-shadow:0 0 12px rgba(212,175,55,.5);
+    opacity:0; transform:scale(.35);
+    transition:opacity .45s ease, transform .45s cubic-bezier(.34,1.56,.64,1)}
+  .mdb-rail.is-in .mdb-week::before{opacity:1; transform:scale(1)}
+  .mdb-rail.is-in .mdb-week:nth-child(1)::before{transition-delay:.1s}
+  .mdb-rail.is-in .mdb-week:nth-child(2)::before{transition-delay:.65s}
+  .mdb-rail.is-in .mdb-week:nth-child(3)::before{transition-delay:1.2s}
+  .mdb-rail.is-in .mdb-week:nth-child(4)::before{transition-delay:1.75s}
+  @media (prefers-reduced-motion:reduce){
+    .mdb-rail::before{transform:none; transition:none}
+    .mdb-week::before{opacity:1; transform:none; transition:none}
+  }
   .mdb-week .k{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
     font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; color:var(--gold,#D4AF37)}
   .mdb-week h3{margin:10px 0 10px; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
@@ -1233,7 +1247,8 @@
 
   /* INDUSTRIES PANELS - ported from the homepage verticals section (photo
      tiles that widen and reveal detail on hover; tap toggles on touch). */
-  .panels{display:flex; flex-direction:column; gap:2px; margin:34px auto 0; max-width:1400px}
+  .panels{display:flex; flex-direction:column; gap:2px; margin:34px auto 0; max-width:960px;
+    width:100%; justify-content:center}
   .panel{position:relative; overflow:hidden; min-height:250px; cursor:pointer; border:0; padding:0;
     text-align:left; background:var(--ink,#16171A); color:var(--paper,#F7F7F5); display:block; width:100%;
     transition:flex-grow .7s cubic-bezier(.16,1,.3,1)}
@@ -1379,7 +1394,7 @@
   </div>
   <div class="aa-hero-content">
     <div class="eyebrow"><span class="num">01</span> &middot; Medical &amp; Dental <span class="sep">/</span> The compliance perimeter, run properly</div>
-    <h1>More booked consults and higher patient value, <em>measured on your calendar</em></h1>
+    <h1>More <em>booked consults</em> and higher patient value, <em>measured on your calendar</em></h1>
     <p class="lede">
       For med spas, plastic surgery, aesthetic dermatology, multi-location dental groups,
       DSOs, MSOs, and oral surgery practices between $500K and $10M in revenue that are done
@@ -1625,7 +1640,54 @@
 </section>
 
 <section class="aa-sec band-light" data-mark="07">
-  <div class="eyebrow">07 &middot; Questions</div>
+  <div class="eyebrow">07 &middot; Industries</div>
+  <h2>The other two verticals, because the compliance and the buying cycle are <em>not interchangeable</em></h2>
+  <div class="panels">
+    <div class="panel" tabindex="0" aria-expanded="false">
+      <img src="https://images.pexels.com/photos/3964736/pexels-photo-3964736.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="" loading="lazy">
+      <div class="pin">
+        <div class="kicker">Home services</div>
+        <h3>HVAC, plumbing, roofing, restoration</h3>
+        <div class="body">
+          <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone is answered.</p>
+          <ul><li>Local Service Ads and the map pack</li><li>Storm and seasonal surge planning</li><li>Call tracking wired into the CRM</li></ul>
+          <a class="vert-link" href="https://magisterdigital.ai/home-services/">See how we work with home services <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="panel" tabindex="0" aria-expanded="false">
+      <img src="https://images.pexels.com/photos/37726703/pexels-photo-37726703.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="Dense floor-to-ceiling shelves of hardcover law volumes with a wooden library ladder" loading="lazy">
+      <div class="pin">
+        <div class="kicker">Legal</div>
+        <h3>Plaintiff and consumer-facing firms</h3>
+        <div class="body">
+          <p>Long cycles, expensive clicks, and advertising rules a generalist agency will get you in trouble with.</p>
+          <ul><li>ABA Rule 7.1 compliant messaging</li><li>Signed-case attribution, not form fills</li><li>Intake quality scoring</li></ul>
+          <a class="vert-link" href="https://magisterdigital.ai/legal/">See how we work with legal <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="08">
+  <div class="eyebrow">08 &middot; Book a practice audit</div>
+  <h2>Forty-five minutes with a founder. <em>Not a sales rep</em></h2>
+  <p class="intro">We pull up your ad accounts, your Google Business Profile, your booking funnel, and your existing ad copy live on the call. We name specific compliance gaps and conversion holes before the call ends. You leave with a written read on what we would run first, what it costs, and what the first 30 days look like for your specific practice type. No deck. No pitch.</p>
+  <div class="mdb-price">
+    <div class="mdb-pr"><span class="k">Single-channel</span><b>$20K</b><span class="s">per month, from</span></div>
+    <div class="mdb-pr"><span class="k">Full-stack</span><b>$60K</b><span class="s">per month, from</span></div>
+    <div class="mdb-pr wide"><span class="k">Scope</span><span class="s">We scope from there based on pace, market intensity, and how much of the stack we operate.</span></div>
+  </div>
+  <div class="mdb-cta">
+    <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
+  <p class="mdb-note">Reviewed and replied to by a founder inside seven days. Engagements scoped privately. We will not sell your practice information to any third party.</p>
+</section>
+
+<section class="aa-sec band-light" data-mark="09">
+  <div class="eyebrow">09 &middot; Questions</div>
   <h2>What practice owners ask first. <em>Answered honestly</em></h2>
   <p class="intro">If something below disqualifies us, we would rather you know now than three months in. We do not stay on past the point where the math says we are not the right team.</p>
   <div class="aa-faq">
@@ -1656,53 +1718,6 @@
   </div>
 </section>
 
-<section class="aa-sec band-light" data-mark="08" style="padding-top:24px">
-  <div class="eyebrow">08 &middot; Industries</div>
-  <h2>The other two verticals, because the compliance and the buying cycle are <em>not interchangeable</em></h2>
-  <div class="panels">
-    <div class="panel" tabindex="0" aria-expanded="false">
-      <img src="https://images.pexels.com/photos/3964736/pexels-photo-3964736.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="" loading="lazy">
-      <div class="pin">
-        <div class="kicker">Home services</div>
-        <h3>HVAC, plumbing, roofing, restoration</h3>
-        <div class="body">
-          <p>High intent, weather-driven demand, and a close rate that lives or dies on how fast the phone is answered.</p>
-          <ul><li>Local Service Ads and the map pack</li><li>Storm and seasonal surge planning</li><li>Call tracking wired into the CRM</li></ul>
-          <a class="vert-link" href="https://magisterdigital.ai/home-services/">See how we work with home services <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </div>
-    </div>
-    <div class="panel" tabindex="0" aria-expanded="false">
-      <img src="https://images.pexels.com/photos/37726703/pexels-photo-37726703.jpeg?auto=compress&cs=tinysrgb&w=900&h=1400&fit=crop" alt="Dense floor-to-ceiling shelves of hardcover law volumes with a wooden library ladder" loading="lazy">
-      <div class="pin">
-        <div class="kicker">Legal</div>
-        <h3>Plaintiff and consumer-facing firms</h3>
-        <div class="body">
-          <p>Long cycles, expensive clicks, and advertising rules a generalist agency will get you in trouble with.</p>
-          <ul><li>ABA Rule 7.1 compliant messaging</li><li>Signed-case attribution, not form fills</li><li>Intake quality scoring</li></ul>
-          <a class="vert-link" href="https://magisterdigital.ai/legal/">See how we work with legal <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="aa-sec" data-mark="09">
-  <div class="eyebrow">09 &middot; Book a practice audit</div>
-  <h2>Forty-five minutes with a founder. <em>Not a sales rep</em></h2>
-  <p class="intro">We pull up your ad accounts, your Google Business Profile, your booking funnel, and your existing ad copy live on the call. We name specific compliance gaps and conversion holes before the call ends. You leave with a written read on what we would run first, what it costs, and what the first 30 days look like for your specific practice type. No deck. No pitch.</p>
-  <div class="mdb-price">
-    <div class="mdb-pr"><span class="k">Single-channel</span><b>$20K</b><span class="s">per month, from</span></div>
-    <div class="mdb-pr"><span class="k">Full-stack</span><b>$60K</b><span class="s">per month, from</span></div>
-    <div class="mdb-pr wide"><span class="k">Scope</span><span class="s">We scope from there based on pace, market intensity, and how much of the stack we operate.</span></div>
-  </div>
-  <div class="mdb-cta">
-    <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
-    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
-  </div>
-  <p class="mdb-note">Reviewed and replied to by a founder inside seven days. Engagements scoped privately. We will not sell your practice information to any third party.</p>
-</section>
-
 <section class="aa-cta-band" data-mark="10" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" width="1920" height="1280" loading="lazy">
@@ -1718,6 +1733,21 @@
   </div>
 </section>
 
+<script>
+  /* Onboarding rail: the line draws down and the week dots pop as it
+     passes, once the section scrolls into view. */
+  (function(){
+    var rail = document.querySelector('.mdb-rail');
+    if (!rail) return;
+    if (!('IntersectionObserver' in window)) { rail.classList.add('is-in'); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { rail.classList.add('is-in'); io.disconnect(); }
+      });
+    }, { rootMargin: '0px 0px -25% 0px' });
+    io.observe(rail);
+  })();
+</script>
 <script>
   /* Service rows: the whole row navigates unless an inner link was clicked. */
   (function(){
