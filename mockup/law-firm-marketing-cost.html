@@ -1209,9 +1209,9 @@
 
 <section class="aa-hero" data-mark="01">
   <div class="aa-hero-bg" aria-hidden="true">
-    <!-- THE SCALE: a balance drafts itself - the invoice on one pan, the
-         signed retainers on the other - and the beam settles toward the work.
-         Judge the math, not the invoice, drawn. -->
+    <!-- THE INTAKE DOCKET: the invoice drafts small on the left while the
+         docket stacks on the right - inquiries narrow to qualified, qualified
+         narrows to the one signed retainer, sealed and signed. -->
     <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
         <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -1220,24 +1220,33 @@
       </defs>
       <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
       <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 01 &middot; the base and the column -->
-        <path class="gp-line" style="--gd:0s" d="M640 820 H960"/>
-        <path class="gp-line" style="--gd:0.3s" d="M800 820 V420"/>
-        <path class="gp-line" style="--gd:0.7s" d="M760 420 L800 360 L840 420 Z"/>
-        <!-- 02 &middot; the beam, tilted toward the work -->
-        <path class="gp-line" style="--gd:1.2s" d="M420 340 L1180 420"/>
-        <path class="gp-line" style="--gd:1.6s" d="M800 388 a10 10 0 1 0 0.1 0"/>
-        <!-- 03 &middot; the invoice pan, higher and lighter -->
-        <path class="gp-line" style="--gd:2.0s; opacity:0.7" d="M420 340 V460 M340 460 Q420 540 500 460 M340 460 H500"/>
-        <path class="gp-line" style="--gd:2.5s" d="M370 380 h100 v60 h-100 z"/>
-        <!-- 04 &middot; the signed-retainer pan, lower and fuller -->
-        <path class="gp-line" style="--gd:2.9s; opacity:0.7" d="M1180 420 V560 M1080 560 Q1180 660 1280 560 M1080 560 H1280"/>
-        <path class="gp-line" style="--gd:3.4s" d="M1105 470 h70 v70 h-70 z M1190 450 h70 v90 h-70 z M1140 410 h70 v40 h-70 z"/>
-        <path class="gp-line" style="--gd:3.8s" d="M1115 500 l10 12 l20 -24 M1200 490 l10 12 l20 -24"/>
+        <!-- 01 &middot; the invoice slip -->
+        <path class="gp-line" style="--gd:0s" d="M370 360 h130 v170 h-130 z"/>
+        <path class="gp-line" style="--gd:0.4s; opacity:0.7" d="M390 400 h90 M390 430 h90 M390 460 h60"/>
+        <path class="gp-line" style="--gd:0.7s" d="M390 495 h90"/>
+        <!-- 02 &middot; the spend flows to the docket -->
+        <path class="gp-line" style="--gd:1.1s; opacity:0.7" d="M500 445 Q720 300 955 430"/>
+        <path class="gp-line" style="--gd:1.5s" d="M929 420 l26 10 l-8 -27"/>
+        <!-- 03 &middot; the docket narrows -->
+        <path class="gp-line" style="--gd:1.8s" d="M960 400 h380 v70 h-380 z"/>
+        <path class="gp-line" style="--gd:2.1s; opacity:0.7" d="M960 400 v-16 h90 v16"/>
+        <path class="gp-line" style="--gd:2.4s" d="M1150 482 v18 M1142 493 l8 11 l8 -11"/>
+        <path class="gp-line" style="--gd:2.6s" d="M1010 512 h280 v58 h-280 z"/>
+        <path class="gp-line" style="--gd:2.9s; opacity:0.7" d="M1010 512 v-16 h80 v16"/>
+        <path class="gp-line" style="--gd:3.1s" d="M1150 582 v18 M1142 593 l8 11 l8 -11"/>
+        <!-- 04 &middot; the one signed retainer -->
+        <path class="gp-line" style="--gd:3.3s" d="M1060 612 h180 v68 h-180 z"/>
+        <path class="gp-line" style="--gd:3.5s; opacity:0.7" d="M1060 612 v-16 h70 v16"/>
+        <path class="gp-line" style="--gd:3.7s" d="M1104 630 a14 14 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:3.9s" d="M1104 637 a7 7 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:4.0s" d="M1097 661 l-7 14 M1111 661 l7 14"/>
+        <path class="gp-line" style="--gd:4.1s" d="M1150 658 q8 -12 16 0 t16 0 t16 0"/>
       </g>
       <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
         <text class="gp-label" style="--gd:4.2s" x="340" y="200">JUDGE THE MATH &middot; NOT THE INVOICE</text>
         <text class="gp-label" style="--gd:4.4s" x="352" y="345" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">THE INVOICE</text>
+        <text class="gp-label" style="--gd:4.4s" x="978" y="442" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">INQUIRIES</text>
+        <text class="gp-label" style="--gd:4.5s" x="1028" y="548" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">QUALIFIED</text>
         <text class="gp-label" style="--gd:4.6s" x="1080" y="700" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">SIGNED RETAINERS &middot; MULTIPLIED ACROSS A MONTH</text>
         <text class="gp-label" style="--gd:4.8s" x="640" y="880" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">$20K &middot; $60K &middot; 90-DAY TERM, THEN MONTH-TO-MONTH</text>
       </g>

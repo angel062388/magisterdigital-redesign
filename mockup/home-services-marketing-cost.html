@@ -1209,9 +1209,9 @@
 
 <section class="aa-hero" data-mark="01">
   <div class="aa-hero-bg" aria-hidden="true">
-    <!-- THE SCALE: a balance drafts itself - the invoice on one pan, the
-         booked jobs on the other - and the beam settles toward the work.
-         Judge the math, not the invoice, drawn. -->
+    <!-- THE TRADES ELEVATION: the invoice drafts small on the left, the house
+         draws on the right, and the trades check in one by one - roof,
+         electrical, plumbing, HVAC - each one a booked job. -->
     <svg class="garage-plan" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
       <defs>
         <pattern id="garageFloorGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
@@ -1220,24 +1220,43 @@
       </defs>
       <rect width="1600" height="900" fill="url(#garageFloorGrid)"/>
       <g class="gp-lines" fill="none" stroke="rgba(212,175,55,0.42)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- 01 &middot; the base and the column -->
-        <path class="gp-line" style="--gd:0s" d="M640 820 H960"/>
-        <path class="gp-line" style="--gd:0.3s" d="M800 820 V420"/>
-        <path class="gp-line" style="--gd:0.7s" d="M760 420 L800 360 L840 420 Z"/>
-        <!-- 02 &middot; the beam, tilted toward the work -->
-        <path class="gp-line" style="--gd:1.2s" d="M420 340 L1180 420"/>
-        <path class="gp-line" style="--gd:1.6s" d="M800 388 a10 10 0 1 0 0.1 0"/>
-        <!-- 03 &middot; the invoice pan, higher and lighter -->
-        <path class="gp-line" style="--gd:2.0s; opacity:0.7" d="M420 340 V460 M340 460 Q420 540 500 460 M340 460 H500"/>
-        <path class="gp-line" style="--gd:2.5s" d="M370 380 h100 v60 h-100 z"/>
-        <!-- 04 &middot; the booked-job pan, lower and fuller -->
-        <path class="gp-line" style="--gd:2.9s; opacity:0.7" d="M1180 420 V560 M1080 560 Q1180 660 1280 560 M1080 560 H1280"/>
-        <path class="gp-line" style="--gd:3.4s" d="M1105 470 h70 v70 h-70 z M1190 450 h70 v90 h-70 z M1140 410 h70 v40 h-70 z"/>
-        <path class="gp-line" style="--gd:3.8s" d="M1115 500 l10 12 l20 -24 M1200 490 l10 12 l20 -24"/>
+        <!-- 01 &middot; the invoice slip -->
+        <path class="gp-line" style="--gd:0s" d="M370 360 h130 v170 h-130 z"/>
+        <path class="gp-line" style="--gd:0.4s; opacity:0.7" d="M390 400 h90 M390 430 h90 M390 460 h60"/>
+        <path class="gp-line" style="--gd:0.7s" d="M390 495 h90"/>
+        <!-- 02 &middot; the spend flows to the house -->
+        <path class="gp-line" style="--gd:1.1s; opacity:0.7" d="M500 445 Q700 330 985 560"/>
+        <path class="gp-line" style="--gd:1.5s" d="M959 550 l26 10 l-8 -27"/>
+        <!-- 03 &middot; the house -->
+        <path class="gp-line" style="--gd:1.8s" d="M920 680 H1380"/>
+        <path class="gp-line" style="--gd:2.0s" d="M990 680 V530 M1340 680 V530"/>
+        <path class="gp-line" style="--gd:2.2s" d="M970 540 L1165 405 L1360 540"/>
+        <path class="gp-line" style="--gd:2.5s" d="M1150 680 v-85 h60 v85"/>
+        <path class="gp-line" style="--gd:2.7s" d="M1030 570 h70 v55 h-70 z"/>
+        <path class="gp-line" style="--gd:2.8s; opacity:0.7" d="M1065 570 v55 M1030 597 h70"/>
+        <!-- 04 &middot; the trades check in -->
+        <path class="gp-line" style="--gd:3.0s; opacity:0.7" d="M1165 405 v-55 h75"/>
+        <path class="gp-line" style="--gd:3.2s" d="M1240 322 h130 v36 h-130 z"/>
+        <path class="gp-line" style="--gd:3.4s" d="M1315 338 l7 9 l14 -18"/>
+        <path class="gp-line" style="--gd:3.3s; opacity:0.7" d="M1040 490 l-45 -60 h-50"/>
+        <path class="gp-line" style="--gd:3.5s" d="M760 400 h185 v36 h-185 z"/>
+        <path class="gp-line" style="--gd:3.7s" d="M905 415 l7 9 l14 -18"/>
+        <path class="gp-line" style="--gd:3.6s; opacity:0.7" d="M990 620 h-45"/>
+        <path class="gp-line" style="--gd:3.8s" d="M760 602 h155 v34 h-155 z"/>
+        <path class="gp-line" style="--gd:3.9s" d="M885 611 l7 9 l14 -18"/>
+        <path class="gp-line" style="--gd:3.8s" d="M925 640 h55 v40 h-55 z"/>
+        <path class="gp-line" style="--gd:3.9s; opacity:0.7" d="M947 650 a9 9 0 1 0 0.1 0"/>
+        <path class="gp-line" style="--gd:4.0s; opacity:0.7" d="M925 660 H900"/>
+        <path class="gp-line" style="--gd:4.0s" d="M760 644 h140 v34 h-140 z"/>
+        <path class="gp-line" style="--gd:4.1s" d="M835 653 l7 9 l14 -18"/>
       </g>
       <g class="gp-labels" fill="rgba(212,175,55,0.60)" font-family="'JetBrains Mono',ui-monospace,Menlo,monospace" font-size="16" letter-spacing="3">
         <text class="gp-label" style="--gd:4.2s" x="340" y="200">JUDGE THE MATH &middot; NOT THE INVOICE</text>
         <text class="gp-label" style="--gd:4.4s" x="352" y="345" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">THE INVOICE</text>
+        <text class="gp-label" style="--gd:4.4s" x="1252" y="345" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">ROOF</text>
+        <text class="gp-label" style="--gd:4.4s" x="772" y="423" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">ELECTRICAL</text>
+        <text class="gp-label" style="--gd:4.5s" x="772" y="624" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">PLUMBING</text>
+        <text class="gp-label" style="--gd:4.5s" x="772" y="666" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">HVAC</text>
         <text class="gp-label" style="--gd:4.6s" x="1080" y="700" font-size="12" letter-spacing="3" fill="rgba(212,175,55,0.5)">BOOKED JOBS &middot; MULTIPLIED ACROSS A MONTH</text>
         <text class="gp-label" style="--gd:4.8s" x="640" y="880" font-size="12" letter-spacing="4" fill="rgba(212,175,55,0.45)">$20K &middot; $60K &middot; 90-DAY TERM, THEN MONTH-TO-MONTH</text>
       </g>
