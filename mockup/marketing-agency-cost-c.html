@@ -1054,15 +1054,10 @@
   .ct-link:hover{color:var(--gold-light,#E3C24E)}
   .aa-sec.band-light .ct-link{color:var(--gold-deep,#6E561A); text-decoration-color:rgba(110,86,26,.5)}
 
-  .ct-tiers{max-width:1400px; margin:38px auto 0; display:grid; gap:24px}
+  .ct-tiers{max-width:1400px; margin:38px auto 0; display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch}
+  @media (max-width:900px){ .ct-tiers{grid-template-columns:1fr} }
   .ct-tier{background:var(--ink-2,#1C1D21); border:1px solid var(--border,#2A2C31);
-    border-radius:12px; padding:34px 38px; position:relative; overflow:hidden;
-    display:grid; grid-template-columns:1fr 1.2fr; column-gap:56px; align-items:start}
-  @media (max-width:860px){ .ct-tier{grid-template-columns:1fr; column-gap:0} }
-  .ct-tier .kk{grid-column:1}
-  .ct-tier .price{grid-column:1}
-  .ct-tier > p{grid-column:2; grid-row:1 / span 2; align-self:center}
-  @media (max-width:860px){ .ct-tier .kk,.ct-tier .price,.ct-tier > p{grid-column:1; grid-row:auto} }
+    border-radius:12px; padding:34px 38px; position:relative; overflow:hidden}
   .ct-tier.feat{order:-1; border:1px solid rgba(212,175,55,.5)}
   .ct-tier.feat::after{content:"THE WHOLE ENGINE"; position:absolute; top:22px; right:-34px;
     transform:rotate(35deg); padding:6px 44px; background:var(--gold,#D4AF37); color:#16171A;
