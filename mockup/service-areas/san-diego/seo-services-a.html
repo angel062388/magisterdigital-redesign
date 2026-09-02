@@ -595,13 +595,81 @@
   .aa-hero .eyebrow .crumbs li+li::before{content:"/"; opacity:.5}
   .aa-hero .eyebrow .crumbs a{color:inherit; text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.5)}
   .aa-hero .eyebrow .crumbs a:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
-  .sa-cities{list-style:none; margin:32px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:12px}
-  .sa-cities a{display:inline-block; padding:10px 18px; border:1px solid var(--border,#2A2C31);
-    font-family:var(--font-mono,'JetBrains Mono',monospace); font-size:.78rem; letter-spacing:.08em;
-    text-transform:uppercase; color:inherit; text-decoration:none; transition:border-color .2s, color .2s}
-  .sa-cities a:hover{border-color:var(--gold-deep,#6E561A); color:var(--gold-deep,#6E561A)}
   .sa-scene{background:#101216}
   .sa-scene svg{width:100%; height:100%; object-fit:cover; display:block}
+
+  /* locations/globe section CSS, harvested from locations.html (Round B) */
+  .loc-grid{display:grid; gap:48px; max-width:1400px; margin:34px auto 0}
+  .loc-globe-wrap{position:relative; aspect-ratio:1; max-width:560px; margin:0 auto; width:100%}
+  .loc-globe-wrap::before{content:""; position:absolute; inset:-8%; z-index:0;
+    background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
+    filter:blur(30px); pointer-events:none}
+  .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+  .loc-fallback img{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
+  .loc-list{display:grid; gap:32px; align-content:start}
+  .loc-meta{display:block; margin-bottom:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold,#D4AF37)}
+  .loc-meta.dim{color:var(--muted-on-dark,#868A90)}
+  .loc-hq{border-top:2px solid var(--gold,#D4AF37); padding-top:24px}
+  .loc-hq-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px}
+  .loc-hq-tel{flex:0 0 auto}
+  .loc-metros{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr;
+    gap:0; border-top:1px solid var(--border,#2A2C31)}
+  .loc-metros li{border-bottom:1px solid var(--border,#2A2C31)}
+  .loc-metro{width:100%; display:flex; align-items:center; gap:12px; text-align:left;
+    padding:16px 12px 16px 0; color:#C0C3C7;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+    transition:color .3s ease, padding .3s ease}
+  .loc-metro::before{content:""; width:8px; height:8px; border-radius:50%;
+    background:var(--gold-dark,#A8842A); box-shadow:0 0 10px rgba(212,175,55,.6);
+    transition:background .3s ease, transform .3s ease}
+  .loc-metro:hover{color:var(--paper,#F7F7F5); padding-left:6px}
+  .loc-metro:hover::before{background:var(--gold,#D4AF37); transform:scale(1.35)}
+  @media (min-width:900px){
+    .loc-grid{grid-template-columns:1.1fr .9fr; gap:64px; align-items:center}
+    .loc-globe-wrap{max-width:none; margin:0}
+  }
+/* HERO-SCENE-CSS START */
+  /* Corridor Map hero scene: draw-in staging (markup is fully drawn without this) */
+  .sa-scene svg .sa-d{stroke-dasharray:1; stroke-dashoffset:1;
+    animation:saDraw .9s cubic-bezier(.25,.65,.3,1) forwards}
+  .sa-scene svg .sa-f{opacity:0; animation:saFade .55s ease-out forwards}
+  @keyframes saDraw{to{stroke-dashoffset:0}}
+  @keyframes saFade{to{opacity:1}}
+  .sa-scene svg .sa-coast{animation-duration:1.05s}
+  .sa-scene svg .sa-i5m{animation-delay:.2s; animation-duration:1.05s}
+  .sa-scene svg .sa-fw{animation-delay:.7s}
+  .sa-scene svg .sa-z1{animation-delay:.6s}
+  .sa-scene svg .sa-z2{animation-delay:.78s}
+  .sa-scene svg .sa-z3{animation-delay:.96s}
+  .sa-scene svg .sa-f2{animation-delay:1.05s}
+  .sa-scene svg .sa-f2b{animation-delay:1.2s}
+  .sa-scene svg .sa-f3{animation-delay:1.45s}
+  .sa-scene svg .sa-s1{animation-delay:1.6s; animation-duration:.6s}
+  .sa-scene svg .sa-s2{animation-delay:1.72s; animation-duration:.6s}
+  .sa-scene svg .sa-s3{animation-delay:1.84s; animation-duration:.6s}
+  .sa-scene svg .sa-s4{animation-delay:1.96s; animation-duration:.6s}
+  .sa-scene svg .sa-s5{animation-delay:2.08s; animation-duration:.6s}
+  .sa-scene svg .sa-plq{animation-delay:2.2s; animation-duration:.6s}
+  .sa-scene svg .sa-f4{animation-delay:2.35s}
+  .sa-scene svg .sa-arc{animation-delay:2.55s; animation-duration:.8s}
+  .sa-scene svg .sa-f5{animation-delay:3.2s; animation-duration:.4s}
+  .sa-scene svg .sa-card{animation-delay:2.95s; animation-duration:.6s}
+  .sa-scene svg .sa-f6{animation-delay:3.3s}
+  .sa-scene svg .sa-ring{transform-box:fill-box; transform-origin:center;
+    animation:saPulse 3s cubic-bezier(.2,.6,.4,1) infinite}
+  .sa-scene svg .sa-r1{animation-delay:1.7s}
+  .sa-scene svg .sa-r2{animation-delay:3.2s}
+  @keyframes saPulse{0%{transform:scale(.3); opacity:0} 12%{opacity:.9}
+    70%{opacity:0; transform:scale(1.25)} 100%{opacity:0; transform:scale(1.25)}}
+  @media (prefers-reduced-motion: reduce){
+    .sa-scene svg *{animation:none !important}
+    .sa-scene svg .sa-d{stroke-dasharray:none !important; stroke-dashoffset:0 !important}
+    .sa-scene svg .sa-f{opacity:1 !important}
+  }
+  /* HERO-SCENE-CSS END */
 </style>
 </head>
 <body>
@@ -650,10 +718,68 @@
 <main>
 
 <section class="aa-hero" data-mark="01">
-  <div class="aa-cta-bg sa-scene" aria-hidden="true"><!-- HERO-SCENE START --><!-- HERO-SCENE END --></div>
+  <div class="aa-cta-bg sa-scene" aria-hidden="true"><!-- HERO-SCENE START --><svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+<defs>
+<mask id="saI5Reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="1400" height="900">
+<path class="sa-d sa-i5m" d="M352 -12 C340 120 300 200 306 320 C312 430 268 520 278 640 C286 740 254 820 258 912" pathLength="1" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round"/>
+</mask>
+</defs>
+<g class="sa-f sa-fw" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.2" stroke-linecap="round">
+<path d="M52 296 q20 -12 40 0"/>
+<path d="M40 470 q20 -12 40 0"/>
+<path d="M74 652 q20 -12 40 0"/>
+</g>
+<path class="sa-d sa-coast" d="M262 -12 C250 70 218 120 224 190 C230 258 196 300 190 356 C186 402 214 436 208 484 C203 528 172 560 176 616 C180 664 208 700 198 752 C190 800 150 848 142 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1.6"/>
+<path d="M352 -12 C340 120 300 200 306 320 C312 430 268 520 278 640 C286 740 254 820 258 912" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.4" stroke-dasharray="7 9" mask="url(#saI5Reveal)"/>
+<text class="sa-f sa-f2" x="315" y="158" text-anchor="end" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">I-5</text>
+<g class="sa-f sa-f2" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="1">
+<path d="M386 58 v12 M380 64 h12"/>
+<path d="M560 346 v12 M554 352 h12"/>
+<path d="M476 656 v12 M470 662 h12"/>
+</g>
+<path class="sa-d sa-z1" d="M400 84 L624 66 L662 150 L616 236 L452 244 L386 168 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<path class="sa-d sa-z2" d="M232 336 L470 318 L516 396 L470 498 L262 512 L216 420 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<path class="sa-d sa-z3" d="M296 608 L520 596 L596 668 L548 772 L330 786 L258 700 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<text class="sa-f sa-f2b" x="412" y="160" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">NORTH COUNTY &middot; POWAY &middot; LA MESA</text>
+<text class="sa-f sa-f2b" x="236" y="300" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">TORREY PINES &middot; UCSD &middot; LA JOLLA</text>
+<text class="sa-f sa-f2b" x="330" y="700" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">DOWNTOWN &middot; CHULA VISTA</text>
+<text class="sa-f sa-f2b" x="258" y="856" font-size="9" letter-spacing="2" fill="rgba(255,255,255,.38)">THE SAN DIEGO READ</text>
+<g class="sa-f sa-f3">
+<circle class="sa-ring sa-r1" cx="181" cy="565" r="11" fill="none" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
+<circle class="sa-ring sa-r2" cx="181" cy="565" r="17" fill="none" stroke="rgba(212,175,55,.30)" stroke-width="1"/>
+<circle cx="181" cy="565" r="4.5" fill="#D4AF37"/>
+<text x="205" y="570" font-size="9.5" letter-spacing="1.8" fill="rgba(227,194,78,.8)">HQ &middot; PACIFIC BEACH</text>
+</g>
+<rect class="sa-d sa-s1" x="950" y="236" width="300" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
+<rect class="sa-d sa-s2" x="950" y="306" width="300" height="52" rx="8" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(212,175,55,.85)" stroke-width="1.4"/>
+<rect class="sa-d sa-s3" x="950" y="376" width="300" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
+<rect class="sa-d sa-s4" x="950" y="446" width="300" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
+<rect class="sa-d sa-s5" x="950" y="516" width="300" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
+<g class="sa-f sa-f4" stroke-linecap="round">
+<g stroke="rgba(255,255,255,.16)" stroke-width="3">
+<path d="M974 257 h176"/><path d="M974 397 h176"/><path d="M974 467 h176"/><path d="M974 537 h176"/>
+</g>
+<g stroke="rgba(255,255,255,.10)" stroke-width="2.5">
+<path d="M974 272 h88"/><path d="M974 412 h88"/><path d="M974 482 h88"/><path d="M974 552 h88"/>
+</g>
+<path d="M974 325 l6 7 -6 7 -6 -7 Z" fill="#D4AF37" stroke="none"/>
+<path d="M992 327 h176" stroke="rgba(255,255,255,.38)" stroke-width="3"/>
+<path d="M992 342 h102" stroke="rgba(227,194,78,.35)" stroke-width="2.5"/>
+</g>
+<path class="sa-d sa-arc" d="M1256 332 C1352 348 1368 452 1344 552 C1330 610 1290 640 1250 676" pathLength="1" fill="none" stroke="rgba(212,175,55,.6)" stroke-width="1.5"/>
+<path class="sa-f sa-f5" d="M1246 680 L1250 669.5 L1257 677 Z" fill="rgba(212,175,55,.75)"/>
+<rect class="sa-d sa-card" x="1128" y="690" width="204" height="72" rx="6" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(255,255,255,.38)" stroke-width="1.3"/>
+<g class="sa-f sa-f6">
+<text x="1230" y="722" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.75)">BOOKED WORK</text>
+<path d="M1168 736 h124" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
+<path d="M1148 748 h164" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 5"/>
+</g>
+<rect class="sa-d sa-plq" x="1168" y="140" width="192" height="34" rx="4" pathLength="1" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+<text class="sa-f sa-f6" x="1264" y="161" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.6)">SAN DIEGO, CA</text>
+</svg><!-- HERO-SCENE END --></div>
   <div class="aa-hero-content">
     <nav class="eyebrow" aria-label="Breadcrumb"><span class="num">01</span> <span class="sep" aria-hidden="true">&middot;</span><ol class="crumbs"><li><a href="../../index.html">Home</a></li><li><a href="../../locations.html">Locations</a></li><li><a href="../../san-diego-marketing.html">San Diego</a></li><li aria-current="page">SEO Services</li></ol></nav>
-    <h1>Win your corridor with <em>San Diego SEO</em>. Measure it in <em>booked work</em>.</h1>
+    <h1>Win your corridor with <em>San Diego SEO</em><br>Measure it in <em>booked work</em></h1>
     <p class="lede">
       For San Diego home service, medical and legal operators done paying for rankings
       that never reach the calendar. The team that owns your technical SEO, content,
@@ -922,7 +1048,7 @@
   <div class="aa-founders">
     <div class="aa-founder-card" data-card-modal="brian">
       <div class="aa-founder-img">
-        <img src="../../img/brian-hong.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/brian-hong-img.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
       </div>
       <h3>Brian Hong</h3>
       <div class="role">Co-founder &amp; CEO</div>
@@ -930,7 +1056,7 @@
     </div>
     <div class="aa-founder-card" data-card-modal="michael">
       <div class="aa-founder-img">
-        <img src="../../img/michael-merlino.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/michael-merlino-img.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
       </div>
       <h3>Michael Merlino</h3>
       <div class="role">Co-founder, Strategy &amp; AI systems</div>
@@ -938,7 +1064,7 @@
     </div>
     <div class="aa-founder-card" data-card-modal="dimitry">
       <div class="aa-founder-img">
-        <img src="../../img/dimitry-morgan.png" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/dimitry-morgan-img.jpg" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
       </div>
       <h3>Dimitry Morgan</h3>
       <div class="role">Co-founder, Head of paid media</div>
@@ -947,36 +1073,53 @@
   </div>
 </section>
 
-<section class="aa-sec band-light" data-mark="09">
-  <div class="eyebrow">09 &middot; The other markets</div>
-  <h2>The same SEO discipline in nine more markets</h2>
-  <p class="intro">Every market gets its own corridor read. Start with yours.</p>
-  <ul class="sa-cities" role="list">
-    <li><a href="../../new-york-marketing.html">New York</a></li>
-    <li><a href="../../los-angeles-marketing.html">Los Angeles</a></li>
-    <li><a href="../../chicago-marketing.html">Chicago</a></li>
-    <li><a href="../../houston-marketing.html">Houston</a></li>
-    <li><a href="../../phoenix-marketing.html">Phoenix</a></li>
-    <li><a href="../../philadelphia-marketing.html">Philadelphia</a></li>
-    <li><a href="../../san-antonio-marketing.html">San Antonio</a></li>
-    <li><a href="../../dallas-marketing.html">Dallas</a></li>
-    <li><a href="../../san-jose-marketing.html">San Jose</a></li>
-  </ul>
+<section class="aa-sec" data-mark="09">
+  <div class="eyebrow">09 &middot; Locations</div>
+  <h2>San Diego HQ, servicing <em>ten metros nationwide</em></h2>
+  <div class="loc-grid">
+    <div class="loc-globe-wrap" aria-hidden="true">
+      <div class="loc-fallback">
+        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIwIDMyMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgbWVldCIgYXJpYS1oaWRkZW49InRydWUiPgogICAgICAgICAgPGRlZnM+CiAgICAgICAgICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ic3BoZXJlIiBjeD0iMzUlIiBjeT0iMzUlIiByPSI4MCUiPgogICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyMzI1MjkiIHN0b3Atb3BhY2l0eT0iLjkiLz4KICAgICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwRjExMTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgICAgICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICAgICAgPC9kZWZzPgogICAgICAgICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMTYwIiByPSIxNDAiIGZpbGw9InVybCgjc3BoZXJlKSIgc3Ryb2tlPSIjMkEyQzMxIiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICAgIDxnIGZpbGw9IiM4NjhBOTAiIG9wYWNpdHk9Ii41NSI+PGNpcmNsZSBjeD0iODAiIGN5PSIxMjAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjkyIiBjeT0iMTEwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMDQiIGN5PSIxMTgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExNiIgY3k9IjEyNiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTI4IiBjeT0iMTIwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMjgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9Ijk0IiBjeT0iMTMyIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMDYiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExOCIgY3k9IjE0OCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTMwIiBjeT0iMTQyIiByPSIxLjQiLz48Y2lyY2xlIGN4PSI4NiIgY3k9IjE0NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iOTgiIGN5PSIxNTYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExMCIgY3k9IjE2NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTIyIiBjeT0iMTcwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMzQiIGN5PSIxNjQiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE0NiIgY3k9IjE1NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iMTUwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSIxNTgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE4MiIgY3k9IjE2NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk0IiBjeT0iMTU2IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIxMiIgY3k9IjEzMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMjI0IiBjeT0iMTQwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMjAiIGN5PSIxMjAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIwOCIgY3k9IjExMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTIwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxODQiIGN5PSIxMjYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE3MiIgY3k9IjEzMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iMTM4IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNDgiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE3NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTg0IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNzQiIGN5PSIxOTAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE4NiIgY3k9IjE4NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTMyIiBjeT0iMTg4IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxOTYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjEwOCIgY3k9IjE4OCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTc2IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMDgiIGN5PSIxODQiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjE3NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTY0IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMjgiIGN5PSIxNTIiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIxNiIgY3k9IjE0OCIgcj0iMS40Ii8+PC9nPgogICAgICAgICAgPGcgZmlsbD0iI0UzQzI0RSI+PGNpcmNsZSBjeD0iMTEyIiBjeT0iMTUyIiByPSI0LjUiLz48Y2lyY2xlIGN4PSIxMTIiIGN5PSIxNTIiIHI9IjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0UzQzI0RSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNiIvPjwvZz4KICAgICAgICAgIDxnIGZpbGw9IiNENEFGMzciPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSIxNTAiIHI9IjIuNSIvPjxjaXJjbGUgY3g9IjExOCIgY3k9IjE1OCIgcj0iMi41Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjE0NiIgY3k9IjE2NCIgcj0iMi41Ii8+PGNpcmNsZSBjeD0iMTY0IiBjeT0iMTcwIiByPSIyLjUiLz4KICAgICAgICAgICAgPGNpcmNsZSBjeD0iMTc0IiBjeT0iMTc4IiByPSIyLjUiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjIiIHI9IjIuNSIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIxNTQiIHI9IjIuNSIvPjxjaXJjbGUgY3g9IjIxOCIgY3k9IjE0OCIgcj0iMi41Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjIzMCIgY3k9IjE0MiIgcj0iMi41Ii8+CiAgICAgICAgICA8L2c+CiAgICAgICAgPC9zdmc+" alt="" aria-hidden="true">
+      </div>
+    </div>
+    <div class="loc-list">
+      <div class="loc-hq">
+        <span class="loc-meta">Headquarters</span>
+        <div class="loc-hq-row">
+          <a class="hero-tel loc-hq-tel" href="tel:+16193300953"><span class="tag">Call</span> <b>(619) 330-0953</b></a>
+        </div>
+      </div>
+      <div>
+        <span class="loc-meta dim">Metros served</span>
+        <ul class="loc-metros" role="list">
+          
+          <li><a class="loc-metro" href="../../los-angeles-marketing.html">Los Angeles</a></li>
+          <li><a class="loc-metro" href="../../san-jose-marketing.html">San Jose</a></li>
+          <li><a class="loc-metro" href="../../phoenix-marketing.html">Phoenix</a></li>
+          <li><a class="loc-metro" href="../../dallas-marketing.html">Dallas</a></li>
+          <li><a class="loc-metro" href="../../san-antonio-marketing.html">San Antonio</a></li>
+          <li><a class="loc-metro" href="../../houston-marketing.html">Houston</a></li>
+          <li><a class="loc-metro" href="../../chicago-marketing.html">Chicago</a></li>
+          <li><a class="loc-metro" href="../../philadelphia-marketing.html">Philadelphia</a></li>
+          <li><a class="loc-metro" href="../../new-york-marketing.html">New York</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="aa-cta-band" data-mark="10" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
-    <img src="../../img/one-engine.jpg" alt="" width="1400" height="933" loading="lazy">
+    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" width="1920" height="1280" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">10 &middot; Next step</div>
-    <h2>The person who <em>audits your San Diego rankings</em> is the person who <em>runs the fix</em></h2>
-    <p class="note-lede">You're right to be skeptical of another agency promising position one. So we won't. Bring your San Diego rankings, your GSC data, and your content footprint to a 45-minute working session. We show you exactly where the pipeline gaps are and what we'd run first. If SEO isn't the highest-return move right now, we'll say so. No deck. No pitch. No keyword report.</p>
+    <div class="eyebrow">10 &middot; Book a call</div>
+    <h2>Bring your numbers. We will tell you what they say.</h2>
+    <p class="note-lede">Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
     <div class="aa-cta-cta">
       <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
       <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
     </div>
-    <p class="note">45 minutes. Dimitry Morgan, Head of Paid Media, runs the call.</p>
   </div>
 </section>
 
@@ -1135,21 +1278,21 @@ document.documentElement.classList.add('js');
   const FOUNDERS = {
     brian: {
       name: 'Brian Hong', role: 'Co-founder & CEO',
-      photo: '../../img/brian-hong.jpg',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/brian-hong-img.jpg',
       alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
       bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
       link: '../../brian-hong.html'
     },
     michael: {
       name: 'Michael Merlino', role: 'Co-founder, Strategy & AI systems',
-      photo: '../../img/michael-merlino.jpg',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/michael-merlino-img.jpg',
       alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
       bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
       link: '../../founder-b.html'
     },
     dimitry: {
       name: 'Dimitry Morgan', role: 'Co-founder, Head of paid media',
-      photo: '../../img/dimitry-morgan.png',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/dimitry-morgan-img.jpg',
       alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
       bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
       link: '../../dimitry-morgan.html'
