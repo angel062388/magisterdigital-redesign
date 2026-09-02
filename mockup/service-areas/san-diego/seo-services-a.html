@@ -604,11 +604,18 @@
   .loc-globe-wrap::before{content:""; position:absolute; inset:-8%; z-index:0;
     background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
     filter:blur(30px); pointer-events:none}
-  .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
+  .loc-globe{position:absolute; inset:0; width:100%!important; height:100%!important; cursor:grab; contain:layout paint}
+  .loc-globe:active{cursor:grabbing}
+  .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0;
+    transition:opacity .35s var(--ease); pointer-events:none}
   .loc-fallback svg{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
   .loc-fallback .dot{fill:var(--muted-on-dark,#868A90); opacity:.55}
   .loc-fallback .pin{fill:var(--gold,#D4AF37)}
   .loc-fallback .hq{fill:var(--gold-light,#E3C24E)}
+  .loc-globe-wrap.static .loc-fallback,html:not(.js) .loc-fallback{opacity:1}
+  .loc-globe-wrap.static .loc-globe,html:not(.js) .loc-globe{opacity:0}
+  .reduced-motion .loc-globe{display:none}
+  .reduced-motion .loc-fallback{opacity:1}
   .loc-list{display:grid; gap:32px; align-content:start}
   .loc-meta{display:block; margin-bottom:14px;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
@@ -1080,8 +1087,9 @@
   <div class="eyebrow">09 &middot; Locations</div>
   <h2>San Diego HQ, servicing <em>ten metros nationwide</em></h2>
   <div class="loc-grid">
-    <div class="loc-globe-wrap" aria-hidden="true">
-      <div class="loc-fallback">
+    <div class="loc-globe-wrap" data-globe-mount>
+      <canvas class="loc-globe" data-globe aria-hidden="true"></canvas>
+      <div class="loc-fallback" aria-hidden="true">
         <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
           <defs>
             <radialGradient id="sphere" cx="35%" cy="35%" r="80%">
@@ -1458,5 +1466,158 @@ document.documentElement.classList.add('js');
   })();
 </script>
 
+<script>
+  /* Locations globe (09): homepage's real cobe.js rotating canvas, extracted
+     from motion.js globeBoot()/loadGlobe() with all per-metro-map wiring
+     (globeState, click-to-rotate targeting, Show-globe map swap) removed --
+     this page has no per-metro map, so none of that exists here. The static
+     graphic above is the no-js/reduced-motion/low-power/import-failure
+     fallback, exactly as the homepage uses it. */
+  (function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canObserve = 'IntersectionObserver' in window;
+
+    (function globeBoot() {
+    var mount = document.querySelector('[data-globe-mount]');
+    var canvas = mount && mount.querySelector('[data-globe]');
+    if (!mount || !canvas) return;
+
+    if (reduced || !canObserve) { mount.classList.add('static'); return; }
+
+    var lowPower = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 2)
+                 || (navigator.connection && navigator.connection.saveData === true);
+    if (lowPower) { mount.classList.add('static'); return; }
+
+    var loaded = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || loaded) return;
+        loaded = true;
+        io.disconnect();
+        loadGlobe(canvas, mount);
+      });
+    }, { rootMargin: '250px' });
+    io.observe(mount);
+  })();
+
+    function loadGlobe(canvas, mount) {
+    import('https://esm.sh/cobe@0.6.3').then(function (mod) {
+      var createGlobe = mod.default || mod;
+
+      // Calibration: BASE_PHI sets the initial facing (US-centred). This
+      // page has no per-city map to click-rotate into, so the longitude-
+      // targeting helper and its east/west anchor constant (only ever
+      // used to feed that helper) are gone.
+      var BASE_PHI = 4.6;
+
+      var phi = BASE_PHI;
+      var pointerInteracting = null;
+      var pointerMovement = 0;
+      var size = mount.clientWidth || 520;
+      // Buffer must be sized in DEVICE pixels. This was hardcoded to size*2,
+      // which is only correct on a 2x display: on an ordinary 1x monitor it
+      // built a buffer twice the CSS box, so the sphere drew at double scale
+      // and only a corner of it was ever visible.
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var paused = false;
+
+      var markers = [
+        { location: [32.7157, -117.1611], size: 0.14 },
+        { location: [34.0522, -118.2437], size: 0.06 },
+        { location: [37.3382, -121.8863], size: 0.06 },
+        { location: [33.4484, -112.0740], size: 0.06 },
+        { location: [32.7767,  -96.7970], size: 0.06 },
+        { location: [29.4241,  -98.4936], size: 0.06 },
+        { location: [29.7604,  -95.3698], size: 0.06 },
+        { location: [41.8781,  -87.6298], size: 0.06 },
+        { location: [39.9526,  -75.1652], size: 0.06 },
+        { location: [40.7128,  -74.0060], size: 0.06 }
+      ];
+
+      var globe;
+      try {
+        globe = createGlobe(canvas, {
+          devicePixelRatio: dpr,
+          width: size * dpr,
+          height: size * dpr,
+          phi: 0,
+          theta: 0.28,
+          // MUCH brighter: dark shading almost off, map dots turned up
+          // hard so the full sphere reads clearly against near-black.
+          dark: 0.05,
+          diffuse: 0.65,
+          mapSamples: 16000,
+          mapBrightness: 9.5,
+          baseColor:   [0.22, 0.23, 0.26],
+          markerColor: [1.0,  0.85, 0.28],
+          glowColor:   [0.42, 0.32, 0.09],
+          markers: markers,
+          onRender: function (state) {
+            if (paused) { state.phi = phi; return; }
+            if (pointerInteracting !== null) {
+              phi = pointerInteracting + pointerMovement / 200;
+            } else {
+              phi += 0.003;
+            }
+            state.phi = phi;
+            state.width  = size * dpr;
+            state.height = size * dpr;
+          }
+        });
+      } catch (err) {
+        mount.classList.add('static');
+        return;
+      }
+
+      canvas.style.opacity = '0';
+      canvas.style.transition = 'opacity .6s ease';
+      requestAnimationFrame(function () { canvas.style.opacity = '1'; });
+
+      canvas.addEventListener('webglcontextlost', function (e) {
+        e.preventDefault();
+        mount.classList.add('static');
+        canvas.style.opacity = '0';
+      });
+
+      canvas.addEventListener('pointerdown', function (e) {
+        pointerMovement = 0;
+        pointerInteracting = phi;
+        try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      canvas.addEventListener('pointerup', function () {
+        pointerInteracting = null; pointerMovement = 0;
+      });
+      canvas.addEventListener('pointerout', function () {
+        pointerInteracting = null; pointerMovement = 0;
+      });
+      canvas.addEventListener('pointermove', function (e) {
+        if (pointerInteracting !== null) {
+          pointerMovement = e.movementX * 2 + pointerMovement * 0.8;
+        }
+      });
+
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () { size = mount.clientWidth || size; }, 180);
+      }, { passive: true });
+
+      new IntersectionObserver(function (es) {
+        paused = !es[0].isIntersecting;
+      }, { rootMargin: '50px' }).observe(mount);
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) paused = true;
+        else {
+          var r = mount.getBoundingClientRect();
+          paused = r.bottom < 0 || r.top > window.innerHeight;
+        }
+      });
+    }).catch(function () {
+      mount.classList.add('static');
+    });
+  }
+  })();
+</script>
 </body>
 </html>
