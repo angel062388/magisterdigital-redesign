@@ -605,7 +605,10 @@
     background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
     filter:blur(30px); pointer-events:none}
   .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center}
-  .loc-fallback img{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
+  .loc-fallback svg{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
+  .loc-fallback .dot{fill:var(--muted-on-dark,#868A90); opacity:.55}
+  .loc-fallback .pin{fill:var(--gold,#D4AF37)}
+  .loc-fallback .hq{fill:var(--gold-light,#E3C24E)}
   .loc-list{display:grid; gap:32px; align-content:start}
   .loc-meta{display:block; margin-bottom:14px;
     font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
@@ -1079,7 +1082,24 @@
   <div class="loc-grid">
     <div class="loc-globe-wrap" aria-hidden="true">
       <div class="loc-fallback">
-        <img src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIwIDMyMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQgbWVldCIgYXJpYS1oaWRkZW49InRydWUiPgogICAgICAgICAgPGRlZnM+CiAgICAgICAgICAgIDxyYWRpYWxHcmFkaWVudCBpZD0ic3BoZXJlIiBjeD0iMzUlIiBjeT0iMzUlIiByPSI4MCUiPgogICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyMzI1MjkiIHN0b3Atb3BhY2l0eT0iLjkiLz4KICAgICAgICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwRjExMTUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgICAgICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICAgICAgPC9kZWZzPgogICAgICAgICAgPGNpcmNsZSBjeD0iMTYwIiBjeT0iMTYwIiByPSIxNDAiIGZpbGw9InVybCgjc3BoZXJlKSIgc3Ryb2tlPSIjMkEyQzMxIiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgICAgIDxnIGZpbGw9IiM4NjhBOTAiIG9wYWNpdHk9Ii41NSI+PGNpcmNsZSBjeD0iODAiIGN5PSIxMjAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjkyIiBjeT0iMTEwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMDQiIGN5PSIxMTgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExNiIgY3k9IjEyNiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTI4IiBjeT0iMTIwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSIxMjgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9Ijk0IiBjeT0iMTMyIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMDYiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExOCIgY3k9IjE0OCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTMwIiBjeT0iMTQyIiByPSIxLjQiLz48Y2lyY2xlIGN4PSI4NiIgY3k9IjE0NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iOTgiIGN5PSIxNTYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjExMCIgY3k9IjE2NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTIyIiBjeT0iMTcwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMzQiIGN5PSIxNjQiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE0NiIgY3k9IjE1NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTU4IiBjeT0iMTUwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSIxNTgiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE4MiIgY3k9IjE2NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk0IiBjeT0iMTU2IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIxMiIgY3k9IjEzMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMjI0IiBjeT0iMTQwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMjAiIGN5PSIxMjAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIwOCIgY3k9IjExMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTIwIiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxODQiIGN5PSIxMjYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE3MiIgY3k9IjEzMiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iMTM4IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNDgiIGN5PSIxNDAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE3NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTg0IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxNzQiIGN5PSIxOTAiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjE4NiIgY3k9IjE4NCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTMyIiBjeT0iMTg4IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIxOTYiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjEwOCIgY3k9IjE4OCIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMTk2IiBjeT0iMTc2IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMDgiIGN5PSIxODQiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjE3NiIgcj0iMS40Ii8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTY0IiByPSIxLjQiLz48Y2lyY2xlIGN4PSIyMjgiIGN5PSIxNTIiIHI9IjEuNCIvPjxjaXJjbGUgY3g9IjIxNiIgY3k9IjE0OCIgcj0iMS40Ii8+PC9nPgogICAgICAgICAgPGcgZmlsbD0iI0UzQzI0RSI+PGNpcmNsZSBjeD0iMTEyIiBjeT0iMTUyIiByPSI0LjUiLz48Y2lyY2xlIGN4PSIxMTIiIGN5PSIxNTIiIHI9IjkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0UzQzI0RSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIuNiIvPjwvZz4KICAgICAgICAgIDxnIGZpbGw9IiNENEFGMzciPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSIxNTAiIHI9IjIuNSIvPjxjaXJjbGUgY3g9IjExOCIgY3k9IjE1OCIgcj0iMi41Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjE0NiIgY3k9IjE2NCIgcj0iMi41Ii8+PGNpcmNsZSBjeD0iMTY0IiBjeT0iMTcwIiByPSIyLjUiLz4KICAgICAgICAgICAgPGNpcmNsZSBjeD0iMTc0IiBjeT0iMTc4IiByPSIyLjUiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjIiIHI9IjIuNSIvPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIyMTAiIGN5PSIxNTQiIHI9IjIuNSIvPjxjaXJjbGUgY3g9IjIxOCIgY3k9IjE0OCIgcj0iMi41Ii8+CiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjIzMCIgY3k9IjE0MiIgcj0iMi41Ii8+CiAgICAgICAgICA8L2c+CiAgICAgICAgPC9zdmc+" alt="" aria-hidden="true">
+        <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <radialGradient id="sphere" cx="35%" cy="35%" r="80%">
+              <stop offset="0%" stop-color="#232529" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#0F1115" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <circle cx="160" cy="160" r="140" fill="url(#sphere)" stroke="#2A2C31" stroke-width="1"/>
+          <g class="dot"><circle cx="80" cy="120" r="1.4"/><circle cx="92" cy="110" r="1.4"/><circle cx="104" cy="118" r="1.4"/><circle cx="116" cy="126" r="1.4"/><circle cx="128" cy="120" r="1.4"/><circle cx="140" cy="128" r="1.4"/><circle cx="94" cy="132" r="1.4"/><circle cx="106" cy="140" r="1.4"/><circle cx="118" cy="148" r="1.4"/><circle cx="130" cy="142" r="1.4"/><circle cx="86" cy="146" r="1.4"/><circle cx="98" cy="156" r="1.4"/><circle cx="110" cy="164" r="1.4"/><circle cx="122" cy="170" r="1.4"/><circle cx="134" cy="164" r="1.4"/><circle cx="146" cy="156" r="1.4"/><circle cx="158" cy="150" r="1.4"/><circle cx="170" cy="158" r="1.4"/><circle cx="182" cy="164" r="1.4"/><circle cx="194" cy="156" r="1.4"/><circle cx="200" cy="140" r="1.4"/><circle cx="212" cy="132" r="1.4"/><circle cx="224" cy="140" r="1.4"/><circle cx="220" cy="120" r="1.4"/><circle cx="208" cy="112" r="1.4"/><circle cx="196" cy="120" r="1.4"/><circle cx="184" cy="126" r="1.4"/><circle cx="172" cy="132" r="1.4"/><circle cx="160" cy="138" r="1.4"/><circle cx="148" cy="140" r="1.4"/><circle cx="150" cy="176" r="1.4"/><circle cx="162" cy="184" r="1.4"/><circle cx="174" cy="190" r="1.4"/><circle cx="186" cy="184" r="1.4"/><circle cx="132" cy="188" r="1.4"/><circle cx="120" cy="196" r="1.4"/><circle cx="108" cy="188" r="1.4"/><circle cx="196" cy="176" r="1.4"/><circle cx="208" cy="184" r="1.4"/><circle cx="220" cy="176" r="1.4"/><circle cx="232" cy="164" r="1.4"/><circle cx="228" cy="152" r="1.4"/><circle cx="216" cy="148" r="1.4"/></g>
+          <g class="hq"><circle cx="112" cy="152" r="4.5"/><circle cx="112" cy="152" r="9" fill="none" stroke="#E3C24E" stroke-width="1" opacity=".6"/></g>
+          <g class="pin">
+            <circle cx="120" cy="150" r="2.5"/><circle cx="118" cy="158" r="2.5"/>
+            <circle cx="146" cy="164" r="2.5"/><circle cx="164" cy="170" r="2.5"/>
+            <circle cx="174" cy="178" r="2.5"/><circle cx="200" cy="162" r="2.5"/>
+            <circle cx="210" cy="154" r="2.5"/><circle cx="218" cy="148" r="2.5"/>
+            <circle cx="230" cy="142" r="2.5"/>
+          </g>
+        </svg>
       </div>
     </div>
     <div class="loc-list">
