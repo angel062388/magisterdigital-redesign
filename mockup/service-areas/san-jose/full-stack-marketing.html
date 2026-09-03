@@ -1,0 +1,1824 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Full-Stack Marketing in San Jose: Magister Digital</title>
+<meta name="description" content="In the priciest market in the country, four vendors is an expensive way to work. Full-stack marketing for San Jose operators, one team, one number.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../tokens.css?v=16">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316171A'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23D4AF37'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2316171A'/%3E%3C/svg%3E">
+<style>
+  /* Page-scoped styles (seo- prefix on page-specific bits; shared primitives
+     below are ported verbatim from ai-automation.html so both pages behave
+     identically. This file intentionally drops the AI-page-only components
+     (neural-mesh hero canvas, live workflow diagram, pipeline spec-table
+     animation) since SEO has no equivalent demo — see chat decision log
+     2026-08-13. */
+  *{box-sizing:border-box}
+  html,body{margin:0; background:var(--ink-2,#16171A); color:var(--paper,#F7F7F5);
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; line-height:1.5}
+  ::selection{background:rgba(212,175,55,.30)}
+  a{color:inherit; text-decoration:none}
+
+  /* FOOTER */
+  .aa-footer{padding:48px 32px 32px; border-top:1px solid var(--border,#2A2C31);
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90);
+    display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center}
+  .aa-footer .r{text-align:right}
+  .aa-footer b{color:var(--paper,#F7F7F5); font-weight:600}
+
+  /* SITE FOOTER — ported verbatim from index.html, so this page's footer
+     matches the homepage instead of the old one-line .aa-footer. */
+  .site-footer{background:var(--ink-deep); padding:var(--sp-8) 0 var(--sp-6)}
+  .site-footer .wrap{max-width:1400px; margin:0 auto; padding:0 32px}
+  .footgrid{display:grid; gap:var(--sp-7)}
+  .footcol h4{font-family:var(--font-mono); font-size:.625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent-on-dark); margin-bottom:var(--sp-4)}
+  .footcol ul{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+  .footcol a{font-size:.875rem; color:var(--text-muted-dark); text-decoration:none; position:relative}
+  .footcol a:hover{color:var(--paper)}
+  .footcol a:focus-visible{outline:2px solid var(--gold-light); outline-offset:3px}
+  .footcol address{font-style:normal; font-size:.875rem; color:var(--text-muted-dark); line-height:1.8}
+  .footcol .mono{font-family:var(--font-mono); color:var(--gold); text-decoration:underline;
+    text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.6)}
+  .footcol .mono:hover{color:var(--gold-light); text-decoration-color:var(--gold-light)}
+  .foot-brand{margin-bottom:var(--sp-4); display:inline-block}
+  .foot-brand img{height:38px; width:auto}
+  .footbar{margin-top:var(--sp-8); padding-top:var(--sp-5); border-top:1px solid var(--rule);
+    display:grid; gap:var(--sp-4); font-size:.6875rem; color:var(--muted-on-dark);
+    font-family:var(--font-mono); letter-spacing:.06em}
+  .footbar nav{display:flex; flex-wrap:wrap; gap:var(--sp-5)}
+  .footbar a{color:var(--muted-on-dark); text-decoration:none}
+  .footbar a:hover{color:var(--border)}
+  @media (min-width:900px){
+    .footgrid{grid-template-columns:1.6fr 1fr 1fr 1.2fr}
+    .footbar{grid-template-columns:1fr auto; align-items:center}
+  }
+  @media (max-width:640px){
+    .footbar{font-size:.8125rem}
+    .footbar a{display:inline-flex; align-items:center; min-height:44px; padding:10px 0}
+  }
+
+  /* ============ HOMEPAGE-LIFTED PRIMITIVES (unscoped on purpose) ============ */
+  .site-header{position:sticky; top:0; z-index:60; transition:background .4s cubic-bezier(.16,1,.3,1), border-color .4s cubic-bezier(.16,1,.3,1);
+    border-bottom:1px solid transparent}
+  .site-header.is-stuck{background:rgba(15,17,21,.9); backdrop-filter:saturate(150%) blur(12px);
+    border-bottom-color:var(--rule,#2A2C31)}
+  .site-header .wrap{display:flex; align-items:center; gap:20px; min-height:80px;
+    max-width:1400px; margin:0 auto; padding:0 32px;
+    transition:min-height .4s cubic-bezier(.16,1,.3,1)}
+  .site-header.is-stuck .wrap{min-height:64px}
+  .brand{display:flex; align-items:center; text-decoration:none; margin-right:auto; flex:0 0 auto}
+  .brand-logo{height:44px; width:auto; max-width:none; flex:0 0 auto;
+    transition:height .4s cubic-bezier(.16,1,.3,1)}
+  .site-header.is-stuck .brand-logo{height:34px}
+  .site-nav{display:none}
+  .site-nav a{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); text-decoration:none; padding:6px 0; position:relative;
+    white-space:nowrap; flex:0 0 auto; transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .site-nav a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1px;
+    background:var(--gold,#D4AF37); transition:right .45s cubic-bezier(.16,1,.3,1)}
+  .site-nav a:hover{color:var(--paper,#F7F7F5)}
+  .site-nav a:hover::after{right:0}
+  .site-nav a.active{color:var(--gold,#D4AF37)}
+  .site-nav a.active::after{right:0}
+  .site-nav a:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:5px}
+  .header-phone{display:none; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.8125rem;
+    color:var(--gold,#D4AF37); text-decoration:underline; text-underline-offset:4px;
+    text-decoration-color:rgba(212,175,55,.6); white-space:nowrap; flex:0 0 auto;
+    transition:color .28s cubic-bezier(.16,1,.3,1), text-decoration-color .28s cubic-bezier(.16,1,.3,1)}
+  .header-phone:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
+  .header-phone:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+
+  .btn{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:.7ch;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+    font-weight:600; text-decoration:none; padding:16px 30px; white-space:nowrap;
+    background:var(--gold,#D4AF37); color:var(--ink,#0F1115);
+    border:2px solid var(--gold,#D4AF37); border-radius:6px;
+    box-shadow:0 6px 18px rgba(212,175,55,.22), inset 0 -2px 0 rgba(0,0,0,.14);
+    cursor:pointer; z-index:20; user-select:none;
+    transition:background .25s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1),
+               transform .18s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
+  .btn .ar{transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .btn:hover{background:var(--gold-light,#E3C24E); border-color:var(--gold-light,#E3C24E); color:var(--ink,#0F1115);
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(227,194,78,.32), inset 0 -2px 0 rgba(0,0,0,.18)}
+  .btn:hover .ar{transform:translateX(6px)}
+  .btn:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+  .btn:active{transform:translateY(0); box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
+  .btn-sm{padding:13px 24px; font-size:.6875rem; white-space:nowrap; flex:0 0 auto;
+    box-shadow:0 6px 18px rgba(212,175,55,.26), inset 0 -2px 0 rgba(0,0,0,.16)}
+  .btn-sm:hover{box-shadow:0 11px 26px rgba(227,194,78,.34), inset 0 -2px 0 rgba(0,0,0,.2)}
+  .btn-sm:active{box-shadow:0 3px 9px rgba(212,175,55,.24), inset 0 -1px 0 rgba(0,0,0,.18)}
+  .btn-ghost{background:transparent; color:#16171A; border-color:#D4AF37;
+    box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1)}
+  .btn-ghost:hover{background:#D4AF37; color:#16171A; border-color:#A8842A;
+    box-shadow:0 10px 22px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
+  .hero-tel{position:relative; display:inline-flex; align-items:center; gap:.7ch;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace); font-size:.75rem; letter-spacing:.13em; text-transform:uppercase;
+    font-weight:600; text-decoration:none; padding:16px 26px; white-space:nowrap;
+    background:transparent; color:var(--gold,#D4AF37);
+    border:2px solid var(--gold,#D4AF37); border-radius:6px;
+    box-shadow:0 3px 12px rgba(212,175,55,.12), inset 0 -1px 0 rgba(0,0,0,.1);
+    cursor:pointer;
+    transition:background .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1),
+               transform .18s cubic-bezier(.16,1,.3,1), box-shadow .3s cubic-bezier(.16,1,.3,1), border-color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel .tag{color:var(--muted-on-dark,#868A90); font-weight:500;
+    transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel b{color:var(--gold-light,#E3C24E); font-weight:600;
+    transition:color .25s cubic-bezier(.16,1,.3,1)}
+  .hero-tel:hover{background:var(--gold,#D4AF37); color:var(--ink,#0F1115); border-color:var(--gold,#D4AF37);
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(212,175,55,.28), inset 0 -1px 0 rgba(0,0,0,.14)}
+  .hero-tel:hover .tag,.hero-tel:hover b{color:var(--ink,#0F1115)}
+  .hero-tel:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:3px}
+  .hero-tel:active{transform:translateY(0);
+    box-shadow:0 3px 10px rgba(212,175,55,.22), inset 0 -1px 0 rgba(0,0,0,.15)}
+
+  @media (min-width:1024px){
+    .site-nav{display:flex; flex-wrap:nowrap; gap:clamp(14px,1.9vw,30px); margin-right:20px}
+  }
+  @media (min-width:1180px){
+    .header-phone{display:inline-block; margin-right:20px}
+  }
+  @media (max-width:640px){
+    .brand-logo{height:30px}
+    .site-header.is-stuck .brand-logo{height:26px}
+    .btn-sm{padding:11px 16px; font-size:.625rem; letter-spacing:.1em}
+  }
+  @media (max-width:360px){
+    .brand-logo{height:26px}
+    .btn-sm{padding:10px 13px}
+  }
+
+  /* HERO — full-width image background (svc-seo.jpg), same treatment as the
+     closing CTA band below (.aa-cta-bg), text centered on top. No AI neural
+     mesh here — that motif is AI Automation-specific. */
+  .aa-hero{position:relative; padding:120px 32px 100px; overflow:hidden; isolation:isolate;
+    min-height:70vh; display:flex; align-items:center; justify-content:center;
+    background:var(--ink,#0F1115)}
+  .aa-hero-content{position:relative; z-index:10; max-width:1240px; text-align:center;
+    margin:0 auto; padding:0 8px; width:100%}
+  .aa-sec .eyebrow,.aa-hero .eyebrow,.aa-cta-band .eyebrow{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold,#D4AF37);
+    margin-bottom:20px; display:inline-flex; gap:10px; align-items:center;
+    justify-content:center}
+  .aa-hero .eyebrow .num{color:var(--muted-on-dark,#868A90)}
+  .aa-hero h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(2.05rem, 5.2vw, 4.15rem); line-height:1.42; letter-spacing:-.015em;
+    margin:0 auto 24px; max-width:none;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
+  .aa-hero h1 em,
+  .aa-cta-band h2 em{position:relative; display:inline-block; font-style:normal;
+    color:#16171A; padding:0 18px; margin:0 4px;
+    white-space:nowrap; z-index:0}
+  .aa-hero h1 em::before,
+  .aa-cta-band h2 em::before{content:""; position:absolute; left:0;
+    top:50%; transform:translateY(-50%);
+    width:100%; height:1.06em;
+    background:#D4AF37; border-radius:50px; z-index:-1;
+    box-shadow:0 4px 18px rgba(212,175,55,.30)}
+  .aa-hero h1 em.animate::before,
+  .aa-cta-band h2 em.animate::before{
+    animation:aaHighlight .95s cubic-bezier(.33,1,.68,1) both}
+  .aa-hero h1 em.animate,
+  .aa-cta-band h2 em.animate{
+    animation:aaHighlightInk .95s cubic-bezier(.33,1,.68,1) both}
+  .aa-hero h1 em.animate.is-2::before,
+  .aa-hero h1 em.animate.is-2,
+  .aa-cta-band h2 em.animate.is-2::before,
+  .aa-cta-band h2 em.animate.is-2{animation-delay:.40s}
+  @keyframes aaHighlight{from{width:0} to{width:100%}}
+  @keyframes aaHighlightInk{0%{color:#F7F7F5} 55%{color:#F7F7F5} 100%{color:#16171A}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-hero h1 em.animate::before,
+    .aa-hero h1 em.animate{animation:none}
+  }
+  .aa-hero .lede{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.0625rem; color:var(--paper,#F7F7F5); max-width:88ch; line-height:1.65;
+    margin:0 auto 32px; text-shadow:0 1px 12px rgba(15,17,21,.55)}
+  .aa-hero-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; position:relative; z-index:20}
+  @media (max-width:640px){
+    .aa-hero{padding:72px 20px 64px; min-height:64vh}
+  }
+
+  /* CONTENT SECTIONS shared */
+  .aa-sec{padding:48px 32px; max-width:1400px; margin:0 auto}
+  .aa-sec h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.1; margin:0 0 24px;
+    max-width:none; color:var(--paper,#F7F7F5)}
+  .aa-sec .intro{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1.0625rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:none; margin:0 0 20px}
+  .aa-sec .intro + .intro{margin-top:0}
+  .aa-sec .intro.small{color:var(--muted-on-dark,#868A90); font-size:.9375rem; margin-bottom:32px}
+  .aa-h2-oneline{white-space:nowrap}
+  @media (max-width:640px){ .aa-h2-oneline{white-space:normal} }
+
+  .aa-h2-rule{display:flex; align-items:center; gap:22px}
+  .aa-h2-rule::after{content:""; flex:1 1 auto; height:1px; min-width:40px;
+    background:linear-gradient(90deg, rgba(212,175,55,.55), rgba(212,175,55,0))}
+  .aa-sec.band-light .aa-h2-rule::after{
+    background:linear-gradient(90deg, rgba(110,86,26,.55), rgba(110,86,26,0))}
+  @media (max-width:640px){ .aa-h2-rule{display:block} .aa-h2-rule::after{display:none} }
+
+  .aa-sec-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:36px}
+  .aa-sec.band-light .aa-sec-cta .hero-tel{color:#16171A; border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel .tag{color:#5E6066}
+  .aa-sec.band-light .aa-sec-cta .hero-tel b{color:#6E561A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover{background:#D4AF37; color:#16171A;
+    border-color:#A8842A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover .tag{color:#16171A}
+  .aa-sec.band-light .aa-sec-cta .hero-tel:hover b{color:#16171A}
+
+  /* Intro band (section 02) */
+  .aa-intro-band{text-align:center; padding-top:80px; padding-bottom:56px}
+  .aa-intro-band .eyebrow{display:inline-flex; gap:10px; align-items:center;
+    justify-content:center; margin-bottom:20px}
+  .aa-intro-band h2{margin:0 auto 22px; max-width:none;
+    font-size:clamp(1.85rem, 4.35vw, 3.1rem); line-height:1.06; letter-spacing:-.015em}
+  .aa-intro-band .intro{margin:0 auto 8px; max-width:82ch; font-size:1.0625rem}
+
+  /* LANDS GRID — 3-item (default) and 4-item (.is-4) variants, same card style */
+  .aa-lands{display:grid; grid-template-columns:repeat(3,1fr); gap:32px}
+  .aa-lands.is-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:1024px){ .aa-lands.is-4{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:820px){ .aa-lands{grid-template-columns:1fr} .aa-lands.is-4{grid-template-columns:1fr} }
+  .aa-lands .item .idx{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.7rem; letter-spacing:.2em; color:var(--gold,#D4AF37);
+    border-bottom:1px solid var(--border,#2A2C31); padding-bottom:10px;
+    display:block; margin-bottom:14px}
+  .aa-lands .item h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:600;
+    font-size:1.15rem; line-height:1.2; margin:0 0 10px; color:var(--paper,#F7F7F5)}
+  .aa-lands .item p{font-size:.95rem; line-height:1.55; color:var(--muted-on-dark,#868A90); margin:0;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-sec.band-light .aa-lands .item .idx{color:#6E561A}
+  .aa-sec.band-light .aa-lands .item h3{color:#16171A}
+  .aa-sec.band-light .aa-lands .item p{color:#45474C}
+
+  /* ENGINE WHEEL CANVAS — two-panel card shared with the other service pages:
+     black-and-gold services wheel left, rolling weekly-brief ticker right.
+     Qualitative states only; live figures land after the audit. */
+  .ga-funnel-wrap{max-width:1400px; margin:0 auto; padding:16px 32px 56px}
+  .ga-funnel{border:1px solid var(--border,#2A2C31); border-radius:8px;
+    background:var(--ink-2,#16171A); overflow:hidden;
+    display:grid; grid-template-columns:1.55fr 1fr}
+  .ga-fmain{padding:30px 28px 22px; min-width:0}
+  /* MONDAY BRIEF TICKER — fills the right side of the canvas, mirroring the
+     AI Automation page's diagram + audit-log pairing. Lines prepend in sync
+     with the walking stage highlight. Figures stay dashes: this page ships
+     without invented numbers. */
+  .ga-brief{border-left:1px solid var(--border,#2A2C31); background:var(--ink,#0F1115);
+    padding:22px 20px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; position:relative; overflow:hidden; min-height:100%}
+  .ga-brief-head{color:var(--muted-on-dark,#868A90); font-size:.6rem; letter-spacing:.2em;
+    text-transform:uppercase; margin-bottom:14px}
+  .ga-brief-stream{display:flex; flex-direction:column; gap:7px}
+  .ga-brief-row{display:grid; grid-template-columns:auto auto 1fr; gap:12px;
+    color:var(--paper,#F7F7F5); animation:gaBriefIn .32s ease-out}
+  .ga-brief-row .t{color:var(--muted-on-dark,#868A90)}
+  .ga-brief-row .k{color:var(--gold,#D4AF37); font-weight:600; letter-spacing:.06em}
+  .ga-brief-row .m{color:var(--paper,#F7F7F5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .ga-brief-row .m .ok{color:#3FB984}
+  @keyframes gaBriefIn{from{opacity:0; transform:translateY(4px)} to{opacity:1}}
+  .ga-brief::after{content:""; position:absolute; left:0; right:0; bottom:0; height:56px;
+    background:linear-gradient(to bottom, transparent, var(--ink,#0F1115)); pointer-events:none}
+  @media (max-width:900px){
+    .ga-funnel{grid-template-columns:1fr}
+    .ga-brief{border-left:none; border-top:1px solid var(--border,#2A2C31); min-height:0; max-height:190px}
+  }
+  .ga-funnel-head{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.8rem; font-weight:600; letter-spacing:.14em; color:var(--gold,#D4AF37);
+    margin:0 0 28px}
+  .ga-funnel-head .sep{color:var(--muted-on-dark,#868A90); padding:0 8px; font-weight:400}
+  .ga-funnel-head .stage{transition:color .3s ease, text-shadow .3s ease}
+  .ga-funnel-head .stage.is-on{color:var(--gold-light,#E3C24E);
+    text-shadow:0 0 14px rgba(227,194,78,.55)}
+
+  /* CRM WHEEL — black and gold donut per feedback: CRM hub in the center,
+     eight configuration wedges alternating gold and ink, four outer arcs
+     grouping them (marketing, sales, automation, attribution). Wedges bloom
+     out from the center on scroll, arcs draw themselves around, then a
+     highlight sweeps the wheel in sync with the operating-log ticker. */
+  .crm-wheel{max-width:460px; margin:0 auto}
+  .crm-wheel svg{width:100%; height:auto; display:block; overflow:visible}
+  .crm-wheel .seg path{stroke:var(--ink-2,#16171A); stroke-width:3;
+    transform-origin:200px 200px; opacity:0; transform:scale(.62) rotate(-10deg);
+    transition:opacity .5s ease, transform .6s cubic-bezier(.22,1.3,.4,1),
+      filter .35s ease}
+  .ga-funnel.is-in .crm-wheel .seg path{opacity:1; transform:scale(1) rotate(0deg);
+    transition-delay:calc(var(--i,0) * 80ms + .25s), calc(var(--i,0) * 80ms + .25s), 0s}
+  .crm-wheel .seg text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:10.5px; letter-spacing:.4px; opacity:0; transition:opacity .45s ease}
+  .ga-funnel.is-in .crm-wheel .seg text{opacity:1;
+    transition-delay:calc(var(--i,0) * 80ms + .6s)}
+  .crm-wheel .seg.on path{filter:brightness(1.18) drop-shadow(0 0 12px rgba(227,194,78,.55));
+    transform:scale(1.045)}
+  .crm-wheel .seg.on text{font-weight:600}
+  .crm-wheel .oarc path{fill:none; stroke-width:26; stroke-dasharray:1; stroke-dashoffset:1;
+    transition:stroke-dashoffset 1s ease, filter .35s ease}
+  .ga-funnel.is-in .crm-wheel .oarc path{stroke-dashoffset:0;
+    transition-delay:calc(var(--a,0) * 180ms + .9s), 0s}
+  .crm-wheel .oarc text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:12px; font-weight:600; letter-spacing:2.5px; opacity:0; transition:opacity .45s ease}
+  .ga-funnel.is-in .crm-wheel .oarc text{opacity:1;
+    transition-delay:calc(var(--a,0) * 180ms + 1.5s)}
+  .crm-wheel .oarc.on path{filter:brightness(1.22) drop-shadow(0 0 10px rgba(227,194,78,.4))}
+  .crm-wheel .hub circle{opacity:0; transform-origin:200px 200px; transform:scale(.5);
+    transition:opacity .4s ease, transform .5s cubic-bezier(.22,1.3,.4,1)}
+  .ga-funnel.is-in .crm-wheel .hub circle{opacity:1; transform:scale(1)}
+  .crm-wheel .hub text{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:30px; font-weight:600; fill:var(--gold,#D4AF37); opacity:0; transition:opacity .5s ease .5s}
+  .ga-funnel.is-in .crm-wheel .hub text{opacity:1}
+  .mx-foot{margin:16px 0 0; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; color:var(--muted-on-dark,#868A90); line-height:1.6}
+  @media (max-width:640px){
+    .ga-funnel-head{font-size:.65rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .crm-wheel .seg path{opacity:1; transform:none; transition:none}
+    .crm-wheel .seg text,.crm-wheel .oarc text,.crm-wheel .hub text{opacity:1; transition:none}
+    .crm-wheel .oarc path{stroke-dashoffset:0; transition:none}
+    .crm-wheel .hub circle{opacity:1; transform:none; transition:none}
+    .crm-wheel .seg.on path,.crm-wheel .oarc.on path{filter:none; transform:none}
+  }
+
+  /* SPEC TABLE — ported verbatim from ai-automation.html's section 04 pipeline,
+     reused here for "What we would run first" since it's also a sequence of
+     steps. Gold rail walks down the left edge and a row highlights on a loop
+     while the table is on screen. */
+  .aa-spec-table{border:1px solid var(--border,#2A2C31); border-radius:6px;
+    overflow:hidden; position:relative}
+  .aa-spec-table::before{content:""; position:absolute; left:0; top:0; width:4px;
+    height:var(--rail,0%); background:linear-gradient(180deg,
+      rgba(212,175,55,.9), rgba(212,175,55,.25));
+    transition:height .55s cubic-bezier(.16,1,.3,1); z-index:2; pointer-events:none}
+  .aa-spec-row .k{transition:color .35s ease, text-shadow .35s ease}
+  .aa-spec-row{position:relative}
+  .aa-spec-row.is-step{background:rgba(212,175,55,.13); transform:translateX(6px)}
+  .aa-spec-row{transition:background .45s ease, transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-spec-row::after{content:""; position:absolute; left:0; top:0; bottom:0; width:0;
+    background:#D4AF37; transition:width .35s cubic-bezier(.16,1,.3,1)}
+  .aa-spec-row.is-step::after{width:4px}
+  .aa-spec-row.is-step .v{color:#FFFFFF}
+  .aa-spec-row.is-step .k{color:#EBCE72; text-shadow:0 0 16px rgba(212,175,55,.5)}
+  .aa-spec-table.is-in .aa-spec-row{animation:aaRowIn .5s cubic-bezier(.16,1,.3,1) both;
+    animation-delay:calc(var(--i,0) * 85ms)}
+  @keyframes aaRowIn{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .aa-spec-table::before{display:none}
+    .aa-spec-table.is-in .aa-spec-row{animation:none}
+    .aa-spec-row.is-step{background:none; transform:none}
+    .aa-spec-row.is-step::after{width:0}
+    .aa-spec-row.is-step .k{color:var(--gold,#D4AF37); text-shadow:none}
+  }
+  .aa-spec-row{display:grid; grid-template-columns:120px 1fr 100px; gap:24px;
+    padding:20px 24px; border-bottom:1px solid var(--border,#2A2C31);
+    align-items:baseline; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.85rem}
+  .aa-spec-row:last-child{border-bottom:none}
+  .aa-spec-row .k{color:var(--gold,#D4AF37); font-weight:600; letter-spacing:.06em}
+  .aa-spec-row .v{color:var(--paper,#F7F7F5); font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-spec-row .v .sub{color:var(--muted-on-dark,#868A90); display:block; font-size:.82rem; margin-top:2px}
+  .aa-spec-row .m{color:var(--muted-on-dark,#868A90); font-size:.75rem; text-align:right}
+  @media (max-width:640px){ .aa-spec-row{grid-template-columns:1fr; gap:8px} .aa-spec-row .m{text-align:left} }
+
+  /* SIX OTHER SERVICE CARDS (section 04 here) — ported verbatim from
+     ai-automation.html's section 05. */
+  .aa-svc-list{list-style:none; margin:40px 0 0; padding:0}
+  .aa-svc{border-top:1px solid #DFDFDA}
+  .aa-svc:last-child{border-bottom:1px solid #DFDFDA}
+  .aa-svc-link{display:grid; grid-template-columns:1fr; gap:20px; padding:24px 0;
+    position:relative; align-items:center; color:#16171A}
+  .aa-svc-visual{position:relative; aspect-ratio:16/10; overflow:hidden; background:#EDEDEA}
+  .aa-svc-visual img{width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) brightness(.5) contrast(1.12); transform:scale(1.04);
+    transition:filter .6s cubic-bezier(.16,1,.3,1), transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-visual img,
+  .aa-svc-link:focus-within .aa-svc-visual img{filter:grayscale(.1) brightness(.65) contrast(1.05);
+    transform:scale(1)}
+  .aa-svc-visual::after{content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 40%, rgba(15,17,21,.55) 100%)}
+  .aa-svc-idx{position:absolute; top:12px; left:12px; z-index:2;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; padding:5px 10px;
+    color:#6E561A; background:#EEEEEB; border:1px solid rgba(212,175,55,.35)}
+  .aa-svc-name{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-style:italic; font-weight:600;
+    font-size:clamp(1.75rem,4vw,2.8rem); letter-spacing:-.02em; line-height:1.02;
+    display:block; position:relative; padding-bottom:12px;
+    color:#16171A; text-decoration:none;
+    transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-name::after{content:""; position:absolute; left:0; bottom:0;
+    height:1px; width:80px; background:#6E561A; transform:scaleX(0); transform-origin:left;
+    transition:transform .55s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-name,
+  .aa-svc-link:focus-within .aa-svc-name{color:#6E561A}
+  .aa-svc-link:hover .aa-svc-name::after,
+  .aa-svc-link:focus-within .aa-svc-name::after{transform:scaleX(1)}
+  .aa-svc-name:focus-visible{outline:2px solid #6E561A; outline-offset:3px}
+  .aa-svc-outcome{display:block; margin-top:16px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1rem; line-height:1.6; color:#5E6066; max-width:44ch}
+  .aa-svc-actions{margin-top:20px}
+  .aa-svc-arrow{position:absolute; top:24px; right:0;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.35rem; color:#5E6066;
+    transition:transform .25s cubic-bezier(.16,1,.3,1), color .25s cubic-bezier(.16,1,.3,1)}
+  .aa-svc-link:hover .aa-svc-arrow,
+  .aa-svc-link:focus-within .aa-svc-arrow{color:#D4AF37; transform:translateX(6px)}
+  @media (min-width:900px){
+    .aa-svc-link{grid-template-columns:.9fr 1.1fr 44px; gap:48px; padding:24px 0 24px 16px;
+      align-items:center}
+    .aa-svc:nth-child(even) .aa-svc-visual{order:2}
+    .aa-svc:nth-child(even) .aa-svc-body{order:1; padding-right:24px}
+    .aa-svc:nth-child(even) .aa-svc-arrow{order:3}
+    .aa-svc-arrow{position:relative; top:auto; right:auto; text-align:right; align-self:center}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .aa-svc-visual img,.aa-svc-name,.aa-svc-name::after,.aa-svc-arrow{transition:none}
+    .aa-svc-link:hover .aa-svc-visual img{transform:none}
+  }
+  .aa-verticals{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.98rem; line-height:1.6; color:#45474C; margin:0}
+  .aa-verticals a{color:#16171A; text-decoration:underline; text-decoration-color:#D4AF37;
+    text-underline-offset:3px; text-decoration-thickness:1.5px;
+    transition:color .2s cubic-bezier(.16,1,.3,1)}
+  .aa-verticals a:hover{color:#6E561A}
+
+  /* TRACK RECORD — two-column text + pull-quote (section 05) */
+  .aa-stack{display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:start}
+  @media (max-width:900px){ .aa-stack{grid-template-columns:1fr} }
+  .aa-stack p{font-size:1rem; line-height:1.65; color:var(--paper,#F7F7F5); margin:0 0 18px;
+    font-family:var(--font-sans,'Inter',system-ui,sans-serif)}
+  .aa-stack p.small{color:var(--muted-on-dark,#868A90); font-size:.88rem}
+  .aa-stack .quote{padding:22px; border-left:2px solid var(--gold,#D4AF37);
+    background:var(--ink-2,#16171A); border-radius:0 4px 4px 0;
+    font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-style:italic; font-weight:500;
+    font-size:1.0625rem; color:var(--paper,#F7F7F5); line-height:1.45}
+  .aa-stack .quote cite{display:block; margin-top:14px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-style:normal; font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90)}
+
+  /* FAQ (section 07) */
+  .aa-faq{border-top:1px solid var(--border,#2A2C31); margin-top:40px}
+  .aa-faq details{border-bottom:1px solid var(--border,#2A2C31)}
+  .aa-faq summary{cursor:pointer; list-style:none; padding:26px 56px 26px 0;
+    position:relative; font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:clamp(1.05rem,2.4vw,1.4rem); font-weight:600;
+    color:var(--paper,#F7F7F5); transition:color .3s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::-webkit-details-marker{display:none}
+  .aa-faq summary::after,.aa-faq summary::before{content:""; position:absolute; right:6px; top:50%;
+    background:var(--gold,#D4AF37); transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .aa-faq summary::after{width:15px; height:1px; transform:translateY(-50%)}
+  .aa-faq summary::before{width:1px; height:15px; right:13px; transform:translateY(-50%)}
+  .aa-faq details[open] summary::before{transform:translateY(-50%) rotate(90deg)}
+  .aa-faq summary:hover{color:var(--gold,#D4AF37)}
+  .aa-faq summary:focus-visible{outline:2px solid var(--gold-light,#E3C24E); outline-offset:2px}
+  .answer-wrap{height:0; overflow:hidden; transition:height .5s cubic-bezier(.16,1,.3,1)}
+  html:not(.js) .answer-wrap{height:auto}
+  .aa-faq .answer{padding:0 56px 26px 0; font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; line-height:1.6; color:var(--muted-on-dark,#868A90); max-width:none}
+  @media (prefers-reduced-motion:reduce){
+    .answer-wrap{transition:none}
+    .aa-faq summary::after,.aa-faq summary::before{transition:none}
+  }
+  .aa-sec.band-light .aa-faq summary{color:#16171A}
+  .aa-sec.band-light .aa-faq summary:hover{color:#6E561A}
+  .aa-sec.band-light .aa-faq summary::after,
+  .aa-sec.band-light .aa-faq summary::before{background:#6E561A}
+
+  /* FOUNDER MODAL — identical to ai-automation.html, retained per instruction */
+  body.modal-open{overflow:hidden}
+  .modal{position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center}
+  .modal[hidden]{display:none}
+  .modal-backdrop{position:absolute; inset:0; background:rgba(4,5,7,.75);
+    backdrop-filter:blur(10px); animation:aaFadeIn .3s cubic-bezier(.16,1,.3,1)}
+  .modal-panel{position:relative; background:#1C1D21; border:1px solid #2A2C31;
+    color:#F7F7F5; width:min(600px, calc(100vw - 32px));
+    max-height:calc(100dvh - 64px); overflow:hidden; display:flex; flex-direction:column;
+    animation:aaPanelIn .5s cubic-bezier(.16,1,.3,1);
+    box-shadow:0 40px 80px rgba(0,0,0,.45); border-radius:8px}
+  @keyframes aaFadeIn{from{opacity:0}}
+  @keyframes aaPanelIn{from{opacity:0; transform:translateY(30px) scale(.98)}}
+  .modal-close{position:absolute; top:14px; right:16px; background:rgba(15,17,21,.7);
+    border:0; padding:8px 14px; color:#F7F7F5;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:1.2rem; cursor:pointer; line-height:1; z-index:5; border-radius:4px;
+    transition:color .28s cubic-bezier(.16,1,.3,1), background .28s cubic-bezier(.16,1,.3,1)}
+  .modal-close:hover{color:#D4AF37; background:rgba(15,17,21,.9)}
+  .modal-close:focus-visible{outline:2px solid #E3C24E; outline-offset:2px}
+  .modal-hero{position:relative; aspect-ratio:16/10; overflow:hidden; flex:none;
+    animation:aaPhotoRise .6s cubic-bezier(.16,1,.3,1) both}
+  @keyframes aaPhotoRise{from{opacity:0; transform:translateY(80px) scale(.9)}}
+  .modal-hero img{width:100%; height:100%; object-fit:cover; object-position:center 25%;
+    filter:grayscale(.1) brightness(.95) contrast(1.05)}
+  .modal-hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(28,29,33,.95) 100%)}
+  .modal-body{padding:28px; overflow-y:auto}
+  .modal-body h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:500; font-size:1.85rem; margin:0 0 6px; color:#F7F7F5}
+  .modal-body .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--muted-on-dark,#868A90); margin-bottom:20px}
+  .modal-body .modal-bio{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:.9375rem; color:var(--muted-on-dark,#868A90); line-height:1.65;
+    margin:0 0 20px; max-width:52ch}
+  .modal-flag{display:inline-block; margin-bottom:12px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.5625rem; letter-spacing:.2em; text-transform:uppercase;
+    color:#D4AF37; padding:3px 7px; border:1px dashed rgba(168,132,42,.7)}
+  .aa-founder-card{position:relative; cursor:pointer}
+  .aa-founder-card:focus-within{outline:2px solid #E3C24E; outline-offset:6px}
+  .aa-founder-more{display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+    background:none; border:0; padding:0; cursor:pointer;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:#6E561A; opacity:.85;
+    transition:color .25s cubic-bezier(.16,1,.3,1), gap .25s cubic-bezier(.16,1,.3,1), opacity .25s}
+  .aa-sec:not(.band-light) .aa-founder-more{color:#D4AF37}
+  .aa-founder-card:hover .aa-founder-more{opacity:1; gap:10px}
+  .aa-founder-more:hover{opacity:1; gap:12px}
+  .aa-founder-more:focus-visible{outline:2px solid #E3C24E; outline-offset:3px}
+  @media (prefers-reduced-motion:reduce){
+    .modal-backdrop,.modal-panel,.modal-hero{animation:none}
+    .aa-founder-card{transition:none}
+  }
+  .aa-founders{display:grid; gap:32px; margin-top:16px;
+    grid-template-columns:1fr}
+  @media (min-width:900px){ .aa-founders{grid-template-columns:repeat(3,1fr); gap:32px} }
+  .aa-founder-card{display:block; position:relative}
+  .aa-founder-img{position:relative; width:100%; aspect-ratio:4/5; overflow:hidden;
+    border:1px solid #E5E4DF; margin-bottom:20px; background:#000;
+    transition:border-color .25s ease}
+  .aa-founder-img img{width:100%; height:100%; object-fit:cover;
+    object-position:center 20%;
+    filter:grayscale(1) brightness(.9) contrast(1.05);
+    transition:filter .6s cubic-bezier(.16,1,.3,1)}
+  .aa-founder-card:hover .aa-founder-img img{filter:grayscale(0) brightness(1) contrast(1)}
+  .aa-founder-img::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(15,17,21,.20) 100%);
+    pointer-events:none}
+  .aa-founder-card:hover .aa-founder-img{border-color:#D4AF37}
+  .aa-founder-card h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:1.35rem; font-weight:500; margin:0; color:#16171A}
+  .aa-founder-card .role{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.16em; text-transform:uppercase;
+    color:#5E6066; margin-top:10px}
+
+  /* LIGHT BAND */
+  .aa-sec.band-light{max-width:none; margin:0;
+    padding:64px max(32px, calc((100vw - 1336px) / 2));
+    background:#F7F7F5; color:#16171A}
+  .aa-sec.band-light .eyebrow{color:#6E561A}
+  .aa-sec.band-light h2{color:#16171A}
+  .aa-sec.band-light .intro{color:#16171A}
+  .aa-sec.band-light .intro.small{color:#45474C}
+
+  /* CTA BAND (also reused as the hero's image-background treatment) */
+  .aa-cta-band{position:relative; padding:112px 32px; text-align:center; overflow:hidden;
+    isolation:isolate;
+    border-top:1px solid var(--border,#2A2C31);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(212,175,55,.10), transparent 55%),
+      var(--ink,#0F1115)}
+  .aa-cta-bg{position:absolute; inset:0; z-index:0}
+  .aa-cta-bg img{width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(.62) brightness(.5) contrast(1.05)}
+  .aa-cta-bg::after{content:""; position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 55%, rgba(15,17,21,.25) 0%, rgba(15,17,21,.75) 78%),
+      linear-gradient(180deg, rgba(15,17,21,.86) 0%, rgba(15,17,21,.45) 40%, rgba(15,17,21,.90) 100%)}
+  .aa-cta-wrap{position:relative; z-index:1; max-width:1240px; margin:0 auto}
+  .aa-cta-cta{display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:18px; margin-top:8px; position:relative; z-index:2}
+  .aa-cta-band h2{font-family:var(--font-serif,'Playfair Display',Georgia,serif); font-weight:500;
+    font-size:clamp(1.9rem, 5vw, 3.4rem); line-height:1.42; margin:0 auto 26px;
+    max-width:none; color:var(--paper,#F7F7F5); letter-spacing:-.015em;
+    text-shadow:0 2px 24px rgba(15,17,21,.6)}
+  .aa-cta-band .note-lede{font-family:var(--font-sans,'Inter',system-ui,sans-serif);
+    font-size:1.0625rem; line-height:1.65; color:var(--paper,#F7F7F5);
+    max-width:78ch; margin:0 auto 36px;
+    text-shadow:0 1px 12px rgba(15,17,21,.55)}
+  .aa-cta-band .note{margin-top:22px; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.72rem; color:var(--muted-on-dark,#868A90)}
+
+  /* NAV DROPDOWN (case studies) */
+  .site-nav-drop{position:relative}
+  .site-nav-drop > a{display:inline-flex; align-items:center; gap:6px}
+  .site-nav-drop > a::after{content:"\25BE"; font-size:.55em; opacity:.5;
+    transition:transform .2s ease, opacity .2s ease}
+  .site-nav-drop:hover > a::after,
+  .site-nav-drop:focus-within > a::after{transform:rotate(-180deg); opacity:1}
+  .site-nav-menu{position:absolute; top:calc(100% + 8px); left:-8px;
+    min-width:280px; padding:8px 0;
+    background:rgba(15,17,21,.98); backdrop-filter:saturate(150%) blur(12px);
+    border:1px solid var(--border,#2A2C31); border-radius:6px;
+    box-shadow:0 12px 32px rgba(0,0,0,.35);
+    opacity:0; visibility:hidden; transform:translateY(6px);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s .22s;
+    z-index:70}
+  .site-nav-drop:hover .site-nav-menu,
+  .site-nav-drop:focus-within .site-nav-menu{
+    opacity:1; visibility:visible; transform:translateY(0);
+    transition:opacity .22s ease, transform .22s ease, visibility 0s 0s}
+  .site-nav-menu a{display:block; padding:12px 20px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.6875rem; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted-on-dark,#B0B3B8); white-space:nowrap;
+    text-decoration:none;
+    transition:color .2s ease, background .2s ease}
+  .site-nav-menu a::after{content:none !important}
+  .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
+    color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
+  .site-nav-menu a.active{color:var(--gold,#D4AF37)}
+
+  /* location+service child page additions */
+  .aa-hero .eyebrow{flex-wrap:wrap}
+  .aa-hero .eyebrow .crumbs{display:flex; flex-wrap:wrap; align-items:center; gap:10px; list-style:none; margin:0; padding:0}
+  .aa-hero .eyebrow .crumbs li{display:flex; align-items:center; gap:10px}
+  .aa-hero .eyebrow .crumbs li+li::before{content:"/"; opacity:.5}
+  .aa-hero .eyebrow .crumbs a{color:inherit; text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.5)}
+  .aa-hero .eyebrow .crumbs a:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
+  /* 02 benefits list. Deliberately NOT the .aa-lands card grid: section 03
+     already uses that, and two identical grids back to back read as one
+     section. Two columns on desktop, one on mobile. Gold rule uses the
+     light-band gold #6E561A the rest of this file uses (the brand --gold is
+     documented dark-only and fails contrast on a light band). */
+  .sa-benefits{list-style:none; margin:44px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(2,1fr); gap:30px 44px; text-align:left}
+  .sa-benefits li{padding-left:18px; border-left:2px solid rgba(110,86,26,.45)}
+  .sa-benefits h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:600; font-size:1.08rem; line-height:1.25; margin:0 0 8px; color:#16171A}
+  .sa-benefits p{margin:0; font-size:.95rem; line-height:1.6; color:#45474C;
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif)}
+  @media (max-width:860px){
+    .sa-benefits{grid-template-columns:1fr; gap:26px; margin-top:34px}
+  }
+  .sa-scene{background:#101216}
+  .sa-scene svg{width:100%; height:100%; object-fit:cover; display:block}
+
+  /* locations/globe section CSS, harvested from locations.html (Round B) */
+  .loc-grid{display:grid; gap:48px; max-width:1400px; margin:34px auto 0}
+  .loc-globe-wrap{position:relative; aspect-ratio:1; max-width:560px; margin:0 auto; width:100%}
+  .loc-globe-wrap::before{content:""; position:absolute; inset:-8%; z-index:0;
+    background:radial-gradient(circle at 50% 50%, rgba(212,175,55,.18), transparent 60%);
+    filter:blur(30px); pointer-events:none}
+  .loc-globe{position:absolute; inset:0; width:100%!important; height:100%!important; cursor:grab; contain:layout paint}
+  .loc-globe:active{cursor:grabbing}
+  .loc-fallback{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0;
+    transition:opacity .35s var(--ease); pointer-events:none}
+  .loc-fallback svg{width:100%; height:100%; max-width:460px; position:relative; z-index:1}
+  .loc-fallback .dot{fill:var(--muted-on-dark,#868A90); opacity:.55}
+  .loc-fallback .pin{fill:var(--gold,#D4AF37)}
+  .loc-fallback .hq{fill:var(--gold-light,#E3C24E)}
+  .loc-globe-wrap.static .loc-fallback,html:not(.js) .loc-fallback{opacity:1}
+  .loc-globe-wrap.static .loc-globe,html:not(.js) .loc-globe{opacity:0}
+  .reduced-motion .loc-globe{display:none}
+  .reduced-motion .loc-fallback{opacity:1}
+  .loc-list{display:grid; gap:32px; align-content:start}
+  .loc-meta{display:block; margin-bottom:14px;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.625rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold,#D4AF37)}
+  .loc-meta.dim{color:var(--muted-on-dark,#868A90)}
+  .loc-hq{border-top:2px solid var(--gold,#D4AF37); padding-top:24px}
+  .loc-hq-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px}
+  .loc-hq-tel{flex:0 0 auto}
+  .loc-metros{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr;
+    gap:0; border-top:1px solid var(--border,#2A2C31)}
+  .loc-metros li{border-bottom:1px solid var(--border,#2A2C31)}
+  .loc-metro{width:100%; display:flex; align-items:center; gap:12px; text-align:left;
+    padding:16px 12px 16px 0; color:#C0C3C7;
+    font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+    transition:color .3s ease, padding .3s ease}
+  .loc-metro::before{content:""; width:8px; height:8px; border-radius:50%;
+    background:var(--gold-dark,#A8842A); box-shadow:0 0 10px rgba(212,175,55,.6);
+    transition:background .3s ease, transform .3s ease}
+  .loc-metro:hover{color:var(--paper,#F7F7F5); padding-left:6px}
+  .loc-metro:hover::before{background:var(--gold,#D4AF37); transform:scale(1.35)}
+  @media (min-width:900px){
+    .loc-grid{grid-template-columns:1.1fr .9fr; gap:64px; align-items:center}
+    .loc-globe-wrap{max-width:none; margin:0}
+  }
+/* HERO-SCENE-CSS START */
+  /* Engine Wheel hero scene: draw-in staging (markup is fully drawn without this).
+     MAP-HALF timing rules below are copied verbatim from scene_seo.css since
+     the MAP-HALF markup itself is reused verbatim (same classes). PAYOFF-HALF
+     timing rules are new, for the engine-wheel diagram's own classes. */
+  .sa-scene svg .sa-d{stroke-dasharray:1; stroke-dashoffset:1;
+    animation:saDraw .9s cubic-bezier(.25,.65,.3,1) forwards}
+  .sa-scene svg .sa-f{opacity:0; animation:saFade .55s ease-out forwards}
+  @keyframes saDraw{to{stroke-dashoffset:0}}
+  @keyframes saFade{to{opacity:1}}
+  .sa-scene svg .sa-coast{animation-duration:1.05s}
+  .sa-scene svg .sa-i5m{animation-delay:.2s; animation-duration:1.05s}
+  .sa-scene svg .sa-fw{animation-delay:.7s}
+  .sa-scene svg .sa-z1{animation-delay:.6s}
+  .sa-scene svg .sa-z2{animation-delay:.78s}
+  .sa-scene svg .sa-z3{animation-delay:.96s}
+  .sa-scene svg .sa-f2{animation-delay:1.05s}
+  .sa-scene svg .sa-f2b{animation-delay:1.2s}
+  .sa-scene svg .sa-f3{animation-delay:1.45s}
+
+  /* PAYOFF-HALF: engine wheel -- hub draws, tick texture, spokes converge one
+     by one, channel nodes fade in behind them, then one gold output line
+     draws from the hub into the weekly-brief card. */
+  .sa-scene svg .sa-tick2{animation-delay:1.1s}
+  .sa-scene svg .sa-hubring{animation-delay:1.5s; animation-duration:.6s}
+  .sa-scene svg .sa-hubtxt{animation-delay:1.95s}
+  .sa-scene svg .sa-spk{animation-duration:.45s}
+  .sa-scene svg .sa-spk0{animation-delay:1.9s}
+  .sa-scene svg .sa-spk1{animation-delay:1.98s}
+  .sa-scene svg .sa-spk2{animation-delay:2.06s}
+  .sa-scene svg .sa-spk3{animation-delay:2.14s}
+  .sa-scene svg .sa-spk4{animation-delay:2.22s}
+  .sa-scene svg .sa-spk5{animation-delay:2.3s}
+  .sa-scene svg .sa-nd0{animation-delay:2.2s}
+  .sa-scene svg .sa-nd1{animation-delay:2.28s}
+  .sa-scene svg .sa-nd2{animation-delay:2.36s}
+  .sa-scene svg .sa-nd3{animation-delay:2.44s}
+  .sa-scene svg .sa-nd4{animation-delay:2.52s}
+  .sa-scene svg .sa-nd5{animation-delay:2.6s}
+  .sa-scene svg .sa-out{animation-delay:2.75s; animation-duration:.75s}
+  .sa-scene svg .sa-card2{animation-delay:3.05s; animation-duration:.6s}
+  .sa-scene svg .sa-arrow2{animation-delay:3.5s; animation-duration:.4s}
+  .sa-scene svg .sa-cardtxt{animation-delay:3.7s}
+  .sa-scene svg .sa-plq2{animation-delay:1.3s; animation-duration:.6s}
+  .sa-scene svg .sa-plqtxt2{animation-delay:1.9s}
+
+  /* shared pulse ring (HQ marker on the map, engine hub on the payoff side) */
+  .sa-scene svg .sa-ring{transform-box:fill-box; transform-origin:center;
+    animation:saPulse 3s cubic-bezier(.2,.6,.4,1) infinite}
+  .sa-scene svg .sa-r1{animation-delay:1.7s}
+  .sa-scene svg .sa-r2{animation-delay:3.2s}
+  @keyframes saPulse{0%{transform:scale(.3); opacity:0} 12%{opacity:.9}
+    70%{opacity:0; transform:scale(1.25)} 100%{opacity:0; transform:scale(1.25)}}
+  @media (prefers-reduced-motion: reduce){
+    .sa-scene svg *{animation:none !important}
+    .sa-scene svg .sa-d{stroke-dasharray:none !important; stroke-dashoffset:0 !important}
+    .sa-scene svg .sa-f{opacity:1 !important}
+  }
+  /* HERO-SCENE-CSS END */
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../../index.html" aria-label="Magister Digital home">
+      <img src="../../img/magister-logo.png" alt="Magister Digital" class="brand-logo" width="240" height="48">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <div class="site-nav-drop">
+        <a href="../../index.html#services">Services</a>
+        <div class="site-nav-menu" role="menu">
+          <a href="../../ai-automation.html" role="menuitem">AI Automation</a>
+          <a href="../../seo-services.html" role="menuitem">SEO Services</a>
+          <a href="../../google-ads-management.html" role="menuitem">Google Ads Management</a>
+          <a href="../../meta-ads-management.html" role="menuitem">Meta Ads Management</a>
+          <a href="../../crm-development.html" role="menuitem">Custom CRM</a>
+          <a href="../../full-stack-marketing.html" role="menuitem">Full-Stack Marketing</a>
+          <a href="../../web-design.html" role="menuitem">Web Design</a>
+        </div>
+      </div>
+      <a href="../../index.html#verticals">Industries</a>
+      <div class="site-nav-drop">
+        <a href="../../index.html#case-studies">Case Studies</a>
+        <div class="site-nav-menu" role="menu">
+          <a href="../../case-studies/garage-services.html" role="menuitem">Garage services &middot; Google Ads</a>
+          <a href="../../case-studies/what-garage-operators-are-up-against.html" role="menuitem">Meta competitive research</a>
+          <a href="../../case-studies/addiction-treatment-leads.html" role="menuitem">Addiction treatment &middot; Meta attribution</a>
+          <a href="../../case-studies/personal-injury-inquiries.html" role="menuitem">Personal injury &middot; channel from zero</a>
+          <a href="../../case-studies/gutter-local-seo.html" role="menuitem">Gutter services &middot; local SEO</a>
+          <a href="../../case-studies/waterproofing-google-ads.html" role="menuitem">Waterproofing &middot; Google Ads</a>
+          <a href="../../case-studies/auto-injury-chiro-local-seo.html" role="menuitem">Auto-injury chiropractic &middot; local SEO</a>
+        </div>
+      </div>
+      <a href="../../index.html#videos">Videos</a>
+      <a href="../../index.html#founders">About</a>
+      <a href="../../insights-b.html">Insights</a>
+      <a href="../../index.html#locations" class="active" aria-current="page">Locations</a>
+    </nav>
+    <a class="header-phone" href="tel:+16193300953">(619) 330-0953</a>
+    <a class="btn btn-sm" href="#call"><span class="t">Book a call</span><span class="ar">&rarr;</span></a>
+  </div>
+</header>
+
+<main>
+
+<section class="aa-hero" data-mark="01">
+  <div class="aa-cta-bg sa-scene" aria-hidden="true"><!-- HERO-SCENE START --><svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
+<defs>
+<mask id="saMsanjose" maskUnits="userSpaceOnUse" x="0" y="0" width="1400" height="900">
+<path class="sa-d sa-i5m" d="M180 -12 C240 160 300 320 360 470 C412 600 470 740 520 912" pathLength="1" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round"/>
+</mask>
+</defs>
+<path class="sa-d sa-coast" d="M40 -12 C96 170 150 340 206 500 C256 640 306 780 352 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.40)" stroke-width="1.6"/>
+<path class="sa-d sa-coast" d="M340 -12 C400 160 458 320 516 470 C566 600 622 740 668 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.40)" stroke-width="1.6"/>
+<path class="sa-d sa-z1" d="M180 -12 C240 160 300 320 360 470 C412 600 470 740 520 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1.3"/>
+<path d="M180 -12 C240 160 300 320 360 470 C412 600 470 740 520 912" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.4" stroke-dasharray="7 9" mask="url(#saMsanjose)"/>
+<path class="sa-d sa-z1" d="M138 130 L330 112 L376 188 L330 262 L166 274 L104 196 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<text class="sa-f sa-f2b" x="108" y="202" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">CUPERTINO &middot; SUNNYVALE</text>
+<path class="sa-d sa-z2" d="M198 396 L392 380 L440 456 L394 544 L228 558 L172 470 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<text class="sa-f sa-f2b" x="176" y="464" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">SAN JOSE &middot; WILLOW GLEN</text>
+<path class="sa-d sa-z3" d="M262 656 L456 640 L508 718 L458 812 L292 826 L232 730 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
+<text class="sa-f sa-f2b" x="236" y="734" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">ALMADEN &middot; SOUTH SAN JOSE</text>
+<text class="sa-f sa-f2" x="76" y="350" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">LOS GATOS</text>
+<text class="sa-f sa-f2" x="524" y="560" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">SANTA CLARA COUNTY</text>
+<text class="sa-f sa-f2b" x="470" y="884" font-size="9" letter-spacing="2" fill="rgba(255,255,255,.38)">THE SAN JOSE READ</text>
+<!-- No pin. San Diego marks a real office; this city has none, so the
+     gold carries coverage and the honest headquarters line. -->
+<g class="sa-f sa-f3">
+<path d="M58 876 h34" stroke="rgba(212,175,55,.55)" stroke-width="1" fill="none"/>
+<text x="58" y="862" font-size="9.5" letter-spacing="1.8" fill="rgba(227,194,78,.8)">THE SOUTH BAY</text>
+<text x="58" y="898" font-size="9" letter-spacing="1.6" fill="rgba(227,194,78,.55)">RUN FROM SAN DIEGO</text>
+</g>
+<g class="sa-f sa-tick2" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="1">
+<path d="M1060 350 v12 M1054 356 h12"/>
+<path d="M1340 500 v12 M1334 506 h12"/>
+</g>
+<path class="sa-d sa-spk sa-spk0" d="M1041.5,409.3 L1010,324" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk1" d="M1019.9,423.9 L952,363" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk2" d="M1007.6,446.9 L919,425" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk3" d="M1007.6,473.1 L919,495" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk4" d="M1019.9,496.1 L952,557" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk5" d="M1041.5,510.7 L1010,596" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<circle class="sa-d sa-hubring" cx="1060" cy="460" r="54" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(212,175,55,.55)" stroke-width="1.4"/>
+<circle class="sa-ring sa-r1" cx="1060" cy="460" r="62" fill="none" stroke="rgba(212,175,55,.5)" stroke-width="1"/>
+<circle class="sa-ring sa-r2" cx="1060" cy="460" r="74" fill="none" stroke="rgba(212,175,55,.28)" stroke-width="1"/>
+<text class="sa-f sa-hubtxt" x="1060" y="466" text-anchor="middle" font-size="13" letter-spacing="2" fill="rgba(255,255,255,.85)">ENGINE</text>
+<g class="sa-f sa-nd sa-nd0">
+<circle cx="1010" cy="324" r="4" fill="#D4AF37"/>
+<text x="1000" y="327.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">SEO</text>
+</g>
+<g class="sa-f sa-nd sa-nd1">
+<circle cx="952" cy="363" r="4" fill="#D4AF37"/>
+<text x="942" y="366.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">GOOGLE ADS</text>
+</g>
+<g class="sa-f sa-nd sa-nd2">
+<circle cx="919" cy="425" r="4" fill="#D4AF37"/>
+<text x="909" y="428.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">META ADS</text>
+</g>
+<g class="sa-f sa-nd sa-nd3">
+<circle cx="919" cy="495" r="4" fill="#D4AF37"/>
+<text x="909" y="498.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">AI AUTOMATION</text>
+</g>
+<g class="sa-f sa-nd sa-nd4">
+<circle cx="952" cy="557" r="4" fill="#D4AF37"/>
+<text x="942" y="560.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">CRM</text>
+</g>
+<g class="sa-f sa-nd sa-nd5">
+<circle cx="1010" cy="596" r="4" fill="#D4AF37"/>
+<text x="1000" y="599.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">WEB DESIGN</text>
+</g>
+<path class="sa-d sa-out" d="M1114,460 C1200,462 1258,505 1264,558" pathLength="1" fill="none" stroke="rgba(212,175,55,.65)" stroke-width="1.7"/>
+<path class="sa-f sa-arrow2" d="M1258,568 L1264,580 L1270,568 Z" fill="rgba(212,175,55,.75)"/>
+<rect class="sa-d sa-card2" x="1180" y="580" width="170" height="70" rx="6" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(255,255,255,.38)" stroke-width="1.3"/>
+<g class="sa-f sa-cardtxt">
+<text x="1265" y="608" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.75)">WEEKLY BRIEF</text>
+<path d="M1205,622 h120" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
+<path d="M1195,634 h140" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 5"/>
+</g>
+<rect class="sa-d sa-plq2" x="1168" y="140" width="192" height="34" rx="4" pathLength="1" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+<text class="sa-f sa-plqtxt2" x="1264" y="161" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.6)">SAN JOSE, CA</text>
+</svg>
+<!-- HERO-SCENE END --></div>
+  <div class="aa-hero-content">
+    <nav class="eyebrow" aria-label="Breadcrumb"><span class="num">01</span> <span class="sep" aria-hidden="true">&middot;</span><ol class="crumbs"><li><a href="../../index.html">Home</a></li><li><a href="../../locations.html">Locations</a></li><li><a href="../../san-jose-marketing.html">San Jose</a></li><li aria-current="page">Full-Stack Marketing</li></ol></nav>
+    <h1>The priciest market, <em>four vendors</em><br>One team, <em>one South Bay number</em></h1>
+    <p class="lede">
+      Paying four agencies to compete for the same expensive click is a costly way to
+      run a business anywhere, and San Jose is the worst place to do it. We run the
+      whole stack with one team and one figure: cost per booked appointment. Run from
+      San Diego, serving a two million person metro, with no South Bay office in the
+      overhead.
+    </p>
+    <div class="aa-hero-cta">
+      <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec band-light aa-intro-band">
+  <div class="eyebrow">02 &middot; Benefits</div>
+  <h2>Benefits of Full-Stack Marketing in San Jose</h2>
+  <p class="intro">San Jose is one of the most expensive paid search markets in the United States, so every avoidable inefficiency costs more here than it would anywhere else. Separate vendors bidding against each other is the most avoidable of all.</p>
+  <ul class="sa-benefits">
+    <li>
+      <h3>You stop bidding against yourself</h3>
+      <p>Paid stops buying terms you already rank for, which in the dearest auction in the country is money back immediately.</p>
+    </li>
+    <li>
+      <h3>Effort moves to where it is cheapest</h3>
+      <p>Where a term is priced beyond sense, the plan earns it instead of buying it, and one team is required to make that trade.</p>
+    </li>
+    <li>
+      <h3>Nobody gets to blame the other guy</h3>
+      <p>When cost per booked appointment moves, one team owns the answer because the same team runs every channel feeding it.</p>
+    </li>
+    <li>
+      <h3>One scoreboard</h3>
+      <p>Cost per booked appointment in one place, rather than four vendors sending four versions of the same month.</p>
+    </li>
+  </ul>
+</section>
+
+<div class="ga-funnel-wrap">
+  <div class="ga-funnel" aria-label="The Magister engine wheel with a rolling weekly-brief ticker">
+  <div class="ga-fmain">
+    <div class="ga-funnel-head"><span class="stage" data-stage="0">ONE TEAM</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="1">ONE DASHBOARD</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="2">ONE NUMBER</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="3">WEEKLY BRIEF</span></div>
+    <div class="crm-wheel">
+      <svg viewBox="0 0 400 400" role="img"
+        aria-label="The engine wheel: all seven Magister services, SEO, Google Ads, Meta Ads, AI Automation, CRM, Web Design, and Full-Stack Marketing, around one engine hub, ringed by one team, one dashboard, one number, weekly brief.">
+        <g class="oarc" data-arc="0" style="--a:0">
+          <path id="crmOa0" pathLength="1" stroke="#A8842A" d="M205.9,32.1 A168 168 0 0 1 367.9,194.1"/>
+          <text fill="#0F1115"><textPath href="#crmOa0" startOffset="50%" text-anchor="middle">ONE TEAM</textPath></text>
+        </g>
+        <g class="oarc" data-arc="1" style="--a:1">
+          <path id="crmOa1" pathLength="1" stroke="#33363D" d="M367.9,205.9 A168 168 0 0 1 205.9,367.9"/>
+          <text fill="#E3C24E"><textPath href="#crmOa1" startOffset="50%" text-anchor="middle">ONE DASHBOARD</textPath></text>
+        </g>
+        <g class="oarc" data-arc="2" style="--a:2">
+          <path id="crmOa2" pathLength="1" stroke="#A8842A" d="M194.1,367.9 A168 168 0 0 1 32.1,205.9"/>
+          <text fill="#0F1115"><textPath href="#crmOa2" startOffset="50%" text-anchor="middle">ONE NUMBER</textPath></text>
+        </g>
+        <g class="oarc" data-arc="3" style="--a:3">
+          <path id="crmOa3" pathLength="1" stroke="#33363D" d="M32.1,194.1 A168 168 0 0 1 194.1,32.1"/>
+          <text fill="#E3C24E"><textPath href="#crmOa3" startOffset="50%" text-anchor="middle">WEEKLY BRIEF</textPath></text>
+        </g>
+        <g class="seg" data-seg="0" style="--i:0">
+          <path fill="#D4AF37" d="M200,138 L200,52 A148 148 0 0 1 315.7,107.7 L248.5,161.3 A62 62 0 0 0 200,138 Z"/>
+          <text x="245.6" y="109.4" text-anchor="middle" fill="#16171A">SEO</text>
+        </g>
+        <g class="seg" data-seg="1" style="--i:1">
+          <path fill="#2A2C31" d="M248.5,161.3 L315.7,107.7 A148 148 0 0 1 344.3,232.9 L260.4,213.8 A62 62 0 0 0 248.5,161.3 Z"/>
+          <text x="302.4" y="176.6" text-anchor="middle" fill="#E3C24E"><tspan x="302.4">Google</tspan><tspan x="302.4" dy="12">Ads</tspan></text>
+        </g>
+        <g class="seg" data-seg="2" style="--i:2">
+          <path fill="#D4AF37" d="M260.4,213.8 L344.3,232.9 A148 148 0 0 1 264.2,333.3 L226.9,255.9 A62 62 0 0 0 260.4,213.8 Z"/>
+          <text x="282.1" y="265.5" text-anchor="middle" fill="#16171A"><tspan x="282.1">Meta</tspan><tspan x="282.1" dy="12">Ads</tspan></text>
+        </g>
+        <g class="seg" data-seg="3" style="--i:3">
+          <path fill="#2A2C31" d="M226.9,255.9 L264.2,333.3 A148 148 0 0 1 135.8,333.3 L173.1,255.9 A62 62 0 0 0 226.9,255.9 Z"/>
+          <text x="200" y="301" text-anchor="middle" fill="#E3C24E"><tspan x="200">AI</tspan><tspan x="200" dy="12">Automation</tspan></text>
+        </g>
+        <g class="seg" data-seg="4" style="--i:4">
+          <path fill="#D4AF37" d="M173.1,255.9 L135.8,333.3 A148 148 0 0 1 55.7,232.9 L139.6,213.8 A62 62 0 0 0 173.1,255.9 Z"/>
+          <text x="117.9" y="273.5" text-anchor="middle" fill="#16171A">CRM</text>
+        </g>
+        <g class="seg" data-seg="5" style="--i:5">
+          <path fill="#2A2C31" d="M139.6,213.8 L55.7,232.9 A148 148 0 0 1 84.3,107.7 L151.5,161.3 A62 62 0 0 0 139.6,213.8 Z"/>
+          <text x="97.6" y="172.6" text-anchor="middle" fill="#E3C24E"><tspan x="97.6">Web</tspan><tspan x="97.6" dy="12">Design</tspan></text>
+        </g>
+        <g class="seg" data-seg="6" style="--i:6">
+          <path fill="#A8842A" d="M151.5,161.3 L84.3,107.7 A148 148 0 0 1 200,52 L200,138 A62 62 0 0 0 151.5,161.3 Z"/>
+          <text x="154.4" y="101.4" text-anchor="middle" fill="#16171A"><tspan x="154.4">Full-Stack</tspan><tspan x="154.4" dy="12">Marketing</tspan></text>
+        </g>
+        <g class="hub">
+          <circle cx="200" cy="200" r="56" fill="#1C1D21" stroke="#2A2C31" stroke-width="2"/>
+          <text x="200" y="207" text-anchor="middle" style="font-size:21px">ENGINE</text>
+        </g>
+      </svg>
+    </div>
+    <p class="mx-foot">Seven services run as a single engine. Every channel feeds one BI layer, three founders sign the same weekly brief, and cost per booked appointment is the only headline number. Live figures land after your audit.</p>
+  </div>
+  <aside class="ga-brief" aria-label="Weekly brief ticker, live figures land after your audit">
+    <div class="ga-brief-head">WEEKLY BRIEF &middot; all_channels_one_number &middot; rolling</div>
+    <div class="ga-brief-stream" id="gaBriefStream">
+      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SEO</span><span class="m">organic &rarr; booked &middot; sourced after your San Jose audit</span></div>
+      <div class="ga-brief-row"><span class="t">00:00:01</span><span class="k">STACK</span><span class="m">seven services &middot; <span class="ok">one engine</span></span></div>
+      <div class="ga-brief-row"><span class="t">00:00:00</span><span class="k">SIGNED</span><span class="m">three founders &middot; monday</span></div>
+    </div>
+  </aside>
+</div>
+
+<section class="aa-sec band-light" data-mark="03">
+  <div class="eyebrow">03 &middot; What lands in your inbox</div>
+  <h2 class="aa-h2-rule">A working brief for San Jose, not a pitch deck</h2>
+  <p class="intro">A 45-minute working session where we walk you through the same weekly BI view TurnkeyRenovators runs on: every channel, one attribution layer, cost per booked appointment by channel by week. Then a written brief inside seven days on what we would run first, whether or not you ever hire us.</p>
+  <p class="intro">If the bottleneck is operational rather than marketing, we say so and decline the account.</p>
+  <div class="aa-sec-cta">
+    <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
+  <p class="intro small" style="margin-top:20px; text-align:center">Full-stack engagements start at $60K per month. Single channels start at $20K.</p>
+  <div class="aa-lands" style="margin-top:48px">
+    <div class="item">
+      <span class="idx">01</span>
+      <h3>A live dashboard walkthrough</h3>
+      <p>The same weekly BI view TurnkeyRenovators runs on. Every channel on one attribution layer, reconciled to cost per booked appointment, by channel, by week.</p>
+    </div>
+    <div class="item">
+      <span class="idx">02</span>
+      <h3>A written brief inside seven days</h3>
+      <p>What we would run first, with budget targets per channel and a named owner per workstream. Not a one-page proposal built for price-shopping.</p>
+    </div>
+    <div class="item">
+      <span class="idx">03</span>
+      <h3>An honest go or no-go</h3>
+      <p>Three verticals only, and only accounts we believe we can win. If the problem is operations rather than marketing, we decline and tell you why.</p>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="04">
+  <div class="eyebrow">04 &middot; What we would run first</div>
+  <h2>One attribution dashboard for San Jose, every channel on it, one team behind it</h2>
+  <p class="intro">The first 30 days follow a fixed order: audit everything, install the BI layer, ship changes live in market, and put the 90-day plan in writing with a founder's signature on it.</p>
+  <p class="intro small">The dashboard is CFO-auditable by Friday of Week 2, changes are live by Week 3, and the scale plan lands numbered and signed in Week 4.</p>
+  <div class="aa-spec-table">
+    <div class="aa-spec-row">
+      <div class="k">AUDIT</div>
+      <div class="v">Every channel and your CRM<div class="sub">Ad accounts, analytics, CRM, calendar, and call recordings read end to end. Current cost per booked appointment mapped by channel across your San Jose corridor.</div></div>
+      <div class="m">week 1</div>
+    </div>
+    <div class="aa-spec-row">
+      <div class="k">INSTALL</div>
+      <div class="v">The BI layer and the tracking fixes<div class="sub">GA4, Meta CAPI, Google Ads offline conversions, call attribution, and CRM pipeline stages, all in one view.</div></div>
+      <div class="m">week 2</div>
+    </div>
+    <div class="aa-spec-row">
+      <div class="k">SHIP</div>
+      <div class="v">Changes live in market, not in a deck<div class="sub">Bid adjustments, negative keywords, landing-page fixes, Flowbots intake agents, and fresh Meta creative.</div></div>
+      <div class="m">week 3</div>
+    </div>
+    <div class="aa-spec-row">
+      <div class="k">PLAN</div>
+      <div class="v">A 90-day scale plan, founder-signed<div class="sub">A numbered document with budget targets per channel and a named owner per workstream in this market.</div></div>
+      <div class="m">week 4</div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="05">
+  <div class="eyebrow">05 &middot; On the ground in San Jose</div>
+  <h2>No San Jose office, which in this market is a feature.</h2>
+  <p class="intro">Magister Digital is an operator-run team headquartered in San Diego, serving operators across Santa Clara County. We keep no South Bay address. Renting one here is among the most expensive ways an agency can add cost to your retainer without adding anything to your pipeline.</p>
+  <p class="intro">The founders and the in-house team run your account directly instead. Every market we serve gets the same dashboard, the same weekly pipeline report and the same named owner per workstream. In the most expensive paid search market in the country, what you want from an agency is discipline, not a lobby.</p>
+</section>
+
+<section class="aa-sec band-light" data-mark="06">
+  <div class="eyebrow">06 &middot; Why this is built differently</div>
+  <h2 class="aa-h2-oneline">One team runs the whole stack in San Jose</h2>
+  <p class="intro">Full-stack is not a bundle of vendors, it is one engine. Every channel below feeds the same BI layer, three founders sign the same weekly brief, and when the calendar is empty there is no four-way conversation about whose fault it is.</p>
+
+  <ul class="aa-svc-list" role="list" aria-label="The other five channels we operate">
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <span class="aa-svc-idx">01</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./seo-services.html">SEO in San Jose</a>
+          <span class="aa-svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <span class="aa-svc-idx">02</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./google-ads-management.html">Google Ads in San Jose</a>
+          <span class="aa-svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="../../img/workflow-code.jpg" alt="" loading="lazy">
+          <span class="aa-svc-idx">03</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./ai-automation.html">AI Automation in San Jose</a>
+          <span class="aa-svc-outcome">Lead intake and qualification that runs 24/7, so the traffic SEO earns never goes to a competitor who answered first.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <span class="aa-svc-idx">04</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./meta-ads-management.html">Meta Ads in San Jose</a>
+          <span class="aa-svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="../../img/crm.jpg" alt="" loading="lazy">
+          <span class="aa-svc-idx">05</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./crm-development.html">Custom CRM Development in San Jose</a>
+          <span class="aa-svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+    <li class="aa-svc">
+      <div class="aa-svc-link">
+        <div class="aa-svc-visual">
+          <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <span class="aa-svc-idx">06</span>
+        </div>
+        <div class="aa-svc-body">
+          <a class="aa-svc-name" href="./web-design.html">Web Design in San Jose</a>
+          <span class="aa-svc-outcome">Sites written to convert the traffic we send, instrumented for booked work end to end.</span>
+          <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
+        </div>
+        <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
+      </div>
+    </li>
+  </ul>
+
+  <p class="aa-verticals">Built for one of three verticals. Pick yours: <a href="../../index.html#verticals">home services</a>, <a href="../../index.html#verticals">medical and dental</a>, or <a href="../../index.html#verticals">legal</a>.</p>
+
+  <div class="aa-sec-cta">
+    <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+    <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="07" id="faq">
+  <div class="eyebrow">07 &middot; Questions San Jose operators ask first</div>
+  <h2>The questions a careful San Jose buyer is already holding</h2>
+  <div class="aa-faq">
+    <details>
+      <summary>What does a full-stack engagement cost?</summary>
+      <div class="answer-wrap"><div class="answer">Full-stack engagements start at $60K per month, fully scoped, fully staffed, fully attributed. Single-channel engagements start at $20K per month. Scoping depends on pace, market intensity, and service breadth, not a flat rate card.</div></div>
+    </details>
+    <details>
+      <summary>Do we have to buy all the channels at once?</summary>
+      <div class="answer-wrap"><div class="answer">No. Plenty of clients start with one channel at $20K per month. Full-stack means all seven services under one team, which is a different commitment than a single channel, and you are never billed for services you are not using.</div></div>
+    </details>
+    <details>
+      <summary>How is this different from hiring separate South Bay agencies?</summary>
+      <div class="answer-wrap"><div class="answer">Separate agencies optimize their own channel, which in the most expensive search market in the country means paying twice for the same buyer and getting two reports about it. One team can decide a term is too dear to buy and go and earn it. Nobody makes that call when three vendors each own a slice.</div></div>
+    </details>
+    <details>
+      <summary>Do we have to move everything at once?</summary>
+      <div class="answer-wrap"><div class="answer">No, and usually you should not. We start with measurement so there is an agreed baseline, then take channels over where the gap between spend and booked work is widest.</div></div>
+    </details>
+    <details>
+      <summary>Do you work outside home services, medical, and legal?</summary>
+      <div class="answer-wrap"><div class="answer">No. Three verticals, USA-wide. Work that does not fit gets referred to Infintech Designs. We do not take engagements we do not believe we can win.</div></div>
+    </details>
+    <details>
+      <summary>How long is the engagement and is there a lock-in?</summary>
+      <div class="answer-wrap"><div class="answer">A 90-day initial term, then month to month. No long lock-ins. We do not lock clients into a year, because the work should keep itself sold.</div></div>
+    </details>
+    <details>
+      <summary>Can we see the San Jose attribution dashboard before signing?</summary>
+      <div class="answer-wrap"><div class="answer">Yes. We walk the real thing on the call rather than a screenshot, and you keep the findings whether or not you hire us.</div></div>
+    </details>
+  </div>
+</section>
+
+<section class="aa-sec band-light" data-mark="08">
+  <div class="eyebrow">08 &middot; Who you will work with</div>
+  <h2>Three founders in San Jose. You will speak to <em>one of them</em></h2>
+  <div class="aa-founders">
+    <div class="aa-founder-card" data-card-modal="brian">
+      <div class="aa-founder-img">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/brian-hong-img.jpg" alt="Brian Hong, Co-founder and CEO of Magister Digital" loading="lazy">
+      </div>
+      <h3>Brian Hong</h3>
+      <div class="role">Co-founder &amp; CEO</div>
+      <button class="aa-founder-more" type="button" data-modal="brian" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+    </div>
+    <div class="aa-founder-card" data-card-modal="michael">
+      <div class="aa-founder-img">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/michael-merlino-img.jpg" alt="Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems" loading="lazy">
+      </div>
+      <h3>Michael Merlino</h3>
+      <div class="role">Co-founder, Strategy &amp; AI systems</div>
+      <button class="aa-founder-more" type="button" data-modal="michael" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+    </div>
+    <div class="aa-founder-card" data-card-modal="dimitry">
+      <div class="aa-founder-img">
+        <img src="https://magisterdigital.ai/wp-content/uploads/2026/08/dimitry-morgan-img.jpg" alt="Dimitry Morgan, Co-founder of Magister Digital, Head of paid media" loading="lazy">
+      </div>
+      <h3>Dimitry Morgan</h3>
+      <div class="role">Co-founder, Head of paid media</div>
+      <button class="aa-founder-more" type="button" data-modal="dimitry" aria-haspopup="dialog" aria-controls="founder-modal">Read profile <span aria-hidden="true">&rarr;</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="aa-sec" data-mark="09">
+  <div class="eyebrow">09 &middot; Locations</div>
+  <h2>San Diego HQ, servicing <em>ten metros nationwide</em></h2>
+  <div class="loc-grid">
+    <div class="loc-globe-wrap" data-globe-mount>
+      <canvas class="loc-globe" data-globe aria-hidden="true"></canvas>
+      <div class="loc-fallback" aria-hidden="true">
+        <svg viewBox="0 0 320 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <radialGradient id="sphere" cx="35%" cy="35%" r="80%">
+              <stop offset="0%" stop-color="#232529" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#0F1115" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <circle cx="160" cy="160" r="140" fill="url(#sphere)" stroke="#2A2C31" stroke-width="1"/>
+          <g class="dot"><circle cx="80" cy="120" r="1.4"/><circle cx="92" cy="110" r="1.4"/><circle cx="104" cy="118" r="1.4"/><circle cx="116" cy="126" r="1.4"/><circle cx="128" cy="120" r="1.4"/><circle cx="140" cy="128" r="1.4"/><circle cx="94" cy="132" r="1.4"/><circle cx="106" cy="140" r="1.4"/><circle cx="118" cy="148" r="1.4"/><circle cx="130" cy="142" r="1.4"/><circle cx="86" cy="146" r="1.4"/><circle cx="98" cy="156" r="1.4"/><circle cx="110" cy="164" r="1.4"/><circle cx="122" cy="170" r="1.4"/><circle cx="134" cy="164" r="1.4"/><circle cx="146" cy="156" r="1.4"/><circle cx="158" cy="150" r="1.4"/><circle cx="170" cy="158" r="1.4"/><circle cx="182" cy="164" r="1.4"/><circle cx="194" cy="156" r="1.4"/><circle cx="200" cy="140" r="1.4"/><circle cx="212" cy="132" r="1.4"/><circle cx="224" cy="140" r="1.4"/><circle cx="220" cy="120" r="1.4"/><circle cx="208" cy="112" r="1.4"/><circle cx="196" cy="120" r="1.4"/><circle cx="184" cy="126" r="1.4"/><circle cx="172" cy="132" r="1.4"/><circle cx="160" cy="138" r="1.4"/><circle cx="148" cy="140" r="1.4"/><circle cx="150" cy="176" r="1.4"/><circle cx="162" cy="184" r="1.4"/><circle cx="174" cy="190" r="1.4"/><circle cx="186" cy="184" r="1.4"/><circle cx="132" cy="188" r="1.4"/><circle cx="120" cy="196" r="1.4"/><circle cx="108" cy="188" r="1.4"/><circle cx="196" cy="176" r="1.4"/><circle cx="208" cy="184" r="1.4"/><circle cx="220" cy="176" r="1.4"/><circle cx="232" cy="164" r="1.4"/><circle cx="228" cy="152" r="1.4"/><circle cx="216" cy="148" r="1.4"/></g>
+          <g class="hq"><circle cx="112" cy="152" r="4.5"/><circle cx="112" cy="152" r="9" fill="none" stroke="#E3C24E" stroke-width="1" opacity=".6"/></g>
+          <g class="pin">
+            <circle cx="120" cy="150" r="2.5"/><circle cx="118" cy="158" r="2.5"/>
+            <circle cx="146" cy="164" r="2.5"/><circle cx="164" cy="170" r="2.5"/>
+            <circle cx="174" cy="178" r="2.5"/><circle cx="200" cy="162" r="2.5"/>
+            <circle cx="210" cy="154" r="2.5"/><circle cx="218" cy="148" r="2.5"/>
+            <circle cx="230" cy="142" r="2.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="loc-list">
+      <div class="loc-hq">
+        <span class="loc-meta">Headquarters</span>
+        <div class="loc-hq-row">
+          <a class="hero-tel loc-hq-tel" href="tel:+16193300953"><span class="tag">Call</span> <b>(619) 330-0953</b></a>
+        </div>
+      </div>
+      <div>
+        <span class="loc-meta dim">Metros served</span>
+        <ul class="loc-metros" role="list">
+          <li><a class="loc-metro" href="../../san-diego-marketing.html">San Diego</a></li>
+          <li><a class="loc-metro" href="../../los-angeles-marketing.html">Los Angeles</a></li>
+          
+          <li><a class="loc-metro" href="../../phoenix-marketing.html">Phoenix</a></li>
+          <li><a class="loc-metro" href="../../dallas-marketing.html">Dallas</a></li>
+          <li><a class="loc-metro" href="../../san-antonio-marketing.html">San Antonio</a></li>
+          <li><a class="loc-metro" href="../../houston-marketing.html">Houston</a></li>
+          <li><a class="loc-metro" href="../../chicago-marketing.html">Chicago</a></li>
+          <li><a class="loc-metro" href="../../philadelphia-marketing.html">Philadelphia</a></li>
+          <li><a class="loc-metro" href="../../new-york-marketing.html">New York</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="aa-cta-band" data-mark="10" id="call">
+  <div class="aa-cta-bg" aria-hidden="true">
+    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="" width="1920" height="1280" loading="lazy">
+  </div>
+  <div class="aa-cta-wrap">
+    <div class="eyebrow">10 &middot; Book a call</div>
+    <h2>Bring your numbers. We will tell you what they say.</h2>
+    <p class="note-lede">Forty-five minutes, no deck, and you keep the findings whether or not you hire us.</p>
+    <div class="aa-cta-cta">
+      <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
+      <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="modal" id="founder-modal" role="dialog" aria-modal="true" aria-labelledby="founder-modal-title" hidden>
+  <div class="modal-backdrop" data-modal-close></div>
+  <div class="modal-panel" role="document">
+    <button class="modal-close" type="button" aria-label="Close" data-modal-close>&times;</button>
+    <div class="modal-hero">
+      <img data-modal-photo src="" alt="">
+    </div>
+    <div class="modal-body">
+      <span class="modal-flag">Bio pending sign-off</span>
+      <h2 id="founder-modal-title" data-modal-title>Founder</h2>
+      <div class="role" data-modal-role>Role</div>
+      <p class="modal-bio" data-modal-bio></p>
+      <a class="btn btn-ghost" data-modal-link href="#"><span class="t">Full profile</span><span class="ar" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footgrid">
+      <div class="footcol">
+        <a class="foot-brand" href="../../index.html" aria-label="Magister Digital home">
+          <img src="../../img/magister-logo.png" alt="Magister Digital">
+        </a>
+        <p style="font-size:.875rem; color:#C0C3C7; max-width:32ch">
+          Marketing run by operators for home services, medical and legal businesses across the United States.
+        </p>
+      </div>
+      <div class="footcol">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../seo-services.html">SEO</a></li><li><a href="../../google-ads-management.html">Google Ads</a></li>
+          <li><a href="../../meta-ads-management.html">Meta Ads</a></li><li><a href="../../ai-automation.html">AI automation</a></li>
+          <li><a href="../../crm-development.html">Custom CRM</a></li><li><a href="../../full-stack-marketing.html">Full-Stack Marketing</a></li>
+          <li><a href="../../web-design.html">Web design</a></li>
+        </ul>
+      </div>
+      <div class="footcol">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="../../index.html#verticals">Industries</a></li><li><a href="../../index.html#case-studies">Case studies</a></li>
+          <li><a href="../../index.html#videos">Videos</a></li><li><a href="../../index.html#founders">About</a></li>
+          <li><a href="../../index.html#reviews">Reviews</a></li><li><a href="../../index.html#locations">Locations</a></li>
+          <li><a href="../../index.html#faq">FAQ</a></li><li><a href="../../index.html#call">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footcol">
+        <h4>San Diego</h4>
+        <address>
+          1135 Garnet Ave #13<br>
+          San Diego, CA 92109<br>
+          <a class="mono" href="tel:+16193300953">(619) 330-0953</a><br>
+          <span class="mono" style="color:var(--muted-on-dark,#868A90); text-decoration:none">Mon to Fri, 8am to 6pm PT</span>
+        </address>
+      </div>
+    </div>
+    <div class="footbar">
+      <p>&copy; 2026 Magister Digital</p>
+      <nav aria-label="Legal">
+        <a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/accessibility/">Accessibility</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script data-v="1">
+/* Highlight pills — identical behaviour to ai-automation.html. Hero pair fires
+   on load; the closing CTA pair waits until the band is on screen. */
+(function(){
+  const rmq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function arm(scope){
+    const pills = scope.querySelectorAll('em');
+    pills.forEach((el,i) => { if (i === 1) el.classList.add('is-2'); });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pills.forEach(el => el.classList.add('animate'));
+    }));
+  }
+  function init(){
+    if (rmq.matches) return;
+    const hero = document.querySelector('.aa-hero h1');
+    if (hero) arm(hero);
+    const cta = document.querySelector('.aa-cta-band h2');
+    if (!cta) return;
+    if (!('IntersectionObserver' in window)) { arm(cta); return; }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting){ arm(cta); obs.disconnect(); } });
+    }, { threshold: .35 });
+    io.observe(cta);
+  }
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+
+/* FAQ disclosure height — identical to ai-automation.html / homepage motion.js */
+document.documentElement.classList.add('js');
+(function(){
+  document.querySelectorAll('.aa-faq details').forEach(function(d){
+    var body = d.querySelector('.answer-wrap');
+    if (!body) return;
+    if (d.open) body.style.height = 'auto';
+    var animating = false;
+    function settle(fn){
+      var done = false;
+      function finish(){
+        if (done) return;
+        done = true;
+        body.removeEventListener('transitionend', onEnd);
+        clearTimeout(timer);
+        fn();
+        animating = false;
+      }
+      function onEnd(e){ if (e.target === body && e.propertyName === 'height') finish(); }
+      body.addEventListener('transitionend', onEnd);
+      var timer = setTimeout(finish, 700);
+      return finish;
+    }
+    d.querySelector('summary').addEventListener('click', function(e){
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
+      if (d.open){
+        body.style.height = body.scrollHeight + 'px';
+        void body.offsetHeight;
+        requestAnimationFrame(function(){ body.style.height = '0px'; });
+        settle(function(){ d.open = false; body.style.height = ''; });
+      } else {
+        d.open = true;
+        var h = body.scrollHeight;
+        body.style.height = '0px';
+        void body.offsetHeight;
+        requestAnimationFrame(function(){ body.style.height = h + 'px'; });
+        settle(function(){ body.style.height = 'auto'; });
+      }
+    });
+  });
+})();
+
+/* FOUNDER MODAL — identical wiring and bios to ai-automation.html. Bios are
+   deliberately flagged "pending sign-off"; no invented biography here. */
+(function(){
+  const modal = document.getElementById('founder-modal');
+  if (!modal) return;
+  const titleEl = modal.querySelector('[data-modal-title]');
+  const roleEl  = modal.querySelector('[data-modal-role]');
+  const photoEl = modal.querySelector('[data-modal-photo]');
+  const bioEl   = modal.querySelector('[data-modal-bio]');
+  const linkEl  = modal.querySelector('[data-modal-link]');
+  const heroEl  = modal.querySelector('.modal-hero');
+  const panelEl = modal.querySelector('.modal-panel');
+  const FOUNDERS = {
+    brian: {
+      name: 'Brian Hong', role: 'Co-founder & CEO',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/brian-hong-img.jpg',
+      alt: 'Brian Hong, Co-founder and CEO of Magister Digital',
+      bio: 'Bio pending sign-off. Full operator background, businesses held under stake, and CEO scope land on the /brian-hong/ profile page. No invented credentials appear here.',
+      link: '../../brian-hong.html'
+    },
+    michael: {
+      name: 'Michael Merlino', role: 'Co-founder, Strategy & AI systems',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/michael-merlino-img.jpg',
+      alt: 'Michael Merlino, Co-founder of Magister Digital, Strategy and AI systems',
+      bio: 'Bio pending sign-off. Positioning, strategy scope and AI systems responsibility land on the /michael-merlino/ profile page.',
+      link: '../../founder-b.html'
+    },
+    dimitry: {
+      name: 'Dimitry Morgan', role: 'Co-founder, Head of paid media',
+      photo: 'https://magisterdigital.ai/wp-content/uploads/2026/08/dimitry-morgan-img.jpg',
+      alt: 'Dimitry Morgan, Co-founder of Magister Digital, Head of paid media',
+      bio: 'Bio pending sign-off. Paid-media leadership scope and the accounts he directly runs land on the /dimitry-morgan/ profile page.',
+      link: '../../dimitry-morgan.html'
+    }
+  };
+  let trigger = null;
+  function siblings(){
+    return [
+      document.querySelector('header'),
+      document.querySelector('main'),
+      document.querySelector('.aa-footer')
+    ].filter(Boolean).filter(el => !el.contains(modal));
+  }
+  function focusables(){
+    return modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  }
+  function restart(el){
+    if (!el) return;
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
+  }
+  function open(key, from){
+    const d = FOUNDERS[key];
+    if (!d) return;
+    trigger = from;
+    titleEl.textContent = d.name;
+    roleEl.textContent  = d.role;
+    photoEl.setAttribute('src', d.photo);
+    photoEl.setAttribute('alt', d.alt);
+    bioEl.textContent = d.bio;
+    linkEl.setAttribute('href', d.link);
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    siblings().forEach(el => el.setAttribute('inert',''));
+    restart(heroEl); restart(panelEl);
+    document.addEventListener('keydown', onKey);
+    const close = modal.querySelector('.modal-close');
+    if (close) close.focus();
+  }
+  function close(){
+    if (modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    siblings().forEach(el => el.removeAttribute('inert'));
+    document.removeEventListener('keydown', onKey);
+    if (trigger && trigger.focus) trigger.focus();
+    trigger = null;
+  }
+  function onKey(e){
+    if (e.key === 'Escape'){ e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables();
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      open(btn.getAttribute('data-modal'), btn);
+    });
+  });
+  document.querySelectorAll('[data-card-modal]').forEach(card => {
+    card.addEventListener('click', () => {
+      const btn = card.querySelector('[data-modal]');
+      open(card.getAttribute('data-card-modal'), btn || card);
+    });
+  });
+  modal.querySelectorAll('[data-modal-close]').forEach(el =>
+    el.addEventListener('click', close));
+})();
+
+/* SPEC TABLE walking rail — ported verbatim from ai-automation.html's section
+   04. Walks one row at a time on a loop while the table is on screen, stops
+   the moment it leaves. Base state (no JS, reduced motion) is the plain
+   static table. */
+(function(){
+  const table = document.querySelector('.aa-spec-table');
+  if (!table) return;
+  const rows = [...table.querySelectorAll('.aa-spec-row')];
+  if (!rows.length) return;
+  rows.forEach((r,i) => r.style.setProperty('--i', i));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
+
+  let timer = null, step = -1;
+  function tick(){
+    if (step >= 0) rows[step].classList.remove('is-step');
+    step = (step + 1) % rows.length;
+    rows[step].classList.add('is-step');
+    table.style.setProperty('--rail', (((step + 1) / rows.length) * 100) + '%');
+  }
+  function start(){
+    if (timer) return;
+    tick();
+    timer = setInterval(tick, 1100);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ table.classList.add('is-in'); start(); }
+      else stop();
+    });
+  }, { threshold: .25 });
+  io.observe(table);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
+})();
+
+/* CRM WHEEL — wedges bloom in on scroll, arcs draw around them; then a
+   highlight sweeps the wheel segment by segment, lighting its parent arc
+   while the operating-log ticker types matching lines. Stops off-screen, on
+   tab hide, and under reduced motion (which gets the finished static wheel). */
+(function(){
+  const funnel = document.querySelector('.ga-funnel');
+  if (!funnel) return;
+  const stages = [...funnel.querySelectorAll('.ga-funnel-head .stage')];
+  const segs = [...funnel.querySelectorAll('.crm-wheel .seg')];
+  const arcs = [...funnel.querySelectorAll('.crm-wheel .oarc')];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
+    funnel.classList.add('is-in');
+    return;
+  }
+  let timer = null, tickN = -1, entered = false, cycle = 0, clock = 3;
+  const stream = document.getElementById('gaBriefStream');
+  /* Two line variants per segment so the ticker reads alive, not looped.
+     Dollar figures stay unstated: live data lands after the audit. */
+  const LINES = [
+    [['SEO','organic &rarr; booked &middot; sourced after your San Jose audit'], ['SEO','citations &middot; ai answers tracked']],
+    [['GOOGLE','offline conversions &rarr; crm'], ['GOOGLE','cost / booked &middot; by campaign']],
+    [['META','capi &middot; server-side in'], ['META','friday creative &middot; shipped']],
+    [['AGENT','flowbots &middot; intake answered'], ['AGENT','after-hours &middot; <span class="ok">booked</span>']],
+    [['CRM','closed-won &rarr; channel'], ['CRM','stages &middot; your words']],
+    [['WEB','landing fix &middot; live in market'], ['WEB','wired for pipeline &middot; day one']],
+    [['STACK','seven services &middot; <span class="ok">one engine</span>'], ['SIGNED','three founders &middot; monday']]
+  ];
+  function briefLine(i){
+    if (!stream) return;
+    const v = LINES[i][cycle % 2];
+    clock += 1 + (i % 3);
+    const secs = String(clock % 60).padStart(2,'0');
+    const row = document.createElement('div');
+    row.className = 'ga-brief-row';
+    row.innerHTML = '<span class="t">00:00:' + secs + '</span><span class="k">' + v[0] + '</span><span class="m">' + v[1] + '</span>';
+    stream.prepend(row);
+    while (stream.children.length > 9) stream.removeChild(stream.lastChild);
+  }
+  function tick(){
+    tickN++;
+    const seg = tickN % segs.length;
+    const arc = Math.floor(seg * 4 / segs.length);
+    if (seg === 0) cycle++;
+    segs.forEach((s,i) => s.classList.toggle('on', i === seg));
+    arcs.forEach((a,i) => a.classList.toggle('on', i === arc));
+    stages.forEach((w,i) => w.classList.toggle('is-on', i === arc));
+    briefLine(seg);
+  }
+  function start(){
+    if (timer) return;
+    timer = setInterval(tick, 1200);
+  }
+  function stop(){
+    if (!timer) return;
+    clearInterval(timer); timer = null;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        if (!entered){ entered = true; funnel.classList.add('is-in'); }
+        start();
+      } else stop();
+    });
+  }, { threshold: .35 });
+  io.observe(funnel);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+})();
+</script>
+
+<script>
+  /* Header sticky-backdrop — identical to ai-automation.html */
+  (function(){
+    var h = document.querySelector('.site-header');
+    if (!h) return;
+    function update(){ h.classList.toggle('is-stuck', (window.scrollY || 0) > 24); }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
+
+<script>
+  /* Locations globe (09): homepage's real cobe.js rotating canvas, extracted
+     from motion.js globeBoot()/loadGlobe() with all per-metro-map wiring
+     (globeState, click-to-rotate targeting, Show-globe map swap) removed --
+     this page has no per-metro map, so none of that exists here. The static
+     graphic above is the no-js/reduced-motion/low-power/import-failure
+     fallback, exactly as the homepage uses it. */
+  (function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canObserve = 'IntersectionObserver' in window;
+
+    (function globeBoot() {
+    var mount = document.querySelector('[data-globe-mount]');
+    var canvas = mount && mount.querySelector('[data-globe]');
+    if (!mount || !canvas) return;
+
+    if (reduced || !canObserve) { mount.classList.add('static'); return; }
+
+    var lowPower = (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency <= 2)
+                 || (navigator.connection && navigator.connection.saveData === true);
+    if (lowPower) { mount.classList.add('static'); return; }
+
+    var loaded = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting || loaded) return;
+        loaded = true;
+        io.disconnect();
+        loadGlobe(canvas, mount);
+      });
+    }, { rootMargin: '250px' });
+    io.observe(mount);
+  })();
+
+    function loadGlobe(canvas, mount) {
+    import('https://esm.sh/cobe@0.6.3').then(function (mod) {
+      var createGlobe = mod.default || mod;
+
+      // Calibration: BASE_PHI sets the initial facing (US-centred). This
+      // page has no per-city map to click-rotate into, so the longitude-
+      // targeting helper and its east/west anchor constant (only ever
+      // used to feed that helper) are gone.
+      var BASE_PHI = 4.6;
+
+      var phi = BASE_PHI;
+      var pointerInteracting = null;
+      var pointerMovement = 0;
+      var size = mount.clientWidth || 520;
+      // Buffer must be sized in DEVICE pixels. This was hardcoded to size*2,
+      // which is only correct on a 2x display: on an ordinary 1x monitor it
+      // built a buffer twice the CSS box, so the sphere drew at double scale
+      // and only a corner of it was ever visible.
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var paused = false;
+
+      var markers = [
+        { location: [32.7157, -117.1611], size: 0.14 },
+        { location: [34.0522, -118.2437], size: 0.06 },
+        { location: [37.3382, -121.8863], size: 0.06 },
+        { location: [33.4484, -112.0740], size: 0.06 },
+        { location: [32.7767,  -96.7970], size: 0.06 },
+        { location: [29.4241,  -98.4936], size: 0.06 },
+        { location: [29.7604,  -95.3698], size: 0.06 },
+        { location: [41.8781,  -87.6298], size: 0.06 },
+        { location: [39.9526,  -75.1652], size: 0.06 },
+        { location: [40.7128,  -74.0060], size: 0.06 }
+      ];
+
+      var globe;
+      try {
+        globe = createGlobe(canvas, {
+          devicePixelRatio: dpr,
+          width: size * dpr,
+          height: size * dpr,
+          phi: 0,
+          theta: 0.28,
+          // MUCH brighter: dark shading almost off, map dots turned up
+          // hard so the full sphere reads clearly against near-black.
+          dark: 0.05,
+          diffuse: 0.65,
+          mapSamples: 16000,
+          mapBrightness: 9.5,
+          baseColor:   [0.22, 0.23, 0.26],
+          markerColor: [1.0,  0.85, 0.28],
+          glowColor:   [0.42, 0.32, 0.09],
+          markers: markers,
+          onRender: function (state) {
+            if (paused) { state.phi = phi; return; }
+            if (pointerInteracting !== null) {
+              phi = pointerInteracting + pointerMovement / 200;
+            } else {
+              phi += 0.003;
+            }
+            state.phi = phi;
+            state.width  = size * dpr;
+            state.height = size * dpr;
+          }
+        });
+      } catch (err) {
+        mount.classList.add('static');
+        return;
+      }
+
+      canvas.style.opacity = '0';
+      canvas.style.transition = 'opacity .6s ease';
+      requestAnimationFrame(function () { canvas.style.opacity = '1'; });
+
+      canvas.addEventListener('webglcontextlost', function (e) {
+        e.preventDefault();
+        mount.classList.add('static');
+        canvas.style.opacity = '0';
+      });
+
+      canvas.addEventListener('pointerdown', function (e) {
+        pointerMovement = 0;
+        pointerInteracting = phi;
+        try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      canvas.addEventListener('pointerup', function () {
+        pointerInteracting = null; pointerMovement = 0;
+      });
+      canvas.addEventListener('pointerout', function () {
+        pointerInteracting = null; pointerMovement = 0;
+      });
+      canvas.addEventListener('pointermove', function (e) {
+        if (pointerInteracting !== null) {
+          pointerMovement = e.movementX * 2 + pointerMovement * 0.8;
+        }
+      });
+
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(function () { size = mount.clientWidth || size; }, 180);
+      }, { passive: true });
+
+      new IntersectionObserver(function (es) {
+        paused = !es[0].isIntersecting;
+      }, { rootMargin: '50px' }).observe(mount);
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) paused = true;
+        else {
+          var r = mount.getBoundingClientRect();
+          paused = r.bottom < 0 || r.top > window.innerHeight;
+        }
+      });
+    }).catch(function () {
+      mount.classList.add('static');
+    });
+  }
+  })();
+</script>
+</body>
+</html>
