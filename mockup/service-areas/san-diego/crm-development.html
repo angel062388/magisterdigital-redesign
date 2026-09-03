@@ -648,6 +648,21 @@
   .aa-hero .eyebrow .crumbs li+li::before{content:"/"; opacity:.5}
   .aa-hero .eyebrow .crumbs a{color:inherit; text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.5)}
   .aa-hero .eyebrow .crumbs a:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
+  /* 02 benefits list. Deliberately NOT the .aa-lands card grid: section 03
+     already uses that, and two identical grids back to back read as one
+     section. Two columns on desktop, one on mobile. Gold rule uses the
+     light-band gold #6E561A the rest of this file uses (the brand --gold is
+     documented dark-only and fails contrast on a light band). */
+  .sa-benefits{list-style:none; margin:44px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(2,1fr); gap:30px 44px; text-align:left}
+  .sa-benefits li{padding-left:18px; border-left:2px solid rgba(110,86,26,.45)}
+  .sa-benefits h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:600; font-size:1.08rem; line-height:1.25; margin:0 0 8px; color:#16171A}
+  .sa-benefits p{margin:0; font-size:.95rem; line-height:1.6; color:#45474C;
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif)}
+  @media (max-width:860px){
+    .sa-benefits{grid-template-columns:1fr; gap:26px; margin-top:34px}
+  }
   .sa-scene{background:#101216}
   .sa-scene svg{width:100%; height:100%; object-fit:cover; display:block}
 
@@ -884,10 +899,27 @@
 </section>
 
 <section class="aa-sec band-light aa-intro-band">
-  <div class="eyebrow">02 &middot; The San Diego read</div>
-  <h2>A CRM built for San Diego does not run on one pipeline</h2>
-  <p class="intro">San Diego is the second largest metro in California, 3.3 million people across half a dozen cities in one media market. A pipeline built for one of them rarely fits the rest. A home service operator routing jobs across North County, Poway and La Mesa, a practice tracking referrals near Torrey Pines, UCSD and La Jolla, and a firm handing cases between intake and counsel downtown and in Chula Vista are running three different sales cycles with three different handoff rules.</p>
-  <p class="intro">The corridors complicate attribution accordingly. Torrey Pines and downtown are among the most competitive corridors in the state, and more than 1,400 life science firms keep referral routing crowded on the medical side. We map how your team actually sells before we touch a pipeline stage: where handoffs break, where a lead goes cold, and what that gap is costing in booked work.</p>
+  <div class="eyebrow">02 &middot; Benefits</div>
+  <h2>Benefits of Custom CRM Development in San Diego</h2>
+  <p class="intro">A metro of 3.3 million across half a dozen cities rarely runs on one pipeline: North County work and downtown work seldom share a sales cycle or a handoff rule. Referral routing is denser again around Torrey Pines, where more than 1,400 life science firms operate.</p>
+  <ul class="sa-benefits">
+    <li>
+      <h3>Your stages match how you sell</h3>
+      <p>The pipeline is built from how your team actually works, in their words, rather than a vendor's default stage names.</p>
+    </li>
+    <li>
+      <h3>Handoffs stop dropping leads</h3>
+      <p>We find where a lead goes cold between intake and the person who closes, then build the step that catches it.</p>
+    </li>
+    <li>
+      <h3>Referrals stay traceable</h3>
+      <p>Source tagging survives the handoff, so you can still tell where a booked case came from three touches later.</p>
+    </li>
+    <li>
+      <h3>Reporting matches reality</h3>
+      <p>The pipeline report and the work you actually booked agree, which is usually the first thing a rebuild fixes.</p>
+    </li>
+  </ul>
 </section>
 
 <div class="ga-funnel-wrap">

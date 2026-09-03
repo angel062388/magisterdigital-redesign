@@ -649,6 +649,21 @@
   .aa-hero .eyebrow .crumbs li+li::before{content:"/"; opacity:.5}
   .aa-hero .eyebrow .crumbs a{color:inherit; text-decoration:underline; text-underline-offset:3px; text-decoration-color:rgba(212,175,55,.5)}
   .aa-hero .eyebrow .crumbs a:hover{color:var(--gold-light,#E3C24E); text-decoration-color:var(--gold-light,#E3C24E)}
+  /* 02 benefits list. Deliberately NOT the .aa-lands card grid: section 03
+     already uses that, and two identical grids back to back read as one
+     section. Two columns on desktop, one on mobile. Gold rule uses the
+     light-band gold #6E561A the rest of this file uses (the brand --gold is
+     documented dark-only and fails contrast on a light band). */
+  .sa-benefits{list-style:none; margin:44px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(2,1fr); gap:30px 44px; text-align:left}
+  .sa-benefits li{padding-left:18px; border-left:2px solid rgba(110,86,26,.45)}
+  .sa-benefits h3{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-weight:600; font-size:1.08rem; line-height:1.25; margin:0 0 8px; color:#16171A}
+  .sa-benefits p{margin:0; font-size:.95rem; line-height:1.6; color:#45474C;
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif)}
+  @media (max-width:860px){
+    .sa-benefits{grid-template-columns:1fr; gap:26px; margin-top:34px}
+  }
   .sa-scene{background:#101216}
   .sa-scene svg{width:100%; height:100%; object-fit:cover; display:block}
 
@@ -861,10 +876,27 @@
 </section>
 
 <section class="aa-sec band-light aa-intro-band">
-  <div class="eyebrow">02 &middot; The San Diego read</div>
-  <h2>Meta Ads in San Diego is a zone fight, not a citywide one.</h2>
-  <p class="intro">San Diego is the second largest metro in California, 3.3 million people across half a dozen cities in one media market. Meta's auction does not treat that as one audience. A creative pairing built for North County, Poway and La Mesa runs on a different feed, at a different cost, than an audience built around Torrey Pines, UCSD and La Jolla, and neither one performs the same downtown or in Chula Vista.</p>
-  <p class="intro">The zones price accordingly. Torrey Pines and downtown are among the most competitive corridors in the state, and more than 1,400 life science firms compete for the same feed and the same educated, high-income audience. We read your zone before we promise anything: which audience and which creative are already paying your team in that zone, not which ones look good in a report.</p>
+  <div class="eyebrow">02 &middot; Benefits</div>
+  <h2>Benefits of Meta Ads Management in San Diego</h2>
+  <p class="intro">Most demand in a 3.3 million person metro exists well before anyone searches for your service, which is where paid social earns its place. Around Torrey Pines the competition is unusually dense, with more than 1,400 life science firms addressing overlapping audiences.</p>
+  <ul class="sa-benefits">
+    <li>
+      <h3>You reach buyers before the search</h3>
+      <p>Meta puts you in front of people with the problem who have not started shopping yet, which is where the cheaper appointments live.</p>
+    </li>
+    <li>
+      <h3>Audiences match your service zones</h3>
+      <p>We build audiences around the areas you cover, from North County to Chula Vista, so budget stops leaking into places you will not drive.</p>
+    </li>
+    <li>
+      <h3>Measurement survives iOS</h3>
+      <p>Server-side conversions and a monitored match rate keep attribution usable after in-platform reporting stops being reliable.</p>
+    </li>
+    <li>
+      <h3>Creative is judged on booked jobs</h3>
+      <p>We test audience against creative angle and keep the pairings that put appointments on the calendar, not the ones with the best engagement.</p>
+    </li>
+  </ul>
 </section>
 
 <div class="ga-funnel-wrap">
