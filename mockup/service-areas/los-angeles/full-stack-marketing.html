@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Google Ads Management in San Diego: Magister Digital</title>
-<meta name="description" content="We audit, rebuild and run Google Ads accounts across San Diego, wire GA4 through to your CRM, and report one number in a Monday brief: cost per booked job.">
+<title>Full-Stack Marketing in Los Angeles: Magister Digital</title>
+<meta name="description" content="Four vendors, 88 cities, and nobody owning the number. Full-stack marketing for Los Angeles operators, run by one team against cost per booked appointment.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -264,12 +264,9 @@
   .aa-sec.band-light .aa-lands .item h3{color:#16171A}
   .aa-sec.band-light .aa-lands .item p{color:#45474C}
 
-  /* SPEND-TO-CLOSED FUNNEL — recreated from the live Google Ads page's funnel
-     widget. Five horizontal bars narrowing from SPEND to CLOSED, each with a
-     caption. Bars sweep in from zero width, staggered top to bottom, when the
-     card scrolls into view; captions fade in behind their bar. The CLOSED bar
-     is bright gold with a glow because cost per booked job is the metric the
-     whole page argues for. Qualitative widths only, no invented figures. */
+  /* ENGINE WHEEL CANVAS — two-panel card shared with the other service pages:
+     black-and-gold services wheel left, rolling weekly-brief ticker right.
+     Qualitative states only; live figures land after the audit. */
   .ga-funnel-wrap{max-width:1400px; margin:0 auto; padding:16px 32px 56px}
   .ga-funnel{border:1px solid var(--border,#2A2C31); border-radius:8px;
     background:var(--ink-2,#16171A); overflow:hidden;
@@ -302,65 +299,56 @@
     font-size:.8rem; font-weight:600; letter-spacing:.14em; color:var(--gold,#D4AF37);
     margin:0 0 28px}
   .ga-funnel-head .sep{color:var(--muted-on-dark,#868A90); padding:0 8px; font-weight:400}
-  .ga-frow{display:grid; grid-template-columns:110px 1fr; gap:20px; align-items:center;
-    padding:11px 0}
-  .ga-frow .lbl{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.875rem; color:var(--muted-on-dark,#868A90)}
-  .ga-frow .bar-area{display:flex; align-items:center; gap:18px; min-width:0}
-  .ga-frow .bar{height:40px; width:0; border-radius:8px; flex:0 0 auto; position:relative;
-    transition:width 1s cubic-bezier(.22,1.35,.4,1); transition-delay:calc(var(--i,0) * 150ms)}
-  .ga-funnel.is-in .ga-frow .bar{width:var(--w)}
-  .ga-frow .cap{font-family:var(--font-sans,'Inter',system-ui,sans-serif); font-size:.95rem;
-    color:var(--paper,#F7F7F5); opacity:0; transform:translateX(-10px);
-    transition:opacity .45s ease, transform .5s cubic-bezier(.16,1,.3,1);
-    transition-delay:calc(var(--i,0) * 150ms + .6s)}
-  .ga-funnel.is-in .ga-frow .cap{opacity:1; transform:translateX(0)}
-  .ga-frow .cap.leak{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
-    font-size:.85rem; font-weight:600; color:var(--gold,#D4AF37)}
-  .ga-frow .cap b{font-weight:600}
-  .ga-frow .bar.closed{background:var(--gold-light,#E3C24E);
-    box-shadow:0 0 18px rgba(212,175,55,.5), 0 0 6px rgba(227,194,78,.6)}
-
-  /* LIVING FUNNEL — after the entrance, a highlight walks the five stages in
-     a loop while the card is on screen: the header word lights up, its row
-     lifts and brightens, a shine sweeps across the bar, the Leads bar drips
-     gold droplets (the leak, made literal), and the Closed bar pulses its
-     glow. Loop stops off-screen and under reduced motion. */
   .ga-funnel-head .stage{transition:color .3s ease, text-shadow .3s ease}
   .ga-funnel-head .stage.is-on{color:var(--gold-light,#E3C24E);
     text-shadow:0 0 14px rgba(227,194,78,.55)}
-  .ga-frow{transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  .ga-frow.is-step{transform:translateX(6px)}
-  .ga-frow.is-step .lbl{color:var(--paper,#F7F7F5)}
-  .ga-frow .lbl{transition:color .3s ease}
-  .ga-frow .bar .shine{position:absolute; inset:0; border-radius:inherit; overflow:hidden;
-    pointer-events:none}
-  .ga-frow.is-step .bar .shine::after{content:""; position:absolute; inset:0;
-    background:linear-gradient(105deg, transparent 30%, rgba(255,255,255,.4) 50%, transparent 70%);
-    transform:translateX(-100%); animation:gaShine .9s ease forwards}
-  @keyframes gaShine{to{transform:translateX(100%)}}
-  .ga-frow .bar .drop{position:absolute; right:-3px; bottom:6px; width:6px; height:6px;
-    border-radius:50%; background:var(--gold-light,#E3C24E); opacity:0; pointer-events:none}
-  .ga-frow.is-step .bar .drop{animation:gaDrip 1s ease-in forwards}
-  .ga-frow .bar .drop:nth-child(3){animation-delay:.2s}
-  .ga-frow .bar .drop:nth-child(4){animation-delay:.45s}
-  @keyframes gaDrip{0%{opacity:0; transform:translate(0,0)} 18%{opacity:1}
-    100%{opacity:0; transform:translate(12px,30px)}}
-  .ga-frow.is-step .bar.closed{animation:gaClosedPulse 1s ease}
-  @keyframes gaClosedPulse{50%{box-shadow:0 0 34px rgba(227,194,78,.85), 0 0 12px rgba(227,194,78,.9)}}
+
+  /* CRM WHEEL — black and gold donut per feedback: CRM hub in the center,
+     eight configuration wedges alternating gold and ink, four outer arcs
+     grouping them (marketing, sales, automation, attribution). Wedges bloom
+     out from the center on scroll, arcs draw themselves around, then a
+     highlight sweeps the wheel in sync with the operating-log ticker. */
+  .crm-wheel{max-width:460px; margin:0 auto}
+  .crm-wheel svg{width:100%; height:auto; display:block; overflow:visible}
+  .crm-wheel .seg path{stroke:var(--ink-2,#16171A); stroke-width:3;
+    transform-origin:200px 200px; opacity:0; transform:scale(.62) rotate(-10deg);
+    transition:opacity .5s ease, transform .6s cubic-bezier(.22,1.3,.4,1),
+      filter .35s ease}
+  .ga-funnel.is-in .crm-wheel .seg path{opacity:1; transform:scale(1) rotate(0deg);
+    transition-delay:calc(var(--i,0) * 80ms + .25s), calc(var(--i,0) * 80ms + .25s), 0s}
+  .crm-wheel .seg text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:10.5px; letter-spacing:.4px; opacity:0; transition:opacity .45s ease}
+  .ga-funnel.is-in .crm-wheel .seg text{opacity:1;
+    transition-delay:calc(var(--i,0) * 80ms + .6s)}
+  .crm-wheel .seg.on path{filter:brightness(1.18) drop-shadow(0 0 12px rgba(227,194,78,.55));
+    transform:scale(1.045)}
+  .crm-wheel .seg.on text{font-weight:600}
+  .crm-wheel .oarc path{fill:none; stroke-width:26; stroke-dasharray:1; stroke-dashoffset:1;
+    transition:stroke-dashoffset 1s ease, filter .35s ease}
+  .ga-funnel.is-in .crm-wheel .oarc path{stroke-dashoffset:0;
+    transition-delay:calc(var(--a,0) * 180ms + .9s), 0s}
+  .crm-wheel .oarc text{font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:12px; font-weight:600; letter-spacing:2.5px; opacity:0; transition:opacity .45s ease}
+  .ga-funnel.is-in .crm-wheel .oarc text{opacity:1;
+    transition-delay:calc(var(--a,0) * 180ms + 1.5s)}
+  .crm-wheel .oarc.on path{filter:brightness(1.22) drop-shadow(0 0 10px rgba(227,194,78,.4))}
+  .crm-wheel .hub circle{opacity:0; transform-origin:200px 200px; transform:scale(.5);
+    transition:opacity .4s ease, transform .5s cubic-bezier(.22,1.3,.4,1)}
+  .ga-funnel.is-in .crm-wheel .hub circle{opacity:1; transform:scale(1)}
+  .crm-wheel .hub text{font-family:var(--font-serif,'Playfair Display',Georgia,serif);
+    font-size:30px; font-weight:600; fill:var(--gold,#D4AF37); opacity:0; transition:opacity .5s ease .5s}
+  .ga-funnel.is-in .crm-wheel .hub text{opacity:1}
+  .mx-foot{margin:16px 0 0; font-family:var(--font-mono,'JetBrains Mono',ui-monospace,Menlo,monospace);
+    font-size:.68rem; color:var(--muted-on-dark,#868A90); line-height:1.6}
   @media (max-width:640px){
-    .ga-frow{grid-template-columns:76px 1fr; gap:12px}
-    .ga-frow .bar-area{gap:10px}
-    .ga-frow .bar{height:30px}
-    .ga-frow .cap{font-size:.8rem}
     .ga-funnel-head{font-size:.65rem}
   }
   @media (prefers-reduced-motion:reduce){
-    .ga-frow .bar{transition:none; width:var(--w)}
-    .ga-frow .cap{transition:none; opacity:1}
-    .ga-frow.is-step{transform:none}
-    .ga-frow.is-step .bar .shine::after,.ga-frow.is-step .bar .drop,
-    .ga-frow.is-step .bar.closed{animation:none}
+    .crm-wheel .seg path{opacity:1; transform:none; transition:none}
+    .crm-wheel .seg text,.crm-wheel .oarc text,.crm-wheel .hub text{opacity:1; transition:none}
+    .crm-wheel .oarc path{stroke-dashoffset:0; transition:none}
+    .crm-wheel .hub circle{opacity:1; transform:none; transition:none}
+    .crm-wheel .seg.on path,.crm-wheel .oarc.on path{filter:none; transform:none}
   }
 
   /* SPEC TABLE — ported verbatim from ai-automation.html's section 04 pipeline,
@@ -722,13 +710,10 @@
     .loc-globe-wrap{max-width:none; margin:0}
   }
 /* HERO-SCENE-CSS START */
-  /* Corridor Map + spend-to-booked funnel hero scene: draw-in staging
-     (markup is fully drawn without this). MAP-HALF timings are copied
-     verbatim from scene_seo.css -- same map, same pacing. PAYOFF-HALF is a
-     new spend->booked funnel (4 bars instead of 5 SERP rows, gold on the
-     final/BOOKED bar) reusing the sa-s1..sa-s4 / sa-arc / sa-card / sa-f5 /
-     sa-f6 timing slots so the two sibling scenes keep the same overall
-     cadence and finish around the same ~3.7s mark. */
+  /* Engine Wheel hero scene: draw-in staging (markup is fully drawn without this).
+     MAP-HALF timing rules below are copied verbatim from scene_seo.css since
+     the MAP-HALF markup itself is reused verbatim (same classes). PAYOFF-HALF
+     timing rules are new, for the engine-wheel diagram's own classes. */
   .sa-scene svg .sa-d{stroke-dasharray:1; stroke-dashoffset:1;
     animation:saDraw .9s cubic-bezier(.25,.65,.3,1) forwards}
   .sa-scene svg .sa-f{opacity:0; animation:saFade .55s ease-out forwards}
@@ -743,15 +728,34 @@
   .sa-scene svg .sa-f2{animation-delay:1.05s}
   .sa-scene svg .sa-f2b{animation-delay:1.2s}
   .sa-scene svg .sa-f3{animation-delay:1.45s}
-  .sa-scene svg .sa-s1{animation-delay:1.6s; animation-duration:.6s}
-  .sa-scene svg .sa-s2{animation-delay:1.72s; animation-duration:.6s}
-  .sa-scene svg .sa-s3{animation-delay:1.84s; animation-duration:.6s}
-  .sa-scene svg .sa-s4{animation-delay:1.96s; animation-duration:.6s}
-  .sa-scene svg .sa-f4{animation-delay:2.3s}
-  .sa-scene svg .sa-arc{animation-delay:2.55s; animation-duration:.8s}
-  .sa-scene svg .sa-f5{animation-delay:3.2s; animation-duration:.4s}
-  .sa-scene svg .sa-card{animation-delay:2.95s; animation-duration:.6s}
-  .sa-scene svg .sa-f6{animation-delay:3.3s}
+
+  /* PAYOFF-HALF: engine wheel -- hub draws, tick texture, spokes converge one
+     by one, channel nodes fade in behind them, then one gold output line
+     draws from the hub into the weekly-brief card. */
+  .sa-scene svg .sa-tick2{animation-delay:1.1s}
+  .sa-scene svg .sa-hubring{animation-delay:1.5s; animation-duration:.6s}
+  .sa-scene svg .sa-hubtxt{animation-delay:1.95s}
+  .sa-scene svg .sa-spk{animation-duration:.45s}
+  .sa-scene svg .sa-spk0{animation-delay:1.9s}
+  .sa-scene svg .sa-spk1{animation-delay:1.98s}
+  .sa-scene svg .sa-spk2{animation-delay:2.06s}
+  .sa-scene svg .sa-spk3{animation-delay:2.14s}
+  .sa-scene svg .sa-spk4{animation-delay:2.22s}
+  .sa-scene svg .sa-spk5{animation-delay:2.3s}
+  .sa-scene svg .sa-nd0{animation-delay:2.2s}
+  .sa-scene svg .sa-nd1{animation-delay:2.28s}
+  .sa-scene svg .sa-nd2{animation-delay:2.36s}
+  .sa-scene svg .sa-nd3{animation-delay:2.44s}
+  .sa-scene svg .sa-nd4{animation-delay:2.52s}
+  .sa-scene svg .sa-nd5{animation-delay:2.6s}
+  .sa-scene svg .sa-out{animation-delay:2.75s; animation-duration:.75s}
+  .sa-scene svg .sa-card2{animation-delay:3.05s; animation-duration:.6s}
+  .sa-scene svg .sa-arrow2{animation-delay:3.5s; animation-duration:.4s}
+  .sa-scene svg .sa-cardtxt{animation-delay:3.7s}
+  .sa-scene svg .sa-plq2{animation-delay:1.3s; animation-duration:.6s}
+  .sa-scene svg .sa-plqtxt2{animation-delay:1.9s}
+
+  /* shared pulse ring (HQ marker on the map, engine hub on the payoff side) */
   .sa-scene svg .sa-ring{transform-box:fill-box; transform-origin:center;
     animation:saPulse 3s cubic-bezier(.2,.6,.4,1) infinite}
   .sa-scene svg .sa-r1{animation-delay:1.7s}
@@ -814,64 +818,179 @@
 <section class="aa-hero" data-mark="01">
   <div class="aa-cta-bg sa-scene" aria-hidden="true"><!-- HERO-SCENE START --><svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace">
 <defs>
-<mask id="saI5Reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="1400" height="900">
-<path class="sa-d sa-i5m" d="M352 -12 C340 120 300 200 306 320 C312 430 268 520 278 640 C286 740 254 820 258 912" pathLength="1" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round"/>
+<mask id="saLaFwyReveal" maskUnits="userSpaceOnUse" x="0" y="0" width="1400" height="900">
+<path class="sa-d sa-i5m" d="M-12 214 C120 250 260 236 392 292 C520 346 566 452 604 566 C640 676 618 790 640 912" pathLength="1" fill="none" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round"/>
 </mask>
 </defs>
-<g class="sa-f sa-fw" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.2" stroke-linecap="round">
-<path d="M52 296 q20 -12 40 0"/>
-<path d="M40 470 q20 -12 40 0"/>
-<path d="M74 652 q20 -12 40 0"/>
+<path class="sa-d sa-coast" d="M-12 690 C90 700 176 742 268 772 C356 800 452 806 548 838 C628 864 668 886 700 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1.6"/>
+<path class="sa-d sa-z1" d="M-12 214 C120 250 260 236 392 292 C520 346 566 452 604 566 C640 676 618 790 640 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.30)" stroke-width="1.3"/>
+<path d="M-12 214 C120 250 260 236 392 292 C520 346 566 452 604 566 C640 676 618 790 640 912" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.4" stroke-dasharray="7 9" mask="url(#saLaFwyReveal)"/>
+<path class="sa-d sa-z2" d="M96 -12 C132 140 176 300 208 452 C236 588 252 730 268 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1.2"/>
+<path class="sa-d sa-z3" d="M-12 470 C130 462 300 486 452 470 C566 458 640 442 700 448" pathLength="1" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1.2"/>
+<g class="sa-f sa-fw">
+<rect x="447" y="254" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="54" y="599" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="515" y="198" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="183" y="676" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="371" y="745" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="207" y="182" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="196" y="313" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="220" y="75" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="65" y="569" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="434" y="543" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="190" y="451" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="478" y="378" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="146" y="627" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="332" y="405" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="414" y="584" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="407" y="644" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="395" y="379" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="624" y="403" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="346" y="504" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="75" y="112" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="500" y="772" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="608" y="114" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="72" y="421" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="266" y="825" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="179" y="715" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="567" y="755" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="534" y="367" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="328" y="601" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="314" y="821" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="210" y="264" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="225" y="546" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="434" y="312" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="449" y="428" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="451" y="618" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="358" y="258" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="348" y="567" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="633" y="489" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="170" y="77" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="500" y="475" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="175" y="549" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="207" y="751" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="156" y="374" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="605" y="694" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="468" y="64" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="113" y="464" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="363" y="113" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="501" y="823" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="162" y="484" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="427" y="821" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="146" y="242" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="258" y="675" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="421" y="767" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="61" y="452" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="329" y="84" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="306" y="439" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="369" y="72" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="657" y="555" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="418" y="509" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="257" y="337" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="517" y="104" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="153" y="592" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="211" y="807" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="550" y="710" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="543" y="319" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="113" y="658" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="399" y="552" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="560" y="138" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="279" y="517" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="478" y="197" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="295" y="145" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="235" y="497" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="366" y="685" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="274" y="66" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="608" y="805" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="308" y="224" width="13" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="93" y="210" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="74" y="365" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="291" y="99" width="11" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="68" y="290" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="286" y="713" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="389" y="228" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="379" y="409" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="564" y="252" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="617" y="655" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+<rect x="67" y="536" width="13" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1"/>
+<rect x="122" y="558" width="9" height="9" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="506" y="534" width="9" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.26)" stroke-width="1"/>
+<rect x="136" y="175" width="11" height="7" rx="1.5" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
 </g>
-<path class="sa-d sa-coast" d="M262 -12 C250 70 218 120 224 190 C230 258 196 300 190 356 C186 402 214 436 208 484 C203 528 172 560 176 616 C180 664 208 700 198 752 C190 800 150 848 142 912" pathLength="1" fill="none" stroke="rgba(255,255,255,.42)" stroke-width="1.6"/>
-<path d="M352 -12 C340 120 300 200 306 320 C312 430 268 520 278 640 C286 740 254 820 258 912" fill="none" stroke="rgba(255,255,255,.34)" stroke-width="1.4" stroke-dasharray="7 9" mask="url(#saI5Reveal)"/>
-<text class="sa-f sa-f2" x="315" y="158" text-anchor="end" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">I-5</text>
-<g class="sa-f sa-f2" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="1">
-<path d="M386 58 v12 M380 64 h12"/>
-<path d="M560 346 v12 M554 352 h12"/>
-<path d="M476 656 v12 M470 662 h12"/>
-</g>
-<path class="sa-d sa-z1" d="M400 84 L624 66 L662 150 L616 236 L452 244 L386 168 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
-<path class="sa-d sa-z2" d="M232 336 L470 318 L516 396 L470 498 L262 512 L216 420 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
-<path class="sa-d sa-z3" d="M296 608 L520 596 L596 668 L548 772 L330 786 L258 700 Z" pathLength="1" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.30)" stroke-width="1.2" stroke-linejoin="round"/>
-<text class="sa-f sa-f2b" x="412" y="160" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">NORTH COUNTY &middot; POWAY &middot; LA MESA</text>
-<text class="sa-f sa-f2b" x="236" y="300" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">TORREY PINES &middot; UCSD &middot; LA JOLLA</text>
-<text class="sa-f sa-f2b" x="330" y="700" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">DOWNTOWN &middot; CHULA VISTA</text>
-<text class="sa-f sa-f2b" x="258" y="856" font-size="9" letter-spacing="2" fill="rgba(255,255,255,.38)">THE SAN DIEGO READ</text>
+<rect class="sa-d sa-z1" x="120" y="196" width="26" height="16" rx="2" pathLength="1" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.40)" stroke-width="1.2"/>
+<text class="sa-f sa-f2b" x="154" y="209" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">PASADENA</text>
+<rect class="sa-d sa-z1" x="300" y="640" width="26" height="16" rx="2" pathLength="1" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.40)" stroke-width="1.2"/>
+<text class="sa-f sa-f2b" x="334" y="653" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">TORRANCE</text>
+<rect class="sa-d sa-z1" x="78" y="452" width="26" height="16" rx="2" pathLength="1" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.40)" stroke-width="1.2"/>
+<text class="sa-f sa-f2b" x="112" y="465" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.6)">WEST LA</text>
+<text class="sa-f sa-f2" x="404" y="270" font-size="10" letter-spacing="1.8" fill="rgba(255,255,255,.55)">I-5</text>
+<text class="sa-f sa-f2b" x="40" y="884" font-size="9" letter-spacing="2" fill="rgba(255,255,255,.38)">THE LOS ANGELES READ</text>
+<!-- No pin. San Diego's scene marks a real office; there is no Los Angeles
+     office, so the gold carries coverage and the honest headquarters line. -->
 <g class="sa-f sa-f3">
-<circle class="sa-ring sa-r1" cx="181" cy="565" r="11" fill="none" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
-<circle class="sa-ring sa-r2" cx="181" cy="565" r="17" fill="none" stroke="rgba(212,175,55,.30)" stroke-width="1"/>
-<circle cx="181" cy="565" r="4.5" fill="#D4AF37"/>
-<text x="205" y="570" font-size="9.5" letter-spacing="1.8" fill="rgba(227,194,78,.8)">HQ &middot; PACIFIC BEACH</text>
+<path d="M40 762 h34" stroke="rgba(212,175,55,.55)" stroke-width="1" fill="none"/>
+<text x="40" y="748" font-size="9.5" letter-spacing="1.8" fill="rgba(227,194,78,.8)">88 CITIES, ONE COUNTY</text>
+<text x="40" y="784" font-size="9" letter-spacing="1.6" fill="rgba(227,194,78,.55)">RUN FROM SAN DIEGO</text>
 </g>
-<rect class="sa-d sa-s1" x="950" y="250" width="300" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
-<rect class="sa-d sa-s2" x="950" y="322" width="250" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
-<rect class="sa-d sa-s3" x="950" y="394" width="200" height="52" rx="8" pathLength="1" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="1.1"/>
-<rect class="sa-d sa-s4" x="950" y="466" width="150" height="52" rx="8" pathLength="1" fill="rgba(212,175,55,.06)" stroke="rgba(212,175,55,.85)" stroke-width="1.4"/>
-<g class="sa-f sa-f4">
-<text x="974" y="281" font-size="11" letter-spacing="2" fill="rgba(255,255,255,.72)">SPEND</text>
-<text x="974" y="353" font-size="11" letter-spacing="2" fill="rgba(255,255,255,.72)">CLICKS</text>
-<text x="974" y="425" font-size="11" letter-spacing="2" fill="rgba(255,255,255,.72)">LEADS</text>
-<text x="974" y="497" font-size="11" letter-spacing="2" fill="rgba(227,194,78,.95)">BOOKED</text>
+<g class="sa-f sa-tick2" fill="none" stroke="rgba(255,255,255,.13)" stroke-width="1">
+<path d="M1060 350 v12 M1054 356 h12"/>
+<path d="M1340 500 v12 M1334 506 h12"/>
 </g>
-<path class="sa-d sa-arc" d="M1100 492 C1206 502 1250 522 1234 566" pathLength="1" fill="none" stroke="rgba(212,175,55,.6)" stroke-width="1.5"/>
-<path class="sa-f sa-f5" d="M1224 570 L1228 559.5 L1235 567 Z" fill="rgba(212,175,55,.75)"/>
-<rect class="sa-d sa-card" x="1124" y="572" width="204" height="72" rx="6" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(255,255,255,.38)" stroke-width="1.3"/>
-<g class="sa-f sa-f6">
-<text x="1226" y="604" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.75)">BOOKED WORK</text>
-<path d="M1164 618 h124" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
-<path d="M1144 630 h164" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 5"/>
+<path class="sa-d sa-spk sa-spk0" d="M1041.5,409.3 L1010,324" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk1" d="M1019.9,423.9 L952,363" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk2" d="M1007.6,446.9 L919,425" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk3" d="M1007.6,473.1 L919,495" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk4" d="M1019.9,496.1 L952,557" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<path class="sa-d sa-spk sa-spk5" d="M1041.5,510.7 L1010,596" pathLength="1" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.2"/>
+<circle class="sa-d sa-hubring" cx="1060" cy="460" r="54" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(212,175,55,.55)" stroke-width="1.4"/>
+<circle class="sa-ring sa-r1" cx="1060" cy="460" r="62" fill="none" stroke="rgba(212,175,55,.5)" stroke-width="1"/>
+<circle class="sa-ring sa-r2" cx="1060" cy="460" r="74" fill="none" stroke="rgba(212,175,55,.28)" stroke-width="1"/>
+<text class="sa-f sa-hubtxt" x="1060" y="466" text-anchor="middle" font-size="13" letter-spacing="2" fill="rgba(255,255,255,.85)">ENGINE</text>
+<g class="sa-f sa-nd sa-nd0">
+<circle cx="1010" cy="324" r="4" fill="#D4AF37"/>
+<text x="1000" y="327.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">SEO</text>
 </g>
+<g class="sa-f sa-nd sa-nd1">
+<circle cx="952" cy="363" r="4" fill="#D4AF37"/>
+<text x="942" y="366.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">GOOGLE ADS</text>
+</g>
+<g class="sa-f sa-nd sa-nd2">
+<circle cx="919" cy="425" r="4" fill="#D4AF37"/>
+<text x="909" y="428.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">META ADS</text>
+</g>
+<g class="sa-f sa-nd sa-nd3">
+<circle cx="919" cy="495" r="4" fill="#D4AF37"/>
+<text x="909" y="498.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">AI AUTOMATION</text>
+</g>
+<g class="sa-f sa-nd sa-nd4">
+<circle cx="952" cy="557" r="4" fill="#D4AF37"/>
+<text x="942" y="560.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">CRM</text>
+</g>
+<g class="sa-f sa-nd sa-nd5">
+<circle cx="1010" cy="596" r="4" fill="#D4AF37"/>
+<text x="1000" y="599.5" text-anchor="end" font-size="9.5" letter-spacing="1.5" fill="rgba(255,255,255,.68)">WEB DESIGN</text>
+</g>
+<path class="sa-d sa-out" d="M1114,460 C1200,462 1258,505 1264,558" pathLength="1" fill="none" stroke="rgba(212,175,55,.65)" stroke-width="1.7"/>
+<path class="sa-f sa-arrow2" d="M1258,568 L1264,580 L1270,568 Z" fill="rgba(212,175,55,.75)"/>
+<rect class="sa-d sa-card2" x="1180" y="580" width="170" height="70" rx="6" pathLength="1" fill="rgba(212,175,55,.04)" stroke="rgba(255,255,255,.38)" stroke-width="1.3"/>
+<g class="sa-f sa-cardtxt">
+<text x="1265" y="608" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.75)">WEEKLY BRIEF</text>
+<path d="M1205,622 h120" stroke="rgba(212,175,55,.55)" stroke-width="1"/>
+<path d="M1195,634 h140" stroke="rgba(255,255,255,.14)" stroke-width="1" stroke-dasharray="3 5"/>
+</g>
+<rect class="sa-d sa-plq2" x="1168" y="140" width="192" height="34" rx="4" pathLength="1" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.1"/>
+<text class="sa-f sa-plqtxt2" x="1264" y="161" text-anchor="middle" font-size="10" letter-spacing="2" fill="rgba(255,255,255,.6)">LOS ANGELES, CA</text>
 </svg>
 <!-- HERO-SCENE END --></div>
   <div class="aa-hero-content">
-    <nav class="eyebrow" aria-label="Breadcrumb"><span class="num">01</span> <span class="sep" aria-hidden="true">&middot;</span><ol class="crumbs"><li><a href="../../index.html">Home</a></li><li><a href="../../locations.html">Locations</a></li><li><a href="../../san-diego-marketing.html">San Diego</a></li><li aria-current="page">Google Ads Management</li></ol></nav>
-    <h1>Win the San Diego auction with <em>Google Ads</em><br>Buy <em>booked jobs</em> instead of clicks</h1>
+    <nav class="eyebrow" aria-label="Breadcrumb"><span class="num">01</span> <span class="sep" aria-hidden="true">&middot;</span><ol class="crumbs"><li><a href="../../index.html">Home</a></li><li><a href="../../locations.html">Locations</a></li><li><a href="../../los-angeles-marketing.html">Los Angeles</a></li><li aria-current="page">Full-Stack Marketing</li></ol></nav>
+    <h1>One team across <em>88 cities</em><br><em>Full-Stack marketing</em> with one owner</h1>
     <p class="lede">
-      For San Diego home service, medical and legal operators done paying for Google Ads
-      clicks that never reach the calendar. The team that owns your account audit, GA4-to-CRM
-      attribution, and Performance Max rebuild sits at 1135 Garnet Ave in Pacific Beach, reports
-      in a Monday brief, and ties every dollar to a booked job, not a click.
+      Splitting channels across separate vendors is expensive anywhere and worse in a
+      county this fragmented, where every one of them targets Los Angeles differently
+      and none of them owns the result. We run the whole stack with one team and one
+      number: cost per booked appointment. Run from San Diego, serving operators
+      across the county.
     </p>
     <div class="aa-hero-cta">
       <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
@@ -882,132 +1001,166 @@
 
 <section class="aa-sec band-light aa-intro-band">
   <div class="eyebrow">02 &middot; Benefits</div>
-  <h2>Benefits of Google Ads Management in San Diego</h2>
-  <p class="intro">One citywide campaign across a 3.3 million person metro quietly funds clicks in cities you will not drive to. The dense corridors price highest: Torrey Pines and downtown cost more per click than the rest of the county, and more than 1,400 life science firms bid on the medical side.</p>
+  <h2>Benefits of Full-Stack Marketing in Los Angeles</h2>
+  <p class="intro">Los Angeles County is 9.7 million people across 88 cities, and separate vendors tend to draw separate maps. When paid targets Pasadena and organic chases Long Beach, the spend competes with itself and nobody is accountable for the result.</p>
   <ul class="sa-benefits">
     <li>
-      <h3>You buy booked jobs, not clicks</h3>
-      <p>Spend is reported against jobs on your calendar, using GA4 wired through to your CRM rather than the platform's own conversion count.</p>
+      <h3>One map, not four</h3>
+      <p>Every channel works the same service area, so you stop funding four different opinions about which parts of the county you serve.</p>
     </li>
     <li>
-      <h3>Budget follows the corridor</h3>
-      <p>Spend splits by the areas you actually serve, so a lead in a zone you cover is worth more than a cheaper one you cannot reach.</p>
+      <h3>Nobody gets to blame the other guy</h3>
+      <p>When cost per booked appointment moves, one team owns the answer because the same team runs every channel feeding it.</p>
     </li>
     <li>
-      <h3>You stop overpaying the auction</h3>
-      <p>Where cost per booked job stops making sense we cap it and say why, rather than letting Performance Max spend into it quietly.</p>
+      <h3>Effort moves to where it is cheapest</h3>
+      <p>Where a city is priced beyond sense on paid, the plan leans on local and organic there instead of repeating one playbook across 88 of them.</p>
     </li>
     <li>
-      <h3>One number every Monday</h3>
-      <p>A written brief carrying cost per booked job, instead of a dashboard you have to interpret yourself.</p>
+      <h3>One scoreboard</h3>
+      <p>Cost per booked appointment in a single place, rather than four vendors sending four versions of the same month.</p>
     </li>
   </ul>
 </section>
 
 <div class="ga-funnel-wrap">
-  <div class="ga-funnel" aria-label="The funnel from ad spend to closed jobs: spend, click, lead, booked, closed">
+  <div class="ga-funnel" aria-label="The Magister engine wheel with a rolling weekly-brief ticker">
   <div class="ga-fmain">
-    <div class="ga-funnel-head"><span class="stage" data-stage="0">SPEND</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="1">CLICK</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="2">LEAD</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="3">BOOKED</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="4">CLOSED</span></div>
-    <div class="ga-frow" style="--i:0; --w:52%">
-      <span class="lbl">Ad spend</span>
-      <div class="bar-area"><div class="bar" style="background:#D9B441"><span class="shine"></span></div><span class="cap">Every dollar tracked</span></div>
+    <div class="ga-funnel-head"><span class="stage" data-stage="0">ONE TEAM</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="1">ONE DASHBOARD</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="2">ONE NUMBER</span> <span class="sep">&rarr;</span> <span class="stage" data-stage="3">WEEKLY BRIEF</span></div>
+    <div class="crm-wheel">
+      <svg viewBox="0 0 400 400" role="img"
+        aria-label="The engine wheel: all seven Magister services, SEO, Google Ads, Meta Ads, AI Automation, CRM, Web Design, and Full-Stack Marketing, around one engine hub, ringed by one team, one dashboard, one number, weekly brief.">
+        <g class="oarc" data-arc="0" style="--a:0">
+          <path id="crmOa0" pathLength="1" stroke="#A8842A" d="M205.9,32.1 A168 168 0 0 1 367.9,194.1"/>
+          <text fill="#0F1115"><textPath href="#crmOa0" startOffset="50%" text-anchor="middle">ONE TEAM</textPath></text>
+        </g>
+        <g class="oarc" data-arc="1" style="--a:1">
+          <path id="crmOa1" pathLength="1" stroke="#33363D" d="M367.9,205.9 A168 168 0 0 1 205.9,367.9"/>
+          <text fill="#E3C24E"><textPath href="#crmOa1" startOffset="50%" text-anchor="middle">ONE DASHBOARD</textPath></text>
+        </g>
+        <g class="oarc" data-arc="2" style="--a:2">
+          <path id="crmOa2" pathLength="1" stroke="#A8842A" d="M194.1,367.9 A168 168 0 0 1 32.1,205.9"/>
+          <text fill="#0F1115"><textPath href="#crmOa2" startOffset="50%" text-anchor="middle">ONE NUMBER</textPath></text>
+        </g>
+        <g class="oarc" data-arc="3" style="--a:3">
+          <path id="crmOa3" pathLength="1" stroke="#33363D" d="M32.1,194.1 A168 168 0 0 1 194.1,32.1"/>
+          <text fill="#E3C24E"><textPath href="#crmOa3" startOffset="50%" text-anchor="middle">WEEKLY BRIEF</textPath></text>
+        </g>
+        <g class="seg" data-seg="0" style="--i:0">
+          <path fill="#D4AF37" d="M200,138 L200,52 A148 148 0 0 1 315.7,107.7 L248.5,161.3 A62 62 0 0 0 200,138 Z"/>
+          <text x="245.6" y="109.4" text-anchor="middle" fill="#16171A">SEO</text>
+        </g>
+        <g class="seg" data-seg="1" style="--i:1">
+          <path fill="#2A2C31" d="M248.5,161.3 L315.7,107.7 A148 148 0 0 1 344.3,232.9 L260.4,213.8 A62 62 0 0 0 248.5,161.3 Z"/>
+          <text x="302.4" y="176.6" text-anchor="middle" fill="#E3C24E"><tspan x="302.4">Google</tspan><tspan x="302.4" dy="12">Ads</tspan></text>
+        </g>
+        <g class="seg" data-seg="2" style="--i:2">
+          <path fill="#D4AF37" d="M260.4,213.8 L344.3,232.9 A148 148 0 0 1 264.2,333.3 L226.9,255.9 A62 62 0 0 0 260.4,213.8 Z"/>
+          <text x="282.1" y="265.5" text-anchor="middle" fill="#16171A"><tspan x="282.1">Meta</tspan><tspan x="282.1" dy="12">Ads</tspan></text>
+        </g>
+        <g class="seg" data-seg="3" style="--i:3">
+          <path fill="#2A2C31" d="M226.9,255.9 L264.2,333.3 A148 148 0 0 1 135.8,333.3 L173.1,255.9 A62 62 0 0 0 226.9,255.9 Z"/>
+          <text x="200" y="301" text-anchor="middle" fill="#E3C24E"><tspan x="200">AI</tspan><tspan x="200" dy="12">Automation</tspan></text>
+        </g>
+        <g class="seg" data-seg="4" style="--i:4">
+          <path fill="#D4AF37" d="M173.1,255.9 L135.8,333.3 A148 148 0 0 1 55.7,232.9 L139.6,213.8 A62 62 0 0 0 173.1,255.9 Z"/>
+          <text x="117.9" y="273.5" text-anchor="middle" fill="#16171A">CRM</text>
+        </g>
+        <g class="seg" data-seg="5" style="--i:5">
+          <path fill="#2A2C31" d="M139.6,213.8 L55.7,232.9 A148 148 0 0 1 84.3,107.7 L151.5,161.3 A62 62 0 0 0 139.6,213.8 Z"/>
+          <text x="97.6" y="172.6" text-anchor="middle" fill="#E3C24E"><tspan x="97.6">Web</tspan><tspan x="97.6" dy="12">Design</tspan></text>
+        </g>
+        <g class="seg" data-seg="6" style="--i:6">
+          <path fill="#A8842A" d="M151.5,161.3 L84.3,107.7 A148 148 0 0 1 200,52 L200,138 A62 62 0 0 0 151.5,161.3 Z"/>
+          <text x="154.4" y="101.4" text-anchor="middle" fill="#16171A"><tspan x="154.4">Full-Stack</tspan><tspan x="154.4" dy="12">Marketing</tspan></text>
+        </g>
+        <g class="hub">
+          <circle cx="200" cy="200" r="56" fill="#1C1D21" stroke="#2A2C31" stroke-width="2"/>
+          <text x="200" y="207" text-anchor="middle" style="font-size:21px">ENGINE</text>
+        </g>
+      </svg>
     </div>
-    <div class="ga-frow" style="--i:1; --w:43%">
-      <span class="lbl">Clicks</span>
-      <div class="bar-area"><div class="bar" style="background:#C6A53C"><span class="shine"></span></div><span class="cap">Tagged by campaign</span></div>
-    </div>
-    <div class="ga-frow" style="--i:2; --w:31%">
-      <span class="lbl">Leads</span>
-      <div class="bar-area"><div class="bar" style="background:#A98E33"><span class="shine"></span><span class="drop"></span><span class="drop"></span><span class="drop"></span></div><span class="cap leak">&larr; the usual leak</span></div>
-    </div>
-    <div class="ga-frow" style="--i:3; --w:19%">
-      <span class="lbl">Booked</span>
-      <div class="bar-area"><div class="bar" style="background:#8A752B"><span class="shine"></span></div><span class="cap">Synced to CRM</span></div>
-    </div>
-    <div class="ga-frow" style="--i:4; --w:9%">
-      <span class="lbl">Closed</span>
-      <div class="bar-area"><div class="bar closed" style="min-width:44px"><span class="shine"></span></div><span class="cap"><b>Cost per booked job</b></span></div>
-    </div>
+    <p class="mx-foot">Seven services run as a single engine. Every channel feeds one BI layer, three founders sign the same weekly brief, and cost per booked appointment is the only headline number. Live figures land after your audit.</p>
   </div>
-  <aside class="ga-brief" aria-label="Monday brief ticker, figures land after your audit">
-    <div class="ga-brief-head">MONDAY BRIEF &middot; spend_to_closed &middot; rolling</div>
+  <aside class="ga-brief" aria-label="Weekly brief ticker, live figures land after your audit">
+    <div class="ga-brief-head">WEEKLY BRIEF &middot; all_channels_one_number &middot; rolling</div>
     <div class="ga-brief-stream" id="gaBriefStream">
-      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SPEND</span><span class="m">by campaign &middot; sourced after your San Diego audit</span></div>
-      <div class="ga-brief-row"><span class="t">00:00:01</span><span class="k">LEAD</span><span class="m">source tag &rarr; <span class="ok">your crm</span></span></div>
-      <div class="ga-brief-row"><span class="t">00:00:00</span><span class="k">BRIEF</span><span class="m">signed &middot; d.morgan &middot; monday</span></div>
+      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SEO</span><span class="m">organic &rarr; booked &middot; sourced after your Los Angeles audit</span></div>
+      <div class="ga-brief-row"><span class="t">00:00:01</span><span class="k">STACK</span><span class="m">seven services &middot; <span class="ok">one engine</span></span></div>
+      <div class="ga-brief-row"><span class="t">00:00:00</span><span class="k">SIGNED</span><span class="m">three founders &middot; monday</span></div>
     </div>
   </aside>
 </div>
 
 <section class="aa-sec band-light" data-mark="03">
   <div class="eyebrow">03 &middot; What lands in your inbox</div>
-  <h2 class="aa-h2-rule">A weekly brief you can hand your San Diego CFO</h2>
-  <p class="intro">A 45-minute working session where we pull up your Google Ads account, your GA4, and your CRM side by side. You see where budget goes to queries that never close, and what a properly structured Performance Max asset group looks like. Whether or not you ever hire us.</p>
-  <p class="intro">If the math at the end of the first 30 days says we are not moving the calendar, we say so before Month 2 invoices.</p>
+  <h2 class="aa-h2-rule">A working brief for Los Angeles, not a pitch deck</h2>
+  <p class="intro">A 45-minute working session where we walk you through the same weekly BI view TurnkeyRenovators runs on: every channel, one attribution layer, cost per booked appointment by channel by week. Then a written brief inside seven days on what we would run first, whether or not you ever hire us.</p>
+  <p class="intro">If the bottleneck is operational rather than marketing, we say so and decline the account.</p>
   <div class="aa-sec-cta">
     <a class="btn" href="https://magisterdigital.ai/contact/"><span class="t">Book a strategy call</span><span class="ar">&rarr;</span></a>
     <a class="hero-tel" href="tel:+16193300953"><span class="tag">or call</span> <b>(619) 330-0953</b></a>
   </div>
-  <p class="intro small" style="margin-top:20px; text-align:center">Single-channel Google Ads engagements start at $20K per month. Scoped to your market.</p>
+  <p class="intro small" style="margin-top:20px; text-align:center">Full-stack engagements start at $60K per month. Single channels start at $20K.</p>
   <div class="aa-lands" style="margin-top:48px">
     <div class="item">
       <span class="idx">01</span>
-      <h3>A cost per closed deal view</h3>
-      <p>Spend, clicks, leads, booked appointments, and closed revenue by campaign, reconciled inside your own CRM and updated every Monday. The headline number is cost per closed deal, not cost per lead.</p>
+      <h3>A live dashboard walkthrough</h3>
+      <p>The same weekly BI view TurnkeyRenovators runs on. Every channel on one attribution layer, reconciled to cost per booked appointment, by channel, by week.</p>
     </div>
     <div class="item">
       <span class="idx">02</span>
-      <h3>A GA4 to CRM attribution bridge</h3>
-      <p>Enhanced conversions, offline conversion import for phone closes, and call tracking mapped to campaign and keyword. HubSpot, Go High Level, ServiceTitan, Salesforce, and Jobber all integrate, each in its own way.</p>
+      <h3>A written brief inside seven days</h3>
+      <p>What we would run first, with budget targets per channel and a named owner per workstream. Not a one-page proposal built for price-shopping.</p>
     </div>
     <div class="item">
       <span class="idx">03</span>
-      <h3>A Performance Max rebuild</h3>
-      <p>Proper feeds, tightened asset groups, audience signals from your first-party CRM data, brand exclusions, and weekly audits. We do not hand Performance Max the keys and call it strategy.</p>
+      <h3>An honest go or no-go</h3>
+      <p>Three verticals only, and only accounts we believe we can win. If the problem is operations rather than marketing, we decline and tell you why.</p>
     </div>
   </div>
 </section>
 
 <section class="aa-sec" data-mark="04">
   <div class="eyebrow">04 &middot; What we would run first</div>
-  <h2>The funnel we wire from San Diego spend to cost per booked job</h2>
-  <p class="intro">Most San Diego accounts we audit have 30 to 60 percent of budget going to queries that never book jobs in this market. So the first three weeks follow a fixed order: read everything, wire the attribution, then rebuild on data instead of hunches.</p>
-  <p class="intro small">Week 1 is the audit, Week 2 is the GA4 to CRM bridge, Week 3 ships the restructure, and every Monday after that is a brief signed by a founder.</p>
+  <h2>One attribution dashboard for Los Angeles, every channel on it, one team behind it</h2>
+  <p class="intro">The first 30 days follow a fixed order: audit everything, install the BI layer, ship changes live in market, and put the 90-day plan in writing with a founder's signature on it.</p>
+  <p class="intro small">The dashboard is CFO-auditable by Friday of Week 2, changes are live by Week 3, and the scale plan lands numbered and signed in Week 4.</p>
   <div class="aa-spec-table">
     <div class="aa-spec-row">
       <div class="k">AUDIT</div>
-      <div class="v">Read the whole account<div class="sub">Every active campaign, ad group, keyword, bidding strategy, conversion action, and negative keyword list, read against your San Diego corridor.</div></div>
+      <div class="v">Every channel and your CRM<div class="sub">Ad accounts, analytics, CRM, calendar, and call recordings read end to end. Current cost per booked appointment mapped by channel across your Los Angeles corridor.</div></div>
       <div class="m">week 1</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">ATTRIBUTE</div>
-      <div class="v">Wire spend to your pipeline<div class="sub">GA4 connected to your CRM: enhanced conversions, offline conversion import for phone closes, call tracking by campaign and keyword.</div></div>
+      <div class="k">INSTALL</div>
+      <div class="v">The BI layer and the tracking fixes<div class="sub">GA4, Meta CAPI, Google Ads offline conversions, call attribution, and CRM pipeline stages, all in one view.</div></div>
       <div class="m">week 2</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">RESTRUCTURE</div>
-      <div class="v">Rebuild on attribution data<div class="sub">Tighten Performance Max asset groups, pull broad match where it bleeds, restructure the campaign architecture.</div></div>
-      <div class="m">live by week 3</div>
+      <div class="k">SHIP</div>
+      <div class="v">Changes live in market, not in a deck<div class="sub">Bid adjustments, negative keywords, landing-page fixes, Flowbots intake agents, and fresh Meta creative.</div></div>
+      <div class="m">week 3</div>
     </div>
     <div class="aa-spec-row">
-      <div class="k">BRIEF</div>
-      <div class="v">A Monday brief signed by a founder<div class="sub">Spend, leads, booked appointments, closed revenue, and cost per closed deal by campaign, every week.</div></div>
-      <div class="m">every Monday</div>
+      <div class="k">PLAN</div>
+      <div class="v">A 90-day scale plan, founder-signed<div class="sub">A numbered document with budget targets per channel and a named owner per workstream in this market.</div></div>
+      <div class="m">week 4</div>
     </div>
   </div>
 </section>
 
 <section class="aa-sec" data-mark="05">
-  <div class="eyebrow">05 &middot; On the ground in San Diego</div>
-  <h2>San Diego is the home market. Here is what that does and does not change.</h2>
-  <p class="intro">This is the one market where the team is physical: the founders and the in-house team work out of 1135 Garnet Ave #13 in Pacific Beach. If a working session belongs in a room, that can happen here.</p>
-  <p class="intro">What does not change is how the work runs. Every market we serve, San Diego included, gets the same dashboard, the same weekly pipeline report, and the same named owner per workstream. The office is not the deliverable. The receipt is.</p>
+  <div class="eyebrow">05 &middot; On the ground in Los Angeles</div>
+  <h2>We are a remote partner here, not a storefront on Wilshire.</h2>
+  <p class="intro">Magister Digital is an operator-run team headquartered in San Diego, not Los Angeles, and we would rather say that on the first call than let you find out later. There is no LA office, no local account manager, and no address rented to look like there is one.</p>
+  <p class="intro">What runs your account instead is the founders and the in-house team, directly. Every market we serve gets the same dashboard, the same weekly pipeline report, and the same named owner per workstream. Two hours down the I-5 has never been the thing that decides whether the reporting is honest.</p>
 </section>
 
 <section class="aa-sec band-light" data-mark="06">
   <div class="eyebrow">06 &middot; Why this is built differently</div>
-  <h2 class="aa-h2-oneline">One team runs the whole stack in San Diego</h2>
-  <p class="intro">Most agencies sell you Google Ads in isolation. We run it inside one stack, next to SEO, Meta Ads, AI automation, CRM, and web, under one team and one dashboard, so there is no vendor finger-pointing when the number moves.</p>
+  <h2 class="aa-h2-oneline">One team runs the whole stack in Los Angeles</h2>
+  <p class="intro">Full-stack is not a bundle of vendors, it is one engine. Every channel below feeds the same BI layer, three founders sign the same weekly brief, and when the calendar is empty there is no four-way conversation about whose fault it is.</p>
 
   <ul class="aa-svc-list" role="list" aria-label="The other five channels we operate">
     <li class="aa-svc">
@@ -1017,7 +1170,7 @@
           <span class="aa-svc-idx">01</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./seo-services.html">SEO in San Diego</a>
+          <a class="aa-svc-name" href="./seo-services.html">SEO in Los Angeles</a>
           <span class="aa-svc-outcome">Rankings on the queries that become booked calls, not on the ones that look good in a report.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
@@ -1027,12 +1180,12 @@
     <li class="aa-svc">
       <div class="aa-svc-link">
         <div class="aa-svc-visual">
-          <img src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
+          <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
           <span class="aa-svc-idx">02</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./meta-ads-management.html">Meta Ads in San Diego</a>
-          <span class="aa-svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
+          <a class="aa-svc-name" href="./google-ads-management.html">Google Ads in Los Angeles</a>
+          <span class="aa-svc-outcome">Search, Performance Max and Local Service Ads built to buy revenue, not clicks.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
         <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
@@ -1045,7 +1198,7 @@
           <span class="aa-svc-idx">03</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./ai-automation.html">AI Automation in San Diego</a>
+          <a class="aa-svc-name" href="./ai-automation.html">AI Automation in Los Angeles</a>
           <span class="aa-svc-outcome">Lead intake and qualification that runs 24/7, so the traffic SEO earns never goes to a competitor who answered first.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
@@ -1055,12 +1208,12 @@
     <li class="aa-svc">
       <div class="aa-svc-link">
         <div class="aa-svc-visual">
-          <img src="../../img/crm.jpg" alt="" loading="lazy">
+          <img src="https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="" loading="lazy">
           <span class="aa-svc-idx">04</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./crm-development.html">Custom CRM Development in San Diego</a>
-          <span class="aa-svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
+          <a class="aa-svc-name" href="./meta-ads-management.html">Meta Ads in Los Angeles</a>
+          <span class="aa-svc-outcome">Facebook and Instagram acquisition with server-side conversion and iOS-safe measurement.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
         <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
@@ -1069,12 +1222,12 @@
     <li class="aa-svc">
       <div class="aa-svc-link">
         <div class="aa-svc-visual">
-          <img src="../../img/full-stack-marketing.jpg" alt="" loading="lazy">
+          <img src="../../img/crm.jpg" alt="" loading="lazy">
           <span class="aa-svc-idx">05</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./full-stack-marketing.html">Full-Stack Marketing in San Diego</a>
-          <span class="aa-svc-outcome">One team across search, paid, automation and the site, so no vendor blame layer eats your budget.</span>
+          <a class="aa-svc-name" href="./crm-development.html">Custom CRM Development in Los Angeles</a>
+          <span class="aa-svc-outcome">Pipeline, routing and reporting built to your workflow, not squeezed into a stock template.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
         <span class="aa-svc-arrow" aria-hidden="true">&rarr;</span>
@@ -1087,7 +1240,7 @@
           <span class="aa-svc-idx">06</span>
         </div>
         <div class="aa-svc-body">
-          <a class="aa-svc-name" href="./web-design.html">Web Design in San Diego</a>
+          <a class="aa-svc-name" href="./web-design.html">Web Design in Los Angeles</a>
           <span class="aa-svc-outcome">Sites written to convert the traffic we send, instrumented for booked work end to end.</span>
           <div class="aa-svc-actions"><a class="btn btn-ghost btn-sm" href="https://magisterdigital.ai/contact/">Book a call</a></div>
         </div>
@@ -1105,43 +1258,43 @@
 </section>
 
 <section class="aa-sec" data-mark="07" id="faq">
-  <div class="eyebrow">07 &middot; Questions San Diego operators ask first</div>
-  <h2>The questions a careful San Diego buyer is already holding</h2>
+  <div class="eyebrow">07 &middot; Questions Los Angeles operators ask first</div>
+  <h2>The questions a careful Los Angeles buyer is already holding</h2>
   <div class="aa-faq">
     <details>
-      <summary>What should we budget for Google Ads management in San Diego?</summary>
-      <div class="answer-wrap"><div class="answer">Single-channel Google Ads engagements start at $20K per month. Full-stack engagements including SEO, AI automation, and CRM start at $60K per month. We scope from there based on market intensity, campaign volume, and how much of the attribution architecture we build from scratch. Torrey Pines and downtown are among the most competitive corridors in the state, so San Diego accounts tend to scope toward the higher end of that range.</div></div>
+      <summary>What does a full-stack engagement cost?</summary>
+      <div class="answer-wrap"><div class="answer">Full-stack engagements start at $60K per month, fully scoped, fully staffed, fully attributed. Single-channel engagements start at $20K per month. Scoping depends on pace, market intensity, and service breadth, not a flat rate card.</div></div>
     </details>
     <details>
-      <summary>Do you manage Performance Max?</summary>
-      <div class="answer-wrap"><div class="answer">Yes, with proper feeds, asset groups, audience signals from your first-party CRM data, and brand exclusions. We do not hand Performance Max the keys and call it strategy.</div></div>
+      <summary>Do we have to buy all the channels at once?</summary>
+      <div class="answer-wrap"><div class="answer">No. Plenty of clients start with one channel at $20K per month. Full-stack means all seven services under one team, which is a different commitment than a single channel, and you are never billed for services you are not using.</div></div>
     </details>
     <details>
-      <summary>How do you connect Google Ads to our CRM?</summary>
-      <div class="answer-wrap"><div class="answer">We build the GA4 to CRM import in Week 2. HubSpot, Go High Level, ServiceTitan, Salesforce, and Jobber all integrate differently. Once live, leads from every campaign carry a source tag through your pipeline to closed-won.</div></div>
+      <summary>How is this different from hiring separate Los Angeles agencies?</summary>
+      <div class="answer-wrap"><div class="answer">Separate agencies optimize their own channel and report separately, which in a county of 88 cities usually means three different service-area definitions and three different versions of the truth. One team can decide a city is too expensive to buy and go and earn it instead. Nobody makes that call when three vendors each own a slice.</div></div>
     </details>
     <details>
-      <summary>Do you run Demand Gen and YouTube?</summary>
-      <div class="answer-wrap"><div class="answer">Both are part of the stack where the sales cycle runs longer than two weeks or consumer awareness is the bottleneck. We scope those channels into your 90-day plan after Month 1 attribution is clean, not before.</div></div>
+      <summary>Do we have to move everything at once?</summary>
+      <div class="answer-wrap"><div class="answer">No, and usually you should not. We start with measurement so there is an agreed baseline, then take channels over in the order where the gap between spend and booked work is widest.</div></div>
     </details>
     <details>
-      <summary>Who actually runs the account?</summary>
-      <div class="answer-wrap"><div class="answer">Dimitry Morgan, Head of Paid Media at Magister Digital, operating with ties to Denver Digital Agency and Green Hat Local SEO. The same operator who builds your account reads your brief every Monday. No account coordinators, no junior managers running your spend, no handoff after the contract is signed.</div></div>
+      <summary>Do you work outside home services, medical, and legal?</summary>
+      <div class="answer-wrap"><div class="answer">No. Three verticals, USA-wide. Work that does not fit gets referred to Infintech Designs. We do not take engagements we do not believe we can win.</div></div>
     </details>
     <details>
-      <summary>How competitive is Google Ads in San Diego?</summary>
-      <div class="answer-wrap"><div class="answer">Torrey Pines and downtown are among the most competitive corridors in the state, and more than 1,400 life science firms alone compete for space in that corridor before an ad ever earns a click. Run this test: open your current report and find cost per closed deal, not cost per lead, for your San Diego campaigns specifically. If that number is not there, the account was never built for how competitive this market actually is.</div></div>
+      <summary>How long is the engagement and is there a lock-in?</summary>
+      <div class="answer-wrap"><div class="answer">A 90-day initial term, then month to month. No long lock-ins. We do not lock clients into a year, because the work should keep itself sold.</div></div>
     </details>
     <details>
-      <summary>Can we meet at the Pacific Beach office?</summary>
-      <div class="answer-wrap"><div class="answer">Yes, that can be arranged. The founders and the in-house team work out of 1135 Garnet Ave #13 in Pacific Beach, and San Diego is the one market where a working session can happen in a room. Most sessions still run on video with the dashboard on screen, because that is where your numbers live, and every other market we serve runs the same way.</div></div>
+      <summary>Can we see the Los Angeles attribution dashboard before signing?</summary>
+      <div class="answer-wrap"><div class="answer">Yes. We walk the real thing on the call rather than a screenshot, and you keep the findings from that session whether or not you hire us.</div></div>
     </details>
   </div>
 </section>
 
 <section class="aa-sec band-light" data-mark="08">
   <div class="eyebrow">08 &middot; Who you will work with</div>
-  <h2>Three founders. You will speak to <em>one of them</em></h2>
+  <h2>Three founders in Los Angeles. You will speak to <em>one of them</em></h2>
   <div class="aa-founders">
     <div class="aa-founder-card" data-card-modal="brian">
       <div class="aa-founder-img">
@@ -1207,8 +1360,8 @@
       <div>
         <span class="loc-meta dim">Metros served</span>
         <ul class="loc-metros" role="list">
+          <li><a class="loc-metro" href="../../san-diego-marketing.html">San Diego</a></li>
           
-          <li><a class="loc-metro" href="../../los-angeles-marketing.html">Los Angeles</a></li>
           <li><a class="loc-metro" href="../../san-jose-marketing.html">San Jose</a></li>
           <li><a class="loc-metro" href="../../phoenix-marketing.html">Phoenix</a></li>
           <li><a class="loc-metro" href="../../dallas-marketing.html">Dallas</a></li>
@@ -1524,31 +1677,32 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* SPEND-TO-CLOSED FUNNEL — entrance sweep plus a walking highlight loop.
-   Bars sweep in once on scroll into view; then a highlight walks the five
-   stages while the card stays on screen: header word and row light up
-   together, a shine sweeps the active bar, the Leads bar drips gold, and
-   Closed pulses its glow. Stops off-screen, on tab hide, and under reduced
-   motion (which gets the finished static funnel). */
+/* CRM WHEEL — wedges bloom in on scroll, arcs draw around them; then a
+   highlight sweeps the wheel segment by segment, lighting its parent arc
+   while the operating-log ticker types matching lines. Stops off-screen, on
+   tab hide, and under reduced motion (which gets the finished static wheel). */
 (function(){
   const funnel = document.querySelector('.ga-funnel');
   if (!funnel) return;
-  const rows = [...funnel.querySelectorAll('.ga-frow')];
   const stages = [...funnel.querySelectorAll('.ga-funnel-head .stage')];
+  const segs = [...funnel.querySelectorAll('.crm-wheel .seg')];
+  const arcs = [...funnel.querySelectorAll('.crm-wheel .oarc')];
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){
     funnel.classList.add('is-in');
     return;
   }
-  let timer = null, step = -1, entered = false, cycle = 0, clock = 3;
+  let timer = null, tickN = -1, entered = false, cycle = 0, clock = 3;
   const stream = document.getElementById('gaBriefStream');
-  /* Two line variants per stage so the ticker reads alive, not looped.
-     Dollar figures stay dashes: sourced after the audit, never invented. */
+  /* Two line variants per segment so the ticker reads alive, not looped.
+     Dollar figures stay unstated: live data lands after the audit. */
   const LINES = [
-    [['SPEND','by campaign &middot; sourced after your San Diego audit'], ['SPEND','pmax feeds &middot; <span class="ok">audited</span>']],
-    [['CLICK','tagged &middot; campaign / keyword'], ['CLICK','broad match &middot; pulled where it bleeds']],
-    [['LEAD','source tag &rarr; <span class="ok">your crm</span>'], ['LEAD','offline import &middot; phone closes']],
-    [['BOOKED','synced &middot; <span class="ok">calendar</span>'], ['BOOKED','call tracking &middot; by keyword']],
-    [['CLOSED','cost / closed deal &middot; sourced after your San Diego audit'], ['CLOSED','brief signed &middot; d.morgan &middot; monday']]
+    [['SEO','organic &rarr; booked &middot; sourced after your Los Angeles audit'], ['SEO','citations &middot; ai answers tracked']],
+    [['GOOGLE','offline conversions &rarr; crm'], ['GOOGLE','cost / booked &middot; by campaign']],
+    [['META','capi &middot; server-side in'], ['META','friday creative &middot; shipped']],
+    [['AGENT','flowbots &middot; intake answered'], ['AGENT','after-hours &middot; <span class="ok">booked</span>']],
+    [['CRM','closed-won &rarr; channel'], ['CRM','stages &middot; your words']],
+    [['WEB','landing fix &middot; live in market'], ['WEB','wired for pipeline &middot; day one']],
+    [['STACK','seven services &middot; <span class="ok">one engine</span>'], ['SIGNED','three founders &middot; monday']]
   ];
   function briefLine(i){
     if (!stream) return;
@@ -1562,12 +1716,14 @@ document.documentElement.classList.add('js');
     while (stream.children.length > 9) stream.removeChild(stream.lastChild);
   }
   function tick(){
-    if (step >= 0){ rows[step].classList.remove('is-step'); if (stages[step]) stages[step].classList.remove('is-on'); }
-    step = (step + 1) % rows.length;
-    if (step === 0) cycle++;
-    rows[step].classList.add('is-step');
-    if (stages[step]) stages[step].classList.add('is-on');
-    briefLine(step);
+    tickN++;
+    const seg = tickN % segs.length;
+    const arc = Math.floor(seg * 4 / segs.length);
+    if (seg === 0) cycle++;
+    segs.forEach((s,i) => s.classList.toggle('on', i === seg));
+    arcs.forEach((a,i) => a.classList.toggle('on', i === arc));
+    stages.forEach((w,i) => w.classList.toggle('is-on', i === arc));
+    briefLine(seg);
   }
   function start(){
     if (timer) return;
