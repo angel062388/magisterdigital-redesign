@@ -641,6 +641,19 @@
   .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
+  /* 08 market strip: this service's ten city pages. Dark band, so the
+     brand gold is safe here (it is documented dark-only). */
+  .aa-markets{list-style:none; margin:34px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:12px 28px}
+  .aa-markets a{display:block; padding:11px 0 11px 16px;
+    border-left:2px solid rgba(212,175,55,.45);
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
+    font-size:.97rem; line-height:1.4; color:#E8E9EB; text-decoration:none}
+  .aa-markets a:hover,
+  .aa-markets a:focus-visible{color:var(--gold-light,#E3C24E);
+    border-left-color:var(--gold-light,#E3C24E)}
+  @media (max-width:900px){ .aa-markets{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .aa-markets{grid-template-columns:1fr; gap:8px} }
 </style>
 </head>
 <body>
@@ -1023,12 +1036,30 @@
   </div>
 </section>
 
+<section class="aa-sec" data-mark="08">
+  <div class="eyebrow">08 &middot; Where we work</div>
+  <h2>Web design in the ten markets we serve</h2>
+  <p class="intro">A site is judged differently in each of these markets, from a storm surge to a technical audience. Each page covers what the build has to survive there.</p>
+  <ul class="aa-markets">
+      <li><a href="san-diego-marketing/web-design.html">Web design in San Diego</a></li>
+      <li><a href="new-york-marketing/web-design.html">Web design in New York</a></li>
+      <li><a href="los-angeles-marketing/web-design.html">Web design in Los Angeles</a></li>
+      <li><a href="chicago-marketing/web-design.html">Web design in Chicago</a></li>
+      <li><a href="houston-marketing/web-design.html">Web design in Houston</a></li>
+      <li><a href="phoenix-marketing/web-design.html">Web design in Phoenix</a></li>
+      <li><a href="philadelphia-marketing/web-design.html">Web design in Philadelphia</a></li>
+      <li><a href="san-antonio-marketing/web-design.html">Web design in San Antonio</a></li>
+      <li><a href="dallas-marketing/web-design.html">Web design in Dallas</a></li>
+      <li><a href="san-jose-marketing/web-design.html">Web design in San Jose</a></li>
+  </ul>
+</section>
+
 <section class="aa-cta-band" data-mark="09" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="img/one-engine.jpg" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">08 &middot; Next step</div>
+    <div class="eyebrow">09 &middot; Next step</div>
     <h2>The person who <em>reads your analytics</em> is the person who <em>signs the build</em></h2>
     <p class="note-lede">Is now a bad time to find out where your current site is leaking qualified buyers? Bring your analytics to a working session. You leave with a written read on where the site is dropping buyers and what we would fix first. No deck. No pitch. No redesign proposal you can take to three other agencies to grind on price.</p>
     <div class="aa-cta-cta">

@@ -640,6 +640,19 @@
   .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
+  /* 08 market strip: this service's ten city pages. Dark band, so the
+     brand gold is safe here (it is documented dark-only). */
+  .aa-markets{list-style:none; margin:34px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:12px 28px}
+  .aa-markets a{display:block; padding:11px 0 11px 16px;
+    border-left:2px solid rgba(212,175,55,.45);
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
+    font-size:.97rem; line-height:1.4; color:#E8E9EB; text-decoration:none}
+  .aa-markets a:hover,
+  .aa-markets a:focus-visible{color:var(--gold-light,#E3C24E);
+    border-left-color:var(--gold-light,#E3C24E)}
+  @media (max-width:900px){ .aa-markets{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .aa-markets{grid-template-columns:1fr; gap:8px} }
 </style>
 </head>
 <body>
@@ -756,7 +769,7 @@
   <aside class="ga-brief" aria-label="Friday report ticker, figures land after your audit">
     <div class="ga-brief-head">FRIDAY REPORT &middot; capi_to_closed &middot; rolling</div>
     <div class="ga-brief-stream" id="gaBriefStream">
-      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SPEND</span><span class="m">by audience &middot; $ &mdash;&mdash; sourced after audit</span></div>
+      <div class="ga-brief-row"><span class="t">00:00:02</span><span class="k">SPEND</span><span class="m">by audience &middot; sourced after your audit</span></div>
       <div class="ga-brief-row"><span class="t">00:00:01</span><span class="k">CAPI</span><span class="m">match rate &middot; target &ge; <span class="ok">70%</span></span></div>
       <div class="ga-brief-row"><span class="t">00:00:00</span><span class="k">SIGNED</span><span class="m">d.morgan &middot; friday</span></div>
     </div>
@@ -983,12 +996,30 @@
   </div>
 </section>
 
+<section class="aa-sec" data-mark="08">
+  <div class="eyebrow">08 &middot; Where we work</div>
+  <h2>Meta Ads in the ten markets we serve</h2>
+  <p class="intro">Audience building is a local job. Each page covers the service areas, the demand pattern and the measurement in that market.</p>
+  <ul class="aa-markets">
+      <li><a href="san-diego-marketing/meta-ads-management.html">Meta Ads in San Diego</a></li>
+      <li><a href="new-york-marketing/meta-ads-management.html">Meta Ads in New York</a></li>
+      <li><a href="los-angeles-marketing/meta-ads-management.html">Meta Ads in Los Angeles</a></li>
+      <li><a href="chicago-marketing/meta-ads-management.html">Meta Ads in Chicago</a></li>
+      <li><a href="houston-marketing/meta-ads-management.html">Meta Ads in Houston</a></li>
+      <li><a href="phoenix-marketing/meta-ads-management.html">Meta Ads in Phoenix</a></li>
+      <li><a href="philadelphia-marketing/meta-ads-management.html">Meta Ads in Philadelphia</a></li>
+      <li><a href="san-antonio-marketing/meta-ads-management.html">Meta Ads in San Antonio</a></li>
+      <li><a href="dallas-marketing/meta-ads-management.html">Meta Ads in Dallas</a></li>
+      <li><a href="san-jose-marketing/meta-ads-management.html">Meta Ads in San Jose</a></li>
+  </ul>
+</section>
+
 <section class="aa-cta-band" data-mark="09" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="img/one-engine.jpg" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">08 &middot; Next step</div>
+    <div class="eyebrow">09 &middot; Next step</div>
     <h2>The operator who <em>reviews every ad</em> is the operator who <em>signs your Friday report</em></h2>
     <p class="note-lede">Is now a bad time to find out which audience and which creative are actually paying you? We review your last 90 days of Meta spend against your CRM pipeline, side by side, and you leave with a written attribution gap analysis whether or not you hire us. No deck. No pitch. No ROAS dashboard.</p>
     <div class="aa-cta-cta">
@@ -1314,7 +1345,7 @@ document.documentElement.classList.add('js');
     [['CAPI','match rate &middot; target &ge; 70%'], ['CAPI','server-side &middot; not the browser']],
     [['BUDGET','&rarr; the pairing that closed'], ['WINNER','audience &times; angle &middot; scaled']],
     [['SHIP','friday &middot; new creative live'], ['SHIP','brief from last week closed jobs']],
-    [['REPORT','pipeline $ &mdash;&mdash; &middot; ranges disclosed'], ['SIGNED','d.morgan &middot; friday']]
+    [['REPORT','pipeline value &middot; ranges disclosed after audit'], ['SIGNED','d.morgan &middot; friday']]
   ];
   function briefLine(i){
     if (!stream) return;

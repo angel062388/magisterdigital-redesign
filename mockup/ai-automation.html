@@ -853,6 +853,19 @@
   .site-nav-menu a:hover,.site-nav-menu a:focus-visible{
     color:var(--gold,#D4AF37); background:rgba(212,175,55,.06); outline:none}
   .site-nav-menu a.active{color:var(--gold,#D4AF37)}
+  /* 08 market strip: this service's ten city pages. Dark band, so the
+     brand gold is safe here (it is documented dark-only). */
+  .aa-markets{list-style:none; margin:34px 0 0; padding:0; display:grid;
+    grid-template-columns:repeat(3,1fr); gap:12px 28px}
+  .aa-markets a{display:block; padding:11px 0 11px 16px;
+    border-left:2px solid rgba(212,175,55,.45);
+    font-family:var(--font-sans,'Inter',system-ui,-apple-system,sans-serif);
+    font-size:.97rem; line-height:1.4; color:#E8E9EB; text-decoration:none}
+  .aa-markets a:hover,
+  .aa-markets a:focus-visible{color:var(--gold-light,#E3C24E);
+    border-left-color:var(--gold-light,#E3C24E)}
+  @media (max-width:900px){ .aa-markets{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .aa-markets{grid-template-columns:1fr; gap:8px} }
 </style>
 </head>
 <body>
@@ -1007,10 +1020,10 @@
 
 <div class="aa-kpi-wrap">
   <div class="aa-kpi-strip">
-    <div class="aa-kpi"><div class="l">tasks / hr</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
-    <div class="aa-kpi"><div class="l">avg time &middot; trigger to book</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
-    <div class="aa-kpi"><div class="l">escalation rate</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
-    <div class="aa-kpi"><div class="l">cost / decision</div><div class="v">&mdash;&mdash;</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">tasks / hr</div><div class="v">pending</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">avg time &middot; trigger to book</div><div class="v">pending</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">escalation rate</div><div class="v">pending</div><div class="d">sourced after audit</div></div>
+    <div class="aa-kpi"><div class="l">cost / decision</div><div class="v">pending</div><div class="d">sourced after audit</div></div>
   </div>
   <p class="aa-kpi-foot">Verified numbers land after your audit call, sourced from your CRM. This page ships without invented figures.</p>
 </div>
@@ -1240,12 +1253,30 @@
   </div>
 </section>
 
+<section class="aa-sec" data-mark="08">
+  <div class="eyebrow">08 &middot; Where we work</div>
+  <h2>AI automation in the ten markets we serve</h2>
+  <p class="intro">What drives the missed call differs by market: a freeze, a flood, a heat wave or simply the next name on a long list. Each page covers its own.</p>
+  <ul class="aa-markets">
+      <li><a href="san-diego-marketing/ai-automation.html">AI automation in San Diego</a></li>
+      <li><a href="new-york-marketing/ai-automation.html">AI automation in New York</a></li>
+      <li><a href="los-angeles-marketing/ai-automation.html">AI automation in Los Angeles</a></li>
+      <li><a href="chicago-marketing/ai-automation.html">AI automation in Chicago</a></li>
+      <li><a href="houston-marketing/ai-automation.html">AI automation in Houston</a></li>
+      <li><a href="phoenix-marketing/ai-automation.html">AI automation in Phoenix</a></li>
+      <li><a href="philadelphia-marketing/ai-automation.html">AI automation in Philadelphia</a></li>
+      <li><a href="san-antonio-marketing/ai-automation.html">AI automation in San Antonio</a></li>
+      <li><a href="dallas-marketing/ai-automation.html">AI automation in Dallas</a></li>
+      <li><a href="san-jose-marketing/ai-automation.html">AI automation in San Jose</a></li>
+  </ul>
+</section>
+
 <section class="aa-cta-band" data-mark="08" id="call">
   <div class="aa-cta-bg" aria-hidden="true">
     <img src="img/ai-automation-hero.jpg" alt="" width="1400" height="933" loading="lazy">
   </div>
   <div class="aa-cta-wrap">
-    <div class="eyebrow">08 &middot; Next step</div>
+    <div class="eyebrow">09 &middot; Next step</div>
     <h2>The person who <em>reads your spec</em> is the person who <em>builds the system</em></h2>
     <p class="note-lede">This is not another AI tool you log into and hope works. It is a system you own, audit, and run weekly with a named team. Bring your CRM and your manual workload to a working session. If automation is not the highest-return move for your business right now, we will say so. No deck. No pitch.</p>
     <div class="aa-cta-cta">
